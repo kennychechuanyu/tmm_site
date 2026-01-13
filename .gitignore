@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.astro/
+*.log
+.vercel/
+*.docx
+package-lock.json
