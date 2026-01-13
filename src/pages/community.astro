@@ -1,0 +1,583 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Section from "../components/Section.astro";
+
+const FORMSPREE_MEMBERSHIP = "mreegjyb";
+const FORMSPREE_PROJECT = "xnjjqylg";
+const FORMSPREE_DISCUSSION = "xqeekonw";
+
+
+// Academic roles
+const academicRoles = [
+  "Full Professor",
+  "Associate Professor",
+  "Assistant Professor",
+  "Postdoc",
+  "PhD Student",
+  "Master's Student",
+  "Research Associate",
+  "Other",
+];
+---
+
+<PageLayout
+  title="Community"
+  description="Join the TMM community of researchers bridging psychological theory and measurement."
+  subtitle="Connect with researchers working on the theory-measurement gap"
+>
+  <!-- Join Section -->
+  <Section background="white">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+        Join Our Network
+      </h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-400">
+        TMM welcomes researchers, students, and practitioners interested in the
+        translation between theory and measurement. We bring together members from
+        diverse fields, including but not limited to cognitive modeling, psychometrics,
+        experimental psychology, and philosophy of science. Membership is free and open to all.
+      </p>
+
+      <div class="mt-10 space-y-8">
+        <!-- Meetings & Events -->
+        <div class="flex gap-4">
+          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 dark:text-white">Regular Meetings & Events</h3>
+            <p class="mt-1 text-slate-600 dark:text-slate-400">
+              We organize seminars, workshops, and conferences bringing together researchers
+              working on the intersection of psychological theory, computational modeling,
+              and measurement.
+            </p>
+          </div>
+        </div>
+
+        <!-- Working Groups -->
+        <div class="flex gap-4">
+          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 dark:text-white">Working Groups</h3>
+            <p class="mt-1 text-slate-600 dark:text-slate-400">
+              Join focused working groups that tackle specific challenges at the theory-measurement
+              interface. Working groups meet regularly to discuss ideas, share progress, and
+              develop collaborative projects.
+            </p>
+          </div>
+        </div>
+
+        <!-- Collaborations -->
+        <div class="flex gap-4">
+          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 dark:text-white">Cross-Disciplinary Collaboration</h3>
+            <p class="mt-1 text-slate-600 dark:text-slate-400">
+              Connect with researchers from psychometrics, computational modeling, philosophy
+              of science, and substantive domains. Our network fosters collaborations that
+              bridge methodological expertise with empirical research questions.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10">
+        <button
+          id="open-modal-btn"
+          class="btn-primary"
+        >
+          Join TMM Network
+        </button>
+      </div>
+    </div>
+  </Section>
+
+  <!-- How to Get Involved -->
+  <Section background="white">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white text-center">
+        How to Get Involved
+      </h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+            <span class="text-xl font-bold">1</span>
+          </div>
+          <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">Join the Network</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            Sign up for free to receive updates and access resources.
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+            <span class="text-xl font-bold">2</span>
+          </div>
+          <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">Attend Events</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            Participate in conferences, workshops, and webinars.
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+            <span class="text-xl font-bold">3</span>
+          </div>
+          <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">Collaborate</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            Join a working group or propose a new initiative.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Working Groups & Project Ideas -->
+  <Section background="gray">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+        Working Groups
+      </h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-400">
+        Working groups tackle specific challenges at the theory-measurement interface.
+        They emerge from project ideas that attract enough interest.
+      </p>
+      <p class="mt-4 text-slate-600 dark:text-slate-400 italic">
+        Active working groups coming soon...
+      </p>
+
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+          Propose a Project Idea
+        </h3>
+        <p class="mt-4 text-slate-600 dark:text-slate-400">
+          Have a rough idea about theory-measurement alignment? Share it. If others are
+          interested, it can grow into a working group. Not every idea needs to be fully
+          formed—that's what collaboration is for.
+        </p>
+        <div class="mt-6">
+          <button
+            id="open-project-modal-btn"
+            class="btn-primary"
+          >
+            Propose an Idea
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+          Project Ideas Seeking Collaborators
+        </h3>
+        <p class="mt-4 text-slate-600 dark:text-slate-400 italic">
+          Coming soon...
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Discussion Topics -->
+  <Section background="white">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+        Discussion Topics
+      </h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-400">
+        What questions should the field be grappling with? Propose topics you think
+        deserve attention—contested assumptions, unresolved tensions, or emerging challenges
+        in theory-measurement alignment.
+      </p>
+
+      <p class="mt-4 text-slate-600 dark:text-slate-400">
+        We organize discussions as network events—online or at workshops.
+      </p>
+
+      <div class="mt-8">
+        <button
+          id="open-discussion-modal-btn"
+          class="btn-primary"
+        >
+          Propose a Topic
+        </button>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Modal -->
+  <div
+    id="membership-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4"
+  >
+    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900">
+      <!-- Close button -->
+      <button
+        id="close-modal-btn"
+        class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+        Join TMM Network
+      </h2>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+        Fill in your details to become a member.
+      </p>
+
+      <form
+        action={`https://formspree.io/f/${FORMSPREE_MEMBERSHIP}`}
+        method="POST"
+        class="mt-6 space-y-4"
+      >
+        <input type="hidden" name="_subject" value="New TMM Membership Request" />
+
+        <!-- Name -->
+        <div>
+          <label for="name" class="label">Full Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="input"
+            placeholder="Your name"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="label">Email *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="input"
+            placeholder="your@email.com"
+          />
+        </div>
+
+        <!-- Academic Role -->
+        <div>
+          <label for="role" class="label">Academic Role *</label>
+          <select id="role" name="academic_role" required class="input">
+            <option value="">Select your role</option>
+            {academicRoles.map((role) => (
+              <option value={role}>{role}</option>
+            ))}
+          </select>
+        </div>
+
+        <!-- University -->
+        <div>
+          <label for="university" class="label">University / Institution *</label>
+          <input
+            type="text"
+            id="university"
+            name="university"
+            required
+            class="input"
+            placeholder="Your university or institution"
+          />
+        </div>
+
+        <!-- Faculty -->
+        <div>
+          <label for="faculty" class="label">Faculty / Department *</label>
+          <input
+            type="text"
+            id="faculty"
+            name="faculty"
+            required
+            class="input"
+            placeholder="Your faculty or department"
+          />
+        </div>
+
+        <!-- Field -->
+        <div>
+          <label for="field" class="label">Research Field *</label>
+          <input
+            type="text"
+            id="field"
+            name="research_field"
+            required
+            class="input"
+            placeholder="Your research field"
+          />
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-2">
+          <button type="submit" class="btn-primary w-full">
+            Submit Membership Request
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div
+    id="project-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto bg-black/50 p-4"
+  >
+    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900 my-8">
+      <!-- Close button -->
+      <button
+        id="close-project-modal-btn"
+        class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+        Propose a Project Idea
+      </h2>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+        Share your idea—rough or refined. We'll help connect you with interested collaborators.
+      </p>
+
+      <form
+        action={`https://formspree.io/f/${FORMSPREE_PROJECT}`}
+        method="POST"
+        class="mt-6 space-y-4"
+      >
+        <input type="hidden" name="_subject" value="New TMM Project Idea" />
+
+        <!-- Name -->
+        <div>
+          <label for="project-name" class="label">Your Name *</label>
+          <input
+            type="text"
+            id="project-name"
+            name="name"
+            required
+            class="input"
+            placeholder="Your name"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="project-email" class="label">Email *</label>
+          <input
+            type="email"
+            id="project-email"
+            name="email"
+            required
+            class="input"
+            placeholder="your@email.com"
+          />
+        </div>
+
+        <!-- Project Title -->
+        <div>
+          <label for="project-title" class="label">Project Title *</label>
+          <input
+            type="text"
+            id="project-title"
+            name="project_title"
+            required
+            class="input"
+            placeholder="A short title for your idea"
+          />
+        </div>
+
+        <!-- Project Description -->
+        <div>
+          <label for="project-description" class="label">Describe Your Idea *</label>
+          <textarea
+            id="project-description"
+            name="project_description"
+            required
+            rows="4"
+            class="input"
+            placeholder="What's the problem or question? What would you like to explore?"
+          ></textarea>
+        </div>
+
+        <!-- Expertise Needed -->
+        <div>
+          <label for="expertise-needed" class="label">What Expertise Would Help?</label>
+          <input
+            type="text"
+            id="expertise-needed"
+            name="expertise_needed"
+            class="input"
+            placeholder="e.g., psychometrics, cognitive modeling, philosophy of science"
+          />
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-2">
+          <button type="submit" class="btn-primary w-full">
+            Submit Project Idea
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Discussion Modal -->
+  <div
+    id="discussion-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto bg-black/50 p-4"
+  >
+    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900 my-8">
+      <!-- Close button -->
+      <button
+        id="close-discussion-modal-btn"
+        class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+        Propose a Discussion Topic
+      </h2>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+        What question or issue deserves more attention from the community?
+      </p>
+
+      <form
+        action={`https://formspree.io/f/${FORMSPREE_DISCUSSION}`}
+        method="POST"
+        class="mt-6 space-y-4"
+      >
+        <input type="hidden" name="_subject" value="New TMM Discussion Topic" />
+
+        <!-- Name -->
+        <div>
+          <label for="discussion-name" class="label">Your Name *</label>
+          <input
+            type="text"
+            id="discussion-name"
+            name="name"
+            required
+            class="input"
+            placeholder="Your name"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="discussion-email" class="label">Email *</label>
+          <input
+            type="email"
+            id="discussion-email"
+            name="email"
+            required
+            class="input"
+            placeholder="your@email.com"
+          />
+        </div>
+
+        <!-- Topic -->
+        <div>
+          <label for="discussion-topic" class="label">Discussion Topic *</label>
+          <input
+            type="text"
+            id="discussion-topic"
+            name="topic"
+            required
+            class="input"
+            placeholder="e.g., Should psychology abandon latent variable models?"
+          />
+        </div>
+
+        <!-- Why it matters -->
+        <div>
+          <label for="discussion-why" class="label">Why Does This Matter? *</label>
+          <textarea
+            id="discussion-why"
+            name="why_it_matters"
+            required
+            rows="3"
+            class="input"
+            placeholder="Why should the community discuss this? What's at stake?"
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-2">
+          <button type="submit" class="btn-primary w-full">
+            Submit Topic
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  // Membership modal
+  const membershipModal = document.getElementById('membership-modal');
+  const openMembershipBtn = document.getElementById('open-modal-btn');
+  const closeMembershipBtn = document.getElementById('close-modal-btn');
+
+  // Project modal
+  const projectModal = document.getElementById('project-modal');
+  const openProjectBtn = document.getElementById('open-project-modal-btn');
+  const closeProjectBtn = document.getElementById('close-project-modal-btn');
+
+  // Discussion modal
+  const discussionModal = document.getElementById('discussion-modal');
+  const openDiscussionBtn = document.getElementById('open-discussion-modal-btn');
+  const closeDiscussionBtn = document.getElementById('close-discussion-modal-btn');
+
+  function openModal(modal) {
+    modal?.classList.remove('hidden');
+    modal?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(modal) {
+    modal?.classList.add('hidden');
+    modal?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  openMembershipBtn?.addEventListener('click', () => openModal(membershipModal));
+  closeMembershipBtn?.addEventListener('click', () => closeModal(membershipModal));
+
+  openProjectBtn?.addEventListener('click', () => openModal(projectModal));
+  closeProjectBtn?.addEventListener('click', () => closeModal(projectModal));
+
+  openDiscussionBtn?.addEventListener('click', () => openModal(discussionModal));
+  closeDiscussionBtn?.addEventListener('click', () => closeModal(discussionModal));
+
+  // Close on backdrop click
+  membershipModal?.addEventListener('click', (e) => {
+    if (e.target === membershipModal) closeModal(membershipModal);
+  });
+  projectModal?.addEventListener('click', (e) => {
+    if (e.target === projectModal) closeModal(projectModal);
+  });
+  discussionModal?.addEventListener('click', (e) => {
+    if (e.target === discussionModal) closeModal(discussionModal);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (!membershipModal?.classList.contains('hidden')) closeModal(membershipModal);
+      if (!projectModal?.classList.contains('hidden')) closeModal(projectModal);
+      if (!discussionModal?.classList.contains('hidden')) closeModal(discussionModal);
+    }
+  });
+</script>

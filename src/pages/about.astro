@@ -1,0 +1,155 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Section from "../components/Section.astro";
+
+// Values data
+const values = [
+  {
+    title: "Conceptual Clarity",
+    description: "Making auxiliary assumptions explicit and understanding what our models can reveal",
+    iconPath: "M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18",
+  },
+  {
+    title: "Integration",
+    description: "Bridging computational modeling, measurement theory, and philosophy of science",
+    iconPath: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5",
+  },
+  {
+    title: "Cross-Disciplinary Dialogue",
+    description: "Connecting methodological specialists with empirical researchers",
+    iconPath: "M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155",
+  },
+  {
+    title: "Honest Engagement",
+    description: "Acknowledging the limits of psychological inference and avoiding theoretical shallowness",
+    iconPath: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z",
+  },
+];
+---
+
+<PageLayout
+  title="About TMM"
+  description="Learn about the Theory, Model, Measurement network and our mission to bridge the gaps between psychological theory, computational models, and measurement."
+  subtitle="Bridging theory, models, and measurement in psychological science"
+>
+  <!-- Mission Section -->
+  <Section background="white">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+        Our Mission
+      </h2>
+      <div class="mt-6 space-y-4 text-slate-600 dark:text-slate-400">
+        <p>
+          Over the past two decades, computational models have become increasingly prominent
+          in psychological science, allowing researchers to formalize theoretical claims and
+          state assumptions explicitly. Simultaneously, advances in statistics and measurement
+          theory have opened new avenues for quantifying human behavior with greater rigor.
+        </p>
+        <p>
+          Yet at the intersection of theory, measurement, and modeling, conceptual and
+          methodological gaps limit the explanatory power of our models and the validity
+          of our measurements. These challenges restrict how successfully models capture
+          psychological theory, and how well measurement instruments capture psychological
+          constructs.
+        </p>
+        <p>
+          The Theory, Model, Measurement (TMM) network exists to address these fundamental
+          issues by connecting researchers across domains and engaging with both conceptual
+          limitations and technical solutions. We bring together computational modelers,
+          measurement theorists, philosophers of science, and empirical researchers to
+          advance psychology toward a truly quantitative science.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- The Two Fundamental Gaps -->
+  <Section background="gray">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white text-center">
+        Two Fundamental Gaps
+      </h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-400">
+        At the intersection of theory, measurement, and modeling, two crucial gaps limit psychology's progress as a quantitative science.
+      </p>
+
+      <div class="mt-12 grid gap-8 md:grid-cols-2">
+        <!-- Gap 1: Prediction-Explanation -->
+        <div class="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800">
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+            The Prediction-Explanation Gap
+          </h3>
+          <div class="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+            <p>
+              The relationship between prediction and explanation in theory assessment remains
+              poorly understood. Models that successfully forecast outcomes are not necessarily
+              theoretically grounded—offering impressive predictive accuracy without revealing
+              the psychological processes that underlie observed patterns.
+            </p>
+            <p>
+              Similarly, models that provide explanatory accounts for specific experimental
+              paradigms do not necessarily predict phenomena across multiple tasks or contexts.
+              This ambiguity creates fundamental challenges for theory testing: predictive success
+              can be mistaken for theoretical progress while explanatory models remain confined
+              to narrow empirical domains.
+            </p>
+          </div>
+        </div>
+
+        <!-- Gap 2: Measurement-Theory -->
+        <div class="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800">
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+            The Measurement-Theory Gap
+          </h3>
+          <div class="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+            <p>
+              The connection between measurement and theoretical constructs remains fundamentally
+              underspecified. This encompasses the <strong>coordination problem</strong>—where
+              latent constructs may lack clear alignment with how they are measured—and the
+              <strong>inference problem</strong>—where statistical regularities may not meaningfully
+              map onto psychological constructs.
+            </p>
+            <p>
+              Both problems are mediated by auxiliary assumptions that are rarely made explicit.
+              Even ostensibly neutral statistical techniques carry implicit commitments about
+              independence, dimensionality, temporal stability, or causal structure—creating
+              situations where statistical convenience is confused with psychological reality.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-6 dark:border-amber-900/50 dark:bg-amber-900/20">
+        <p class="text-slate-700 dark:text-slate-300">
+          <strong>The risk:</strong> Without addressing these gaps, psychology risks producing
+          increasingly sophisticated models that remain descriptively impressive but theoretically
+          shallow—offering forecasts without understanding and parameters without psychological
+          interpretation.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Values Section -->
+  <Section background="white">
+    <h2 class="text-center text-3xl font-semibold text-slate-900 dark:text-white">
+      Our Values
+    </h2>
+    <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      {values.map((value) => (
+        <div class="text-center">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={value.iconPath} />
+            </svg>
+          </div>
+          <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">{value.title}</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            {value.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+</PageLayout>

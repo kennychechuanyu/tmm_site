@@ -1,0 +1,39 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import Section from "../../components/Section.astro";
+import Button from "../../components/Button.astro";
+---
+
+<PageLayout
+  title="Events"
+  description="TMM conferences, workshops, webinars, and meetups on psychological theory, modeling, and measurement."
+  subtitle="Join our conferences, workshops, and webinars"
+>
+  <!-- Upcoming Events -->
+  <Section background="white">
+    <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+      Upcoming Events
+    </h2>
+    <p class="mt-8 text-slate-600 dark:text-slate-400 italic">
+      Coming soon... Subscribe to our newsletter to stay updated.
+    </p>
+  </Section>
+
+  <!-- Propose Event CTA -->
+  <Section background="navy" centered>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+        Propose an Event
+      </h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-400">
+        Have an idea for a workshop, webinar, or reading group? We welcome proposals
+        from network members.
+      </p>
+      <div class="mt-6">
+        <Button href="/contact">
+          Submit a Proposal
+        </Button>
+      </div>
+    </div>
+  </Section>
+</PageLayout>

@@ -1,0 +1,125 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Section from "../components/Section.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const FORMSPREE_ID = "mdaaobwz";
+---
+
+<PageLayout
+  title="Contact"
+  description="Get in touch with the TMM network. We'd love to hear from you."
+  subtitle="Get in touch with the TMM team"
+>
+  <Section background="white">
+    <div class="grid gap-12 lg:grid-cols-5">
+      <!-- Contact Form -->
+      <div class="lg:col-span-3">
+        <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+          Send Us a Message
+        </h2>
+        <p class="mt-4 text-slate-600 dark:text-slate-400">
+          Have a question, suggestion, or want to get involved? Fill out the form
+          below and we'll get back to you as soon as possible.
+        </p>
+        <div class="mt-8">
+          <ContactForm formspreeId={FORMSPREE_ID} />
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="lg:col-span-2">
+        <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+          Other Ways to Reach Us
+        </h2>
+
+        <div class="mt-8 space-y-6">
+          <div>
+            <h3 class="font-semibold text-slate-900 dark:text-white">Email</h3>
+            <p class="mt-2 text-slate-600 dark:text-slate-400">
+              <a href="mailto:tmm.psych@outlook.com" class="link">
+                tmm.psych@outlook.com
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- FAQ Section -->
+  <Section background="white">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white text-center">
+        Frequently Asked Questions
+      </h2>
+      <div class="mt-8 space-y-6">
+        <div>
+          <h3 class="font-semibold text-slate-900 dark:text-white">
+            Is membership free?
+          </h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Yes! TMM membership is completely free and open to anyone interested in
+            the relationship between psychological theory, modeling, and measurement.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900 dark:text-white">
+            How can I propose an event or workshop?
+          </h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Use the contact form above and select "Events" as the subject. Include
+            details about your proposed event, target audience, and preferred timing.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900 dark:text-white">
+            How do I join a working group?
+          </h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Contact us expressing your interest and relevant expertise. Working group
+            coordinators will follow up with more information about current activities
+            and how to participate.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900 dark:text-white">
+            Can I contribute resources to the website?
+          </h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Absolutely! We welcome tutorials, papers, software tools, and other resources.
+            Please use the contact form and select "Other" to submit your contribution.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900 dark:text-white">
+            How can I propose a collaborating project?
+          </h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Visit our <a href="/community" class="link">Community page</a> and use the
+            "Propose an Idea" form. If others are interested, your idea can grow into
+            a working group.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900 dark:text-white">
+            How can I propose a discussion topic?
+          </h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            On our <a href="/community" class="link">Community page</a>, use the
+            "Propose a Topic" form to suggest questions or issues that deserve
+            attention from the community.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900 dark:text-white">
+            Will joining TMM improve my model fit?
+          </h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            No, but it will give you better excuses for why it doesn't.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Section>
+</PageLayout>

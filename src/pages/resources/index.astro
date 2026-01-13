@@ -1,0 +1,221 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import Section from "../../components/Section.astro";
+
+const FORMSPREE_ID = "xjggvlaw";
+
+// Resource types
+const resourceTypes = [
+  "Tutorial",
+  "Paper",
+  "Software/Package",
+  "Dataset",
+  "Slides/Presentation",
+  "Video",
+  "Other",
+];
+---
+
+<PageLayout
+  title="Resources"
+  description="Curated resources on theory, modeling, and measurement in psychological science."
+  subtitle="Curated resources on theory, modeling, and measurement in psychological science"
+>
+  <!-- Resources -->
+  <Section background="white">
+    <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+      Resources
+    </h2>
+    <p class="mt-8 text-slate-600 dark:text-slate-400 italic">
+      Coming soon... We're curating a collection of tutorials, papers, software, and educational materials.
+    </p>
+  </Section>
+
+  <!-- Contribute CTA -->
+  <Section background="gray" centered>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+        Contribute a Resource
+      </h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-400">
+        Have a tutorial, tool, or paper to share? We welcome contributions from
+        the TMM community.
+      </p>
+      <div class="mt-6">
+        <button id="open-modal-btn" class="btn-primary">
+          Submit a Resource
+        </button>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Modal -->
+  <div
+    id="resource-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto bg-black/50 p-4"
+  >
+    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900 my-8">
+      <!-- Close button -->
+      <button
+        id="close-modal-btn"
+        class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+        Submit a Resource
+      </h2>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+        Share a resource with the TMM community.
+      </p>
+
+      <form
+        action={`https://formspree.io/f/${FORMSPREE_ID}`}
+        method="POST"
+        enctype="multipart/form-data"
+        class="mt-6 space-y-4"
+      >
+        <input type="hidden" name="_subject" value="New Resource Submission" />
+
+        <!-- Name -->
+        <div>
+          <label for="name" class="label">Your Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="input"
+            placeholder="Your name"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="label">Email *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="input"
+            placeholder="your@email.com"
+          />
+        </div>
+
+        <!-- Resource Title -->
+        <div>
+          <label for="title" class="label">Resource Title *</label>
+          <input
+            type="text"
+            id="title"
+            name="resource_title"
+            required
+            class="input"
+            placeholder="Title of your resource"
+          />
+        </div>
+
+        <!-- Resource Type -->
+        <div>
+          <label for="type" class="label">Resource Type *</label>
+          <select id="type" name="resource_type" required class="input">
+            <option value="">Select type</option>
+            {resourceTypes.map((type) => (
+              <option value={type}>{type}</option>
+            ))}
+          </select>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="description" class="label">Description *</label>
+          <textarea
+            id="description"
+            name="description"
+            required
+            rows="3"
+            class="input"
+            placeholder="Brief description of the resource"
+          ></textarea>
+        </div>
+
+        <!-- URL (optional) -->
+        <div>
+          <label for="url" class="label">URL (optional)</label>
+          <input
+            type="url"
+            id="url"
+            name="resource_url"
+            class="input"
+            placeholder="https://..."
+          />
+          <p class="mt-1 text-xs text-slate-500">Link to the resource if hosted elsewhere</p>
+        </div>
+
+        <!-- File Upload (optional) -->
+        <div>
+          <label for="file" class="label">Upload File (optional)</label>
+          <input
+            type="file"
+            id="file"
+            name="attachment"
+            class="block w-full text-sm text-slate-600 dark:text-slate-400
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-lg file:border-0
+              file:text-sm file:font-semibold
+              file:bg-navy-100 file:text-navy-700
+              hover:file:bg-navy-200
+              dark:file:bg-navy-900/50 dark:file:text-navy-300"
+          />
+          <p class="mt-1 text-xs text-slate-500">Max 10MB. PDF, DOC, PPT, or ZIP files.</p>
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-2">
+          <button type="submit" class="btn-primary w-full">
+            Submit Resource
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  const modal = document.getElementById('resource-modal');
+  const openBtn = document.getElementById('open-modal-btn');
+  const closeBtn = document.getElementById('close-modal-btn');
+
+  function openModal() {
+    modal?.classList.remove('hidden');
+    modal?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal?.classList.add('hidden');
+    modal?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+
+  // Close on backdrop click
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+</script>

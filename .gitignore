@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.astro/
+*.log
+.vercel/
+.claude/
+tmpclaude-*
+*.docx
+package-lock.json

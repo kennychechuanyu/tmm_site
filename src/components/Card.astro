@@ -1,0 +1,53 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  href?: string;
+  class?: string;
+  accent?: "navy" | "salmon" | "teal";
+}
+
+const { title, description, href, class: className, accent } = Astro.props;
+const Tag = href ? "a" : "div";
+
+const accentColors = {
+  navy: "bg-navy-500",
+  salmon: "bg-salmon-500",
+  teal: "bg-teal-500",
+};
+---
+
+<Tag
+  href={href}
+  class:list={[
+    "card group relative overflow-hidden",
+    href && "cursor-pointer",
+    "hover:-translate-y-1 hover:shadow-lg hover:border-navy-200 dark:hover:border-navy-700",
+    "transition-all duration-300",
+    className,
+  ]}
+>
+  <!-- Accent bar -->
+  {accent && (
+    <div class:list={[
+      "absolute top-0 left-0 right-0 h-1",
+      accentColors[accent],
+      "opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    ]} />
+  )}
+
+  <!-- Optional icon slot -->
+  <slot name="icon" />
+
+  <h3 class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-navy-600 dark:group-hover:text-navy-400 transition-colors">
+    {title}
+  </h3>
+
+  {description && (
+    <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+      {description}
+    </p>
+  )}
+
+  <slot />
+</Tag>

@@ -1,0 +1,65 @@
+---
+interface Props {
+  subtitle: string;
+  description: string;
+  primaryCTA?: {
+    label: string;
+    href: string;
+  };
+  secondaryCTA?: {
+    label: string;
+    href: string;
+  };
+}
+
+const { subtitle, description, primaryCTA, secondaryCTA } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-24 dark:from-slate-900 dark:to-slate-950 md:py-32">
+  <!-- Subtle background decoration -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-salmon-100/50 blur-3xl dark:bg-salmon-900/20"></div>
+    <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-navy-100/50 blur-3xl dark:bg-navy-900/20"></div>
+  </div>
+
+  <div class="container-wide relative">
+    <div class="mx-auto max-w-4xl text-center">
+      <!-- Main Headline: TMM -->
+      <h1 class="whitespace-nowrap text-4xl font-bold tracking-tight text-slate-700 dark:text-slate-300 sm:text-5xl md:text-6xl lg:text-7xl">
+        <span class="text-navy-500 text-[1.2em]">T</span>heory,
+        <span class="text-navy-500 text-[1.2em]">M</span>odel,
+        <span class="text-navy-500 text-[1.2em]">M</span>easurement
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="mt-6 text-lg font-medium text-slate-700 dark:text-slate-300 sm:text-xl md:text-2xl">
+        {subtitle}
+      </p>
+
+      <!-- Description -->
+      <p class="mx-auto mt-4 max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg">
+        {description}
+      </p>
+
+      <!-- CTAs -->
+      {(primaryCTA || secondaryCTA) && (
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          {primaryCTA && (
+            <a href={primaryCTA.href} class="btn-primary">
+              {primaryCTA.label}
+            </a>
+          )}
+          {secondaryCTA && (
+            <a
+              href={secondaryCTA.href}
+              class="text-sm font-semibold text-slate-600 hover:text-navy-600 dark:text-slate-400 dark:hover:text-navy-400 transition-colors"
+            >
+              {secondaryCTA.label}
+              <span aria-hidden="true" class="ml-1">&rarr;</span>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

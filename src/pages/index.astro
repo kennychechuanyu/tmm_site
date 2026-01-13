@@ -1,0 +1,171 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import EventCard from "../components/EventCard.astro";
+import Button from "../components/Button.astro";
+import { getCollection } from "astro:content";
+
+// Get upcoming events
+const allEvents = await getCollection("events");
+const now = new Date();
+const upcomingEvents = allEvents
+  .filter((event) => event.data.date >= now)
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
+  .slice(0, 3);
+
+// Focus areas data
+const focusAreas = [
+  {
+    title: "Theory-Measurement Gap",
+    description: "What we measure often isn't what we theorize. We expose the hidden assumptions.",
+    iconPath: "M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15",
+  },
+  {
+    title: "Prediction-Explanation Gap",
+    description: "Good predictions can come from bad theories. We investigate what it really takes for a model to explain.",
+    iconPath: "M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z",
+  },
+  {
+    title: "Cumulative Science",
+    description: "Evidence for theories and evidence for measures get tangled. We work to untangle them—so both can genuinely accumulate.",
+    iconPath: "M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3",
+  },
+];
+---
+
+<BaseLayout
+  title="TMM - Theory, Model, Measurement"
+  description="An international network addressing the disconnect between what psychologists theorize, what they model, and what they actually measure."
+>
+  <!-- Hero Section -->
+  <Hero
+    subtitle="Bridging Theory and Measurement in Psychology"
+    description="TMM is an international network addressing the disconnect between what psychologists theorize, what they model, and what they actually measure."
+    primaryCTA={{ label: "Join the Network", href: "/community" }}
+    secondaryCTA={{ label: "Upcoming Events", href: "/events" }}
+  />
+
+  <!-- What We Do -->
+  <Section background="gray">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <!-- Left: Headline -->
+        <div class="scroll-fade-in-left">
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white lg:text-4xl">
+            What We Do
+          </h2>
+          <p class="mt-6 text-xl text-slate-600 dark:text-slate-400">
+            Psychologists theorize, model, and measure in disconnected ways.
+          </p>
+          <p class="mt-2 text-xl font-medium text-navy-600 dark:text-navy-400">
+            We work to align them.
+          </p>
+        </div>
+
+        <!-- Right: Activities -->
+        <div class="space-y-6 scroll-fade-in-right">
+          <div class="flex gap-4 items-start">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-500 text-white">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900 dark:text-white">Unite disciplines</h3>
+              <p class="mt-1 text-slate-600 dark:text-slate-400">Bringing together cognitive modelers, psychometricians, experimentalists, and philosophers.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-salmon-500 text-white">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900 dark:text-white">Foster dialogue</h3>
+              <p class="mt-1 text-slate-600 dark:text-slate-400">Creating spaces where theoretical, modeling, and methodological assumptions can be questioned.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-400 text-white">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900 dark:text-white">Organize events</h3>
+              <p class="mt-1 text-slate-600 dark:text-slate-400">Hosting workshops and conferences where conversations translate into concrete progress.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-salmon-400 text-white">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-slate-900 dark:text-white">Build collaborations</h3>
+              <p class="mt-1 text-slate-600 dark:text-slate-400">Providing a platform where joint research projects can emerge from shared understanding.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Focus Areas -->
+  <Section
+    title="Our Focus"
+    centered
+    background="white"
+  >
+    <div class="grid gap-6 md:grid-cols-3 scroll-fade-in-children">
+      {focusAreas.map((area, index) => (
+        <Card title={area.title} description={area.description} accent={index === 0 ? "navy" : index === 1 ? "salmon" : "teal"}>
+          <div slot="icon" class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-navy-100 to-navy-50 text-navy-600 dark:from-navy-900/50 dark:to-navy-800/30 dark:text-navy-400 group-hover:scale-110 transition-transform duration-300">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={area.iconPath} />
+            </svg>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Upcoming Events -->
+  <Section
+    title="Upcoming Events"
+    subtitle="Join us at our conferences, workshops, and webinars."
+    background="gray"
+  >
+    {upcomingEvents.length > 0 ? (
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 scroll-fade-in-children">
+        {upcomingEvents.map((event) => (
+          <EventCard
+            title={event.data.title}
+            date={event.data.date}
+            location={event.data.location}
+            type={event.data.type}
+            href={`/events/${event.id}`}
+            featured={event.data.featured}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-slate-600 dark:text-slate-400 scroll-fade-in">
+        No upcoming events at the moment. Check back soon!
+      </p>
+    )}
+    <div class="mt-8 text-center scroll-fade-in">
+      <Button href="/events" variant="secondary">
+        View All Events
+      </Button>
+    </div>
+  </Section>
+
+</BaseLayout>
