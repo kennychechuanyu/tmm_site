@@ -33,7 +33,7 @@ closes with an open audience Q&A.
 
 - **Talk 1.** ~30 min presentation · 30 min guided discussion
 - **Talk 2.** ~30 min presentation · 30 min guided discussion
-- **Talk 3.** ~15 min presentation · 30 min guided discussion
+- **Talk 3.** ~30 min presentation · 30 min guided discussion
 - **Audience Q&A.** 20 min
 
 Total runtime: approximately **2.5 hours**, including a brief introduction and wrap-up.
