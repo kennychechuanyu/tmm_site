@@ -24,11 +24,7 @@ philosophy of science for a structured conversation organised around three quest
 - **Foundations.** What is interpretability, what is it not, and is it graded or binary?
 - **Structure.** Which model classes are more interpretable, and why? How do mimicry,
   auxiliary assumptions, and parameter identifiability complicate the picture?
-- **Methodology.** Can theory drive tools that *increase* interpretability? Do amortised
-  inference methods change what counts as an interpretation at all?
-
-The discussion is intended to feed directly into a collaboratively authored perspective
-paper.
+- **Methodology.** Can theory drive tools that *increase* interpretability?
 
 ## Format
 
@@ -45,10 +41,10 @@ Total runtime: approximately **2.5 hours**, including a brief introduction and w
 ## How to Participate
 
 **Speakers** *(2–3 invited).* Give a short talk on interpretability from your own
-perspective. Speakers are co-authors on the resulting perspective paper.
+perspective.
 
 **Discussion panel** *(invited experts).* Respond to the talks, challenge speakers,
-raise new points, and guide the conversation. Panel members are co-authors on the paper.
+raise new points, and guide the conversation.
 
 **Open audience** *(public registration).* Anyone interested in the topic is welcome to
 register and attend. Audience members can ask questions during the final Q&A.
