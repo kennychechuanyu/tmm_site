@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
+import ChapterHeader from "../components/ChapterHeader.astro";
 
 // Values data
 const values = [
@@ -34,11 +35,9 @@ const values = [
 >
   <!-- Mission Section -->
   <Section background="white">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-        Our Mission
-      </h2>
-      <div class="mt-6 space-y-4 text-slate-600 dark:text-slate-400">
+    <div class="mx-auto max-w-4xl">
+      <ChapterHeader numeral="I" title="Our Mission" metaLabel="Purpose" />
+      <div class="mt-10 space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300 md:mt-12 max-w-3xl">
         <p>
           Over the past two decades, computational models have become increasingly prominent
           in psychological science, allowing researchers to formalize theoretical claims and
@@ -66,10 +65,8 @@ const values = [
   <!-- The Two Fundamental Gaps -->
   <Section background="gray">
     <div class="mx-auto max-w-4xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white text-center">
-        Two Fundamental Gaps
-      </h2>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
+      <ChapterHeader numeral="II" title="Two Fundamental Gaps" metaLabel="Diagnosis" />
+      <p class="mt-10 font-serif text-lg italic text-slate-600 dark:text-slate-400 md:text-xl">
         At the intersection of theory, measurement, and modeling, two crucial gaps limit psychology's progress as a quantitative science.
       </p>
 
@@ -132,9 +129,9 @@ const values = [
 
   <!-- Values Section -->
   <Section background="white">
-    <h2 class="text-center text-3xl font-semibold text-slate-900 dark:text-white">
-      Our Values
-    </h2>
+    <div class="mx-auto max-w-4xl">
+      <ChapterHeader numeral="III" title="Our Values" metaLabel="Commitments" />
+    </div>
     <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
       {values.map((value) => (
         <div class="text-center">

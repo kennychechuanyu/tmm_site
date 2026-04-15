@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
+import ChapterHeader from "../components/ChapterHeader.astro";
 
 const FORMSPREE_MEMBERSHIP = "mreegjyb";
 const FORMSPREE_PROJECT = "xnjjqylg";
@@ -27,11 +28,9 @@ const academicRoles = [
 >
   <!-- Join Section -->
   <Section background="white">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-        Join Our Network
-      </h2>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
+    <div class="mx-auto max-w-4xl">
+      <ChapterHeader numeral="I" title="Join Our Network" metaLabel="Membership" />
+      <p class="mt-10 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300 md:mt-12">
         TMM welcomes researchers, students, and practitioners interested in the
         translation between theory and measurement. We bring together members from
         diverse fields, including but not limited to cognitive modeling, psychometrics,
@@ -104,11 +103,9 @@ const academicRoles = [
 
   <!-- How to Get Involved -->
   <Section background="white">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white text-center">
-        How to Get Involved
-      </h2>
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
+    <div class="mx-auto max-w-4xl">
+      <ChapterHeader numeral="II" title="How to Get Involved" metaLabel="Three Steps" />
+      <div class="mt-12 grid gap-6 md:grid-cols-3 md:mt-16">
         <div class="text-center">
           <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
             <span class="text-xl font-bold">1</span>
@@ -142,11 +139,9 @@ const academicRoles = [
 
   <!-- Working Groups & Project Ideas -->
   <Section background="gray">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-        Working Groups
-      </h2>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
+    <div class="mx-auto max-w-4xl">
+      <ChapterHeader numeral="III" title="Working Groups" metaLabel="Collaboration" />
+      <p class="mt-10 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300 md:mt-12">
         Working groups tackle specific challenges at the theory-measurement interface.
         They emerge from project ideas that attract enough interest.
       </p>
@@ -186,17 +181,15 @@ const academicRoles = [
 
   <!-- Discussion Topics -->
   <Section background="white">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-        Discussion Topics
-      </h2>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
+    <div class="mx-auto max-w-4xl">
+      <ChapterHeader numeral="IV" title="Discussion Topics" metaLabel="Open Questions" />
+      <p class="mt-10 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300 md:mt-12">
         What questions should the field be grappling with? Propose topics you think
         deserve attention—contested assumptions, unresolved tensions, or emerging challenges
         in theory-measurement alignment.
       </p>
 
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
         We organize discussions as network events—online or at workshops.
       </p>
 

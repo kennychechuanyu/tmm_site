@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
+import ChapterHeader from "../components/ChapterHeader.astro";
 
 // Coordinating Team members
 const coordinatingCommittee = [
@@ -35,12 +36,10 @@ const coordinatingCommittee = [
 >
   <!-- Coordinating Team -->
   <Section background="white">
-    <div class="mx-auto max-w-4xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-        Coordinating Team
-      </h2>
+    <div class="mx-auto max-w-6xl">
+      <ChapterHeader numeral="I" title="Coordinating Team" />
 
-      <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {coordinatingCommittee.map((member) => (
           <div class="group rounded-xl bg-white p-8 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
             <!-- Photo -->
@@ -77,12 +76,10 @@ const coordinatingCommittee = [
 
   <!-- Network Members -->
   <Section background="gray">
-    <div class="mx-auto max-w-4xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-        Network Members
-      </h2>
-      <p class="mt-8 text-slate-600 dark:text-slate-400 italic">
-        Coming soon...
+    <div class="mx-auto max-w-6xl">
+      <ChapterHeader numeral="II" title="Network Members" />
+      <p class="mt-10 font-serif text-lg italic text-slate-500 dark:text-slate-500 md:text-xl">
+        Roster coming soon.
       </p>
     </div>
   </Section>

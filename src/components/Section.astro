@@ -1,13 +1,25 @@
 ---
+import ChapterHeader from "./ChapterHeader.astro";
+
 interface Props {
   title?: string;
   subtitle?: string;
+  numeral?: string;
+  metaLabel?: string;
   centered?: boolean;
   background?: "white" | "gray" | "navy";
   id?: string;
 }
 
-const { title, subtitle, centered = false, background = "white", id } = Astro.props;
+const {
+  title,
+  subtitle,
+  numeral,
+  metaLabel,
+  centered = false,
+  background = "white",
+  id,
+} = Astro.props;
 
 const bgClasses = {
   white: "bg-white dark:bg-slate-900",
@@ -18,18 +30,14 @@ const bgClasses = {
 
 <section id={id} class:list={["section", bgClasses[background]]}>
   <div class="container-wide">
-    {(title || subtitle) && (
-      <div class:list={["mb-12", centered && "text-center"]}>
-        {title && (
-          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white md:text-4xl">
-            {title}
-          </h2>
-        )}
+    {title && (
+      <div class="mb-12 md:mb-16">
+        <ChapterHeader numeral={numeral} title={title} metaLabel={metaLabel} />
         {subtitle && (
           <p
             class:list={[
-              "mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400",
-              centered && "mx-auto",
+              "mt-6 font-serif text-lg italic text-slate-600 dark:text-slate-400 md:text-xl",
+              centered && "mx-auto text-center",
             ]}
           >
             {subtitle}

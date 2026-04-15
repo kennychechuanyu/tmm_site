@@ -1,38 +1,187 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
+import ChapterHeader from "../../components/ChapterHeader.astro";
 import Button from "../../components/Button.astro";
+import { getCollection } from "astro:content";
+
+const allEvents = await getCollection("events");
+const now = new Date();
+
+const upcomingEvents = allEvents
+  .filter((event) => !event.data.date || event.data.date >= now)
+  .sort((a, b) => {
+    const ad = a.data.date?.getTime() ?? -Infinity;
+    const bd = b.data.date?.getTime() ?? -Infinity;
+    return ad - bd;
+  });
+
+const pastEvents = allEvents
+  .filter((event) => event.data.date && event.data.date < now)
+  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 ---
 
 <PageLayout
   title="Events"
   description="TMM conferences, workshops, webinars, and meetups on psychological theory, modeling, and measurement."
-  subtitle="Join our conferences, workshops, and webinars"
+  subtitle="Conferences, workshops, and webinars on theory, modeling, and measurement"
 >
   <!-- Upcoming Events -->
   <Section background="white">
-    <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-      Upcoming Events
-    </h2>
-    <p class="mt-8 text-slate-600 dark:text-slate-400 italic">
-      Coming soon... Subscribe to our newsletter to stay updated.
-    </p>
+    <ChapterHeader numeral="I" title="Upcoming" metaLabel="Agenda" />
+
+    {upcomingEvents.length > 0 ? (
+      <ol class="mt-12 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+        {upcomingEvents.map((event) => {
+          const d = event.data.date;
+          const day = d ? String(d.getDate()).padStart(2, "0") : null;
+          const month = d ? d.toLocaleDateString("en-US", { month: "short" }) : null;
+          const year = d ? d.getFullYear() : null;
+          const weekday = d ? d.toLocaleDateString("en-US", { weekday: "long" }) : "Date TBD";
+          return (
+            <li>
+              <a
+                href={`/events/${event.slug}`}
+                class="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 transition-colors hover:bg-slate-50/60 dark:hover:bg-slate-900/30 md:gap-10 md:py-8"
+              >
+                <!-- Date block -->
+                <div class="flex items-baseline gap-3 pl-1 text-slate-900 dark:text-slate-100">
+                  {d ? (
+                    <>
+                      <span class="font-serif text-4xl leading-[0.85] tabular-nums md:text-6xl">
+                        {day}
+                      </span>
+                      <div
+                        class="flex flex-col font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
+                        style="letter-spacing: 0.22em;"
+                      >
+                        <span>{month}</span>
+                        <span class="font-mono tabular-nums">{year}</span>
+                      </div>
+                    </>
+                  ) : (
+                    <span class="font-serif text-2xl italic leading-[0.9] text-slate-500 dark:text-slate-500 md:text-3xl">
+                      TBD
+                    </span>
+                  )}
+                </div>
+
+                <!-- Details -->
+                <div class="min-w-0 pr-2">
+                  <div
+                    class="mb-2 flex flex-wrap items-center gap-3 font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
+                    style="letter-spacing: 0.22em;"
+                  >
+                    <span>{weekday}</span>
+                    <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
+                    <span class="text-salmon-600 dark:text-salmon-400">{event.data.type}</span>
+                    {event.data.featured && (
+                      <>
+                        <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
+                        <span>Featured</span>
+                      </>
+                    )}
+                  </div>
+                  <h3 class="font-serif text-xl leading-tight text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400 md:text-2xl">
+                    {event.data.title}
+                  </h3>
+                  <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                    {event.data.location}
+                  </p>
+                </div>
+
+                <!-- Arrow -->
+                <span
+                  aria-hidden="true"
+                  class="hidden pr-2 text-xl text-slate-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-salmon-500 dark:text-slate-600 md:inline"
+                >
+                  →
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    ) : (
+      <div class="mt-12 border-y border-slate-900/15 py-16 text-center dark:border-slate-100/15">
+        <p class="font-serif text-xl italic text-slate-500 dark:text-slate-500">
+          No events currently scheduled. Check back soon.
+        </p>
+      </div>
+    )}
   </Section>
 
+  {pastEvents.length > 0 && (
+    <Section background="gray">
+      <ChapterHeader numeral="II" title="Past Events" metaLabel="Archive" />
+
+      <ol class="mt-12 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+        {pastEvents.map((event) => {
+          const d = event.data.date!;
+          const day = String(d.getDate()).padStart(2, "0");
+          const month = d.toLocaleDateString("en-US", { month: "short" });
+          const year = d.getFullYear();
+          const weekday = d.toLocaleDateString("en-US", { weekday: "long" });
+          return (
+            <li>
+              <a
+                href={`/events/${event.slug}`}
+                class="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 transition-colors hover:bg-white/60 dark:hover:bg-slate-900/30 md:gap-10 md:py-8"
+              >
+                <div class="flex items-baseline gap-3 pl-1 text-slate-500 dark:text-slate-500">
+                  <span class="font-serif text-4xl leading-[0.85] tabular-nums md:text-6xl">
+                    {day}
+                  </span>
+                  <div
+                    class="flex flex-col font-sans text-[10px] uppercase"
+                    style="letter-spacing: 0.22em;"
+                  >
+                    <span>{month}</span>
+                    <span class="font-mono tabular-nums">{year}</span>
+                  </div>
+                </div>
+                <div class="min-w-0 pr-2">
+                  <div
+                    class="mb-2 flex flex-wrap items-center gap-3 font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
+                    style="letter-spacing: 0.22em;"
+                  >
+                    <span>{weekday}</span>
+                    <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
+                    <span>{event.data.type}</span>
+                  </div>
+                  <h3 class="font-serif text-xl leading-tight text-slate-600 transition-colors group-hover:text-slate-900 dark:text-slate-400 dark:group-hover:text-slate-100 md:text-2xl">
+                    {event.data.title}
+                  </h3>
+                  <p class="mt-1 text-sm text-slate-500 dark:text-slate-500">
+                    {event.data.location}
+                  </p>
+                </div>
+                <span
+                  aria-hidden="true"
+                  class="hidden pr-2 text-xl text-slate-400 transition-all duration-300 group-hover:translate-x-1 dark:text-slate-600 md:inline"
+                >
+                  →
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </Section>
+  )}
+
   <!-- Propose Event CTA -->
-  <Section background="navy" centered>
+  <Section background={pastEvents.length > 0 ? "white" : "gray"}>
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
+      <h2 class="font-serif text-3xl text-slate-900 dark:text-slate-100 md:text-4xl">
         Propose an Event
       </h2>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
+      <p class="mt-4 font-serif text-lg italic text-slate-600 dark:text-slate-400">
         Have an idea for a workshop, webinar, or reading group? We welcome proposals
         from network members.
       </p>
-      <div class="mt-6">
-        <Button href="/contact">
-          Submit a Proposal
-        </Button>
+      <div class="mt-8">
+        <Button href="/contact">Submit a Proposal</Button>
       </div>
     </div>
   </Section>

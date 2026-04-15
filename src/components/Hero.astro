@@ -15,51 +15,94 @@ interface Props {
 const { subtitle, description, primaryCTA, secondaryCTA } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-24 dark:from-slate-900 dark:to-slate-950 md:py-32">
-  <!-- Subtle background decoration -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-salmon-100/50 blur-3xl dark:bg-salmon-900/20"></div>
-    <div class="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-navy-100/50 blur-3xl dark:bg-navy-900/20"></div>
-  </div>
+<section class="relative overflow-hidden bg-white pt-28 pb-20 dark:bg-slate-950 md:pt-36 md:pb-28">
+  <!-- Paper texture: subtle dotted grid -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.045] dark:text-slate-100 dark:opacity-[0.08]"
+    style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
+  ></div>
 
   <div class="container-wide relative">
-    <div class="mx-auto max-w-4xl text-center">
-      <!-- Main Headline: TMM -->
-      <h1 class="whitespace-nowrap text-4xl font-bold tracking-tight text-slate-700 dark:text-slate-300 sm:text-5xl md:text-6xl lg:text-7xl">
-        <span class="text-navy-500 text-[1.2em]">T</span>heory,
-        <span class="text-navy-500 text-[1.2em]">M</span>odel,
-        <span class="text-navy-500 text-[1.2em]">M</span>easurement
+    <div class="mx-auto max-w-6xl">
+      <!-- Eyebrow rule + label -->
+      <div class="mb-10 flex items-center gap-4 font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400"
+           style="letter-spacing: 0.22em;">
+        <span class="inline-block h-px w-12 bg-salmon-500/80 dark:bg-salmon-400/80"></span>
+        <span>A Network for</span>
+      </div>
+
+      <!-- Wordmark: Theory, Model, Measurement stacked -->
+      <h1 class="font-serif font-normal leading-[0.92] tracking-[-0.025em] text-slate-900 dark:text-slate-100">
+        <span class="block" style="font-size: clamp(2.75rem, 11vw, 9rem);">
+          <span class="text-navy-600 dark:text-navy-400" style="font-size: 1.18em;">T</span><span>heory<span class="text-slate-300 dark:text-slate-700">,</span></span>
+        </span>
+        <span class="block pl-[0.08em]" style="font-size: clamp(2.75rem, 11vw, 9rem);">
+          <span class="text-navy-600 dark:text-navy-400" style="font-size: 1.18em;">M</span><span>odel<span class="text-slate-300 dark:text-slate-700">,</span></span>
+        </span>
+        <span class="block pl-[0.18em] italic text-slate-700 dark:text-slate-300" style="font-size: clamp(2.75rem, 11vw, 9rem);">
+          <span class="not-italic text-navy-600 dark:text-navy-400" style="font-size: 1.18em;">M</span><span>easurement<span class="not-italic text-slate-300 dark:text-slate-700">.</span></span>
+        </span>
       </h1>
 
-      <!-- Subtitle -->
-      <p class="mt-6 text-lg font-medium text-slate-700 dark:text-slate-300 sm:text-xl md:text-2xl">
-        {subtitle}
-      </p>
+      <!-- Byline block: rule + meta + pullquote + CTAs -->
+      <div class="mt-14 grid gap-10 md:mt-20 md:grid-cols-12 md:gap-14">
+        <!-- Left: vertical rule + subject label -->
+        <div class="md:col-span-4">
+          <div class="flex items-start gap-5">
+            <div aria-hidden="true" class="mt-2 h-14 w-px bg-slate-900 dark:bg-slate-100"></div>
+            <div class="space-y-2">
+              <p class="font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.25em;">
+                Subject
+              </p>
+              <p class="font-serif text-lg leading-snug text-slate-800 dark:text-slate-200">
+                {subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
 
-      <!-- Description -->
-      <p class="mx-auto mt-4 max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg">
-        {description}
-      </p>
+        <!-- Right: pullquote + CTAs -->
+        <div class="md:col-span-8">
+          <p
+            class="max-w-2xl font-serif text-xl leading-snug text-slate-700 dark:text-slate-300 md:text-2xl [&_em]:font-medium [&_em]:text-navy-700 dark:[&_em]:text-navy-300"
+            set:html={description}
+          ></p>
 
-      <!-- CTAs -->
-      {(primaryCTA || secondaryCTA) && (
-        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          {primaryCTA && (
-            <a href={primaryCTA.href} class="btn-primary">
-              {primaryCTA.label}
-            </a>
-          )}
-          {secondaryCTA && (
-            <a
-              href={secondaryCTA.href}
-              class="text-sm font-semibold text-slate-600 hover:text-navy-600 dark:text-slate-400 dark:hover:text-navy-400 transition-colors"
-            >
-              {secondaryCTA.label}
-              <span aria-hidden="true" class="ml-1">&rarr;</span>
-            </a>
+          {(primaryCTA || secondaryCTA) && (
+            <div class="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4">
+              {primaryCTA && (
+                <a
+                  href={primaryCTA.href}
+                  class="group inline-flex items-center gap-3 bg-slate-900 px-7 py-4 font-sans text-[11px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-salmon-600 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-salmon-500 dark:hover:text-white"
+                  style="letter-spacing: 0.18em;"
+                >
+                  <span>{primaryCTA.label}</span>
+                  <span aria-hidden="true" class="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </a>
+              )}
+              {secondaryCTA && (
+                <a
+                  href={secondaryCTA.href}
+                  class="group inline-flex items-center gap-2 font-sans text-[13px] font-medium text-slate-700 dark:text-slate-300"
+                >
+                  <span class="editorial-underline">{secondaryCTA.label}</span>
+                  <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </a>
+              )}
+            </div>
           )}
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="pointer-events-none absolute bottom-6 right-4 hidden flex-col items-center gap-3 font-sans text-[9px] uppercase text-slate-500 dark:text-slate-500 md:flex lg:right-8"
+       style="letter-spacing: 0.3em;">
+    <span style="writing-mode: vertical-rl; transform: rotate(180deg);">Read on</span>
+    <div class="relative h-12 w-px overflow-hidden bg-slate-300 dark:bg-slate-700">
+      <div class="absolute inset-x-0 h-4 bg-slate-900 animate-scroll-hint dark:bg-slate-100"></div>
     </div>
   </div>
 </section>

@@ -261,6 +261,42 @@
 .scroll-fade-in-children.is-visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
 .scroll-fade-in-children.is-visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: translateY(0); }
 
+/* ========================================
+   Editorial Utilities (homepage masthead)
+   ======================================== */
+
+/* Link underline that draws in on hover */
+.editorial-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .editorial-underline,
+.editorial-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* Small label with tracked uppercase + leading rule */
+.eyebrow {
+  @apply inline-flex items-center gap-3 font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500;
+  letter-spacing: 0.22em;
+}
+
+/* Hero scroll-indicator tick */
+@keyframes scrollHint {
+  0%   { transform: translateY(-120%); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(260%); opacity: 0; }
+}
+
+.animate-scroll-hint {
+  animation: scrollHint 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -5,22 +5,47 @@ interface Props {
   title: string;
   description: string;
   subtitle?: string;
+  eyebrow?: string;
 }
 
-const { title, description, subtitle } = Astro.props;
+const { title, description, subtitle, eyebrow = "TMM Network" } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- Page Header -->
-  <section class="border-b border-slate-200 bg-white py-16 dark:border-slate-800 dark:bg-slate-900">
-    <div class="container-wide">
-      <h1 class="text-4xl font-semibold text-slate-900 dark:text-white md:text-5xl">
+  <!-- Editorial Page Header -->
+  <section class="relative overflow-hidden border-b border-slate-900/10 bg-white pt-24 pb-16 dark:border-slate-100/10 dark:bg-slate-950 md:pt-32 md:pb-24">
+    <!-- Paper texture -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.04] dark:text-slate-100 dark:opacity-[0.08]"
+      style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
+    ></div>
+
+    <div class="container-wide relative">
+      <!-- Eyebrow -->
+      <div
+        class="mb-8 flex items-center gap-4 font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400"
+        style="letter-spacing: 0.22em;"
+      >
+        <span aria-hidden="true" class="inline-block h-px w-12 bg-salmon-500/80 dark:bg-salmon-400/80"></span>
+        <span>{eyebrow}</span>
+      </div>
+
+      <!-- Serif display title -->
+      <h1
+        class="font-serif font-normal leading-[0.95] tracking-[-0.02em] text-slate-900 dark:text-slate-100"
+        style="font-size: clamp(2.5rem, 7vw, 5.25rem);"
+      >
         {title}
       </h1>
+
       {subtitle && (
-        <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
-          {subtitle}
-        </p>
+        <div class="mt-8 flex items-start gap-5">
+          <div aria-hidden="true" class="mt-2 hidden h-12 w-px bg-slate-900 dark:bg-slate-100 sm:block"></div>
+          <p class="max-w-2xl font-serif text-lg leading-snug text-slate-700 dark:text-slate-300 md:text-xl">
+            {subtitle}
+          </p>
+        </div>
       )}
     </div>
   </section>

@@ -7,7 +7,7 @@ const events = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/events" }),
   schema: z.object({
     title: z.string(),
-    date: z.coerce.date(),
+    date: z.coerce.date().optional(),
     endDate: z.coerce.date().optional(),
     location: z.string(),
     type: z.enum(["conference", "workshop", "webinar", "meetup"]),
