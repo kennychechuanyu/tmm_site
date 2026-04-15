@@ -6,9 +6,20 @@ interface Props {
   description: string;
   subtitle?: string;
   eyebrow?: string;
+  compact?: boolean;
 }
 
-const { title, description, subtitle, eyebrow = "TMM Network" } = Astro.props;
+const {
+  title,
+  description,
+  subtitle,
+  eyebrow = "TMM Network",
+  compact = false,
+} = Astro.props;
+
+const titleSize = compact
+  ? "clamp(1.875rem, 4vw, 3.25rem)"
+  : "clamp(2.5rem, 7vw, 5.25rem)";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -34,7 +45,7 @@ const { title, description, subtitle, eyebrow = "TMM Network" } = Astro.props;
       <!-- Serif display title -->
       <h1
         class="font-serif font-normal leading-[0.95] tracking-[-0.02em] text-slate-900 dark:text-slate-100"
-        style="font-size: clamp(2.5rem, 7vw, 5.25rem);"
+        style={`font-size: ${titleSize};`}
       >
         {title}
       </h1>
