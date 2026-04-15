@@ -1,0 +1,31 @@
+---
+interface Props {
+  numeral?: string;
+  title: string;
+  metaLabel?: string;
+  class?: string;
+}
+
+const { numeral, title, metaLabel, class: className } = Astro.props;
+---
+
+<header class:list={["flex items-baseline gap-6 md:gap-10", className]}>
+  {numeral && (
+    <span class="font-serif text-5xl italic leading-none text-salmon-500 dark:text-salmon-400 md:text-6xl">
+      {numeral}
+    </span>
+  )}
+  <div class="flex flex-1 items-baseline gap-4 border-b border-slate-900/15 pb-3 dark:border-slate-100/15">
+    <h2 class="font-serif text-3xl leading-none text-slate-900 dark:text-slate-100 md:text-[2.75rem]">
+      {title}
+    </h2>
+    {metaLabel && (
+      <span
+        class="ml-auto hidden font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500 md:inline"
+        style="letter-spacing: 0.25em;"
+      >
+        {metaLabel}
+      </span>
+    )}
+  </div>
+</header>

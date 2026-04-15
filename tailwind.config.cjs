@@ -41,7 +41,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         serif: ['Lora', 'ui-serif', 'Georgia', 'Times New Roman', 'serif'],
-        mono: ['ui-monospace', 'SFMono-Regular', 'Roboto Mono', 'monospace'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       borderRadius: {
         sm: '0.25rem',

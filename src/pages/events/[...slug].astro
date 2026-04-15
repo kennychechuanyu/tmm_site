@@ -7,7 +7,7 @@ import { getCollection, render } from "astro:content";
 export async function getStaticPaths() {
   const events = await getCollection("events");
   return events.map((event) => ({
-    params: { slug: event.id },
+    params: { slug: event.slug },
     props: { event },
   }));
 }
@@ -15,7 +15,8 @@ export async function getStaticPaths() {
 const { event } = Astro.props;
 const { Content } = await render(event);
 
-const formatDate = (date: Date, endDate?: Date) => {
+const formatDate = (date?: Date, endDate?: Date) => {
+  if (!date) return "Date to be determined";
   const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     month: "long",

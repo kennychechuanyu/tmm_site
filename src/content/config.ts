@@ -17,7 +17,7 @@ const events = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.date(),
+    date: z.date().optional(),
     endDate: z.date().optional(),
     location: z.string(),
     type: z.enum(["conference", "workshop", "webinar", "meetup"]),
