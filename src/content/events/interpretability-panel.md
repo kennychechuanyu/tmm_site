@@ -24,7 +24,7 @@ philosophy of science for a structured conversation organised around three quest
 - **Foundations.** What is interpretability, what is it not, and is it graded or binary?
 - **Structure.** Which model classes are more interpretable, and why? How do mimicry,
   auxiliary assumptions, and parameter identifiability complicate the picture?
-- **Methodology.** Can theory drive tools that *increase* interpretability?
+- **Relations.** How does interpretability relate to explanation, prediction, and generalizability—and can it be disentangled from them?
 
 ## Format
 
