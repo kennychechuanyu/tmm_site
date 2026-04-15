@@ -47,6 +47,37 @@ const focusAreas = [
     secondaryCTA={{ label: "Upcoming Events", href: "/events" }}
   />
 
+  <!-- Upcoming Events -->
+  <Section
+    title="Upcoming Events"
+    subtitle="Join us at our conferences, workshops, and webinars."
+    background="white"
+  >
+    {upcomingEvents.length > 0 ? (
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 scroll-fade-in-children">
+        {upcomingEvents.map((event) => (
+          <EventCard
+            title={event.data.title}
+            date={event.data.date}
+            location={event.data.location}
+            type={event.data.type}
+            href={`/events/${event.id}`}
+            featured={event.data.featured}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-slate-600 dark:text-slate-400 scroll-fade-in">
+        No upcoming events at the moment. Check back soon!
+      </p>
+    )}
+    <div class="mt-8 text-center scroll-fade-in">
+      <Button href="/events" variant="secondary">
+        View All Events
+      </Button>
+    </div>
+  </Section>
+
   <!-- What We Do -->
   <Section background="gray">
     <div class="mx-auto max-w-6xl">
@@ -134,37 +165,6 @@ const focusAreas = [
           </div>
         </Card>
       ))}
-    </div>
-  </Section>
-
-  <!-- Upcoming Events -->
-  <Section
-    title="Upcoming Events"
-    subtitle="Join us at our conferences, workshops, and webinars."
-    background="gray"
-  >
-    {upcomingEvents.length > 0 ? (
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 scroll-fade-in-children">
-        {upcomingEvents.map((event) => (
-          <EventCard
-            title={event.data.title}
-            date={event.data.date}
-            location={event.data.location}
-            type={event.data.type}
-            href={`/events/${event.id}`}
-            featured={event.data.featured}
-          />
-        ))}
-      </div>
-    ) : (
-      <p class="text-slate-600 dark:text-slate-400 scroll-fade-in">
-        No upcoming events at the moment. Check back soon!
-      </p>
-    )}
-    <div class="mt-8 text-center scroll-fade-in">
-      <Button href="/events" variant="secondary">
-        View All Events
-      </Button>
     </div>
   </Section>
 
