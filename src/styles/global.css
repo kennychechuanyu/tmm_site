@@ -190,7 +190,7 @@
   }
 
   .dark .prose-tmm {
-    @apply prose-invert prose-headings:text-slate-50 prose-a:text-navy-400;
+    @apply prose-invert prose-headings:text-slate-50 prose-a:text-navy-400 prose-strong:text-slate-50;
   }
 }
 
