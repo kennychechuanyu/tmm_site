@@ -297,6 +297,31 @@
   animation: scrollHint 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
+/* Bio accordion (smooth expand/collapse) */
+.bio-accordion .bio-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.bio-accordion[open] .bio-content {
+  grid-template-rows: 1fr;
+}
+
+.bio-accordion summary::-webkit-details-marker,
+.bio-accordion summary::marker {
+  display: none;
+  content: "";
+}
+
+.bio-accordion .bio-toggle-label::before {
+  content: "▸ ";
+}
+
+.bio-accordion[open] .bio-toggle-label::before {
+  content: "▾ ";
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
