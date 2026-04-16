@@ -3,14 +3,14 @@ import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
 import ChapterHeader from "../components/ChapterHeader.astro";
 
-// Coordinating Team members
+// Coordinating Team members (alphabetical by surname)
 const coordinatingCommittee = [
   {
-    name: "Dr. Kenny Yu",
-    role: "Quantitative Psychology and Individual Differences",
-    institution: "KU Leuven",
-    email: "kenny.yu@kuleuven.be",
-    image: "/images/people/KY.jpg",
+    name: "Dr. Maria Robinson",
+    role: "Behavioural Science Group",
+    institution: "University of Warwick",
+    email: "maria.robinson@warwick.ac.uk",
+    image: "/images/people/MR.png",
   },
   {
     name: "Dr. Niels Vanhasbroeck",
@@ -20,11 +20,23 @@ const coordinatingCommittee = [
     image: "/images/people/NV.jpg",
   },
   {
-    name: "Dr. Maria Robinson",
-    role: "Behavioural Science Group",
-    institution: "University of Warwick",
-    email: "maria.robinson@warwick.ac.uk",
-    image: "/images/people/MR.png",
+    name: "Dr. Kenny Yu",
+    role: "Quantitative Psychology and Individual Differences",
+    institution: "KU Leuven",
+    email: "kenny.yu@kuleuven.be",
+    image: "/images/people/KY.jpg",
+  },
+];
+
+// Network Members
+const networkMembers = [
+  {
+    name: "Sigert Ariens",
+    role: "Quantitative Psychology and Individual Differences",
+    institution: "KU Leuven",
+    email: "sigert.ariens@kuleuven.be",
+    image: "/images/people/SA.png",
+    bio: "Sigert Ariens is a mathematical psychologist focused on the dynamic paradigm in psychological science. His main areas of research are model interpretation, study design, and misspecification. He has developed a framework and software tools to help researchers interpret dynamic model structures and align them with psychological hypotheses, and works on study designs which aim to maximize the amount of information about the dynamic parameters. His work on misspecification criticizes atheoretic methods for handling dependence over time.",
   },
 ];
 ---
@@ -42,29 +54,20 @@ const coordinatingCommittee = [
       <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {coordinatingCommittee.map((member) => (
           <article class="group flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
-            <!-- Photo -->
             <img
               src={member.image}
               alt={member.name}
               class="h-36 w-36 rounded-full object-cover ring-4 ring-slate-100 transition-transform duration-300 group-hover:scale-[1.03] dark:ring-slate-700"
             />
-
-            <!-- Name -->
             <h3 class="mt-6 whitespace-nowrap font-serif text-xl text-slate-900 dark:text-white">
               {member.name}
             </h3>
-
-            <!-- Institution -->
             <p class="mt-2 whitespace-nowrap font-medium text-navy-600 dark:text-navy-400">
               {member.institution}
             </p>
-
-            <!-- Research group / role -->
             <p class="mt-1 whitespace-nowrap font-serif text-xs italic text-slate-500 dark:text-slate-400">
               {member.role}
             </p>
-
-            <!-- Email -->
             <a
               href={`mailto:${member.email}`}
               class="mt-5 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-navy-100 hover:text-navy-700 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-navy-900/50 dark:hover:text-navy-300"
@@ -84,9 +87,49 @@ const coordinatingCommittee = [
   <Section background="gray">
     <div class="mx-auto max-w-6xl">
       <ChapterHeader title="Network Members" />
-      <p class="mt-10 font-serif text-lg italic text-slate-500 dark:text-slate-500 md:text-xl">
-        Roster coming soon.
-      </p>
+
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+        {networkMembers.map((member) => (
+          <article class="group flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
+            <img
+              src={member.image}
+              alt={member.name}
+              class="h-36 w-36 rounded-full object-cover ring-4 ring-slate-100 transition-transform duration-300 group-hover:scale-[1.03] dark:ring-slate-700"
+            />
+            <h3 class="mt-6 whitespace-nowrap font-serif text-xl text-slate-900 dark:text-white">
+              {member.name}
+            </h3>
+            <p class="mt-2 whitespace-nowrap font-medium text-navy-600 dark:text-navy-400">
+              {member.institution}
+            </p>
+            <p class="mt-1 whitespace-nowrap font-serif text-xs italic text-slate-500 dark:text-slate-400">
+              {member.role}
+            </p>
+
+            <!-- Expandable bio -->
+            {member.bio && (
+              <details class="mt-4 w-full text-left">
+                <summary class="cursor-pointer text-center text-xs font-sans font-medium uppercase text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400" style="letter-spacing: 0.15em;">
+                  About
+                </summary>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  {member.bio}
+                </p>
+              </details>
+            )}
+
+            <a
+              href={`mailto:${member.email}`}
+              class="mt-5 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-navy-100 hover:text-navy-700 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-navy-900/50 dark:hover:text-navy-300"
+            >
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+              Email
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
   </Section>
 </PageLayout>
