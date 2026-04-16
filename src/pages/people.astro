@@ -93,13 +93,13 @@ const networkMembers = [
 
       <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {networkMembers.sort(sortByName).map((member) => (
-          <article class="flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
+          <article class="group flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
             <img
               src={member.image}
               alt={member.name}
-              class="h-28 w-28 rounded-full object-cover ring-4 ring-slate-100 dark:ring-slate-700"
+              class="h-36 w-36 rounded-full object-cover ring-4 ring-slate-100 transition-transform duration-300 group-hover:scale-[1.03] dark:ring-slate-700"
             />
-            <h3 class="mt-5 whitespace-nowrap font-serif text-xl text-slate-900 dark:text-white">
+            <h3 class="mt-6 whitespace-nowrap font-serif text-xl text-slate-900 dark:text-white">
               {member.name}
             </h3>
             <p class="mt-2 whitespace-nowrap font-medium text-navy-600 dark:text-navy-400">
@@ -109,24 +109,21 @@ const networkMembers = [
               {member.role}
             </p>
 
+            <!-- Expandable bio -->
             {member.bio && (
-              <details class="bio-accordion mt-4 w-full">
-                <summary class="cursor-pointer select-none border-t border-slate-200 pt-3 text-center font-sans text-xs font-medium uppercase text-navy-600 transition-colors hover:text-salmon-600 dark:border-slate-700 dark:text-navy-400 dark:hover:text-salmon-400" style="letter-spacing: 0.15em;">
-                  <span class="bio-toggle-label">Bio</span>
+              <details class="mt-4 w-full text-left">
+                <summary class="cursor-pointer text-center text-xs font-sans font-medium uppercase text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400" style="letter-spacing: 0.15em;">
+                  About
                 </summary>
-                <div class="bio-content">
-                  <div class="overflow-hidden">
-                    <p class="pt-3 text-left text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                      {member.bio}
-                    </p>
-                  </div>
-                </div>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  {member.bio}
+                </p>
               </details>
             )}
 
             <a
               href={`mailto:${member.email}`}
-              class="mt-4 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-navy-100 hover:text-navy-700 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-navy-900/50 dark:hover:text-navy-300"
+              class="mt-5 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-navy-100 hover:text-navy-700 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-navy-900/50 dark:hover:text-navy-300"
             >
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
