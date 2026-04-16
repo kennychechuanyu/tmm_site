@@ -41,6 +41,15 @@ const networkMembers = [
     image: "/images/people/SA.png",
     bio: "Sigert Ariens is a mathematical psychologist focused on the dynamic paradigm in psychological science. His main areas of research are model interpretation, study design, and misspecification. He has developed a framework and software tools to help researchers interpret dynamic model structures and align them with psychological hypotheses, and works on study designs which aim to maximize the amount of information about the dynamic parameters. His work on misspecification criticizes atheoretic methods for handling dependence over time.",
   },
+  {
+    name: "Prof. Andrew Heathcote",
+    role: "Cognitive Science and Mathematical Psychology",
+    institution: "University of Amsterdam",
+    email: "ajheathcote@gmail.com",
+    image: "/images/people/AH.png",
+    website: "https://www.ampl-psych.com/team/andrew-heathcote/",
+    bio: "Andrew Heathcote is a cognitive scientist whose work centres on evidence accumulation models of rapid decision-making. He is best known for developing the Linear Ballistic Accumulator (LBA), a widely used model for understanding how people make choices across laboratory, occupational, and clinical settings. His research integrates mathematical modelling with cognitive science to investigate memory, skill acquisition, and decision control across the lifespan.",
+  },
 ];
 ---
 
@@ -129,12 +138,24 @@ const networkMembers = [
               </details>
             )}
 
-            <a
-              href={`mailto:${member.email}`}
-              class="mt-4 font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
-            >
-              {member.email}
-            </a>
+            <div class="mt-4 flex flex-col items-center gap-1.5">
+              <a
+                href={`mailto:${member.email}`}
+                class="font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
+              >
+                {member.email}
+              </a>
+              {member.website && (
+                <a
+                  href={member.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
+                >
+                  Personal page →
+                </a>
+              )}
+            </div>
           </article>
         ))}
       </div>
