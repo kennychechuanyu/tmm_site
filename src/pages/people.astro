@@ -91,45 +91,48 @@ const networkMembers = [
     <div class="mx-auto max-w-6xl">
       <ChapterHeader title="Network Members" />
 
-      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+      <div class="mt-12 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15 md:mt-16">
         {networkMembers.sort(sortByName).map((member) => (
-          <article class="group flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
+          <article class="grid grid-cols-1 gap-6 py-8 sm:grid-cols-[auto_1fr] sm:gap-10 md:py-10">
+            <!-- Photo -->
             <img
               src={member.image}
               alt={member.name}
-              class="h-36 w-36 rounded-full object-cover ring-4 ring-slate-100 transition-transform duration-300 group-hover:scale-[1.03] dark:ring-slate-700"
+              class="mx-auto h-28 w-28 rounded-full object-cover ring-4 ring-slate-100 sm:mx-0 dark:ring-slate-700"
             />
-            <h3 class="mt-6 whitespace-nowrap font-serif text-xl text-slate-900 dark:text-white">
-              {member.name}
-            </h3>
-            <p class="mt-2 whitespace-nowrap font-medium text-navy-600 dark:text-navy-400">
-              {member.institution}
-            </p>
-            <p class="mt-1 whitespace-nowrap font-serif text-xs italic text-slate-500 dark:text-slate-400">
-              {member.role}
-            </p>
 
-            <!-- Expandable bio -->
-            {member.bio && (
-              <details class="mt-4 w-full text-left">
-                <summary class="cursor-pointer text-center text-xs font-sans font-medium uppercase text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400" style="letter-spacing: 0.15em;">
-                  About
-                </summary>
-                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            <!-- Content -->
+            <div>
+              <!-- Name + meta -->
+              <h3 class="font-serif text-xl text-slate-900 dark:text-slate-100 sm:text-2xl">
+                {member.name}
+              </h3>
+              <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span class="font-medium text-navy-600 dark:text-navy-400">
+                  {member.institution}
+                </span>
+                <span aria-hidden="true" class="hidden h-px w-4 bg-slate-400 dark:bg-slate-600 sm:inline-block"></span>
+                <span class="font-serif text-xs italic text-slate-500 dark:text-slate-400">
+                  {member.role}
+                </span>
+              </div>
+
+              <!-- Bio -->
+              {member.bio && (
+                <p class="mt-5 max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                   {member.bio}
                 </p>
-              </details>
-            )}
+              )}
 
-            <a
-              href={`mailto:${member.email}`}
-              class="mt-5 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600 transition-colors hover:bg-navy-100 hover:text-navy-700 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-navy-900/50 dark:hover:text-navy-300"
-            >
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-              </svg>
-              Email
-            </a>
+              <!-- Email -->
+              <a
+                href={`mailto:${member.email}`}
+                class="mt-5 inline-flex items-center gap-2 font-sans text-sm font-medium text-slate-900 dark:text-slate-100"
+              >
+                <span class="editorial-underline">{member.email}</span>
+                <span aria-hidden="true" class="text-slate-400 dark:text-slate-600">→</span>
+              </a>
+            </div>
           </article>
         ))}
       </div>
