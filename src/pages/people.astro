@@ -21,6 +21,8 @@ const coordinatingCommittee = [
     institution: "University of Amsterdam",
     email: "n.d.p.vanhasbroeck@uva.nl",
     image: "/images/people/NV.jpg",
+    bio: "Niels Vanhasbroeck is a mathematical psychologist with a special interest in (non)linear models capturing psychological processes such as emotions, attitudes, and pedestrian behavior. He seeks to bridge mathematical models and psychological theory, allowing for the formulation of theory through the language of mathematics and its testing through phenomena generation and direct engagement with data. He furthermore asks what types of psychological phenomena allow for mathematical description and what we learn through this quantification—connecting qualitative phenomena to quantitative measurement.",
+    website: "https://ndpvh.github.io",
   },
   {
     name: "Dr. Kenny Yu",
@@ -84,12 +86,40 @@ const networkMembers = [
             <p class="mt-1 font-serif text-xs italic text-slate-500 dark:text-slate-400">
               {member.role}
             </p>
-            <a
-              href={`mailto:${member.email}`}
-              class="mt-4 font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
-            >
-              {member.email}
-            </a>
+
+            {member.bio && (
+              <details class="mt-4 w-full text-left">
+                <summary class="cursor-pointer select-none border-t border-slate-200 pt-3 text-center font-sans text-xs font-medium uppercase text-navy-600 transition-colors hover:text-salmon-600 dark:border-slate-700 dark:text-navy-400 dark:hover:text-salmon-400" style="letter-spacing: 0.15em;">
+                  <span class="bio-toggle-label">About</span>
+                </summary>
+                <div class="bio-content">
+                  <div class="overflow-hidden">
+                    <p class="pt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                      {member.bio}
+                    </p>
+                  </div>
+                </div>
+              </details>
+            )}
+
+            <div class="mt-4 flex flex-col items-center gap-1.5">
+              <a
+                href={`mailto:${member.email}`}
+                class="font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
+              >
+                {member.email}
+              </a>
+              {member.website && (
+                <a
+                  href={member.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
+                >
+                  Personal page →
+                </a>
+              )}
+            </div>
           </article>
         ))}
       </div>
