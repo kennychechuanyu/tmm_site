@@ -3,7 +3,10 @@ import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
 import ChapterHeader from "../components/ChapterHeader.astro";
 
-// Coordinating Team members (alphabetical by surname)
+const sortByName = (a: { name: string }, b: { name: string }) =>
+  a.name.split(" ").pop()!.localeCompare(b.name.split(" ").pop()!);
+
+// Coordinating Team members
 const coordinatingCommittee = [
   {
     name: "Dr. Maria Robinson",
@@ -52,7 +55,7 @@ const networkMembers = [
       <ChapterHeader title="Coordinating Team" />
 
       <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
-        {coordinatingCommittee.map((member) => (
+        {coordinatingCommittee.sort(sortByName).map((member) => (
           <article class="group flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
             <img
               src={member.image}
@@ -89,7 +92,7 @@ const networkMembers = [
       <ChapterHeader title="Network Members" />
 
       <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
-        {networkMembers.map((member) => (
+        {networkMembers.sort(sortByName).map((member) => (
           <article class="group flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-slate-800">
             <img
               src={member.image}
