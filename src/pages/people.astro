@@ -54,6 +54,16 @@ const networkMembers = [
     website: "https://www.ampl-psych.com/team/andrew-heathcote/",
     bio: "Andrew Heathcote is a cognitive scientist whose work centres on evidence accumulation models of rapid decision-making. He is known for developing the Linear Ballistic Accumulator (LBA), a widely used model for understanding how people make choices across laboratory, occupational, and clinical settings. His research integrates mathematical modelling with cognitive science to investigate memory, skill acquisition, and decision control across the lifespan.",
   },
+  {
+    name: "Prof. Adam Sanborn",
+    role: "Department of Psychology",
+    institution: "University of Warwick",
+    email: "adam.n.sanborn@warwick.ac.uk",
+    image: "/images/people/AS.jpg",
+    website: "https://sampling.warwick.ac.uk",
+    website2: "https://profiles.warwick.ac.uk/pssjak-adam-sanborn",
+    bio: "Adam Sanborn is a cognitive scientist interested in the rationality of human behaviour, which he studies with Bayesian models, approximations to Bayesian models, and behavioural experiments. He is interested in developing general-purpose models of cognition that can explain why human behaviour broadly corresponds to Bayesian models, yet also show strong deviations.",
+  },
 ];
 ---
 
@@ -118,7 +128,17 @@ const networkMembers = [
                   rel="noopener noreferrer"
                   class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
                 >
-                  Personal page →
+                  {member.website2 ? "Lab page →" : "Personal page →"}
+                </a>
+              )}
+              {member.website2 && (
+                <a
+                  href={member.website2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
+                >
+                  University profile →
                 </a>
               )}
             </div>
@@ -184,7 +204,17 @@ const networkMembers = [
                   rel="noopener noreferrer"
                   class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
                 >
-                  Personal page →
+                  {member.website2 ? "Lab page →" : "Personal page →"}
+                </a>
+              )}
+              {member.website2 && (
+                <a
+                  href={member.website2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
+                >
+                  University profile →
                 </a>
               )}
             </div>
