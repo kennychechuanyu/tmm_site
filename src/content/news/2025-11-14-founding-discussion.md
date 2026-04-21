@@ -8,17 +8,17 @@ featured: true
 
 ## Participants
 
-- **Kenny Yu** (KU Leuven)
-- **Niels Vanhasbroeck** (University of Amsterdam)
-- **Maria Robinson** (University of Warwick)
-- **Francis Tuerlinckx** (KU Leuven)
-- **Andrew Heathcote** (University of Amsterdam)
+- **Sigert Ariens** (KU Leuven)
 - **Laura Bringmann** (University of Groningen)
 - **Markus Eronen** (University of Groningen)
-- **Sigert Ariens** (KU Leuven)
-- **Adam Sanborn** (University of Warwick)
-- **Wolf Vanpaemel** (KU Leuven)
+- **Andrew Heathcote** (University of Amsterdam)
 - **Craig Hedge** (Aston University)
+- **Maria Robinson** (University of Warwick)
+- **Adam Sanborn** (University of Warwick)
+- **Francis Tuerlinckx** (KU Leuven)
+- **Niels Vanhasbroeck** (University of Amsterdam)
+- **Wolf Vanpaemel** (KU Leuven)
+- **Kenny Yu** (KU Leuven)
 
 ## Key Themes
 
