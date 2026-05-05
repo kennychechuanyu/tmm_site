@@ -92,11 +92,10 @@ const otherResources = resources.filter((r) => !r.featured);
     </Section>
   )}
 
-  <Section background="gray">
-    <div class="mx-auto max-w-6xl">
-      <ChapterHeader title="All Resources" />
-
-      {otherResources.length > 0 ? (
+  {otherResources.length > 0 && (
+    <Section background="gray">
+      <div class="mx-auto max-w-6xl">
+        <ChapterHeader title="All Resources" />
         <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {otherResources.map((resource) => (
             <a
@@ -122,13 +121,9 @@ const otherResources = resources.filter((r) => !r.featured);
             </a>
           ))}
         </div>
-      ) : (
-        <p class="mt-12 font-serif text-lg italic text-slate-500 dark:text-slate-400">
-          More resources coming soon. Submit yours below.
-        </p>
-      )}
-    </div>
-  </Section>
+      </div>
+    </Section>
+  )}
 
   <Section background="white" centered>
     <div class="mx-auto max-w-2xl text-center">
