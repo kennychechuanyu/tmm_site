@@ -2,93 +2,63 @@
 
 This page showcases curated academic resources relevant to theory, modeling, and measurement in psychological science.
 
-## How to Add a Featured Resource
+## Page Structure
 
-Featured resources are added directly in `index.astro`. Each featured resource is an `<article>` block within a `<Section>` component.
+The page has three sections:
 
-### Structure of a featured resource:
+1. **Featured Resource** — One pinned resource with full editorial treatment (long description, themed subsections). Set `featured: true` on the resource.
+2. **All Resources** — A responsive card grid (1/2/3 columns) for all non-featured resources. Each card shows type, title, source, year, and a 3-line description.
+3. **Contribute** — Formspree submission form for community suggestions.
 
-```html
-<article class="mx-auto max-w-3xl">
-  <!-- Eyebrow label -->
-  <div class="flex items-center gap-3 mb-8">
-    <span class="inline-block h-px w-10 bg-salmon-500"></span>
-    <span class="font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.22em;">
-      Type Label (e.g., Discussion Collection, Tutorial, Software)
-    </span>
-  </div>
+## How to Add a Resource
 
-  <!-- Title -->
-  <h2 class="font-serif text-3xl font-normal text-slate-900 dark:text-white md:text-4xl" style="line-height: 1.15; letter-spacing: -0.02em;">
-    Resource Title
-  </h2>
+All resources are defined in the `resources` array at the top of `index.astro`.
 
-  <!-- Meta (journal, year, article count, etc.) -->
-  <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1">
-    <span class="font-serif text-sm italic text-navy-600 dark:text-navy-400">Journal or Source</span>
-    <span class="text-slate-300 dark:text-slate-600">·</span>
-    <span class="font-sans text-sm text-slate-500 dark:text-slate-400">Year</span>
-  </div>
+### Add a new resource card:
 
-  <!-- Divider -->
-  <div class="mt-8 h-px bg-slate-200 dark:bg-slate-700"></div>
-
-  <!-- Description -->
-  <div class="mt-8 space-y-6 text-[15px] leading-[1.8] text-slate-600 dark:text-slate-400 text-justify">
-    <p>Description paragraph...</p>
-  </div>
-
-  <!-- Link -->
-  <div class="mt-10 flex items-center gap-3">
-    <a href="URL" target="_blank" rel="noopener noreferrer"
-       class="inline-flex items-center gap-2 font-sans text-sm font-semibold text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
-      Link text →
-    </a>
-  </div>
-
-  <!-- Bottom rule -->
-  <div class="mt-10 h-px bg-slate-200 dark:bg-slate-700"></div>
-</article>
+```typescript
+{
+  title: "Resource Title",
+  type: "Paper",                    // Paper, Tutorial, Software/Package, Dataset, Discussion Collection, Video, Other
+  source: "Journal or Publisher",
+  year: 2026,
+  description: "1-3 sentence description. This appears on the card.",
+  url: "https://...",               // link to the resource
+  featured: false,                  // set true for ONE resource to pin at top
+},
 ```
 
-### For themed subsections within a description:
+Add it anywhere in the `resources` array. The grid handles layout automatically.
 
-Use the bordered-left block pattern:
+### Make a resource featured:
 
-```html
-<div class="space-y-5 border-l-2 border-slate-200 dark:border-slate-700 pl-6">
-  <div>
-    <p class="font-sans text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1">Theme Title</p>
-    <p class="text-sm leading-relaxed">Description of this theme...</p>
-  </div>
-  <!-- More themes... -->
-</div>
-```
+Set `featured: true`. Only one resource should be featured at a time. The featured resource gets the full editorial layout with long-form description. Its detailed content (themed subsections, etc.) is written directly in the HTML below the `{featured && (` block.
 
-## Adding Multiple Resources
+### Resource types:
 
-To add more featured resources, duplicate the `<article>` block within a new `<Section>` component. Alternate between `background="white"` and `background="gray"` for visual separation:
-
-```html
-<Section background="white">
-  <article><!-- First resource --></article>
-</Section>
-
-<Section background="gray">
-  <article><!-- Second resource --></article>
-</Section>
-```
-
-## Community-Submitted Resources
-
-The page includes a "Contribute a Resource" section with a Formspree form (ID: `xjggvlaw`). Submissions are emailed to the TMM account and can then be manually added to the page by the coordinating team.
-
-## Resource Type Labels
-
-Use the eyebrow label to categorize:
+Use these labels consistently:
 - `Discussion Collection` — journal special issues, commentary collections
-- `Tutorial` — educational materials, workshops
-- `Software` — packages, tools, code repositories
 - `Paper` — individual influential papers
+- `Tutorial` — educational materials, workshops, guides
+- `Software/Package` — packages, tools, code repositories
 - `Dataset` — open datasets relevant to TMM themes
 - `Video` — recorded talks, lectures
+- `Other` — anything else
+
+## Community Submissions
+
+The Formspree form (ID: `xjggvlaw`) collects community-submitted resources. Submissions are emailed to the TMM account. To promote a submission to the page, add it to the `resources` array manually.
+
+## Adding a collection URL
+
+For resources with both a main article and a collection/browsing URL, use:
+
+```typescript
+{
+  ...
+  url: "https://...",              // main/target article
+  collectionUrl: "https://...",    // collection page (optional)
+},
+```
+
+The featured template renders both links. For card-grid items, only `url` is used as the card link.
