@@ -136,20 +136,14 @@ const otherResources = resources.filter((r) => !r.featured);
   )}
 
   <!-- Contribute CTA -->
-  <Section background="white" centered>
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-        Contribute a Resource
-      </h2>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
-        Have a tutorial, tool, or paper to share? We welcome contributions from
-        the TMM community.
+  <Section background="white">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <p class="text-slate-600 dark:text-slate-400">
+        Have a tutorial, tool, or paper to share? We welcome contributions from the TMM community.
       </p>
-      <div class="mt-6">
-        <button id="open-modal-btn" class="btn-primary">
-          Submit a Resource
-        </button>
-      </div>
+      <button id="open-modal-btn" class="btn-primary flex-shrink-0">
+        Submit a Resource
+      </button>
     </div>
   </Section>
 
