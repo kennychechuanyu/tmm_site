@@ -17,7 +17,23 @@ speakers:
     photo: "/images/people/AS.jpg"
     bio: "Adam Sanborn is a cognitive scientist interested in the rationality of human behaviour, which he studies with Bayesian models, approximations to Bayesian models, and behavioural experiments. He is interested in developing general-purpose models of cognition that can explain why human behaviour broadly corresponds to Bayesian models, yet also show strong deviations."
     website: "https://sampling.warwick.ac.uk"
-panelists: []
+panelists:
+  - name: "Sigert Ariens"
+    institution: "KU Leuven"
+    role: "Quantitative Psychology and Individual Differences"
+    photo: "/images/people/SA.png"
+  - name: "Francis Tuerlinckx"
+    institution: "KU Leuven"
+    role: "Quantitative Psychology and Individual Differences"
+    photo: "/images/people/FT.jpg"
+  - name: "David Kellen"
+    institution: "Syracuse University"
+    role: "Department of Psychology"
+    photo: "/images/people/DK.png"
+  - name: "Andrew Heathcote"
+    institution: "University of Amsterdam & University of Newcastle"
+    role: "Amsterdam Mathematical Psychology Laboratory"
+    photo: "/images/people/AH.png"
 ---
 
 > **Date and programme to be confirmed.** Speakers are confirmed. Panel members and schedule
