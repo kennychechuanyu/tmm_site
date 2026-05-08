@@ -4,6 +4,14 @@ location: "Online — Microsoft Teams"
 type: "webinar"
 featured: true
 description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
+about: "Computational models now sit at the centre of psychological theorising. Yet the word interpretable, attached to cognitive architectures, evidence accumulation models, Bayesian accounts, and now large neural networks alike, has begun to mean very different things to very different people. This event asks what it should mean, and whether a shared notion is even recoverable. We are bringing together speakers from cognitive modelling, machine learning, and the philosophy of science for a structured conversation."
+questions:
+  - label: "Foundations"
+    text: "What is interpretability, what is it not, and is it graded or binary?"
+  - label: "Structure"
+    text: "Which model classes are more interpretable, and why? How do mimicry, auxiliary assumptions, and parameter identifiability complicate the picture?"
+  - label: "Relations"
+    text: "How does interpretability relate to explanation, prediction, and generalizability, and can it be disentangled from them?"
 speakers:
   - name: "Marcel Binz"
     institution: "Helmholtz Munich"
@@ -44,29 +52,9 @@ panelists:
     website: "https://www.ampl-psych.com/team/andrew-heathcote/"
 ---
 
-> **Date and programme to be confirmed.** Speakers are confirmed. Panel members and schedule
-> will be announced shortly. [Join the network](/community) to be notified.
+## Programme
 
-## About
-
-Computational models now sit at the centre of psychological theorising. Yet the word
-*interpretable*, attached to cognitive architectures, evidence accumulation models,
-Bayesian accounts, and now large neural networks alike, has begun to mean very different
-things to very different people. This event asks what it *should* mean, and whether a
-shared notion is even recoverable.
-
-We are bringing together speakers from cognitive modelling, machine learning, and the
-philosophy of science for a structured conversation organised around three questions:
-
-- **Foundations.** What is interpretability, what is it not, and is it graded or binary?
-- **Structure.** Which model classes are more interpretable, and why? How do mimicry,
-  auxiliary assumptions, and parameter identifiability complicate the picture?
-- **Relations.** How does interpretability relate to explanation, prediction, and generalizability, and can it be disentangled from them?
-
-## Format
-
-Three short talks, each followed by a guided discussion with an invited panel. The event
-closes with an open audience Q&A.
+Three short talks, each followed by a guided discussion with an invited panel. The event closes with an open audience Q&A.
 
 - **Talk 1.** ~15 min presentation followed by 30 min guided discussion
 - **Talk 2.** ~15 min presentation followed by 30 min guided discussion
@@ -75,17 +63,14 @@ closes with an open audience Q&A.
 
 Total runtime: approximately **2.5 hours**, including a brief introduction and wrap-up.
 
-## How to Participate
+## How to Attend
 
 **Speakers** *(invited).* Give a short talk on interpretability from your own perspective.
 
-**Discussion panel** *(invited experts).* Respond to the talks, challenge speakers,
-raise new points, and guide the conversation.
+**Discussion panel** *(invited experts).* Respond to the talks, challenge speakers, raise new points, and guide the conversation.
 
-**Open audience** *(public registration).* Anyone interested in the topic is welcome to
-register and attend. Audience members can ask questions during the final Q&A.
+**Open audience** *(public registration).* Anyone interested in the topic is welcome to register and attend. Audience members can ask questions during the final Q&A.
 
-## A Note on Recording
+## Recording
 
-The event will be recorded for internal reference by the coordinating team. The
-recording will **not** be made publicly available.
+The event will be recorded for internal reference by the coordinating team. The recording will **not** be made publicly available.

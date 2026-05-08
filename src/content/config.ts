@@ -32,6 +32,11 @@ const events = defineCollection({
     type: z.enum(["conference", "workshop", "webinar", "meetup"]),
     featured: z.boolean().default(false),
     registrationUrl: z.string().url().optional(),
+    about: z.string().optional(),
+    questions: z.array(z.object({
+      label: z.string(),
+      text: z.string(),
+    })).optional(),
     speakers: z.array(personSchema).optional(),
     panelists: z.array(personSchema).optional(),
   }),
