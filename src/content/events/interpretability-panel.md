@@ -22,18 +22,22 @@ panelists:
     institution: "KU Leuven"
     role: "Quantitative Psychology and Individual Differences"
     photo: "/images/people/SA.png"
+    bio: "Sigert Ariens is a mathematical psychologist focused on the dynamic paradigm in psychological science. His main areas of research are model interpretation, study design, and misspecification. He has developed a framework and software tools to help researchers interpret dynamic model structures and align them with psychological hypotheses, and works on study designs which aim to maximize the amount of information about the dynamic parameters."
   - name: "Francis Tuerlinckx"
     institution: "KU Leuven"
     role: "Quantitative Psychology and Individual Differences"
     photo: "/images/people/FT.jpg"
+    bio: "Francis Tuerlinckx is a psychometrician and professor of Quantitative Psychology and Individual Differences at KU Leuven in Belgium. His research deals with the mathematical modeling of various aspects of human behavior. More specifically, he works on item response theory, reaction time modeling, and dynamical systems data analysis."
   - name: "David Kellen"
     institution: "Syracuse University"
     role: "Department of Psychology"
     photo: "/images/people/DK.png"
+    bio: "David Kellen is a cognitive psychologist and associate professor in the Department of Psychology at Syracuse University. His research focuses on recognition memory, judgment and decision making, and the development and evaluation of formal models in cognitive psychology. Much of this work centers on signal detection theory and probabilistic models of choice."
   - name: "Andrew Heathcote"
     institution: "University of Amsterdam & University of Newcastle"
     role: "Amsterdam Mathematical Psychology Laboratory"
     photo: "/images/people/AH.png"
+    bio: "Andrew Heathcote is a cognitive scientist whose work centres on evidence accumulation models of rapid decision-making. He is known for developing the Linear Ballistic Accumulator (LBA), a widely used model for understanding how people make choices across laboratory, occupational, and clinical settings. His research integrates mathematical modelling with cognitive science to investigate memory, skill acquisition, and decision control across the lifespan."
 ---
 
 > **Date and programme to be confirmed.** Speakers are confirmed. Panel members and schedule
