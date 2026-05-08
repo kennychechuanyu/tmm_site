@@ -12,6 +12,15 @@ const news = defineCollection({
   }),
 });
 
+const personSchema = z.object({
+  name: z.string(),
+  institution: z.string(),
+  photo: z.string().optional(),
+  role: z.string().optional(),
+  bio: z.string().optional(),
+  website: z.string().url().optional(),
+});
+
 const events = defineCollection({
   type: "content",
   schema: z.object({
@@ -23,6 +32,8 @@ const events = defineCollection({
     type: z.enum(["conference", "workshop", "webinar", "meetup"]),
     featured: z.boolean().default(false),
     registrationUrl: z.string().url().optional(),
+    speakers: z.array(personSchema).optional(),
+    panelists: z.array(personSchema).optional(),
   }),
 });
 
