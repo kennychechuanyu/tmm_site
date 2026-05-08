@@ -37,7 +37,7 @@ panelists:
     bio: "David Kellen is a cognitive psychologist and associate professor in the Department of Psychology at Syracuse University. His research focuses on recognition memory, judgment and decision making, and the development and evaluation of formal models in cognitive psychology. Much of this work centers on signal detection theory and probabilistic models of choice."
     website: "https://artsandsciences.syracuse.edu/people/faculty/kellen-phd-david/"
   - name: "Andrew Heathcote"
-    institution: "University of Amsterdam & University of Newcastle"
+    institution: "University of Amsterdam"
     role: "Amsterdam Mathematical Psychology Laboratory"
     photo: "/images/people/AH.png"
     bio: "Andrew Heathcote is a cognitive scientist whose work centres on evidence accumulation models of rapid decision-making. He is known for developing the Linear Ballistic Accumulator (LBA), a widely used model for understanding how people make choices across laboratory, occupational, and clinical settings. His research integrates mathematical modelling with cognitive science to investigate memory, skill acquisition, and decision control across the lifespan."
