@@ -50,6 +50,12 @@ panelists:
     photo: "/images/people/AH.png"
     bio: "Andrew Heathcote is a cognitive scientist whose work centres on evidence accumulation models of rapid decision-making. He is known for developing the Linear Ballistic Accumulator (LBA), a widely used model for understanding how people make choices across laboratory, occupational, and clinical settings. His research integrates mathematical modelling with cognitive science to investigate memory, skill acquisition, and decision control across the lifespan."
     website: "https://www.ampl-psych.com/team/andrew-heathcote/"
+  - name: "Peter Killeen"
+    institution: "Arizona State University"
+    role: "Department of Psychology"
+    photo: "/images/people/PK.png"
+    bio: "Peter Killeen studies choice, schedule-induced behavior, reinforcement schedules, interval timing, and delay and probability discounting, all under the microscope of mathematics. He has received the Poetry in Science Award, the APA Div. 25 Outstanding Researcher Award, the Banco de Santander Research Prize, and the F. J. McGuigan Lecture on Understanding the Human Mind. He was President of the Society of Experimental Psychologists, the Society for the Quantitative Analysis of Behavior, and the Association for Behavior Analysis."
+    website: "https://search.asu.edu/profile/56114"
 ---
 
 ## Programme
