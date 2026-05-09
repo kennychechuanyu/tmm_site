@@ -172,17 +172,11 @@ const pastEvents = allEvents
 
   <!-- Propose Event CTA -->
   <Section background={pastEvents.length > 0 ? "white" : "gray"}>
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="font-serif text-3xl text-slate-900 dark:text-slate-100 md:text-4xl">
-        Propose an Event
-      </h2>
-      <p class="mt-4 font-serif text-lg italic text-slate-600 dark:text-slate-400">
-        Have an idea for a workshop, webinar, or reading group? We welcome proposals
-        from network members.
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <p class="text-slate-600 dark:text-slate-400">
+        Have an idea for a workshop, webinar, or reading group? We welcome proposals from network members.
       </p>
-      <div class="mt-8">
-        <Button href="/contact">Submit a Proposal</Button>
-      </div>
+      <Button href="/contact">Submit a Proposal</Button>
     </div>
   </Section>
 </PageLayout>
