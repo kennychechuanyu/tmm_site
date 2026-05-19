@@ -62,6 +62,12 @@ panelists:
     photo: "/images/people/ME.jpg"
     bio: "Markus Eronen is an associate professor at the University of Groningen (Department of Theoretical Philosophy), working on philosophy of science and the limits and possibilities of developing psychological theories and causal explanations."
     website: "https://www.markuseronen.com"
+  - name: "Stephen José Hanson"
+    institution: "Rutgers University"
+    role: "Department of Psychology"
+    photo: "/images/people/SJH.png"
+    bio: "Stephen José Hanson is a professor of psychology at Rutgers University and director of the Rutgers Brain Imaging Center (RUBIC). His research spans learning theory across humans, animals, and machines, including neural network learning algorithms, computational neuroimaging, and deep learning. He was General Chair of NeurIPS (1992) and a founding member of the McDonnell-Pew Cognitive Neuroscience Advisory Board."
+    website: "https://sasn.rutgers.edu/about-us/faculty-staff/stephen-jose-hanson-0"
 ---
 
 ## Programme
