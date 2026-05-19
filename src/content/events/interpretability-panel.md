@@ -56,6 +56,12 @@ panelists:
     photo: "/images/people/PK.png"
     bio: "Peter Killeen studies choice, schedule-induced behavior, reinforcement schedules, interval timing, and delay and probability discounting, all under the microscope of mathematics. He has received the Poetry in Science Award, the APA Div. 25 Outstanding Researcher Award, the Banco de Santander Research Prize, and the F. J. McGuigan Lecture on Understanding the Human Mind. He was President of the Society of Experimental Psychologists, the Society for the Quantitative Analysis of Behavior, and the Association for Behavior Analysis."
     website: "https://search.asu.edu/profile/56114"
+  - name: "Markus Eronen"
+    institution: "University of Groningen"
+    role: "Department of Theoretical Philosophy"
+    photo: "/images/people/ME.jpg"
+    bio: "Markus Eronen is an associate professor at the University of Groningen (Department of Theoretical Philosophy), working on philosophy of science and the limits and possibilities of developing psychological theories and causal explanations."
+    website: "https://www.markuseronen.com"
 ---
 
 ## Programme
