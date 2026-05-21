@@ -68,6 +68,12 @@ panelists:
     photo: "/images/people/SJH.png"
     bio: "Stephen José Hanson is a professor of psychology at Rutgers University and director of the Rutgers Brain Imaging Center (RUBIC). His research spans learning theory across humans, animals, and machines, including neural network learning algorithms, computational neuroimaging, and deep learning. He was General Chair of NeurIPS (1992) and a founding member of the McDonnell-Pew Cognitive Neuroscience Advisory Board."
     website: "https://sasn.rutgers.edu/about-us/faculty-staff/stephen-jose-hanson-0"
+  - name: "Michel Regenwetter"
+    institution: "University of Illinois"
+    role: "Department of Psychology"
+    photo: "/images/people/MR2.jpg"
+    bio: "Michel Regenwetter is a professor of psychology, political science, and electrical and computer engineering at the University of Illinois. His research revolves around modeling heterogeneity of behavior, especially in decision making, as well as meta-theory and scientific reasoning fallacies that plague behavioral research."
+    website: "https://psychology.illinois.edu/directory/profile/regMDnwt"
 ---
 
 ## Programme
