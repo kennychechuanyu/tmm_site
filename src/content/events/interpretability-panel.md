@@ -72,7 +72,7 @@ panelists:
     institution: "University of Illinois"
     role: "Department of Psychology"
     photo: "/images/people/MR2.jpg"
-    bio: "Michel Regenwetter is a professor of psychology, political science, and electrical and computer engineering at the University of Illinois. His research revolves around modeling heterogeneity of behavior, especially in decision making, as well as meta-theory and scientific reasoning fallacies that plague behavioral research."
+    bio: "Michel Regenwetter is a Professor of Psychology, Political Science, and Electrical and Computer Engineering at the University of Illinois. He is an affiliate member of the Center for Social and Behavioral Science and of the Coordinated Science Laboratory at Illinois. After having double majored in Psychology and Mathematics at the University of Bonn (Germany), Regenwetter completed a PhD in Mathematical Behavioral Science at UC Irvine (USA). Regenwetter received the 1999 Young Investigator Award of the Society for Mathematical Psychology, co-received the 2012 Exeter Prize for Research in Experimental Economics, Decision Theory, and Behavioral Economics, and is an elected fellow of both the Association for Psychological Science and of the Psychonomic Society. He has co-authored an award-winning book as well as numerous journal articles spanning several scientific disciplines. Regenwetter's research revolves around modeling heterogeneity of behavior, especially in decision making, as well as meta-theory, especially scientific reasoning fallacies that plague behavioral research."
     website: "https://psychology.illinois.edu/directory/profile/regMDnwt"
 ---
 
