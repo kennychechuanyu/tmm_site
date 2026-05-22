@@ -17,7 +17,7 @@ speakers:
     institution: "Helmholtz Munich"
     role: "Institute for Human-Centered AI"
     photo: "/images/people/MB.jpg"
-    bio: "My research employs state-of-the-art machine learning methods to uncover the fundamental principles behind human cognition. I believe that to get a full understanding of the human mind, it is vital to consider it as a whole and not just as the sum of its parts. My long-term goal is to develop a unified theory of cognition, instantiated in models that can simulate, predict, and explain human behavior across a broad range of domains. Towards this end, I recently led the development of the first foundation model of human cognition."
+    bio: "Marcel Binz employs state-of-the-art machine learning methods to uncover the fundamental principles behind human cognition. He believes that to get a full understanding of the human mind, it is vital to consider it as a whole and not just as the sum of its parts. His long-term goal is to develop a unified theory of cognition, instantiated in models that can simulate, predict, and explain human behavior across a broad range of domains. Towards this end, he recently led the development of the first foundation model of human cognition."
     website: "https://marcelbinz.github.io"
   - name: "Adam Sanborn"
     institution: "University of Warwick"
