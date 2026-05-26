@@ -132,7 +132,7 @@ const hasPeople = (event.data.speakers?.length || 0) + (event.data.panelists?.le
 
               <div class="relative">
                 {person.photo ? (
-                  <img src={person.photo} alt={person.name} class="h-32 w-32 rounded-full object-cover shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-salmon-100/30 dark:group-hover:shadow-salmon-900/20" />
+                  <img src={person.photo} alt={person.name} class="h-32 w-32 rounded-full object-cover object-[center_30%] shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-salmon-100/30 dark:group-hover:shadow-salmon-900/20" />
                 ) : (
                   <div class="flex h-32 w-32 rounded-full items-center justify-center bg-slate-50 dark:bg-slate-800 shadow-lg">
                     <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{person.name.split(" ").map((n: string) => n[0]).join("")}</span>
@@ -193,7 +193,7 @@ const hasPeople = (event.data.speakers?.length || 0) + (event.data.panelists?.le
 
               <div class="relative">
                 {person.photo ? (
-                  <img src={person.photo} alt={person.name} class="h-32 w-32 rounded-full object-cover shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-salmon-100/30 dark:group-hover:shadow-salmon-900/20" />
+                  <img src={person.photo} alt={person.name} class="h-32 w-32 rounded-full object-cover object-[center_30%] shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-salmon-100/30 dark:group-hover:shadow-salmon-900/20" />
                 ) : (
                   <div class="flex h-32 w-32 rounded-full items-center justify-center bg-slate-50 dark:bg-slate-800 shadow-lg">
                     <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{person.name.split(" ").map((n: string) => n[0]).join("")}</span>
