@@ -25,6 +25,12 @@ speakers:
     photo: "/images/people/AS.jpg"
     bio: "Adam Sanborn is a cognitive scientist interested in the rationality of human behaviour, which he studies with Bayesian models, approximations to Bayesian models, and behavioural experiments. He is interested in developing general-purpose models of cognition that can explain why human behaviour broadly corresponds to Bayesian models, yet also show strong deviations."
     website: "https://sampling.warwick.ac.uk"
+  - name: "To Be Confirmed"
+    institution: ""
+    role: ""
+  - name: "To Be Confirmed"
+    institution: ""
+    role: ""
 panelists:
   - name: "Sigert Ariens"
     institution: "KU Leuven"
@@ -78,14 +84,15 @@ panelists:
 
 ## Programme
 
-Three short talks, each followed by a guided discussion with an invited panel. The event closes with an open audience Q&A.
+Four short talks, each followed by a guided discussion with an invited panel. The event closes with an open audience Q&A.
 
 - **Talk 1.** ~15 min presentation followed by 30 min guided discussion
 - **Talk 2.** ~15 min presentation followed by 30 min guided discussion
 - **Talk 3.** ~15 min presentation followed by 30 min guided discussion
+- **Talk 4.** ~15 min presentation followed by 30 min guided discussion
 - **Audience Q&A.** 20 min
 
-Total runtime: approximately **2.5 hours**, including a brief introduction and wrap-up.
+Total runtime: approximately **3.5 hours**, including a brief introduction and wrap-up.
 
 ## How to Attend
 
