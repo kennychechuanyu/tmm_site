@@ -124,7 +124,7 @@ const hasPeople = (event.data.speakers?.length || 0) + (event.data.panelists?.le
           </p>
         </div>
 
-        <div class="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {event.data.speakers.map((person) => (
             <article class="group relative flex flex-col items-center pt-8 text-center">
               <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
@@ -185,7 +185,7 @@ const hasPeople = (event.data.speakers?.length || 0) + (event.data.panelists?.le
           </p>
         </div>
 
-        <div class="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {event.data.panelists.map((person) => (
             <article class="group relative flex flex-col items-center pt-8 text-center">
               <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
