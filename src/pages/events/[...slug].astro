@@ -40,7 +40,15 @@ const eyebrow = event.data.featured
 // Combine speakers and panelists for shared rendering
 const hasPeople = (event.data.speakers?.length || 0) + (event.data.panelists?.length || 0) > 0;
 
-// Person card renderer helper — used for both speakers and panelists
+// Order people by last name, keeping unconfirmed placeholders at the end
+const byLastName = (a: { name: string }, b: { name: string }) => {
+  const aTBC = a.name === "To Be Confirmed";
+  const bTBC = b.name === "To Be Confirmed";
+  if (aTBC !== bTBC) return aTBC ? 1 : -1;
+  return a.name.split(" ").pop()!.localeCompare(b.name.split(" ").pop()!);
+};
+const sortedSpeakers = [...(event.data.speakers ?? [])].sort(byLastName);
+const sortedPanelists = [...(event.data.panelists ?? [])].sort(byLastName);
 ---
 
 <PageLayout
@@ -125,7 +133,7 @@ const hasPeople = (event.data.speakers?.length || 0) + (event.data.panelists?.le
         </div>
 
         <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {event.data.speakers.map((person) => (
+          {sortedSpeakers.map((person) => (
             <article class="group relative flex flex-col items-center pt-8 text-center">
               <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
               <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full dark:bg-salmon-400"></div>
@@ -186,7 +194,7 @@ const hasPeople = (event.data.speakers?.length || 0) + (event.data.panelists?.le
         </div>
 
         <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {event.data.panelists.map((person) => (
+          {sortedPanelists.map((person) => (
             <article class="group relative flex flex-col items-center pt-8 text-center">
               <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
               <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full dark:bg-salmon-400"></div>
