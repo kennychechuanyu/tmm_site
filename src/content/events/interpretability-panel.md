@@ -96,7 +96,7 @@ panelists:
     institution: "University of Zürich"
     role: "Department of Psychology"
     photo: "/images/people/VP.png"
-    bio: "Ven Popov is a tenured senior scientist in computational modeling of behavior at the Department of Psychology, University of Zürich. He received his PhD in cognitive psychology from Carnegie Mellon University in 2020. He uses computational modeling to understand the structure, organization, and function of fundamental cognitive processes, to refine the development and evaluation of psychological theories, and to improve psychological measurement. His work centers on addressing the theory crisis in psychology through mechanistic models, primarily within human memory research, while developing accessible Bayesian tools and strengthening measurement standards."
+    bio: "Ven Popov is a tenured senior scientist in computational modeling of behavior at the Department of Psychology, University of Zürich. He uses computational modeling to understand the structure, organization, and function of fundamental cognitive processes, to refine the development and evaluation of psychological theories, and to improve psychological measurement. His work centers on addressing the theory crisis in psychology through mechanistic models, primarily within human memory research, while developing accessible Bayesian tools and strengthening measurement standards."
     website: "https://venpopov.com/"
   - name: "To Be Confirmed"
     institution: ""
