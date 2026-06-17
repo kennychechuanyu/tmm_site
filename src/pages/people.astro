@@ -129,6 +129,24 @@ const networkMembers = [
     website: "https://www.mdubova.com/",
     bio: "Marina Dubova is an assistant professor at UC Berkeley, where she directs the Cognitive Epistemology Lab. She studies the cognitive mechanisms of scientific discovery, using computational modeling and empirical work with scientists to understand how we actually observe and build theories about the world, and how we ought to.",
   },
+  {
+    name: "Andrew Perfors",
+    role: "Complex Human Data Hub",
+    institution: "University of Melbourne",
+    email: "andrew.perfors@unimelb.edu.au",
+    website: "https://findanexpert.unimelb.edu.au/profile/800124-andrew-perfors",
+    bio: "Andrew Perfors is the Director of the Complex Human Data Hub in the School of Psychological Sciences at the University of Melbourne. He uses computational models of the mind, in combination with behavioural experiments, to study human cognition: how we acquire and use concepts and language, how we make decisions, how we learn from and share information with each other, and how that process of collaborative meaning-making changes the information environment itself. Andy has many thoughts about the role of models and computation in cognitive science, not just in terms of epistemology (what do they tell us, and how can they best be used?) but also given the real-world incentives and power structures that science is embedded in.",
+  },
+  {
+    name: "Marie-Ann Sengewald",
+    role: "Department of Psychology",
+    institution: "FAU Erlangen-Nürnberg",
+    email: "marie.sengewald@fau.de",
+    image: "/images/people/MAS.jpg",
+    website: "https://www.methodenlehre.phil.fau.de/en/",
+    website2: "https://www.m-sengewald.de/",
+    bio: "Marie-Ann Sengewald is an assistant professor at Friedrich-Alexander-Universität (FAU) Erlangen-Nürnberg and a research associate at the Leibniz Institute for Educational Trajectories (LIfBi). Her research advances quantitative methods in psychometrics, causal inference, and metascience. She is particularly interested in developing methodological approaches that help researchers strengthen scientific evidence by ruling out alternative explanations and addressing challenges such as measurement error, missing data, and other sources of uncertainty that can affect the quality of research findings.",
+  },
 ];
 ---
 
@@ -149,11 +167,17 @@ const networkMembers = [
             <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
             <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full dark:bg-salmon-400"></div>
 
-            <img
-              src={member.image}
-              alt={member.name}
-              class="h-32 w-32 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700"
-            />
+            {member.image ? (
+              <img
+                src={member.image}
+                alt={member.name}
+                class="h-32 w-32 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700"
+              />
+            ) : (
+              <div class="flex h-32 w-32 items-center justify-center rounded-full bg-slate-50 ring-2 ring-slate-100 dark:bg-slate-800 dark:ring-slate-700">
+                <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{member.name.split(" ").map((n: string) => n[0]).join("")}</span>
+              </div>
+            )}
             <h3 class="mt-5 whitespace-nowrap font-serif text-lg text-slate-900 dark:text-white">
               {member.name}
             </h3>
@@ -225,11 +249,17 @@ const networkMembers = [
             <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
             <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full dark:bg-salmon-400"></div>
 
-            <img
-              src={member.image}
-              alt={member.name}
-              class="h-32 w-32 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700"
-            />
+            {member.image ? (
+              <img
+                src={member.image}
+                alt={member.name}
+                class="h-32 w-32 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700"
+              />
+            ) : (
+              <div class="flex h-32 w-32 items-center justify-center rounded-full bg-slate-50 ring-2 ring-slate-100 dark:bg-slate-800 dark:ring-slate-700">
+                <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{member.name.split(" ").map((n: string) => n[0]).join("")}</span>
+              </div>
+            )}
             <h3 class="mt-5 whitespace-nowrap font-serif text-lg text-slate-900 dark:text-white">
               {member.name}
             </h3>
