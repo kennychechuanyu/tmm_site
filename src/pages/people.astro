@@ -3,8 +3,10 @@ import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
 import ChapterHeader from "../components/ChapterHeader.astro";
 
+const lastName = (n: string) =>
+  n.replace(/\s*\(.*?\)\s*/g, " ").trim().split(" ").pop()!;
 const sortByName = (a: { name: string }, b: { name: string }) =>
-  a.name.split(" ").pop()!.localeCompare(b.name.split(" ").pop()!);
+  lastName(a.name).localeCompare(lastName(b.name));
 
 // Coordinating Team members
 const coordinatingCommittee = [
@@ -130,7 +132,7 @@ const networkMembers = [
     bio: "Marina Dubova is an assistant professor at UC Berkeley, where she directs the Cognitive Epistemology Lab. She studies the cognitive mechanisms of scientific discovery, using computational modeling and empirical work with scientists to understand how we actually observe and build theories about the world, and how we ought to.",
   },
   {
-    name: "Andrew Perfors",
+    name: "Andrew Perfors (Andy)",
     role: "Complex Human Data Hub",
     institution: "University of Melbourne",
     email: "andrew.perfors@unimelb.edu.au",
