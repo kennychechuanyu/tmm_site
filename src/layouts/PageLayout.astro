@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import DataCurve from "../components/DataCurve.astro";
 
 interface Props {
   title: string;
@@ -31,6 +32,9 @@ const titleSize = compact
       class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.04] dark:text-slate-100 dark:opacity-[0.08]"
       style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
     ></div>
+
+    <!-- Signature animation: data resampling around a model curve -->
+    <DataCurve class="opacity-90" />
 
     <div class="container-wide relative">
       <!-- Eyebrow -->
