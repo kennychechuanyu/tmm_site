@@ -6,3 +6,6 @@ dist/
 .vercel/
 *.docx
 package-lock.json
+
+.DS_Store
+*.pdf
