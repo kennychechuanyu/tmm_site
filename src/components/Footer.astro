@@ -1,8 +1,14 @@
 ---
 const currentYear = new Date().getFullYear();
 
+// The network's name as its thesis: three words, each with a quiet gloss.
+const triptych = [
+  { initial: "T", rest: "heory", gloss: "the claims we make" },
+  { initial: "M", rest: "odel", gloss: "the form we give them" },
+  { initial: "M", rest: "easurement", gloss: "the evidence we gather" },
+];
+
 const nav = [
-  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "People", href: "/people" },
   { label: "Events", href: "/events" },
@@ -13,41 +19,26 @@ const nav = [
 ];
 ---
 
-<footer class="relative overflow-hidden border-t border-slate-900/10 bg-white dark:border-slate-100/10 dark:bg-slate-950">
-  <!-- Dotted paper texture — the TMM page-header signature -->
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.04] dark:text-slate-100 dark:opacity-[0.07]"
-    style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
-  ></div>
-
-  <div class="container-wide relative py-16 md:py-20">
-    <!-- Closing masthead -->
-    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-      <div class="max-w-2xl">
-        <div class="flex items-center gap-3 font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.22em;">
-          <span aria-hidden="true" class="inline-block h-px w-10 bg-salmon-500/80 dark:bg-salmon-400/80"></span>
-          <span>The TMM Network</span>
+<footer class="border-t border-slate-900/10 bg-white dark:border-slate-100/10 dark:bg-slate-950">
+  <div class="container-wide py-16 md:py-24">
+    <!-- Triptych: Theory · Model · Measurement -->
+    <div class="grid gap-x-10 gap-y-10 sm:grid-cols-3">
+      {triptych.map((t) => (
+        <div class="group relative pt-6">
+          <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900/15 dark:bg-slate-100/15"></span>
+          <span aria-hidden="true" class="absolute left-0 top-0 h-px w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-16 dark:bg-salmon-400"></span>
+          <p class="font-serif leading-none tracking-[-0.01em] text-slate-900 dark:text-slate-100" style="font-size: clamp(2rem, 4vw, 2.75rem);">
+            <span class="text-navy-600 dark:text-navy-400">{t.initial}</span>{t.rest}
+          </p>
+          <p class="mt-3 font-serif text-sm italic text-slate-500 dark:text-slate-400">
+            {t.gloss}
+          </p>
         </div>
-        <p class="mt-5 font-serif leading-[1.08] tracking-[-0.01em] text-slate-900 dark:text-slate-100" style="font-size: clamp(1.75rem, 4vw, 2.5rem);">
-          Bridging theory and measurement<br class="hidden sm:block" /> in psychological science.
-        </p>
-      </div>
-
-      <a
-        href="/community"
-        class="group inline-flex shrink-0 items-baseline gap-2 font-serif text-xl text-slate-900 dark:text-slate-100"
-      >
-        <span class="editorial-underline">Join the network</span>
-        <span aria-hidden="true" class="text-salmon-500 transition-transform duration-300 group-hover:translate-x-1 dark:text-salmon-400">→</span>
-      </a>
+      ))}
     </div>
 
-    <!-- Rule -->
-    <div aria-hidden="true" class="my-10 h-px bg-slate-900/10 dark:bg-slate-100/10 md:my-12"></div>
-
-    <!-- Utility row: brand · inline nav · email -->
-    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+    <!-- Utility row -->
+    <div class="mt-16 flex flex-col gap-8 border-t border-slate-900/10 pt-8 dark:border-slate-100/10 lg:flex-row lg:items-center lg:justify-between md:mt-20">
       <a href="/" class="flex shrink-0 items-center gap-2.5" aria-label="TMM, home">
         <svg class="h-7 w-7" viewBox="0 0 40 40" fill="none">
           <path d="M20 8 L32 28 M20 8 L8 28 M8 28 L32 28" stroke="currentColor" stroke-width="1.5" class="text-slate-400 dark:text-slate-600" />
@@ -70,21 +61,25 @@ const nav = [
       </nav>
 
       <a
-        href="mailto:tmm.psych@outlook.com"
-        class="shrink-0 font-mono text-sm text-slate-600 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400"
+        href="/community"
+        class="group inline-flex shrink-0 items-baseline gap-2 font-serif text-lg text-slate-900 dark:text-slate-100"
       >
-        tmm.psych@outlook.com
+        <span class="editorial-underline">Join the network</span>
+        <span aria-hidden="true" class="text-salmon-500 transition-transform duration-300 group-hover:translate-x-1 dark:text-salmon-400">→</span>
       </a>
     </div>
 
     <!-- Bottom bar -->
     <div class="mt-12 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
       <p class="font-sans text-xs text-slate-500 dark:text-slate-500">
-        &copy; {currentYear} Theory, Model, Measurement Network. All rights reserved.
+        &copy; {currentYear} Theory, Model, Measurement Network
       </p>
-      <p class="font-sans text-[11px] uppercase text-slate-400 dark:text-slate-600" style="letter-spacing: 0.2em;">
-        Theory · Model · Measurement
-      </p>
+      <a
+        href="mailto:tmm.psych@outlook.com"
+        class="font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
+      >
+        tmm.psych@outlook.com
+      </a>
     </div>
   </div>
 </footer>
