@@ -152,19 +152,47 @@ const networkMembers = [
     bio: "Marie-Ann Sengewald is an assistant professor at Friedrich-Alexander-Universität (FAU) Erlangen-Nürnberg and a research associate at the Leibniz Institute for Educational Trajectories (LIfBi). Her research advances quantitative methods in psychometrics, causal inference, and metascience. She is particularly interested in developing methodological approaches that help researchers strengthen scientific evidence by ruling out alternative explanations and addressing challenges such as measurement error, missing data, and other sources of uncertainty that can affect the quality of research findings.",
   },
 ];
+
+// ── Network stats (computed for the header) ──────────────────────────
+const allMembers = [...coordinatingCommittee, ...networkMembers];
+const memberCount = allMembers.length;
+const institutionCount = new Set(
+  allMembers.flatMap((m) =>
+    m.institution.split(/\s*(?:&|and)\s*/i).map((s) => s.trim())
+  )
+).size;
 ---
 
 <PageLayout
   title="People"
   description="Meet the researchers behind the TMM network."
-  subtitle="Meet the researchers behind TMM"
+  subtitle="An international network of researchers advancing theory and measurement in psychological science."
 >
   <!-- Coordinating Team -->
   <Section background="white">
     <div class="mx-auto max-w-6xl">
-      <ChapterHeader title="Coordinating Team" />
+      <!-- Stats band -->
+      <dl class="mb-14 grid grid-cols-3 gap-6 border-y border-slate-900/10 py-7 dark:border-slate-100/10 md:mb-20">
+        <div class="text-center">
+          <dt class="font-serif text-4xl text-salmon-500 dark:text-salmon-400 md:text-5xl">{memberCount}</dt>
+          <dd class="mt-1 font-sans text-[11px] uppercase text-slate-500 dark:text-slate-400" style="letter-spacing: 0.18em;">Researchers</dd>
+        </div>
+        <div class="border-x border-slate-900/10 text-center dark:border-slate-100/10">
+          <dt class="font-serif text-4xl text-salmon-500 dark:text-salmon-400 md:text-5xl">{institutionCount}</dt>
+          <dd class="mt-1 font-sans text-[11px] uppercase text-slate-500 dark:text-slate-400" style="letter-spacing: 0.18em;">Institutions</dd>
+        </div>
+        <div class="text-center">
+          <dt class="font-serif text-4xl text-salmon-500 dark:text-salmon-400 md:text-5xl">{coordinatingCommittee.length}</dt>
+          <dd class="mt-1 font-sans text-[11px] uppercase text-slate-500 dark:text-slate-400" style="letter-spacing: 0.18em;">Coordinators</dd>
+        </div>
+      </dl>
 
-      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+      <ChapterHeader numeral="I" title="Coordinating Team" metaLabel={`${coordinatingCommittee.length} members`} />
+      <p class="mt-5 max-w-2xl font-serif text-base italic leading-relaxed text-slate-600 dark:text-slate-400">
+        The team steering the network's activities, events, and collaborations.
+      </p>
+
+      <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {coordinatingCommittee.sort(sortByName).map((member) => (
           <PersonCard
             name={member.name}
@@ -184,9 +212,12 @@ const networkMembers = [
   <!-- Network Members -->
   <Section background="gray">
     <div class="mx-auto max-w-6xl">
-      <ChapterHeader title="Network Members" />
+      <ChapterHeader numeral="II" title="Network Members" metaLabel={`${networkMembers.length} members`} />
+      <p class="mt-5 max-w-2xl font-serif text-base italic leading-relaxed text-slate-600 dark:text-slate-400">
+        Researchers across institutions contributing to the network's shared work.
+      </p>
 
-      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+      <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {networkMembers.sort(sortByName).map((member) => (
           <PersonCard
             name={member.name}
