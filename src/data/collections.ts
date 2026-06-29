@@ -88,7 +88,7 @@ export const collections = [
     type: "Reading Collection",
     title: "Data versus Phenomena",
     blurb:
-      "From Bogen & Woodward's classic distinction to psychology's theory crisis: should theories answer to stable phenomena, to the data we observe, or to both?",
+      "When we test a theory, do we judge it by the data it fits or the phenomena it reproduces? Why relying on either one alone can mislead, and why theory testing needs both.",
     meta: `${dvpCount} readings`,
   },
   {
