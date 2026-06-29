@@ -37,7 +37,7 @@ function getTypeBadge(type: string): { bg: string; text: string } {
   description="Updates, meeting notes, and announcements from the TMM network."
   subtitle="Updates and meeting notes from our community"
 >
-  <Section background="white" numeral="I" title="Latest" metaLabel="Updates" compactTop>
+  <Section background="white" compactTop>
     {sortedNews.length > 0 ? (
       <div class="space-y-8">
         {sortedNews.map((post) => {
