@@ -152,6 +152,19 @@ const networkMembers = [
     bio: "Marie-Ann Sengewald is an assistant professor at Friedrich-Alexander-Universität (FAU) Erlangen-Nürnberg and a research associate at the Leibniz Institute for Educational Trajectories (LIfBi). Her research advances quantitative methods in psychometrics, causal inference, and metascience. She is particularly interested in developing methodological approaches that help researchers strengthen scientific evidence by ruling out alternative explanations and addressing challenges such as measurement error, missing data, and other sources of uncertainty that can affect the quality of research findings.",
   },
 ];
+
+// Early Career Members
+const earlyCareerMembers = [
+  {
+    name: "Yiou He",
+    role: "Department of Psychology",
+    institution: "Syracuse University",
+    email: "yhe231@syr.edu",
+    image: "/images/people/YH.jpg",
+    website: "https://yiouhe.com/",
+    bio: "Yiou He is a cognitive psychology PhD student at Syracuse University, working with Dr. David Kellen. Her current research uses formal modeling to study memory and confidence judgments. She is broadly interested in various methodological issues surrounding model evaluation and behavioral inference.",
+  },
+];
 ---
 
 <PageLayout
@@ -196,6 +209,27 @@ const networkMembers = [
             email={member.email}
             website={member.website}
             website2={(member as any).website2}
+            bio={member.bio}
+          />
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <!-- Early Career Members -->
+  <Section background="white">
+    <div class="mx-auto max-w-6xl">
+      <ChapterHeader title="Early Career Members" metaLabel={`${earlyCareerMembers.length} members`} />
+
+      <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+        {earlyCareerMembers.sort(sortByName).map((member) => (
+          <PersonCard
+            name={member.name}
+            institution={member.institution}
+            role={member.role}
+            image={member.image}
+            email={member.email}
+            website={member.website}
             bio={member.bio}
           />
         ))}
