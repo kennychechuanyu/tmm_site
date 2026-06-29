@@ -30,15 +30,15 @@ export const dvp = {
     summary:
       "Vanhasbroeck, Yu, and Ariens challenge the increasingly popular view that formal psychological theories should be validated against phenomena alone, and make the case for bringing data back into theory testing. They show that neither phenomena nor data are a sufficient basis on their own, and propose an integrative approach in which the two play complementary roles.",
     points: [
-      "A single phenomenon rarely distinguishes competing models — many different mechanisms can produce the same mean difference.",
+      "A single phenomenon rarely distinguishes competing models: many different mechanisms can produce the same mean difference.",
       "Phenomena alone give no principled way to judge a model's complexity, and reasoning from them becomes circular when the phenomenon itself is mis-specified.",
       "Pure data-fitting has its own blind spots: auxiliary assumptions, estimability, and atheoretical models that often fit better than explanatory ones.",
-      "Their integrative loop pairs top-down prediction of phenomena with bottom-up analysis of the full data structure — illustrated by the 19th-century discovery of Neptune.",
+      "Their integrative loop pairs top-down prediction of phenomena with bottom-up analysis of the full data structure, illustrated by the 19th-century discovery of Neptune.",
     ],
   },
   groups: [
     {
-      label: "Foundations — data vs phenomena",
+      label: "Foundations: data vs phenomena",
       items: [
         { authors: "Bogen, J., & Woodward, J.", year: 1988, title: "Saving the Phenomena", venue: "The Philosophical Review", doi: "10.2307/2185445" },
         { authors: "Woodward, J.", year: 1989, title: "Data and Phenomena", venue: "Synthese", doi: "10.1007/BF00869282" },
@@ -88,7 +88,7 @@ export const collections = [
     type: "Reading Collection",
     title: "Data versus Phenomena",
     blurb:
-      "From Bogen & Woodward's classic distinction to psychology's theory crisis — should theories answer to stable phenomena, to the data we observe, or to both?",
+      "From Bogen & Woodward's classic distinction to psychology's theory crisis: should theories answer to stable phenomena, to the data we observe, or to both?",
     meta: `${dvpCount} readings`,
   },
   {
@@ -96,7 +96,7 @@ export const collections = [
     type: "Discussion Collection",
     title: illusions.title,
     blurb:
-      "Shiffrin, Stigler & Keil on the predictable illusions scientists operate under when interpreting data and building theories — with cross-disciplinary commentaries.",
+      "Shiffrin, Stigler & Keil on the predictable illusions scientists operate under when interpreting data and building theories, with cross-disciplinary commentaries.",
     meta: "Target article + commentaries",
   },
 ];
