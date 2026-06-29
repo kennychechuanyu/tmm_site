@@ -21,7 +21,7 @@ const { class: extraClass = "" } = Astro.props;
 <canvas
   data-datacurve
   class:list={["pointer-events-none absolute inset-0 h-full w-full", extraClass]}
-  style="-webkit-mask-image: linear-gradient(to bottom, transparent 28%, #000 62%); mask-image: linear-gradient(to bottom, transparent 28%, #000 62%);"
+  style="-webkit-mask-image: linear-gradient(72deg, transparent 40%, #000 66%); mask-image: linear-gradient(72deg, transparent 40%, #000 66%);"
   aria-hidden="true"></canvas>
 
 <script>
@@ -68,9 +68,9 @@ const { class: extraClass = "" } = Astro.props;
           r: rand(1, 2.3),
         }));
         const hubCount = w < 700 ? 2 : w < 1100 ? 3 : 4;
-        hubs = Array.from({ length: hubCount }, (_, i) => ({
-          x: (w * (i + 0.5)) / hubCount + rand(-w * 0.12, w * 0.12),
-          y: rand(h * 0.68, h * 0.96),
+        hubs = Array.from({ length: hubCount }, () => ({
+          x: rand(w * 0.46, w * 0.97),
+          y: rand(h * 0.12, h * 0.82),
           vx: rand(-0.1, 0.1),
           vy: rand(-0.07, 0.07),
           r: rand(3.2, 4.6),
