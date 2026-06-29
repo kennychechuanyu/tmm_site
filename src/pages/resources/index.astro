@@ -51,6 +51,49 @@ const memberPapers: typeof resources = [
   //   doi: "10.1007/s42113-026-00287-7",
   // },
 ];
+
+// ── Reading collection: Data versus Phenomena ────────────────────────
+const dvpIntro =
+  "A foundational debate in philosophy of science and the current theory crisis in psychology: should theories be validated against <em>phenomena</em> — stable, generalizable patterns — or against the <em>data</em> we actually observe? These readings trace the distinction from its origins to the latest arguments for bringing the two back together.";
+
+const dvpAnchor = {
+  authors: "Vanhasbroeck, N., Yu, K., & Ariens, S.",
+  year: 2026,
+  title: "No Need to Be Indirect: On the Role of Data in the Validation of Theoretical Models",
+  venue: "Theory & Psychology",
+  url: "https://doi.org/10.1177/09593543261450876",
+  preprint: "https://doi.org/10.31234/osf.io/hfvnx",
+  note: "Argues that data and phenomena should jointly validate formal theories — co-authored by TMM members.",
+};
+
+const dvpGroups = [
+  {
+    label: "Foundations — data vs phenomena",
+    items: [
+      { authors: "Bogen, J., & Woodward, J.", year: 1988, title: "Saving the Phenomena", venue: "The Philosophical Review", doi: "10.2307/2185445" },
+      { authors: "Woodward, J.", year: 1989, title: "Data and Phenomena", venue: "Synthese", doi: "10.1007/BF00869282" },
+    ],
+  },
+  {
+    label: "Phenomenon-based theory construction",
+    items: [
+      { authors: "Borsboom, D., van der Maas, H. L. J., Dalege, J., Kievit, R. A., & Haig, B. D.", year: 2021, title: "Theory Construction Methodology: A Practical Framework for Building Theories in Psychology", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691620969647" },
+      { authors: "Haslbeck, J. M. B., Ryan, O., Robinaugh, D. J., Waldorp, L. J., & Borsboom, D.", year: 2022, title: "Modeling Psychopathology: From Data Models to Formal Theories", venue: "Psychological Methods", doi: "10.1037/met0000303" },
+      { authors: "van Dongen, N., et al.", year: 2025, title: "Productive Explanation: A Framework for Evaluating Explanations in Psychological Science", venue: "Psychological Review", doi: "10.1037/rev0000479" },
+      { authors: "Haig, B. D.", year: 2005, title: "An Abductive Theory of Scientific Method", venue: "Psychological Methods", doi: "10.1037/1082-989X.10.4.371" },
+    ],
+  },
+  {
+    label: "Data, prediction & the theory crisis",
+    items: [
+      { authors: "Navarro, D. J.", year: 2019, title: "Between the Devil and the Deep Blue Sea: Tensions Between Scientific Judgement and Statistical Model Selection", venue: "Computational Brain & Behavior", doi: "10.1007/s42113-018-0019-z" },
+      { authors: "Yarkoni, T., & Westfall, J.", year: 2017, title: "Choosing Prediction Over Explanation in Psychology: Lessons From Machine Learning", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691617693393" },
+      { authors: "Vanpaemel, W.", year: 2020, title: "Strong Theory Testing Using the Prior Predictive and the Data Prior", venue: "Psychological Review", doi: "10.1037/rev0000167" },
+      { authors: "Eronen, M. I., & Bringmann, L. F.", year: 2021, title: "The Theory Crisis in Psychology: How to Move Forward", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691620970586" },
+      { authors: "van Rooij, I., & Baggio, G.", year: 2021, title: "Theory Before the Test: How to Build High-Verisimilitude Explanatory Theories in Psychological Science", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691620970604" },
+    ],
+  },
+];
 ---
 
 <PageLayout
@@ -149,6 +192,84 @@ const memberPapers: typeof resources = [
       </div>
     </Section>
   )}
+
+  <!-- Reading Collection: Data versus Phenomena -->
+  <Section background="gray">
+    <div class="mx-auto max-w-4xl">
+      <!-- Header -->
+      <div class="flex items-center gap-3">
+        <span class="inline-block h-px w-10 bg-salmon-500"></span>
+        <span class="font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.22em;">
+          Reading Collection
+        </span>
+      </div>
+      <h2 class="mt-4 font-serif text-3xl font-normal text-slate-900 dark:text-white md:text-4xl" style="letter-spacing: -0.015em;">
+        Data versus Phenomena
+      </h2>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-400" set:html={dvpIntro}></p>
+
+      <!-- Anchor paper -->
+      <a
+        href={dvpAnchor.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group mt-10 block rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-navy-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-navy-600 md:p-8"
+      >
+        <span class="inline-block font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">
+          Start here
+        </span>
+        <h3 class="mt-3 font-serif text-xl text-slate-900 transition-colors group-hover:text-navy-600 dark:text-white dark:group-hover:text-navy-400 md:text-2xl" style="line-height: 1.25;">
+          {dvpAnchor.title}
+        </h3>
+        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          {dvpAnchor.authors} &middot; <span class="font-serif italic">{dvpAnchor.venue}</span> &middot; {dvpAnchor.year}
+        </p>
+        <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{dvpAnchor.note}</p>
+        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <span class="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy-600 group-hover:text-salmon-600 dark:text-navy-400 dark:group-hover:text-salmon-400">
+            Read paper
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+          </span>
+          <a href={dvpAnchor.preprint} target="_blank" rel="noopener noreferrer" class="font-sans text-sm text-slate-500 underline-offset-2 hover:text-salmon-600 hover:underline dark:text-slate-400 dark:hover:text-salmon-400">
+            Open preprint
+          </a>
+        </div>
+      </a>
+
+      <!-- Related readings, grouped -->
+      <div class="mt-12 space-y-10">
+        {dvpGroups.map((group) => (
+          <div>
+            <h3 class="font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.18em;">
+              {group.label}
+            </h3>
+            <ul class="mt-3 divide-y divide-slate-200 border-t border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+              {group.items.map((item) => (
+                <li>
+                  <a
+                    href={`https://doi.org/${item.doi}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex items-baseline justify-between gap-5 py-4"
+                  >
+                    <div class="min-w-0">
+                      <h4 class="font-serif text-base leading-snug text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400">
+                        {item.title}
+                      </h4>
+                      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        {item.authors} &middot; <span class="font-serif italic">{item.venue}</span>
+                      </p>
+                    </div>
+                    <span class="shrink-0 font-mono text-xs tabular-nums text-slate-400 dark:text-slate-600">{item.year}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
 
   <!-- All Resources Grid — renders only when there are non-featured resources -->
   {otherResources.length > 0 && (
