@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
+import ChapterHeader from "../components/ChapterHeader.astro";
 import ContactForm from "../components/ContactForm.astro";
 
 const FORMSPREE_ID = "mdaaobwz";
@@ -12,35 +13,33 @@ const FORMSPREE_ID = "mdaaobwz";
   subtitle="Get in touch with the TMM team"
 >
   <Section background="white">
-    <div class="grid gap-12 lg:grid-cols-5">
-      <!-- Contact Form -->
-      <div class="lg:col-span-3">
-        <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-          Send Us a Message
-        </h2>
-        <p class="mt-4 text-slate-600 dark:text-slate-400">
-          Have a question, suggestion, or want to get involved? Fill out the form
-          below and we'll get back to you as soon as possible.
-        </p>
-        <div class="mt-8">
-          <ContactForm formspreeId={FORMSPREE_ID} />
+    <div class="mx-auto max-w-6xl">
+      <ChapterHeader numeral="I" title="Send a Message" />
+
+      <div class="mt-12 grid gap-12 md:mt-16 lg:grid-cols-5">
+        <!-- Contact Form -->
+        <div class="lg:col-span-3">
+          <p class="font-serif text-lg italic leading-relaxed text-slate-600 dark:text-slate-400">
+            Have a question, suggestion, or want to get involved? Fill out the form
+            below and we'll get back to you as soon as possible.
+          </p>
+          <div class="mt-8">
+            <ContactForm formspreeId={FORMSPREE_ID} />
+          </div>
         </div>
-      </div>
 
-      <!-- Contact Info -->
-      <div class="lg:col-span-2">
-        <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">
-          Other Ways to Reach Us
-        </h2>
-
-        <div class="mt-8 space-y-6">
-          <div>
-            <h3 class="font-semibold text-slate-900 dark:text-white">Email</h3>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">
-              <a href="mailto:tmm.psych@outlook.com" class="link">
-                tmm.psych@outlook.com
-              </a>
+        <!-- Contact Info -->
+        <div class="lg:col-span-2">
+          <h3 class="font-serif text-xl text-slate-900 dark:text-white">
+            Other ways to reach us
+          </h3>
+          <div class="mt-6">
+            <p class="font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.18em;">
+              Email
             </p>
+            <a href="mailto:tmm.psych@outlook.com" class="mt-2 inline-block font-mono text-sm text-slate-700 transition-colors hover:text-salmon-600 dark:text-slate-300 dark:hover:text-salmon-400">
+              tmm.psych@outlook.com
+            </a>
           </div>
         </div>
       </div>
@@ -48,12 +47,10 @@ const FORMSPREE_ID = "mdaaobwz";
   </Section>
 
   <!-- FAQ Section -->
-  <Section background="white">
+  <Section background="gray">
     <div class="mx-auto max-w-3xl">
-      <h2 class="text-2xl font-semibold text-slate-900 dark:text-white text-center">
-        Frequently Asked Questions
-      </h2>
-      <div class="mt-8 space-y-6">
+      <ChapterHeader numeral="II" title="Frequently Asked Questions" />
+      <div class="mt-10 space-y-6">
         <div>
           <h3 class="font-semibold text-slate-900 dark:text-white">
             Is membership free?
