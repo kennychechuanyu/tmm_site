@@ -1,85 +1,99 @@
 ---
 const currentYear = new Date().getFullYear();
 
-// The network's name as its thesis: three words, each with a quiet gloss.
-const triptych = [
-  { initial: "T", rest: "heory", gloss: "the claims we make" },
-  { initial: "M", rest: "odel", gloss: "the form we give them" },
-  { initial: "M", rest: "easurement", gloss: "the evidence we gather" },
-];
-
-const nav = [
-  { label: "About", href: "/about" },
-  { label: "People", href: "/people" },
-  { label: "Events", href: "/events" },
-  { label: "News", href: "/news" },
-  { label: "Resources", href: "/resources" },
-  { label: "Community", href: "/community" },
-  { label: "Contact", href: "/contact" },
+const columns = [
+  {
+    heading: "Network",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "People", href: "/people" },
+      { label: "Events", href: "/events" },
+      { label: "News", href: "/news" },
+    ],
+  },
+  {
+    heading: "Participate",
+    links: [
+      { label: "Resources", href: "/resources" },
+      { label: "Community", href: "/community" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
 ];
 ---
 
-<footer class="border-t border-slate-900/10 bg-white dark:border-slate-100/10 dark:bg-slate-950">
-  <div class="container-wide py-16 md:py-24">
-    <!-- Triptych: Theory · Model · Measurement -->
-    <div class="grid gap-x-10 gap-y-10 sm:grid-cols-3">
-      {triptych.map((t) => (
-        <div class="group relative pt-6">
-          <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900/15 dark:bg-slate-100/15"></span>
-          <span aria-hidden="true" class="absolute left-0 top-0 h-px w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-16 dark:bg-salmon-400"></span>
-          <p class="font-serif leading-none tracking-[-0.01em] text-slate-900 dark:text-slate-100" style="font-size: clamp(2rem, 4vw, 2.75rem);">
-            <span class="text-navy-600 dark:text-navy-400">{t.initial}</span>{t.rest}
-          </p>
-          <p class="mt-3 font-serif text-sm italic text-slate-500 dark:text-slate-400">
-            {t.gloss}
-          </p>
-        </div>
+<footer class="relative border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
+  <!-- Salmon hairline accent -->
+  <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-salmon-400/70 to-transparent"></div>
+
+  <div class="container-wide py-14 md:py-16">
+    <div class="grid gap-10 md:grid-cols-12 md:gap-8">
+      <!-- Brand -->
+      <div class="md:col-span-5">
+        <a href="/" class="flex items-center gap-2.5" aria-label="TMM — Home">
+          <svg class="h-7 w-7" viewBox="0 0 40 40" fill="none">
+            <path d="M20 8 L32 28 M20 8 L8 28 M8 28 L32 28" stroke="currentColor" stroke-width="1.5" class="text-slate-400 dark:text-slate-600" />
+            <circle cx="20" cy="8" r="6" class="fill-slate-700 dark:fill-slate-300" />
+            <text x="20" y="11" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">T</text>
+            <circle cx="8" cy="28" r="6" class="fill-slate-600 dark:fill-slate-400" />
+            <text x="8" y="31" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">M</text>
+            <circle cx="32" cy="28" r="6" class="fill-slate-600 dark:fill-slate-400" />
+            <text x="32" y="31" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">M</text>
+          </svg>
+          <span class="font-serif text-xl text-navy-600 dark:text-navy-400">TMM</span>
+        </a>
+        <p class="mt-4 max-w-xs font-serif text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Bridging theory and measurement in psychological science.
+        </p>
+      </div>
+
+      <!-- Link columns -->
+      {columns.map((col) => (
+        <nav class="md:col-span-2">
+          <h3 class="font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.18em;">
+            {col.heading}
+          </h3>
+          <ul class="mt-4 space-y-2.5">
+            {col.links.map((link) => (
+              <li>
+                <a href={link.href} class="font-sans text-sm text-slate-600 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       ))}
-    </div>
 
-    <!-- Utility row -->
-    <div class="mt-16 flex flex-col gap-8 border-t border-slate-900/10 pt-8 dark:border-slate-100/10 lg:flex-row lg:items-center lg:justify-between md:mt-20">
-      <a href="/" class="flex shrink-0 items-center gap-2.5" aria-label="TMM, home">
-        <svg class="h-7 w-7" viewBox="0 0 40 40" fill="none">
-          <path d="M20 8 L32 28 M20 8 L8 28 M8 28 L32 28" stroke="currentColor" stroke-width="1.5" class="text-slate-400 dark:text-slate-600" />
-          <circle cx="20" cy="8" r="6" class="fill-slate-700 dark:fill-slate-300" />
-          <text x="20" y="11" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">T</text>
-          <circle cx="8" cy="28" r="6" class="fill-slate-600 dark:fill-slate-400" />
-          <text x="8" y="31" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">M</text>
-          <circle cx="32" cy="28" r="6" class="fill-slate-600 dark:fill-slate-400" />
-          <text x="32" y="31" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">M</text>
-        </svg>
-        <span class="font-serif text-xl text-navy-600 dark:text-navy-400">TMM</span>
-      </a>
-
-      <nav class="flex flex-wrap gap-x-6 gap-y-2.5">
-        {nav.map((link) => (
-          <a href={link.href} class="font-sans text-sm text-slate-600 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
-            {link.label}
-          </a>
-        ))}
-      </nav>
-
-      <a
-        href="/community"
-        class="group inline-flex shrink-0 items-baseline gap-2 font-serif text-lg text-slate-900 dark:text-slate-100"
-      >
-        <span class="editorial-underline">Join the network</span>
-        <span aria-hidden="true" class="text-salmon-500 transition-transform duration-300 group-hover:translate-x-1 dark:text-salmon-400">→</span>
-      </a>
+      <!-- Connect -->
+      <div class="md:col-span-3">
+        <h3 class="font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.18em;">
+          Connect
+        </h3>
+        <a
+          href="mailto:tmm.psych@outlook.com"
+          class="mt-4 block font-mono text-sm text-slate-600 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400"
+        >
+          tmm.psych@outlook.com
+        </a>
+        <a
+          href="/community"
+          class="mt-4 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
+        >
+          Join the network
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h13m0 0-5.5-5.5M18 12l-5.5 5.5" /></svg>
+        </a>
+      </div>
     </div>
 
     <!-- Bottom bar -->
-    <div class="mt-12 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+    <div class="mt-14 flex flex-col items-start justify-between gap-3 border-t border-slate-200 pt-6 dark:border-slate-800 sm:flex-row sm:items-center">
       <p class="font-sans text-xs text-slate-500 dark:text-slate-500">
-        &copy; {currentYear} Theory, Model, Measurement Network
+        &copy; {currentYear} Theory, Model, Measurement Network. All rights reserved.
       </p>
-      <a
-        href="mailto:tmm.psych@outlook.com"
-        class="font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
-      >
-        tmm.psych@outlook.com
-      </a>
+      <p class="font-sans text-[11px] uppercase text-slate-400 dark:text-slate-600" style="letter-spacing: 0.2em;">
+        Theory · Model · Measurement
+      </p>
     </div>
   </div>
 </footer>
