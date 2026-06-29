@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
+import Button from "../../components/Button.astro";
 import { getCollection } from "astro:content";
 
 const allNews = await getCollection("news");
@@ -33,7 +34,7 @@ function getTypeBadge(type: string): { bg: string; text: string } {
   description="Updates, meeting notes, and announcements from the TMM network."
   subtitle="Updates and meeting notes from our community"
 >
-  <Section background="white">
+  <Section background="white" numeral="I" title="Latest" metaLabel="Updates" compactTop>
     {sortedNews.length > 0 ? (
       <div class="space-y-8">
         {sortedNews.map((post) => {
@@ -82,5 +83,14 @@ function getTypeBadge(type: string): { bg: string; text: string } {
         No news posts yet. Check back soon!
       </p>
     )}
+  </Section>
+
+  <Section background="gray">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-slate-600 dark:text-slate-400">
+        Want meeting notes and announcements as they happen? Join the network to stay in the loop.
+      </p>
+      <Button href="/community">Join the Network</Button>
+    </div>
   </Section>
 </PageLayout>
