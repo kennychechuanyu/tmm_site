@@ -1,16 +1,16 @@
 ---
 /**
- * DataCurve — TMM's signature animation: "the predictive distribution in motion."
+ * DataCurve — TMM's signature animation: a "measurement network."
  *
- * A central model curve (salmon) is wrapped in nested, translucent credible-
- * interval bands (navy), with a few fine sample draws flowing inside. It reads
- * as a model, its uncertainty, and the data realisations it generates — the
- * theory → model → measurement loop, rendered as soft layered motion rather
- * than a scatterplot.
+ * Drifting observed nodes (navy) connect to their neighbours by proximity, and
+ * a few glowing latent-factor hubs (salmon) draw the nearby nodes toward them.
+ * It pictures a factor / measurement model: latent constructs, their indicators,
+ * and the covariance web among observations. A connected constellation in the
+ * spirit of a star map, but built from TMM's own ideas and palette.
  *
- * Theme-aware (light + dark), masked into the lower-right so it never crosses
- * the left-aligned titles, pauses offscreen, and renders a single static frame
- * under prefers-reduced-motion.
+ * Theme-aware (light + dark), masked to the lower hero so it never crosses the
+ * left-aligned titles, pointer-reactive, pauses offscreen, and renders a single
+ * static frame under prefers-reduced-motion.
  */
 interface Props {
   class?: string;
@@ -21,7 +21,7 @@ const { class: extraClass = "" } = Astro.props;
 <canvas
   data-datacurve
   class:list={["pointer-events-none absolute inset-0 h-full w-full", extraClass]}
-  style="-webkit-mask-image: radial-gradient(135% 150% at 76% 102%, #000 44%, transparent 84%); mask-image: radial-gradient(135% 150% at 76% 102%, #000 44%, transparent 84%);"
+  style="-webkit-mask-image: linear-gradient(to bottom, transparent 28%, #000 62%); mask-image: linear-gradient(to bottom, transparent 28%, #000 62%);"
   aria-hidden="true"></canvas>
 
 <script>
@@ -38,104 +38,153 @@ const { class: extraClass = "" } = Astro.props;
       if (!ctx || !parent) return;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      let w = 0, h = 0, t = 0, raf = 0, running = false;
+      let w = 0, h = 0, raf = 0, running = false;
+      const LINK = 132;
+      const HUB_LINK = 188;
 
-      const SEG = 128;
-      const DRAWS = [
-        { phase: 0.0, freq: 3.1, amp: 0.64 },
-        { phase: 1.7, freq: 4.3, amp: 0.5 },
-        { phase: 3.2, freq: 2.6, amp: 0.74 },
-        { phase: 4.8, freq: 5.0, amp: 0.42 },
-        { phase: 2.3, freq: 3.7, amp: 0.58 },
-      ];
+      type N = { x: number; y: number; vx: number; vy: number; r: number };
+      let nodes: N[] = [];
+      let hubs: N[] = [];
+      const pointer = { x: -9999, y: -9999, on: false };
 
       function palette() {
         const dark = document.documentElement.classList.contains("dark");
         return dark
-          ? { band: "120, 160, 240", model: "250, 128, 114", draw: "165, 180, 205", bandA: 0.06, drawA: 0.17, glow: 12 }
-          : { band: "58, 102, 200", model: "240, 106, 90", draw: "58, 102, 200", bandA: 0.085, drawA: 0.2, glow: 9 };
+          ? { node: "150, 175, 220", edge: "120, 150, 210", hub: "250, 128, 114", nodeA: 0.55, edgeA: 0.5 }
+          : { node: "58, 102, 200", edge: "58, 102, 200", hub: "240, 106, 90", nodeA: 0.55, edgeA: 0.45 };
       }
 
-      // Expectation curve (fraction 0..1), slowly morphing.
-      function mean(xf: number, time: number) {
-        return (
-          0.5 +
-          0.12 * Math.sin(xf * 2.4 + time * 0.42) +
-          0.05 * Math.sin(xf * 4.9 - time * 0.3 + 1.2)
-        );
-      }
-      // Vertical centre of the ribbon, kept in the lower band.
-      const midY = (xf: number) => mean(xf, t) * h * 0.34 + h * 0.6;
-      // Half-width of the uncertainty band (px), wider toward the middle, breathing.
-      function halfWidth(xf: number) {
-        const envelope = 0.42 + 0.58 * Math.sin(Math.max(0, Math.min(1, xf)) * Math.PI);
-        return h * 0.082 * envelope * (0.78 + 0.22 * Math.sin(xf * 1.7 + t * 0.35));
+      function rand(a: number, b: number) {
+        return a + Math.random() * (b - a);
       }
 
-      function band(k: number, rgb: string, alpha: number) {
-        ctx!.beginPath();
-        for (let i = 0; i <= SEG; i++) {
-          const xf = i / SEG;
-          const x = xf * w;
-          const y = midY(xf) - k * halfWidth(xf);
-          i ? ctx!.lineTo(x, y) : ctx!.moveTo(x, y);
-        }
-        for (let i = SEG; i >= 0; i--) {
-          const xf = i / SEG;
-          ctx!.lineTo(xf * w, midY(xf) + k * halfWidth(xf));
-        }
-        ctx!.closePath();
-        ctx!.fillStyle = `rgba(${rgb}, ${alpha})`;
-        ctx!.fill();
+      function build() {
+        const count = Math.min(78, Math.max(34, Math.round((w * h) / 17000)));
+        nodes = Array.from({ length: count }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: rand(-0.18, 0.18),
+          vy: rand(-0.18, 0.18),
+          r: rand(1, 2.3),
+        }));
+        const hubCount = w < 700 ? 2 : w < 1100 ? 3 : 4;
+        hubs = Array.from({ length: hubCount }, (_, i) => ({
+          x: (w * (i + 0.5)) / hubCount + rand(-w * 0.12, w * 0.12),
+          y: rand(h * 0.68, h * 0.96),
+          vx: rand(-0.1, 0.1),
+          vy: rand(-0.07, 0.07),
+          r: rand(3.2, 4.6),
+        }));
       }
 
-      function stroke(yOf: (xf: number) => number, rgb: string, alpha: number, lw: number) {
-        ctx!.beginPath();
-        for (let i = 0; i <= SEG; i++) {
-          const xf = i / SEG;
-          const x = xf * w;
-          const y = yOf(xf);
-          i ? ctx!.lineTo(x, y) : ctx!.moveTo(x, y);
+      function resize() {
+        w = parent!.clientWidth;
+        h = parent!.clientHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+        build();
+      }
+
+      function move(n: N, jitter: boolean) {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < -30) n.x = w + 30;
+        if (n.x > w + 30) n.x = -30;
+        if (n.y < -30) n.y = h + 30;
+        if (n.y > h + 30) n.y = -30;
+        if (jitter && pointer.on) {
+          const dx = pointer.x - n.x, dy = pointer.y - n.y;
+          const d = Math.hypot(dx, dy);
+          if (d < 130 && d > 0.1) {
+            n.x += (dx / d) * 0.25;
+            n.y += (dy / d) * 0.25;
+          }
         }
-        ctx!.strokeStyle = `rgba(${rgb}, ${alpha})`;
-        ctx!.lineWidth = lw;
-        ctx!.lineJoin = "round";
-        ctx!.stroke();
       }
 
       function draw() {
         const c = palette();
         ctx!.clearRect(0, 0, w, h);
 
-        // Nested credible-interval bands (alpha accumulates toward the centre).
-        band(1.0, c.band, c.bandA * 0.85);
-        band(0.6, c.band, c.bandA);
-        band(0.28, c.band, c.bandA * 1.15);
-
-        // Defined upper contour of the band, for a crisp edge.
-        stroke((xf) => midY(xf) - halfWidth(xf), c.band, c.bandA * 2.4, 1);
-
-        // Fine sample draws flowing inside the band.
-        for (const d of DRAWS) {
-          stroke(
-            (xf) => midY(xf) + Math.sin(xf * d.freq + t * 0.5 + d.phase) * halfWidth(xf) * d.amp,
-            c.draw,
-            c.drawA,
-            1,
-          );
+        // Node-to-node covariance web
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < LINK) {
+              ctx!.strokeStyle = `rgba(${c.edge}, ${(1 - dist / LINK) * c.edgeA * 0.6})`;
+              ctx!.lineWidth = 0.7;
+              ctx!.beginPath();
+              ctx!.moveTo(a.x, a.y);
+              ctx!.lineTo(b.x, b.y);
+              ctx!.stroke();
+            }
+          }
+          // Edge toward the cursor
+          if (pointer.on) {
+            const d = Math.hypot(a.x - pointer.x, a.y - pointer.y);
+            if (d < LINK * 1.4) {
+              ctx!.strokeStyle = `rgba(${c.hub}, ${(1 - d / (LINK * 1.4)) * 0.5})`;
+              ctx!.lineWidth = 0.8;
+              ctx!.beginPath();
+              ctx!.moveTo(a.x, a.y);
+              ctx!.lineTo(pointer.x, pointer.y);
+              ctx!.stroke();
+            }
+          }
         }
 
-        // The model curve (expectation), with a soft glow.
-        ctx!.save();
-        ctx!.shadowColor = `rgba(${c.model}, 0.5)`;
-        ctx!.shadowBlur = c.glow;
-        stroke((xf) => midY(xf), c.model, 0.62, 1.6);
-        ctx!.restore();
+        // Loadings: nodes link to nearby latent hubs (salmon)
+        for (const hub of hubs) {
+          for (const n of nodes) {
+            const dx = hub.x - n.x, dy = hub.y - n.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < HUB_LINK) {
+              ctx!.strokeStyle = `rgba(${c.hub}, ${(1 - dist / HUB_LINK) * 0.32})`;
+              ctx!.lineWidth = 0.8;
+              ctx!.beginPath();
+              ctx!.moveTo(hub.x, hub.y);
+              ctx!.lineTo(n.x, n.y);
+              ctx!.stroke();
+            }
+          }
+        }
+
+        // Observed nodes
+        for (const n of nodes) {
+          ctx!.fillStyle = `rgba(${c.node}, ${c.nodeA})`;
+          ctx!.beginPath();
+          ctx!.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx!.fill();
+        }
+
+        // Latent hubs with glow
+        for (const hub of hubs) {
+          const g = ctx!.createRadialGradient(hub.x, hub.y, 0, hub.x, hub.y, hub.r * 5);
+          g.addColorStop(0, `rgba(${c.hub}, 0.45)`);
+          g.addColorStop(1, `rgba(${c.hub}, 0)`);
+          ctx!.fillStyle = g;
+          ctx!.beginPath();
+          ctx!.arc(hub.x, hub.y, hub.r * 5, 0, Math.PI * 2);
+          ctx!.fill();
+          ctx!.fillStyle = `rgba(${c.hub}, 0.95)`;
+          ctx!.beginPath();
+          ctx!.arc(hub.x, hub.y, hub.r, 0, Math.PI * 2);
+          ctx!.fill();
+        }
+      }
+
+      function step() {
+        for (const n of nodes) move(n, true);
+        for (const hub of hubs) move(hub, false);
+        draw();
       }
 
       function loop() {
-        t += 0.005;
-        draw();
+        step();
         raf = requestAnimationFrame(loop);
       }
       function start() {
@@ -149,17 +198,16 @@ const { class: extraClass = "" } = Astro.props;
         cancelAnimationFrame(raf);
       }
 
-      function resize() {
-        w = parent!.clientWidth;
-        h = parent!.clientHeight;
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-        ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-        draw();
-      }
-
       const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0 });
       io.observe(canvas);
+
+      parent.addEventListener("pointermove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        pointer.x = e.clientX - rect.left;
+        pointer.y = e.clientY - rect.top;
+        pointer.on = true;
+      });
+      parent.addEventListener("pointerleave", () => (pointer.on = false));
 
       let rt: number;
       window.addEventListener("resize", () => {
@@ -168,6 +216,7 @@ const { class: extraClass = "" } = Astro.props;
       });
 
       resize();
+      draw();
     });
   }
 
