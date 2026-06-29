@@ -2,6 +2,7 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
 import ChapterHeader from "../components/ChapterHeader.astro";
+import PersonCard from "../components/PersonCard.astro";
 
 const lastName = (n: string) =>
   n.replace(/\s*\(.*?\)\s*/g, " ").trim().split(" ").pop()!;
@@ -165,76 +166,16 @@ const networkMembers = [
 
       <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {coordinatingCommittee.sort(sortByName).map((member) => (
-          <article class="group relative flex flex-col items-center pt-8 text-center">
-            <!-- Top accent rule -->
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full dark:bg-salmon-400"></div>
-
-            {member.image ? (
-              <img
-                src={member.image}
-                alt={member.name}
-                class="h-32 w-32 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700"
-              />
-            ) : (
-              <div class="flex h-32 w-32 items-center justify-center rounded-full bg-slate-50 ring-2 ring-slate-100 dark:bg-slate-800 dark:ring-slate-700">
-                <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{member.name.split(" ").map((n: string) => n[0]).join("")}</span>
-              </div>
-            )}
-            <h3 class="mt-5 whitespace-nowrap font-serif text-lg text-slate-900 dark:text-white">
-              {member.name}
-            </h3>
-            <p class="mt-1.5 text-sm font-medium text-navy-600 dark:text-navy-400">
-              {member.institution}
-            </p>
-            <p class="mt-1 font-serif text-xs italic text-slate-500 dark:text-slate-400">
-              {member.role}
-            </p>
-
-            {member.bio && (
-              <details class="mt-4 w-full text-left">
-                <summary class="cursor-pointer select-none border-t border-slate-200 pt-3 text-center font-sans text-xs font-medium uppercase text-navy-600 transition-colors hover:text-salmon-600 dark:border-slate-700 dark:text-navy-400 dark:hover:text-salmon-400" style="letter-spacing: 0.15em;">
-                  <span class="bio-toggle-label">About</span>
-                </summary>
-                <div class="bio-content">
-                  <div class="overflow-hidden">
-                    <p class="pt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400 text-justify">
-                      {member.bio}
-                    </p>
-                  </div>
-                </div>
-              </details>
-            )}
-
-            <div class="mt-4 flex flex-col items-center gap-1.5">
-              <a
-                href={`mailto:${member.email}`}
-                class="font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
-              >
-                {member.email}
-              </a>
-              {member.website && (
-                <a
-                  href={member.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
-                >
-                  {member.website2 ? "Lab page →" : "Personal page →"}
-                </a>
-              )}
-              {member.website2 && (
-                <a
-                  href={member.website2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
-                >
-                  Personal page →
-                </a>
-              )}
-            </div>
-          </article>
+          <PersonCard
+            name={member.name}
+            institution={member.institution}
+            role={member.role}
+            image={member.image}
+            email={member.email}
+            website={member.website}
+            website2={member.website2}
+            bio={member.bio}
+          />
         ))}
       </div>
     </div>
@@ -247,76 +188,16 @@ const networkMembers = [
 
       <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {networkMembers.sort(sortByName).map((member) => (
-          <article class="group relative flex flex-col items-center pt-8 text-center">
-            <!-- Top accent rule -->
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></div>
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full dark:bg-salmon-400"></div>
-
-            {member.image ? (
-              <img
-                src={member.image}
-                alt={member.name}
-                class="h-32 w-32 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-700"
-              />
-            ) : (
-              <div class="flex h-32 w-32 items-center justify-center rounded-full bg-slate-50 ring-2 ring-slate-100 dark:bg-slate-800 dark:ring-slate-700">
-                <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{member.name.split(" ").map((n: string) => n[0]).join("")}</span>
-              </div>
-            )}
-            <h3 class="mt-5 whitespace-nowrap font-serif text-lg text-slate-900 dark:text-white">
-              {member.name}
-            </h3>
-            <p class="mt-1.5 whitespace-nowrap text-sm font-medium text-navy-600 dark:text-navy-400">
-              {member.institution}
-            </p>
-            <p class="mt-1 whitespace-nowrap font-serif text-xs italic text-slate-500 dark:text-slate-400">
-              {member.role}
-            </p>
-
-            {member.bio && (
-              <details class="mt-4 w-full text-left">
-                <summary class="cursor-pointer select-none border-t border-slate-200 pt-3 text-center font-sans text-xs font-medium uppercase text-navy-600 transition-colors hover:text-salmon-600 dark:border-slate-700 dark:text-navy-400 dark:hover:text-salmon-400" style="letter-spacing: 0.15em;">
-                  <span class="bio-toggle-label">About</span>
-                </summary>
-                <div class="bio-content">
-                  <div class="overflow-hidden">
-                    <p class="pt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400 text-justify">
-                      {member.bio}
-                    </p>
-                  </div>
-                </div>
-              </details>
-            )}
-
-            <div class="mt-4 flex flex-col items-center gap-1.5">
-              <a
-                href={`mailto:${member.email}`}
-                class="font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-500 dark:hover:text-salmon-400"
-              >
-                {member.email}
-              </a>
-              {member.website && (
-                <a
-                  href={member.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
-                >
-                  {member.website2 ? "Lab page →" : "Personal page →"}
-                </a>
-              )}
-              {member.website2 && (
-                <a
-                  href={member.website2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-sans text-xs text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
-                >
-                  Personal page →
-                </a>
-              )}
-            </div>
-          </article>
+          <PersonCard
+            name={member.name}
+            institution={member.institution}
+            role={member.role}
+            image={member.image}
+            email={member.email}
+            website={member.website}
+            website2={(member as any).website2}
+            bio={member.bio}
+          />
         ))}
       </div>
     </div>

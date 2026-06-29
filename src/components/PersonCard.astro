@@ -1,67 +1,173 @@
 ---
+/**
+ * PersonCard — an elegant, theme-aware profile card that opens a refined
+ * modal with the full bio. Used on the People page and Event pages.
+ */
 interface Props {
   name: string;
-  role: string;
-  affiliation: string;
+  institution?: string;
+  role?: string;
   image?: string;
-  website?: string;
   email?: string;
+  website?: string;
+  website2?: string;
+  bio?: string;
 }
 
-const { name, role, affiliation, image, website, email } = Astro.props;
+const { name, institution, role, image, email, website, website2, bio } = Astro.props;
 
-// Generate initials for placeholder
-const initials = name.split(" ").map((n) => n[0]).join("");
+const initials = name
+  .replace(/\s*\(.*?\)\s*/g, " ")
+  .trim()
+  .split(" ")
+  .map((n) => n[0])
+  .join("")
+  .slice(0, 2)
+  .toUpperCase();
+
+const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const dialogId = `profile-${slug}`;
+const labLink = website2 ? website : null;          // primary website acts as lab page if a 2nd exists
+const personalLink = website2 ?? website ?? null;   // the most "personal" link
 ---
 
-<div class="card flex flex-col items-center text-center">
-  <!-- Avatar -->
-  <div class="h-24 w-24 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+<!-- One grid cell: card + its modal (single child keeps grid/stagger counts correct) -->
+<div class="person-cell">
+<!-- Card (whole card opens the modal) -->
+<button
+  type="button"
+  data-profile-open={dialogId}
+  class="profile-trigger group relative flex w-full flex-col items-center pt-8 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-salmon-400 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 rounded-md"
+>
+  <!-- Top accent rule -->
+  <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></span>
+  <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full dark:bg-salmon-400"></span>
+
+  <!-- Photo with concentric ring -->
+  <div class="relative">
     {image ? (
       <img
         src={image}
         alt={name}
-        class="h-full w-full object-cover"
         loading="lazy"
+        class="h-32 w-32 rounded-full object-cover object-[center_30%] shadow-lg shadow-slate-200/50 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-salmon-100/40 dark:shadow-slate-900/50 dark:group-hover:shadow-salmon-900/20"
       />
     ) : (
-      <div class="flex h-full w-full items-center justify-center text-2xl font-semibold text-slate-400 dark:text-slate-500">
-        {initials}
+      <div class="flex h-32 w-32 items-center justify-center rounded-full bg-slate-50 shadow-lg dark:bg-slate-800">
+        <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{initials}</span>
+      </div>
+    )}
+    <span aria-hidden="true" class="absolute -inset-2 rounded-full border border-slate-200/60 transition-colors duration-500 group-hover:border-salmon-300/50 dark:border-slate-700/60 dark:group-hover:border-salmon-600/30"></span>
+  </div>
+
+  <h3 class="mt-6 font-serif text-lg text-slate-900 dark:text-white" style="letter-spacing: -0.01em;">{name}</h3>
+  <span aria-hidden="true" class="mx-auto mt-2.5 block h-px w-6 bg-salmon-400/60"></span>
+  {institution && <p class="mt-2.5 text-sm font-medium text-navy-600 dark:text-navy-400">{institution}</p>}
+  {role && <p class="mt-1 font-serif text-xs italic text-slate-500 dark:text-slate-400">{role}</p>}
+
+  <!-- Affordance -->
+  <span class="mt-4 inline-flex items-center gap-1.5 font-sans text-[10px] font-semibold uppercase text-slate-400 transition-colors duration-300 group-hover:text-salmon-600 dark:text-slate-500 dark:group-hover:text-salmon-400" style="letter-spacing: 0.2em;">
+    {bio ? "View profile" : "Details"}
+    <svg class="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h13m0 0-5.5-5.5M18 12l-5.5 5.5" />
+    </svg>
+  </span>
+</button>
+
+<!-- Profile modal -->
+<dialog id={dialogId} class="profile-modal w-[min(92vw,40rem)] overflow-hidden rounded-2xl border border-slate-200 bg-white p-0 text-left shadow-2xl dark:border-slate-800 dark:bg-slate-900">
+  <!-- Salmon accent bar -->
+  <div aria-hidden="true" class="h-1 w-full bg-gradient-to-r from-salmon-400 via-salmon-500 to-navy-400"></div>
+
+  <div class="relative max-h-[85vh] overflow-y-auto px-7 py-8 sm:px-10 sm:py-9">
+    <!-- Close -->
+    <button type="button" data-profile-close aria-label="Close" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Header -->
+    <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+      <div class="relative flex-shrink-0">
+        {image ? (
+          <img src={image} alt={name} class="h-24 w-24 rounded-full object-cover object-[center_30%] ring-2 ring-slate-100 dark:ring-slate-700" />
+        ) : (
+          <div class="flex h-24 w-24 items-center justify-center rounded-full bg-slate-50 ring-2 ring-slate-100 dark:bg-slate-800 dark:ring-slate-700">
+            <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{initials}</span>
+          </div>
+        )}
+        <span aria-hidden="true" class="absolute -inset-1.5 rounded-full border border-salmon-300/40 dark:border-salmon-700/30"></span>
+      </div>
+      <div class="min-w-0 pr-8">
+        <h3 class="font-serif text-2xl leading-tight text-slate-900 dark:text-white">{name}</h3>
+        {institution && <p class="mt-1.5 text-sm font-medium text-navy-600 dark:text-navy-400">{institution}</p>}
+        {role && <p class="mt-0.5 font-serif text-sm italic text-slate-500 dark:text-slate-400">{role}</p>}
+      </div>
+    </div>
+
+    <div class="my-6 h-px w-full bg-gradient-to-r from-salmon-400/50 via-slate-200 to-transparent dark:via-slate-700"></div>
+
+    <!-- Bio -->
+    {bio ? (
+      <p class="text-pretty font-sans text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">{bio}</p>
+    ) : (
+      <p class="font-sans text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">Profile details coming soon.</p>
+    )}
+
+    <!-- Links -->
+    {(email || website || website2) && (
+      <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-200 pt-5 dark:border-slate-700">
+        {email && (
+          <a href={`mailto:${email}`} class="inline-flex items-center gap-2 font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            {email}
+          </a>
+        )}
+        {website && (
+          <a href={website} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
+            {labLink ? "Lab page" : "Personal page"}
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
+          </a>
+        )}
+        {website2 && (
+          <a href={website2} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
+            Personal page
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
+          </a>
+        )}
       </div>
     )}
   </div>
-
-  <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">{name}</h3>
-  <p class="text-sm text-navy-600 dark:text-navy-400">{role}</p>
-  <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{affiliation}</p>
-
-  <!-- Links -->
-  {(website || email) && (
-    <div class="mt-4 flex gap-3">
-      {website && (
-        <a
-          href={website}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-slate-400 hover:text-navy-600 dark:hover:text-navy-400 transition-colors"
-          aria-label={`${name}'s website`}
-        >
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-          </svg>
-        </a>
-      )}
-      {email && (
-        <a
-          href={`mailto:${email}`}
-          class="text-slate-400 hover:text-navy-600 dark:hover:text-navy-400 transition-colors"
-          aria-label={`Email ${name}`}
-        >
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-          </svg>
-        </a>
-      )}
-    </div>
-  )}
+</dialog>
 </div>
+
+<script>
+  function wireProfileModals() {
+    if (!(window as any).__profileModalWired) {
+      (window as any).__profileModalWired = true;
+      document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const opener = target.closest<HTMLElement>("[data-profile-open]");
+        if (opener) {
+          const dlg = document.getElementById(opener.getAttribute("data-profile-open")!) as HTMLDialogElement | null;
+          dlg?.showModal?.();
+          return;
+        }
+        if (target.closest("[data-profile-close]")) {
+          target.closest("dialog")?.close();
+        }
+      });
+    }
+    document.querySelectorAll<HTMLDialogElement>("dialog.profile-modal").forEach((d) => {
+      if (d.dataset.wired) return;
+      d.dataset.wired = "1";
+      d.addEventListener("click", (e) => {
+        if (e.target === d) d.close();
+      });
+    });
+  }
+
+  wireProfileModals();
+  document.addEventListener("astro:after-swap", wireProfileModals);
+</script>
