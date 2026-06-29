@@ -53,9 +53,6 @@ const memberPapers: typeof resources = [
 ];
 
 // ── Reading collection: Data versus Phenomena ────────────────────────
-const dvpIntro =
-  "A foundational debate in philosophy of science and the current theory crisis in psychology: should theories be validated against <em>phenomena</em> — stable, generalizable patterns — or against the <em>data</em> we actually observe? These readings trace the distinction from its origins to the latest arguments for bringing the two back together.";
-
 const dvpAnchor = {
   authors: "Vanhasbroeck, N., Yu, K., & Ariens, S.",
   year: 2026,
@@ -63,7 +60,14 @@ const dvpAnchor = {
   venue: "Theory & Psychology",
   url: "https://doi.org/10.1177/09593543261450876",
   preprint: "https://doi.org/10.31234/osf.io/hfvnx",
-  note: "Argues that data and phenomena should jointly validate formal theories — co-authored by TMM members.",
+  summary:
+    "Vanhasbroeck, Yu, and Ariens challenge the increasingly popular view that formal psychological theories should be validated against phenomena alone, and make the case for bringing data back into theory testing. They show that neither phenomena nor data are a sufficient basis on their own, and propose an integrative approach in which the two play complementary roles.",
+  points: [
+    "A single phenomenon rarely distinguishes competing models — many different mechanisms can produce the same mean difference.",
+    "Phenomena alone give no principled way to judge a model's complexity, and reasoning from them becomes circular when the phenomenon itself is mis-specified.",
+    "Pure data-fitting has its own blind spots: auxiliary assumptions, estimability, and atheoretical models that often fit better than explanatory ones.",
+    "Their integrative loop pairs top-down prediction of phenomena with bottom-up analysis of the full data structure — illustrated by the 19th-century discovery of Neptune.",
+  ],
 };
 
 const dvpGroups = [
@@ -206,35 +210,76 @@ const dvpGroups = [
       <h2 class="mt-4 font-serif text-3xl font-normal text-slate-900 dark:text-white md:text-4xl" style="letter-spacing: -0.015em;">
         Data versus Phenomena
       </h2>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-400" set:html={dvpIntro}></p>
+
+      <!-- Background -->
+      <div class="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+        <p>
+          The distinction between <em class="font-serif not-italic font-medium text-slate-800 dark:text-slate-200">data</em> and
+          <em class="font-serif not-italic font-medium text-slate-800 dark:text-slate-200">phenomena</em>, introduced by
+          philosophers James Bogen and James Woodward in 1988, draws a line between the concrete records an experiment
+          produces and the stable regularities those records are taken to reveal. On this view, scientific theories
+          explain phenomena, not data — data are merely the evidence from which phenomena are inferred.
+        </p>
+        <p>
+          The distinction now sits at the center of psychology's “theory crisis.” A growing program argues that the field
+          has too often mistaken statistical findings in particular datasets for genuine theoretical progress, and that
+          researchers should instead identify robust phenomena and build formal models that reproduce them. But how far
+          should the pendulum swing — and what role is left for data, and for the model-fitting tools psychology has spent
+          decades developing? These readings trace the debate from its philosophical origins to the latest attempts to put
+          data and phenomena back on equal footing.
+        </p>
+      </div>
+
+      <!-- The two concepts -->
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
+          <p class="font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">Data</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            Concrete, noisy records from particular instruments and settings — a column of reaction times, a set of brain
+            activations, a sheet of questionnaire ratings.
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
+          <p class="font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">Phenomena</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            The stable, repeatable regularities those records are taken to reveal — the speed–accuracy trade-off, the power
+            law of practice, the recovery of mood after a setback.
+          </p>
+        </div>
+      </div>
 
       <!-- Anchor paper -->
-      <a
-        href={dvpAnchor.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group mt-10 block rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-navy-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-navy-600 md:p-8"
-      >
+      <div class="mt-10 rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900 md:p-8">
         <span class="inline-block font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">
-          Start here
+          Start here · from the TMM network
         </span>
-        <h3 class="mt-3 font-serif text-xl text-slate-900 transition-colors group-hover:text-navy-600 dark:text-white dark:group-hover:text-navy-400 md:text-2xl" style="line-height: 1.25;">
+        <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white md:text-2xl" style="line-height: 1.25;">
           {dvpAnchor.title}
         </h3>
         <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
           {dvpAnchor.authors} &middot; <span class="font-serif italic">{dvpAnchor.venue}</span> &middot; {dvpAnchor.year}
         </p>
-        <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{dvpAnchor.note}</p>
-        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
-          <span class="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy-600 group-hover:text-salmon-600 dark:text-navy-400 dark:group-hover:text-salmon-400">
-            Read paper
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-          </span>
-          <a href={dvpAnchor.preprint} target="_blank" rel="noopener noreferrer" class="font-sans text-sm text-slate-500 underline-offset-2 hover:text-salmon-600 hover:underline dark:text-slate-400 dark:hover:text-salmon-400">
-            Open preprint
-          </a>
-        </div>
-      </a>
+        <p class="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{dvpAnchor.summary}</p>
+
+        <ul class="mt-5 space-y-2.5">
+          {dvpAnchor.points.map((pt) => (
+            <li class="flex gap-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-salmon-500 dark:bg-salmon-400"></span>
+              <span>{pt}</span>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href={dvpAnchor.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
+        >
+          Read paper
+          <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+        </a>
+      </div>
 
       <!-- Related readings, grouped -->
       <div class="mt-12 space-y-10">
