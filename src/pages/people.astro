@@ -163,9 +163,6 @@ const networkMembers = [
   <Section background="white">
     <div class="mx-auto max-w-6xl">
       <ChapterHeader title="Coordinating Team" metaLabel={`${coordinatingCommittee.length} members`} />
-      <p class="mt-5 max-w-2xl font-serif text-base italic leading-relaxed text-slate-600 dark:text-slate-400">
-        The team steering the network's activities, events, and collaborations.
-      </p>
 
       <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {coordinatingCommittee.sort(sortByName).map((member) => (
@@ -188,9 +185,6 @@ const networkMembers = [
   <Section background="gray">
     <div class="mx-auto max-w-6xl">
       <ChapterHeader title="Network Members" metaLabel={`${networkMembers.length} members`} />
-      <p class="mt-5 max-w-2xl font-serif text-base italic leading-relaxed text-slate-600 dark:text-slate-400">
-        Researchers across institutions contributing to the network's shared work.
-      </p>
 
       <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {networkMembers.sort(sortByName).map((member) => (
