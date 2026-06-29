@@ -22,16 +22,21 @@ const columns = [
 ];
 ---
 
-<footer class="relative border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
-  <!-- Salmon hairline accent -->
+<footer class="relative overflow-hidden border-t border-slate-900/10 bg-white dark:border-slate-100/10 dark:bg-slate-950">
+  <!-- Salmon hairline + dotted page-header texture (TMM signature) -->
   <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-salmon-400/70 to-transparent"></div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.035] dark:text-slate-100 dark:opacity-[0.06]"
+    style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
+  ></div>
 
-  <div class="container-wide py-14 md:py-16">
-    <div class="grid gap-10 md:grid-cols-12 md:gap-8">
+  <div class="container-wide relative py-16 md:py-20">
+    <div class="grid gap-12 md:grid-cols-12 md:gap-10">
       <!-- Brand -->
       <div class="md:col-span-5">
-        <a href="/" class="flex items-center gap-2.5" aria-label="TMM — Home">
-          <svg class="h-7 w-7" viewBox="0 0 40 40" fill="none">
+        <a href="/" class="inline-flex items-center gap-2.5" aria-label="TMM, home">
+          <svg class="h-8 w-8" viewBox="0 0 40 40" fill="none">
             <path d="M20 8 L32 28 M20 8 L8 28 M8 28 L32 28" stroke="currentColor" stroke-width="1.5" class="text-slate-400 dark:text-slate-600" />
             <circle cx="20" cy="8" r="6" class="fill-slate-700 dark:fill-slate-300" />
             <text x="20" y="11" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">T</text>
@@ -40,23 +45,31 @@ const columns = [
             <circle cx="32" cy="28" r="6" class="fill-slate-600 dark:fill-slate-400" />
             <text x="32" y="31" text-anchor="middle" class="fill-white dark:fill-slate-900 text-[8px] font-bold">M</text>
           </svg>
-          <span class="font-serif text-xl text-navy-600 dark:text-navy-400">TMM</span>
+          <span class="font-serif text-2xl text-navy-600 dark:text-navy-400">TMM</span>
         </a>
-        <p class="mt-4 max-w-xs font-serif text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+        <p class="mt-5 max-w-sm font-serif text-lg leading-relaxed text-slate-700 dark:text-slate-300">
           Bridging theory and measurement in psychological science.
         </p>
+        <a
+          href="/community"
+          class="group mt-6 inline-flex items-baseline gap-2 font-serif text-base text-slate-900 dark:text-slate-100"
+        >
+          <span class="editorial-underline">Join the network</span>
+          <span aria-hidden="true" class="text-salmon-500 transition-transform duration-300 group-hover:translate-x-1 dark:text-salmon-400">→</span>
+        </a>
       </div>
 
       <!-- Link columns -->
       {columns.map((col) => (
         <nav class="md:col-span-2">
-          <h3 class="font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.18em;">
+          <h3 class="relative inline-block pb-2.5 font-sans text-[11px] font-semibold uppercase text-slate-900 dark:text-slate-100" style="letter-spacing: 0.18em;">
             {col.heading}
+            <span aria-hidden="true" class="absolute bottom-0 left-0 h-px w-6 bg-salmon-500 dark:bg-salmon-400"></span>
           </h3>
-          <ul class="mt-4 space-y-2.5">
+          <ul class="mt-5 space-y-3">
             {col.links.map((link) => (
               <li>
-                <a href={link.href} class="font-sans text-sm text-slate-600 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
+                <a href={link.href} class="editorial-underline font-sans text-sm text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100">
                   {link.label}
                 </a>
               </li>
@@ -67,27 +80,23 @@ const columns = [
 
       <!-- Connect -->
       <div class="md:col-span-3">
-        <h3 class="font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.18em;">
+        <h3 class="relative inline-block pb-2.5 font-sans text-[11px] font-semibold uppercase text-slate-900 dark:text-slate-100" style="letter-spacing: 0.18em;">
           Connect
+          <span aria-hidden="true" class="absolute bottom-0 left-0 h-px w-6 bg-salmon-500 dark:bg-salmon-400"></span>
         </h3>
-        <a
-          href="mailto:tmm.psych@outlook.com"
-          class="mt-4 block font-mono text-sm text-slate-600 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400"
-        >
-          tmm.psych@outlook.com
-        </a>
-        <a
-          href="/community"
-          class="mt-4 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
-        >
-          Join the network
-          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h13m0 0-5.5-5.5M18 12l-5.5 5.5" /></svg>
-        </a>
+        <div class="mt-5">
+          <a
+            href="mailto:tmm.psych@outlook.com"
+            class="editorial-underline inline-block font-mono text-sm text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+          >
+            tmm.psych@outlook.com
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- Bottom bar -->
-    <div class="mt-14 flex flex-col items-start justify-between gap-3 border-t border-slate-200 pt-6 dark:border-slate-800 sm:flex-row sm:items-center">
+    <div class="mt-16 flex flex-col items-start justify-between gap-3 border-t border-slate-900/10 pt-6 dark:border-slate-100/10 sm:flex-row sm:items-center">
       <p class="font-sans text-xs text-slate-500 dark:text-slate-500">
         &copy; {currentYear} Theory, Model, Measurement Network. All rights reserved.
       </p>
