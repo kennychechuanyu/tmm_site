@@ -8,3 +8,7 @@ dist/
 tmpclaude-*
 *.docx
 package-lock.json
+
+# OS / local artifacts
+.DS_Store
+*.pdf

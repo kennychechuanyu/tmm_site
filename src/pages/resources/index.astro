@@ -2,10 +2,10 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
 import ChapterHeader from "../../components/ChapterHeader.astro";
+import { collections } from "../../data/collections";
 
 const FORMSPREE_ID = "xjggvlaw";
 
-// Resource types
 const resourceTypes = [
   "Tutorial",
   "Paper",
@@ -16,110 +16,9 @@ const resourceTypes = [
   "Other",
 ];
 
-// All resources — add new ones here
-const resources = [
-  {
-    title: "Illusions of Understanding in the Sciences",
-    type: "Discussion Collection",
-    source: "Computational Brain & Behavior",
-    year: 2026,
-    description: "Shiffrin, Stigler, and Keil argue that scientists routinely operate under predictable illusions when interpreting data, building theories, and evaluating evidence. Commentaries respond across themes including bounded rationality, the nature of understanding, formal modeling, prediction and risk, extrapolation, replication, causal reasoning, AI, and science communication.",
-    url: "https://link.springer.com/article/10.1007/s42113-026-00271-1",
-    collectionUrl: "https://link.springer.com/collections/fdagffafgf",
-    featured: true,
-  },
-];
-
-const featured = resources.find((r) => r.featured);
-const otherResources = resources.filter((r) => !r.featured);
-
-// Member contributions — papers by TMM members
-// Uncomment when ready to display
-const memberPapers: typeof resources = [
-  // {
-  //   title: "Prediction, Risk, and Illusion",
-  //   authors: "Kenny Yu, Maria M. Robinson",
-  //   journal: "Computational Brain & Behavior",
-  //   year: 2026,
-  //   doi: "10.1007/s42113-026-00285-9",
-  // },
-  // {
-  //   title: "Bounded Understanding Is Still Understanding",
-  //   authors: "Kenny Yu, Sigert Ariens, Niels Vanhasbroeck",
-  //   journal: "Computational Brain & Behavior",
-  //   year: 2026,
-  //   doi: "10.1007/s42113-026-00287-7",
-  // },
-];
-
-// ── Reading collection: Data versus Phenomena ────────────────────────
-const dvpAnchor = {
-  authors: "Vanhasbroeck, N., Yu, K., & Ariens, S.",
-  year: 2026,
-  title: "No Need to Be Indirect: On the Role of Data in the Validation of Theoretical Models",
-  venue: "Theory & Psychology",
-  url: "https://doi.org/10.1177/09593543261450876",
-  preprint: "https://doi.org/10.31234/osf.io/hfvnx",
-  summary:
-    "Vanhasbroeck, Yu, and Ariens challenge the increasingly popular view that formal psychological theories should be validated against phenomena alone, and make the case for bringing data back into theory testing. They show that neither phenomena nor data are a sufficient basis on their own, and propose an integrative approach in which the two play complementary roles.",
-  points: [
-    "A single phenomenon rarely distinguishes competing models — many different mechanisms can produce the same mean difference.",
-    "Phenomena alone give no principled way to judge a model's complexity, and reasoning from them becomes circular when the phenomenon itself is mis-specified.",
-    "Pure data-fitting has its own blind spots: auxiliary assumptions, estimability, and atheoretical models that often fit better than explanatory ones.",
-    "Their integrative loop pairs top-down prediction of phenomena with bottom-up analysis of the full data structure — illustrated by the 19th-century discovery of Neptune.",
-  ],
-};
-
-const dvpGroups = [
-  {
-    label: "Foundations — data vs phenomena",
-    items: [
-      { authors: "Bogen, J., & Woodward, J.", year: 1988, title: "Saving the Phenomena", venue: "The Philosophical Review", doi: "10.2307/2185445" },
-      { authors: "Woodward, J.", year: 1989, title: "Data and Phenomena", venue: "Synthese", doi: "10.1007/BF00869282" },
-    ],
-  },
-  {
-    label: "Phenomenon-based theory construction",
-    items: [
-      { authors: "Borsboom, D., van der Maas, H. L. J., Dalege, J., Kievit, R. A., & Haig, B. D.", year: 2021, title: "Theory Construction Methodology: A Practical Framework for Building Theories in Psychology", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691620969647" },
-      { authors: "Haslbeck, J. M. B., Ryan, O., Robinaugh, D. J., Waldorp, L. J., & Borsboom, D.", year: 2022, title: "Modeling Psychopathology: From Data Models to Formal Theories", venue: "Psychological Methods", doi: "10.1037/met0000303" },
-      { authors: "van Dongen, N., et al.", year: 2025, title: "Productive Explanation: A Framework for Evaluating Explanations in Psychological Science", venue: "Psychological Review", doi: "10.1037/rev0000479" },
-      { authors: "Haig, B. D.", year: 2005, title: "An Abductive Theory of Scientific Method", venue: "Psychological Methods", doi: "10.1037/1082-989X.10.4.371" },
-    ],
-  },
-  {
-    label: "Data, prediction & the theory crisis",
-    items: [
-      { authors: "Navarro, D. J.", year: 2019, title: "Between the Devil and the Deep Blue Sea: Tensions Between Scientific Judgement and Statistical Model Selection", venue: "Computational Brain & Behavior", doi: "10.1007/s42113-018-0019-z" },
-      { authors: "Yarkoni, T., & Westfall, J.", year: 2017, title: "Choosing Prediction Over Explanation in Psychology: Lessons From Machine Learning", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691617693393" },
-      { authors: "Vanpaemel, W.", year: 2020, title: "Strong Theory Testing Using the Prior Predictive and the Data Prior", venue: "Psychological Review", doi: "10.1037/rev0000167" },
-      { authors: "Eronen, M. I., & Bringmann, L. F.", year: 2021, title: "The Theory Crisis in Psychology: How to Move Forward", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691620970586" },
-      { authors: "van Rooij, I., & Baggio, G.", year: 2021, title: "Theory Before the Test: How to Build High-Verisimilitude Explanatory Theories in Psychological Science", venue: "Perspectives on Psychological Science", doi: "10.1177/1745691620970604" },
-    ],
-  },
-];
-
-const dvpCount = 1 + dvpGroups.reduce((n, g) => n + g.items.length, 0);
-
-// ── Collection directory (top-of-page index) ─────────────────────────
-const collections = [
-  {
-    id: "data-vs-phenomena",
-    type: "Reading Collection",
-    title: "Data versus Phenomena",
-    blurb:
-      "From Bogen & Woodward's classic distinction to psychology's theory crisis — should theories answer to stable phenomena, to the data we observe, or to both?",
-    meta: `${dvpCount} readings`,
-  },
-  {
-    id: "illusions-of-understanding",
-    type: "Discussion Collection",
-    title: "Illusions of Understanding in the Sciences",
-    blurb:
-      "Shiffrin, Stigler & Keil on the predictable illusions scientists operate under when interpreting data and building theories — with cross-disciplinary commentaries.",
-    meta: "Target article + commentaries",
-  },
-];
+// Individual (non-collection) resources — long tail. Add entries here;
+// they render in the filterable grid below. Empty for now.
+const resources: { title: string; type: string; source: string; year: number; description: string; url: string }[] = [];
 ---
 
 <PageLayout
@@ -127,7 +26,7 @@ const collections = [
   description="Curated resources on theory, modeling, and measurement in psychological science."
   subtitle="Curated resources on theory, modeling, and measurement in psychological science"
 >
-  <!-- Collection directory -->
+  <!-- Collections -->
   <Section background="white" compactTop>
     <div class="mx-auto max-w-5xl">
       <div class="flex items-center gap-3">
@@ -137,26 +36,26 @@ const collections = [
         </span>
       </div>
       <p class="mt-4 max-w-2xl font-serif text-lg italic leading-snug text-slate-600 dark:text-slate-400">
-        Curated reading and discussion collections on the theory–measurement interface. Jump to one below.
+        Curated reading and discussion collections on the theory–measurement interface.
       </p>
 
       <div class="mt-8 grid gap-5 sm:grid-cols-2">
         {collections.map((c) => (
           <a
-            href={`#${c.id}`}
-            class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-navy-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-navy-600"
+            href={`/resources/${c.slug}`}
+            class="group flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-navy-300 hover:shadow-md hover:-translate-y-0.5 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-navy-600"
           >
             <div class="flex items-start justify-between gap-4">
               <span class="font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">
                 {c.type}
               </span>
-              <svg class="h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-y-0.5 group-hover:text-salmon-500 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v13m0 0-5.5-5.5M12 18l5.5-5.5" />
+              <svg class="h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-salmon-500 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h13m0 0-5.5-5.5M18 12l-5.5 5.5" />
               </svg>
             </div>
-            <h3 class="mt-3 font-serif text-xl text-slate-900 transition-colors group-hover:text-navy-600 dark:text-white dark:group-hover:text-navy-400" style="line-height: 1.25;">
+            <h2 class="mt-3 font-serif text-xl text-slate-900 transition-colors group-hover:text-navy-600 dark:text-white dark:group-hover:text-navy-400" style="line-height: 1.25;">
               {c.title}
-            </h3>
+            </h2>
             <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
               {c.blurb}
             </p>
@@ -169,202 +68,33 @@ const collections = [
     </div>
   </Section>
 
-  <!-- Reading Collection: Data versus Phenomena -->
-  <Section background="gray" id="data-vs-phenomena" class="scroll-mt-24">
-    <div class="mx-auto max-w-4xl">
-      <!-- Header -->
-      <div class="flex items-center gap-3">
-        <span class="inline-block h-px w-10 bg-salmon-500"></span>
-        <span class="font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.22em;">
-          Reading Collection
-        </span>
-      </div>
-      <h2 class="mt-4 font-serif text-3xl font-normal text-slate-900 dark:text-white md:text-4xl" style="letter-spacing: -0.015em;">
-        Data versus Phenomena
-      </h2>
-
-      <!-- Background -->
-      <div class="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
-        <p>
-          The distinction between <em class="font-serif not-italic font-medium text-slate-800 dark:text-slate-200">data</em> and
-          <em class="font-serif not-italic font-medium text-slate-800 dark:text-slate-200">phenomena</em>, introduced by
-          philosophers James Bogen and James Woodward in 1988, draws a line between the concrete records an experiment
-          produces and the stable regularities those records are taken to reveal. On this view, scientific theories
-          explain phenomena, not data — data are merely the evidence from which phenomena are inferred.
-        </p>
-        <p>
-          The distinction now sits at the center of psychology's “theory crisis.” A growing program argues that the field
-          has too often mistaken statistical findings in particular datasets for genuine theoretical progress, and that
-          researchers should instead identify robust phenomena and build formal models that reproduce them. But how far
-          should the pendulum swing — and what role is left for data, and for the model-fitting tools psychology has spent
-          decades developing? These readings trace the debate from its philosophical origins to the latest attempts to put
-          data and phenomena back on equal footing.
-        </p>
-      </div>
-
-      <!-- The two concepts -->
-      <div class="mt-8 grid gap-4 sm:grid-cols-2">
-        <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
-          <p class="font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">Data</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-            Concrete, noisy records from particular instruments and settings — a column of reaction times, a set of brain
-            activations, a sheet of questionnaire ratings.
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
-          <p class="font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">Phenomena</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-            The stable, repeatable regularities those records are taken to reveal — the speed–accuracy trade-off, the power
-            law of practice, the recovery of mood after a setback.
-          </p>
-        </div>
-      </div>
-
-      <!-- Anchor paper -->
-      <div class="mt-10 rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900 md:p-8">
-        <span class="inline-block font-sans text-[10px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">
-          Start here · from the TMM network
-        </span>
-        <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white md:text-2xl" style="line-height: 1.25;">
-          {dvpAnchor.title}
-        </h3>
-        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          {dvpAnchor.authors} &middot; <span class="font-serif italic">{dvpAnchor.venue}</span> &middot; {dvpAnchor.year}
-        </p>
-        <p class="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{dvpAnchor.summary}</p>
-
-        <ul class="mt-5 space-y-2.5">
-          {dvpAnchor.points.map((pt) => (
-            <li class="flex gap-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-              <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-salmon-500 dark:bg-salmon-400"></span>
-              <span>{pt}</span>
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href={dvpAnchor.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400"
-        >
-          Read paper
-          <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-        </a>
-      </div>
-
-      <!-- Related readings, grouped -->
-      <div class="mt-12 space-y-10">
-        {dvpGroups.map((group) => (
-          <div>
-            <h3 class="font-sans text-[11px] font-medium uppercase text-slate-500 dark:text-slate-500" style="letter-spacing: 0.18em;">
-              {group.label}
-            </h3>
-            <ul class="mt-3 divide-y divide-slate-200 border-t border-slate-200 dark:divide-slate-800 dark:border-slate-800">
-              {group.items.map((item) => (
-                <li>
-                  <a
-                    href={`https://doi.org/${item.doi}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="group flex items-baseline justify-between gap-5 py-4"
-                  >
-                    <div class="min-w-0">
-                      <h4 class="font-serif text-base leading-snug text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400">
-                        {item.title}
-                      </h4>
-                      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                        {item.authors} &middot; <span class="font-serif italic">{item.venue}</span>
-                      </p>
-                    </div>
-                    <span class="shrink-0 font-mono text-xs tabular-nums text-slate-400 dark:text-slate-600">{item.year}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </Section>
-
-  <!-- Discussion Collection: Illusions of Understanding -->
-  {featured && (
-    <Section background="white" id="illusions-of-understanding" class="scroll-mt-24">
-      <div class="mx-auto max-w-3xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
-        <div class="p-8 md:p-10">
-          <div class="mb-5 flex items-center gap-3">
-            <span class="inline-block h-px w-10 bg-salmon-500"></span>
-            <span class="font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.22em;">
-              {featured.type}
-            </span>
-          </div>
-          <h2 class="font-serif text-2xl font-normal text-slate-900 dark:text-white md:text-3xl" style="line-height: 1.2; letter-spacing: -0.015em;">
-            {featured.title}
-          </h2>
-          <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span class="font-serif text-sm italic text-navy-600 dark:text-navy-400">{featured.source}</span>
-            <span class="text-slate-300 dark:text-slate-600">&middot;</span>
-            <span class="font-sans text-sm text-slate-500 dark:text-slate-400">{featured.year}</span>
-          </div>
-          <p class="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-            {featured.description}
-          </p>
-          <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
-            <a href={featured.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
-              Read target article
-              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-            </a>
-            <a href={featured.collectionUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
-              Browse commentaries
-              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-            </a>
-          </div>
-          {memberPapers.length > 0 && (
-            <div class="mt-8 border-t border-slate-200 pt-6 dark:border-slate-700">
-              <p class="mb-4 font-sans text-[10px] font-semibold uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.2em;">
-                TMM Member Contributions
-              </p>
-              <div class="space-y-4">
-                {memberPapers.map((paper) => (
-                  <a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener noreferrer" class="group block">
-                    <p class="font-serif text-[15px] text-slate-800 transition-colors group-hover:text-navy-600 dark:text-slate-200 dark:group-hover:text-navy-400" style="line-height: 1.4;">
-                      {paper.title}
-                    </p>
-                    <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                      {paper.authors}
-                      <span class="mx-1 text-slate-300 dark:text-slate-600">&middot;</span>
-                      <span class="font-serif italic">{paper.journal}</span>
-                      <span class="mx-1 text-slate-300 dark:text-slate-600">&middot;</span>
-                      {paper.year}
-                    </p>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </Section>
-  )}
-
-  <!-- All Resources Grid — renders only when there are non-featured resources -->
-  {otherResources.length > 0 && (
+  <!-- Individual resources (filterable grid) — renders when populated -->
+  {resources.length > 0 && (
     <Section background="gray">
       <div class="mx-auto max-w-6xl">
         <ChapterHeader title="All Resources" />
-        <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {otherResources.map((resource) => (
+
+        <!-- Type filter -->
+        <div class="mt-8 flex flex-wrap gap-2" id="resource-filter">
+          <button data-filter="all" class="resource-chip is-active">All</button>
+          {[...new Set(resources.map((r) => r.type))].map((t) => (
+            <button data-filter={t} class="resource-chip">{t}</button>
+          ))}
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" id="resource-grid">
+          {resources.map((resource) => (
             <a
               href={resource.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group block border border-slate-200 dark:border-slate-700 rounded-xl p-6 bg-white dark:bg-slate-900 transition-all duration-200 hover:border-navy-300 dark:hover:border-navy-600 hover:shadow-md hover:-translate-y-0.5"
+              data-type={resource.type}
+              class="resource-item group block rounded-xl border border-slate-200 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-navy-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-navy-600"
             >
-              <span class="inline-block font-sans text-[10px] font-medium uppercase text-salmon-600 dark:text-salmon-400 mb-3" style="letter-spacing: 0.2em;">
+              <span class="mb-3 inline-block font-sans text-[10px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.2em;">
                 {resource.type}
               </span>
-              <h3 class="font-serif text-lg text-slate-900 dark:text-white group-hover:text-navy-600 dark:group-hover:text-navy-400 transition-colors" style="line-height: 1.3;">
+              <h3 class="font-serif text-lg text-slate-900 transition-colors group-hover:text-navy-600 dark:text-white dark:group-hover:text-navy-400" style="line-height: 1.3;">
                 {resource.title}
               </h3>
               <div class="mt-2 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
@@ -372,7 +102,7 @@ const collections = [
                 <span class="text-slate-300 dark:text-slate-600">&middot;</span>
                 <span>{resource.year}</span>
               </div>
-              <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-3">
+              <p class="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-3 dark:text-slate-400">
                 {resource.description}
               </p>
             </a>
@@ -384,7 +114,7 @@ const collections = [
 
   <!-- Contribute CTA -->
   <Section background="gray">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <p class="text-slate-600 dark:text-slate-400">
         Have a tutorial, tool, or paper to share? We welcome contributions from the TMM community.
       </p>
@@ -399,7 +129,7 @@ const collections = [
     id="resource-modal"
     class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto bg-black/50 p-4"
   >
-    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900 my-8">
+    <div class="relative my-8 w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900">
       <button
         id="close-modal-btn"
         class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
@@ -409,9 +139,7 @@ const collections = [
         </svg>
       </button>
 
-      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
-        Submit a Resource
-      </h2>
+      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">Submit a Resource</h2>
       <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
         Share a resource with the TMM community.
       </p>
@@ -466,21 +194,13 @@ const collections = [
             type="file"
             id="file"
             name="attachment"
-            class="block w-full text-sm text-slate-600 dark:text-slate-400
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-lg file:border-0
-              file:text-sm file:font-semibold
-              file:bg-navy-100 file:text-navy-700
-              hover:file:bg-navy-200
-              dark:file:bg-navy-900/50 dark:file:text-navy-300"
+            class="block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-navy-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-navy-700 hover:file:bg-navy-200 dark:text-slate-400 dark:file:bg-navy-900/50 dark:file:text-navy-300"
           />
           <p class="mt-1 text-xs text-slate-500">Max 10MB. PDF, DOC, PPT, or ZIP files.</p>
         </div>
 
         <div class="pt-2">
-          <button type="submit" class="btn-primary w-full">
-            Submit Resource
-          </button>
+          <button type="submit" class="btn-primary w-full">Submit Resource</button>
         </div>
       </form>
     </div>
@@ -488,30 +208,39 @@ const collections = [
 </PageLayout>
 
 <script>
-  const modal = document.getElementById('resource-modal');
-  const openBtn = document.getElementById('open-modal-btn');
-  const closeBtn = document.getElementById('close-modal-btn');
+  // Submit-a-resource modal
+  const modal = document.getElementById("resource-modal");
+  const openBtn = document.getElementById("open-modal-btn");
+  const closeBtn = document.getElementById("close-modal-btn");
 
   function openModal() {
-    modal?.classList.remove('hidden');
-    modal?.classList.add('flex');
-    document.body.style.overflow = 'hidden';
+    modal?.classList.remove("hidden");
+    modal?.classList.add("flex");
+    document.body.style.overflow = "hidden";
   }
-
   function closeModal() {
-    modal?.classList.add('hidden');
-    modal?.classList.remove('flex');
-    document.body.style.overflow = '';
+    modal?.classList.add("hidden");
+    modal?.classList.remove("flex");
+    document.body.style.overflow = "";
   }
-
-  openBtn?.addEventListener('click', openModal);
-  closeBtn?.addEventListener('click', closeModal);
-
-  modal?.addEventListener('click', (e) => {
+  openBtn?.addEventListener("click", openModal);
+  closeBtn?.addEventListener("click", closeModal);
+  modal?.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal?.classList.contains("hidden")) closeModal();
+  });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) closeModal();
+  // Resource type filter (for the individual-resources grid)
+  const filterBar = document.getElementById("resource-filter");
+  filterBar?.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-filter]");
+    if (!btn) return;
+    const want = btn.getAttribute("data-filter");
+    filterBar.querySelectorAll("[data-filter]").forEach((b) => b.classList.toggle("is-active", b === btn));
+    document.querySelectorAll<HTMLElement>("#resource-grid .resource-item").forEach((item) => {
+      item.style.display = want === "all" || item.getAttribute("data-type") === want ? "" : "none";
+    });
   });
 </script>
