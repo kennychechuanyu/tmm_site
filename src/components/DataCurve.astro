@@ -1,0 +1,150 @@
+---
+/**
+ * DataCurve — TMM's signature hero animation. Scattered data points resample
+ * around a slowly morphing smooth curve, with faint residual lines connecting
+ * each observation to the curve. It pictures the network's premise: noisy data
+ * sampled around an underlying model / phenomenon.
+ *
+ * Theme-aware (light + dark), masked to the lower hero so the wordmark stays
+ * crisp, pauses offscreen, and disables under prefers-reduced-motion.
+ */
+interface Props {
+  class?: string;
+}
+const { class: extraClass = "" } = Astro.props;
+---
+
+<canvas
+  data-datacurve
+  class:list={["pointer-events-none absolute inset-0 h-full w-full", extraClass]}
+  style="-webkit-mask-image: linear-gradient(to bottom, transparent 6%, #000 46%); mask-image: linear-gradient(to bottom, transparent 6%, #000 46%);"
+  aria-hidden="true"></canvas>
+
+<script>
+  function initDataCurve() {
+    const canvases = document.querySelectorAll<HTMLCanvasElement>("canvas[data-datacurve]");
+    if (!canvases.length) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    canvases.forEach((canvas) => {
+      if (canvas.dataset.init === "1") return;
+      canvas.dataset.init = "1";
+      const ctx = canvas.getContext("2d");
+      const parent = canvas.parentElement as HTMLElement | null;
+      if (!ctx || !parent) return;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let w = 0, h = 0, t = 0, raf = 0, running = false;
+      let pts: { xf: number; noise: number; target: number; r: number }[] = [];
+
+      function palette() {
+        const dark = document.documentElement.classList.contains("dark");
+        return dark
+          ? { curve: "250, 128, 114", point: "203, 213, 225", resid: "148, 163, 184" }
+          : { curve: "240, 106, 90", point: "71, 85, 105", resid: "100, 116, 139" };
+      }
+
+      // Smooth, slowly morphing function across the width (fraction of height).
+      function curveY(xf: number, time: number) {
+        return (
+          0.5 +
+          0.17 * Math.sin(xf * 3.4 + time * 0.6) +
+          0.07 * Math.sin(xf * 7.1 - time * 0.4 + 1.3)
+        );
+      }
+      // Place the curve in the lower-middle band of the hero.
+      const plot = (xf: number) => curveY(xf, t) * h * 0.5 + h * 0.42;
+
+      function build() {
+        const n = Math.min(64, Math.max(26, Math.round(w / 24)));
+        pts = Array.from({ length: n }, (_, i) => ({
+          xf: (i + 0.5) / n,
+          noise: Math.random() - 0.5,
+          target: Math.random() - 0.5,
+          r: 1.3 + Math.random() * 1.5,
+        }));
+      }
+
+      function resize() {
+        w = parent!.clientWidth;
+        h = parent!.clientHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+        build();
+      }
+
+      function draw() {
+        const col = palette();
+        const amp = h * 0.3;
+        ctx!.clearRect(0, 0, w, h);
+
+        // The curve (model / phenomenon)
+        ctx!.beginPath();
+        for (let i = 0; i <= 140; i++) {
+          const xf = i / 140;
+          const x = xf * w;
+          const y = plot(xf);
+          i ? ctx!.lineTo(x, y) : ctx!.moveTo(x, y);
+        }
+        ctx!.strokeStyle = `rgba(${col.curve}, 0.55)`;
+        ctx!.lineWidth = 1.6;
+        ctx!.stroke();
+
+        // Data points + residual lines
+        for (const p of pts) {
+          if (running) {
+            p.noise += (p.target - p.noise) * 0.02;
+            if (Math.random() < 0.004) p.target = Math.random() - 0.5;
+          }
+          const x = p.xf * w;
+          const cy = plot(p.xf);
+          const y = cy + p.noise * amp * 0.55;
+
+          ctx!.beginPath();
+          ctx!.moveTo(x, cy);
+          ctx!.lineTo(x, y);
+          ctx!.strokeStyle = `rgba(${col.resid}, 0.1)`;
+          ctx!.lineWidth = 1;
+          ctx!.stroke();
+
+          ctx!.beginPath();
+          ctx!.arc(x, y, p.r, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${col.point}, 0.32)`;
+          ctx!.fill();
+        }
+      }
+
+      function loop() {
+        t += 0.006;
+        draw();
+        raf = requestAnimationFrame(loop);
+      }
+      function start() {
+        if (!running && !reduce) {
+          running = true;
+          loop();
+        }
+      }
+      function stop() {
+        running = false;
+        cancelAnimationFrame(raf);
+      }
+
+      const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0 });
+      io.observe(canvas);
+
+      let rt: number;
+      window.addEventListener("resize", () => {
+        clearTimeout(rt);
+        rt = window.setTimeout(resize, 150);
+      });
+
+      resize();
+      draw(); // initial frame (also the static frame under reduced motion)
+    });
+  }
+
+  initDataCurve();
+  document.addEventListener("astro:after-swap", initDataCurve);
+</script>

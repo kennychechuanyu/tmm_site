@@ -1,4 +1,6 @@
 ---
+import DataCurve from "./DataCurve.astro";
+
 interface Props {
   subtitle: string;
   description: string;
@@ -19,9 +21,12 @@ const { subtitle, description, primaryCTA, secondaryCTA } = Astro.props;
   <!-- Paper texture: subtle dotted grid -->
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.045] dark:text-slate-100 dark:opacity-[0.08]"
+    class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.04] dark:text-slate-100 dark:opacity-[0.07]"
     style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
   ></div>
+
+  <!-- Signature animation: data resampling around a model curve -->
+  <DataCurve class="opacity-90" />
 
   <div class="container-wide relative">
     <div class="mx-auto max-w-6xl">
