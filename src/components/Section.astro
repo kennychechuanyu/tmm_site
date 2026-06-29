@@ -10,6 +10,7 @@ interface Props {
   background?: "white" | "gray" | "navy";
   compactTop?: boolean;
   id?: string;
+  class?: string;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   background = "white",
   compactTop = false,
   id,
+  class: className,
 } = Astro.props;
 
 const bgClasses = {
@@ -30,7 +32,7 @@ const bgClasses = {
 };
 ---
 
-<section id={id} class:list={["section", compactTop && "!pt-8 md:!pt-10", bgClasses[background]]}>
+<section id={id} class:list={["section", compactTop && "!pt-8 md:!pt-10", bgClasses[background], className]}>
   <div class="container-wide">
     {title && (
       <div class="mb-12 md:mb-16">
