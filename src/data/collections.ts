@@ -17,6 +17,53 @@ export interface ReadingGroup {
   items: Reading[];
 }
 
+// ── APA citation generation ──────────────────────────────────────────
+// Builds an APA-7 reference from the metadata we store. Author strings are
+// already kept in APA form (e.g. "Bogen, J., & Woodward, J."). Volume/issue/
+// pages are omitted because we don't track them; this is valid for advance /
+// online-first articles, which is how most of these are cited anyway.
+export interface Citable {
+  authors: string;
+  year: number | string;
+  title: string;
+  venue: string;
+  doi?: string;
+  url?: string;
+}
+
+function citationLink(r: Citable): string {
+  if (r.doi) return `https://doi.org/${r.doi}`;
+  return r.url ?? "";
+}
+
+// Add a closing period unless the text already ends with sentence punctuation.
+function endStop(s: string): string {
+  const t = s.trim();
+  return /[.?!]$/.test(t) ? t : t + ".";
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/** Plain-text APA reference, for copying to the clipboard. */
+export function apaCitation(r: Citable): string {
+  const ref = `${endStop(r.authors)} (${r.year}). ${endStop(r.title)} ${endStop(r.venue)}`;
+  const link = citationLink(r);
+  return link ? `${ref} ${link}` : ref;
+}
+
+/** Same reference as HTML, with the venue italicised and the DOI linked. */
+export function apaCitationHtml(r: Citable): string {
+  const venue = escapeHtml(r.venue.trim());
+  const venueStop = /[.?!]$/.test(r.venue.trim()) ? "" : "."; // period stays roman
+  const ref = `${endStop(escapeHtml(r.authors))} (${r.year}). ${endStop(escapeHtml(r.title))} <em>${venue}</em>${venueStop}`;
+  const link = citationLink(r);
+  return link
+    ? `${ref} <a href="${link}" target="_blank" rel="noopener noreferrer">${escapeHtml(link)}</a>`
+    : ref;
+}
+
 // ── Data versus Phenomena (reading collection) ───────────────────────
 export const dvp = {
   slug: "data-versus-phenomena",

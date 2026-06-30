@@ -1,7 +1,8 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
-import { illusions } from "../../data/collections";
+import Cite from "../../components/Cite.astro";
+import { illusions, apaCitation, apaCitationHtml } from "../../data/collections";
 ---
 
 <PageLayout
@@ -49,18 +50,21 @@ import { illusions } from "../../data/collections";
           </p>
           <div class="space-y-4">
             {illusions.memberPapers.map((paper) => (
-              <a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener noreferrer" class="group block">
-                <p class="font-serif text-[15px] text-slate-800 transition-colors group-hover:text-navy-600 dark:text-slate-200 dark:group-hover:text-navy-400" style="line-height: 1.4;">
-                  {paper.title}
-                </p>
-                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                  {paper.authors}
-                  <span class="mx-1 text-slate-300 dark:text-slate-600">&middot;</span>
-                  <span class="font-serif italic">{paper.venue}</span>
-                  <span class="mx-1 text-slate-300 dark:text-slate-600">&middot;</span>
-                  {paper.year}
-                </p>
-              </a>
+              <div>
+                <a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener noreferrer" class="group block">
+                  <p class="font-serif text-[15px] text-slate-800 transition-colors group-hover:text-navy-600 dark:text-slate-200 dark:group-hover:text-navy-400" style="line-height: 1.4;">
+                    {paper.title}
+                  </p>
+                  <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                    {paper.authors}
+                    <span class="mx-1 text-slate-300 dark:text-slate-600">&middot;</span>
+                    <span class="font-serif italic">{paper.venue}</span>
+                    <span class="mx-1 text-slate-300 dark:text-slate-600">&middot;</span>
+                    {paper.year}
+                  </p>
+                </a>
+                <Cite citation={apaCitation(paper)} citationHtml={apaCitationHtml(paper)} class="mt-2" />
+              </div>
             ))}
           </div>
         </div>
