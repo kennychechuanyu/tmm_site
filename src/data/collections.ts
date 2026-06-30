@@ -11,6 +11,45 @@ export interface ReadingGroup {
   items: Reading[];
 }
 
+export interface Citable {
+  authors: string;
+  year: number | string;
+  title: string;
+  venue: string;
+  doi?: string;
+  url?: string;
+}
+
+function citationLink(r: Citable): string {
+  if (r.doi) return `https://doi.org/${r.doi}`;
+  return r.url ?? "";
+}
+
+function endStop(s: string): string {
+  const t = s.trim();
+  return /[.?!]$/.test(t) ? t : t + ".";
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+export function apaCitation(r: Citable): string {
+  const ref = `${endStop(r.authors)} (${r.year}). ${endStop(r.title)} ${endStop(r.venue)}`;
+  const link = citationLink(r);
+  return link ? `${ref} ${link}` : ref;
+}
+
+export function apaCitationHtml(r: Citable): string {
+  const venue = escapeHtml(r.venue.trim());
+  const venueStop = /[.?!]$/.test(r.venue.trim()) ? "" : ".";
+  const ref = `${endStop(escapeHtml(r.authors))} (${r.year}). ${endStop(escapeHtml(r.title))} <em>${venue}</em>${venueStop}`;
+  const link = citationLink(r);
+  return link
+    ? `${ref} <a href="${link}" target="_blank" rel="noopener noreferrer">${escapeHtml(link)}</a>`
+    : ref;
+}
+
 export const dvp = {
   slug: "data-versus-phenomena",
   anchor: {
