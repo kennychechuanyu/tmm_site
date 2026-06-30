@@ -12,3 +12,5 @@ package-lock.json
 # OS / local artifacts
 .DS_Store
 *.pdf
+# ...but keep hosted papers offered for download
+!public/papers/*.pdf

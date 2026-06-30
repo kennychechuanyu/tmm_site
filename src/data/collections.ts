@@ -27,6 +27,7 @@ export const dvp = {
       "No Need to Be Indirect: On the Role of Data in the Validation of Theoretical Models",
     venue: "Theory & Psychology",
     url: "https://doi.org/10.1177/09593543261450876",
+    pdf: "/papers/no-need-to-be-indirect.pdf",
     summary:
       "Vanhasbroeck, Yu, and Ariens challenge the increasingly popular view that formal psychological theories should be validated against phenomena alone, and make the case for bringing data back into theory testing. They show that neither phenomena nor data are a sufficient basis on their own, and propose an integrative approach in which the two play complementary roles.",
     points: [
