@@ -178,7 +178,7 @@ const earlyCareerMembers = [
       <p class="mb-10 font-sans text-sm text-slate-400 dark:text-slate-500">
         Each group is ordered alphabetically by last name.
       </p>
-      <ChapterHeader title="Coordinating Team" metaLabel={`${coordinatingCommittee.length} members`} />
+      <ChapterHeader title="Coordinating Team" />
 
       <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {coordinatingCommittee.sort(sortByName).map((member) => (
@@ -200,7 +200,7 @@ const earlyCareerMembers = [
   <!-- Network Members -->
   <Section background="gray">
     <div class="mx-auto max-w-6xl">
-      <ChapterHeader title="Network Members" metaLabel={`${networkMembers.length} members`} />
+      <ChapterHeader title="Network Members" />
 
       <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {networkMembers.sort(sortByName).map((member) => (
@@ -222,7 +222,7 @@ const earlyCareerMembers = [
   <!-- Early Career Members -->
   <Section background="white">
     <div class="mx-auto max-w-6xl">
-      <ChapterHeader title="Early Career Members" metaLabel={`${earlyCareerMembers.length} members`} />
+      <ChapterHeader title="Early Career Members" />
 
       <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
         {earlyCareerMembers.sort(sortByName).map((member) => (
