@@ -4,6 +4,10 @@
  * the grid parts below the clicked card's row and a full-width editorial
  * panel unfolds in-flow (no overlay). Used on the People and Event pages.
  *
+ * The portrait exists in ONE place at a time: on open it visually travels
+ * from the card into the panel (FLIP clone), leaving a quiet empty frame
+ * with the person's initials on the card; on close it flies back.
+ *
  * Each card ships its panel content in a <template>; a single shared panel
  * element per grid is filled from it and inserted after the clicked row.
  * Deep-linkable via #<slug>. Esc, ×, or a second click closes it.
@@ -50,15 +54,22 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
   <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></span>
   <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full group-aria-expanded:w-full dark:bg-salmon-400"></span>
 
-  <!-- Portrait: frameless 4:5 on a soft shadow; whitespace does the framing -->
-  <div class="aspect-[4/5] w-40 overflow-hidden rounded-xl bg-slate-100 shadow-[0_14px_36px_-14px_rgba(15,23,42,0.3)] transition-shadow duration-500 group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.4)] dark:bg-slate-800 dark:shadow-[0_14px_36px_-14px_rgba(0,0,0,0.65)] dark:group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.3)]">
+  <!-- Portrait: frameless 4:5. While the profile is open the photo moves into
+       the panel and this becomes a quiet empty frame with the initials. -->
+  <div
+    data-card-portrait
+    class="relative aspect-[4/5] w-40 overflow-hidden rounded-xl bg-slate-100 shadow-[0_14px_36px_-14px_rgba(15,23,42,0.3)] transition-all duration-500 group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.4)] group-aria-expanded:shadow-none group-aria-expanded:ring-1 group-aria-expanded:ring-slate-200 dark:bg-slate-800 dark:shadow-[0_14px_36px_-14px_rgba(0,0,0,0.65)] dark:group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.3)] dark:group-aria-expanded:ring-slate-700"
+  >
     {image ? (
-      <img
-        src={image}
-        alt={name}
-        loading="lazy"
-        class="h-full w-full object-cover object-[center_30%] transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-      />
+      <Fragment>
+        <img
+          src={image}
+          alt={name}
+          loading="lazy"
+          class="h-full w-full object-cover object-[center_30%] transition-[transform,opacity] duration-500 ease-out group-hover:scale-[1.04] group-aria-expanded:opacity-0"
+        />
+        <span aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center font-serif text-2xl text-slate-300 opacity-0 transition-opacity duration-500 group-aria-expanded:opacity-100 dark:text-slate-600">{initials}</span>
+      </Fragment>
     ) : (
       <div class="flex h-full w-full items-center justify-center">
         <span class="font-serif text-2xl text-slate-300 dark:text-slate-600">{initials}</span>
@@ -90,21 +101,36 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
       </svg>
     </button>
 
-    <!-- Pure reading layout: identity rail left, bio column right.
-         The portrait lives only on the grid card above. -->
-    <div class="grid items-start gap-6 md:grid-cols-[15rem_1fr] md:gap-14">
-      <!-- Identity rail -->
-      <div class="min-w-0 md:border-r md:border-slate-200 md:pr-8 dark:md:border-slate-800">
-        <h3 class="pr-12 font-serif text-xl leading-tight text-slate-900 dark:text-white md:pr-0 md:text-2xl">{name}</h3>
+    <div class="grid items-start gap-8 md:grid-cols-[auto_1fr] md:gap-12">
+      <!-- The portrait's home while the profile is open -->
+      <div data-panel-portrait class="aspect-[4/5] w-44 overflow-hidden rounded-xl bg-slate-100 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.35)] dark:bg-slate-800 dark:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)] md:w-56">
+        {image ? (
+          <img src={image} alt={name} loading="lazy" class="h-full w-full object-cover object-[center_30%]" />
+        ) : (
+          <div class="flex h-full w-full items-center justify-center">
+            <span class="font-serif text-3xl text-slate-300 dark:text-slate-600">{initials}</span>
+          </div>
+        )}
+      </div>
+
+      <!-- Text column -->
+      <div class="min-w-0">
+        <h3 class="pr-12 font-serif text-2xl leading-tight text-slate-900 dark:text-white md:text-3xl">{name}</h3>
         <span aria-hidden="true" class="mt-3 block h-px w-8 bg-salmon-400/70"></span>
         {institution && <p class="mt-3 text-sm font-medium text-navy-600 dark:text-navy-400">{institution}</p>}
-        {role && <p class="mt-1 font-serif text-sm italic leading-snug text-slate-500 dark:text-slate-400">{role}</p>}
+        {role && <p class="mt-1 font-serif text-sm italic text-slate-500 dark:text-slate-400">{role}</p>}
+
+        {bio ? (
+          <p class="mt-6 max-w-[65ch] text-pretty font-sans text-[15px] leading-[1.85] text-slate-600 dark:text-slate-300 md:text-base">{bio}</p>
+        ) : (
+          <p class="mt-6 font-sans text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">Profile details coming soon.</p>
+        )}
 
         {(email || website || website2) && (
-          <div class="mt-6 flex flex-col items-start gap-2.5">
+          <div class="mt-7 flex max-w-[65ch] flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-200 pt-5 dark:border-slate-700">
             {email && (
-              <a href={`mailto:${email}`} class="inline-flex items-center gap-2 break-all font-mono text-[11px] text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
-                <svg class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              <a href={`mailto:${email}`} class="inline-flex items-center gap-2 font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                 {email}
               </a>
             )}
@@ -123,13 +149,6 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
           </div>
         )}
       </div>
-
-      <!-- Bio: one comfortable reading column -->
-      {bio ? (
-        <p class="max-w-[70ch] text-pretty font-sans text-[15px] leading-[1.85] text-slate-600 dark:text-slate-300 md:text-base">{bio}</p>
-      ) : (
-        <p class="font-sans text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">Profile details coming soon.</p>
-      )}
     </div>
   </div>
 </template>
@@ -137,13 +156,15 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
 
 <script>
   // Inline profile panels: one shared panel per grid, inserted after the
-  // clicked card's row so the grid visibly "parts" to reveal the bio.
+  // clicked card's row so the grid visibly "parts" to reveal the bio. The
+  // portrait FLIP-flies between card and panel so it only ever shows once.
   if (!(window as any).__tmmProfilePanels) {
     (window as any).__tmmProfilePanels = true;
 
     type PanelState = { panel: HTMLElement; openId: string | null; opener: HTMLElement | null };
     const state = new WeakMap<HTMLElement, PanelState>();
     let activeGrid: HTMLElement | null = null;
+    let flying: HTMLElement | null = null;
     const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function ensure(grid: HTMLElement): PanelState {
@@ -164,6 +185,58 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
       const top = cell.offsetTop;
       const rowLast = cells.filter((c) => c.offsetTop === top).pop() ?? cell;
       grid.insertBefore(panel, rowLast.nextSibling);
+    }
+
+    // Fly a clone of `fromImg` to `toImg` in document coordinates; `toImg` is
+    // revealed when the clone lands. Both ends are 4:5 crops, so scale is uniform.
+    function flyPortrait(fromImg: HTMLImageElement | null, toImg: HTMLImageElement | null) {
+      if (flying) {
+        flying.remove();
+        flying = null;
+      }
+      if (!fromImg || !toImg) return;
+      if (reduce()) return;
+      const a = fromImg.getBoundingClientRect();
+      const b = toImg.getBoundingClientRect();
+      if (!a.width || !b.width) return;
+
+      const clone = fromImg.cloneNode(true) as HTMLElement;
+      clone.removeAttribute("loading");
+      Object.assign(clone.style, {
+        position: "absolute",
+        left: `${a.left + window.scrollX}px`,
+        top: `${a.top + window.scrollY}px`,
+        width: `${a.width}px`,
+        height: `${a.height}px`,
+        margin: "0",
+        zIndex: "40",
+        borderRadius: "0.75rem",
+        objectFit: "cover",
+        objectPosition: "center 30%",
+        opacity: "1",
+        transform: "none",
+        transformOrigin: "top left",
+        transition: "none",
+        pointerEvents: "none",
+      });
+      document.body.appendChild(clone);
+      flying = clone;
+      toImg.style.opacity = "0";
+
+      const anim = clone.animate(
+        [
+          { transform: "translate(0, 0) scale(1)" },
+          { transform: `translate(${b.left - a.left}px, ${b.top - a.top}px) scale(${b.width / a.width})` },
+        ],
+        { duration: 520, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
+      );
+      const land = () => {
+        toImg.style.opacity = "";
+        if (flying === clone) flying = null;
+        clone.remove();
+      };
+      anim.onfinish = land;
+      anim.oncancel = land;
     }
 
     function open(opener: HTMLElement) {
@@ -217,6 +290,12 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
         s.panel.addEventListener("transitionend", onEnd);
       }
 
+      // The portrait leaves its frame and lands in the panel.
+      flyPortrait(
+        cell.querySelector<HTMLImageElement>("[data-card-portrait] img"),
+        s.panel.querySelector<HTMLImageElement>("[data-panel-portrait] img")
+      );
+
       requestAnimationFrame(() => {
         s.panel.focus({ preventScroll: true });
         s.panel.scrollIntoView({ behavior: reduce() ? "auto" : "smooth", block: "nearest" });
@@ -227,11 +306,20 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
       const s = state.get(grid);
       if (!s || !s.openId) return;
       const opener = s.opener;
+      const cell = opener?.closest<HTMLElement>(".person-cell") ?? null;
       grid.querySelectorAll("[data-profile-open]").forEach((b) => b.setAttribute("aria-expanded", "false"));
       s.openId = null;
       s.opener = null;
       if (activeGrid === grid) activeGrid = null;
       if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+
+      // Fly the portrait back into its frame on the card.
+      if (!instant && cell) {
+        const panelImg = s.panel.querySelector<HTMLImageElement>("[data-panel-portrait] img");
+        const cardImg = cell.querySelector<HTMLImageElement>("[data-card-portrait] img");
+        flyPortrait(panelImg, cardImg);
+        if (panelImg) panelImg.style.opacity = "0";
+      }
 
       const finish = () => {
         s.panel.remove();
