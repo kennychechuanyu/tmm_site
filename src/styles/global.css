@@ -338,24 +338,32 @@
 }
 
 /* ========================================
-   Profile modal (native <dialog>)
+   Profile panel (inline expanding profile)
    ======================================== */
-.profile-modal {
-  margin: auto;                 /* center in viewport */
+.profile-panel {
+  overflow: hidden;
+  outline: none;
+  transition: height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.profile-modal::backdrop {
-  background-color: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(5px);
+
+/* Staggered entrance for people grids (per-card delay set inline) */
+.stagger-grid > .person-cell {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.dark .profile-modal::backdrop {
-  background-color: rgba(2, 6, 23, 0.72);
+.stagger-grid.is-visible > .person-cell {
+  opacity: 1;
+  transform: translateY(0);
 }
-@keyframes profilePop {
-  from { opacity: 0; transform: translateY(16px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-.profile-modal[open] {
-  animation: profilePop 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+@media (prefers-reduced-motion: reduce) {
+  .stagger-grid > .person-cell {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Reduced motion */

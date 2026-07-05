@@ -180,8 +180,8 @@ const earlyCareerMembers = [
       </p>
       <ChapterHeader title="Coordinating Team" />
 
-      <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
-        {coordinatingCommittee.sort(sortByName).map((member) => (
+      <div class="stagger-grid mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+        {coordinatingCommittee.sort(sortByName).map((member, i) => (
           <PersonCard
             name={member.name}
             institution={member.institution}
@@ -191,6 +191,7 @@ const earlyCareerMembers = [
             website={member.website}
             website2={member.website2}
             bio={member.bio}
+            stagger={Math.min(i * 70, 560)}
           />
         ))}
       </div>
@@ -202,8 +203,8 @@ const earlyCareerMembers = [
     <div class="mx-auto max-w-6xl">
       <ChapterHeader title="Network Members" />
 
-      <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
-        {networkMembers.sort(sortByName).map((member) => (
+      <div class="stagger-grid mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+        {networkMembers.sort(sortByName).map((member, i) => (
           <PersonCard
             name={member.name}
             institution={member.institution}
@@ -213,6 +214,7 @@ const earlyCareerMembers = [
             website={member.website}
             website2={(member as any).website2}
             bio={member.bio}
+            stagger={Math.min(i * 70, 560)}
           />
         ))}
       </div>
@@ -224,8 +226,8 @@ const earlyCareerMembers = [
     <div class="mx-auto max-w-6xl">
       <ChapterHeader title="Early Career Members" />
 
-      <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
-        {earlyCareerMembers.sort(sortByName).map((member) => (
+      <div class="stagger-grid mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+        {earlyCareerMembers.sort(sortByName).map((member, i) => (
           <PersonCard
             name={member.name}
             institution={member.institution}
@@ -234,6 +236,7 @@ const earlyCareerMembers = [
             email={member.email}
             website={member.website}
             bio={member.bio}
+            stagger={Math.min(i * 70, 560)}
           />
         ))}
       </div>
