@@ -90,36 +90,21 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
       </svg>
     </button>
 
-    <div class="grid items-start gap-8 md:grid-cols-[auto_1fr] md:gap-12">
-      <!-- Large portrait -->
-      <div class="aspect-[4/5] w-44 overflow-hidden rounded-xl bg-slate-100 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.35)] dark:bg-slate-800 dark:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)] md:w-56">
-        {image ? (
-          <img src={image} alt={name} loading="lazy" class="h-full w-full object-cover object-[center_30%]" />
-        ) : (
-          <div class="flex h-full w-full items-center justify-center">
-            <span class="font-serif text-3xl text-slate-300 dark:text-slate-600">{initials}</span>
-          </div>
-        )}
-      </div>
-
-      <!-- Text column -->
-      <div class="min-w-0">
-        <h3 class="pr-12 font-serif text-2xl leading-tight text-slate-900 dark:text-white md:text-3xl">{name}</h3>
+    <!-- Pure reading layout: identity rail left, bio column right.
+         The portrait lives only on the grid card above. -->
+    <div class="grid items-start gap-6 md:grid-cols-[15rem_1fr] md:gap-14">
+      <!-- Identity rail -->
+      <div class="min-w-0 md:border-r md:border-slate-200 md:pr-8 dark:md:border-slate-800">
+        <h3 class="pr-12 font-serif text-xl leading-tight text-slate-900 dark:text-white md:pr-0 md:text-2xl">{name}</h3>
         <span aria-hidden="true" class="mt-3 block h-px w-8 bg-salmon-400/70"></span>
         {institution && <p class="mt-3 text-sm font-medium text-navy-600 dark:text-navy-400">{institution}</p>}
-        {role && <p class="mt-1 font-serif text-sm italic text-slate-500 dark:text-slate-400">{role}</p>}
-
-        {bio ? (
-          <p class="mt-6 max-w-[65ch] text-pretty font-sans text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">{bio}</p>
-        ) : (
-          <p class="mt-6 font-sans text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">Profile details coming soon.</p>
-        )}
+        {role && <p class="mt-1 font-serif text-sm italic leading-snug text-slate-500 dark:text-slate-400">{role}</p>}
 
         {(email || website || website2) && (
-          <div class="mt-7 flex max-w-[65ch] flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-200 pt-5 dark:border-slate-700">
+          <div class="mt-6 flex flex-col items-start gap-2.5">
             {email && (
-              <a href={`mailto:${email}`} class="inline-flex items-center gap-2 font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
-                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              <a href={`mailto:${email}`} class="inline-flex items-center gap-2 break-all font-mono text-[11px] text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
+                <svg class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                 {email}
               </a>
             )}
@@ -138,6 +123,13 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
           </div>
         )}
       </div>
+
+      <!-- Bio: one comfortable reading column -->
+      {bio ? (
+        <p class="max-w-[70ch] text-pretty font-sans text-[15px] leading-[1.85] text-slate-600 dark:text-slate-300 md:text-base">{bio}</p>
+      ) : (
+        <p class="font-sans text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">Profile details coming soon.</p>
+      )}
     </div>
   </div>
 </template>
