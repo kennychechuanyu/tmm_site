@@ -114,8 +114,6 @@ export const dvp = {
   ] as ReadingGroup[],
 };
 
-export const dvpCount = 1 + dvp.groups.reduce((n, g) => n + g.items.length, 0);
-
 // ── Illusions of Understanding (discussion collection) ───────────────
 export const illusions = {
   slug: "illusions-of-understanding",
@@ -137,7 +135,6 @@ export const collections = [
     title: "Data versus Phenomena",
     blurb:
       "When we test a theory, do we judge it by the data it fits or the phenomena it reproduces? Why relying on either one alone can mislead, and why theory testing needs both.",
-    meta: `${dvpCount} readings`,
   },
   {
     slug: illusions.slug,
@@ -145,6 +142,5 @@ export const collections = [
     title: illusions.title,
     blurb:
       "Shiffrin, Stigler & Keil on the predictable illusions scientists operate under when interpreting data and building theories, with cross-disciplinary commentaries.",
-    meta: "Target article + commentaries",
   },
 ];
