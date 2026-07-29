@@ -160,10 +160,6 @@ const networkMembers = [
     website2: "https://www.m-sengewald.de/",
     bio: "Marie-Ann Sengewald is an assistant professor at Friedrich-Alexander-Universität (FAU) Erlangen-Nürnberg and a research associate at the Leibniz Institute for Educational Trajectories (LIfBi). Her research advances quantitative methods in psychometrics, causal inference, and metascience. She is particularly interested in developing methodological approaches that help researchers strengthen scientific evidence by ruling out alternative explanations and addressing challenges such as measurement error, missing data, and other sources of uncertainty that can affect the quality of research findings.",
   },
-];
-
-// Early Career Members
-const earlyCareerMembers = [
   {
     name: "Yiou He",
     role: "Department of Psychology",
@@ -230,28 +226,6 @@ const earlyCareerMembers = [
             email={member.email}
             website={member.website}
             website2={(member as any).website2}
-            bio={member.bio}
-            stagger={Math.min(i * 70, 560)}
-          />
-        ))}
-      </div>
-    </div>
-  </Section>
-
-  <!-- Early Career Members -->
-  <Section background="white">
-    <div class="mx-auto max-w-6xl">
-      <ChapterHeader title="Early Career Members" />
-
-      <div class="stagger-grid mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
-        {earlyCareerMembers.sort(sortByName).map((member, i) => (
-          <PersonCard
-            name={member.name}
-            institution={member.institution}
-            role={member.role}
-            image={member.image}
-            email={member.email}
-            website={member.website}
             bio={member.bio}
             stagger={Math.min(i * 70, 560)}
           />
