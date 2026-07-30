@@ -188,6 +188,16 @@ const networkMembers = [
     bio: "Tyler Brunet is a philosopher of science working in the philosophy of biology (molecular biology) and the philosophy of technology (AI and robotics). In both areas he brings strange and interesting empirical examples to bear on traditional philosophical problems: what synthetic macromolecules imply about the possibility of subjective experience in machines, what achlorophyllous orchid symbioses tell us about the nature of selection, and what generative AI tells us about the nature of explanation. He also does technical work in evolutionary theory, on evolutionary neutrality and on evolutionary reticulation in molecular and microbiological evolution. In logic he focuses on modal logics, applications of logic within metaphysics, and the use of category theory within modal semantics, having given a categorial perspective on modal (counterfactual) accounts of causation and on modal realism. Much of this work is motivated by taking a “local” approach to problems that are typically examined globally — a local account of causation, or of ontological primitives — alongside purely technical work on metalogical relationships between coalgebraic logics.",
   },
   {
+    name: "Mazviita Chirimuuta",
+    role: "Department of Philosophy",
+    institution: "University of Edinburgh",
+    image: "/images/people/MC.jpg",
+    photoCredit: "Julie Broadfoot",
+    photoCreditUrl: "https://www.juliebee.co.uk",
+    website: "https://outsidecolour.net",
+    bio: "Mazviita Chirimuuta was awarded a PhD in visual neuroscience from the University of Cambridge and was a post-doc in Philosophy at Monash University and Washington University in St. Louis. She is Senior Lecturer in Philosophy at the University of Edinburgh. Before then she was Associate Professor in History and Philosophy of Science at the University of Pittsburgh. She writes on conceptual and methodological topics within the mind/brain sciences, including perception and computational modelling, taking a historical approach. Her two books Outside Color: Perceptual Science and the Puzzle of Color in Philosophy (2014) and The Brain Abstracted: Simplification in the History and Philosophy of Neuroscience (2024) are published with MIT Press. Outside Color argues for a novel relational and process-based theory of colour ontology, drawing on recent vision science. The Brain Abstracted argues that computational models in neuroscience are radical simplifications of neuro-biological processes and should not be interpreted as evidence for claims that cognition literally is a form of computation. It was awarded the Nayef Al-Rodhan prize for trans-disciplinary philosophy from the Royal Institute of Philosophy in 2024 and the Lakatos Award from the London School of Economics in 2025.",
+  },
+  {
     name: "Joachim Vandekerckhove",
     role: "Department of Cognitive Sciences",
     institution: "University of California, Irvine",
@@ -218,6 +228,8 @@ const networkMembers = [
             institution={member.institution}
             role={member.role}
             image={member.image}
+            photoCredit={(member as any).photoCredit}
+            photoCreditUrl={(member as any).photoCreditUrl}
             email={member.email}
             website={member.website}
             website2={member.website2}
@@ -241,6 +253,8 @@ const networkMembers = [
             institution={member.institution}
             role={member.role}
             image={member.image}
+            photoCredit={(member as any).photoCredit}
+            photoCreditUrl={(member as any).photoCreditUrl}
             email={member.email}
             website={member.website}
             website2={(member as any).website2}
