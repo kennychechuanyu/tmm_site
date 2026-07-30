@@ -21,6 +21,10 @@ const personSchema = z.object({
   role: z.string().optional(),
   bio: z.string().optional(),
   website: z.string().url().optional(),
+  links: z.array(z.object({
+    label: z.string(),
+    url: z.string().url(),
+  })).optional(),
 });
 
 const events = defineCollection({
