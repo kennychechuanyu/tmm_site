@@ -116,9 +116,12 @@ panelists:
   - name: "To Be Confirmed"
     institution: ""
     role: ""
-  - name: "To Be Confirmed"
-    institution: ""
-    role: ""
+  - name: "Tyler Brunet"
+    institution: "University of Exeter"
+    role: "Egenis, the Centre for the Study of the Life Sciences"
+    photo: "/images/people/TB.jpg"
+    bio: "Tyler Brunet is a philosopher of science working in the philosophy of biology (molecular biology) and the philosophy of technology (AI and robotics). In both areas he brings strange and interesting empirical examples to bear on traditional philosophical problems: what synthetic macromolecules imply about the possibility of subjective experience in machines, what achlorophyllous orchid symbioses tell us about the nature of selection, and what generative AI tells us about the nature of explanation. He also does technical work in evolutionary theory, on evolutionary neutrality and on evolutionary reticulation in molecular and microbiological evolution. In logic he focuses on modal logics, applications of logic within metaphysics, and the use of category theory within modal semantics, having given a categorial perspective on modal (counterfactual) accounts of causation and on modal realism."
+    website: "https://experts.exeter.ac.uk/37087-tyler-brunet"
 ---
 
 ## Programme
