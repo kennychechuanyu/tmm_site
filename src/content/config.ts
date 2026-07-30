@@ -16,6 +16,8 @@ const personSchema = z.object({
   name: z.string(),
   institution: z.string(),
   photo: z.string().optional(),
+  photoCredit: z.string().optional(),
+  photoCreditUrl: z.string().url().optional(),
   role: z.string().optional(),
   bio: z.string().optional(),
   website: z.string().url().optional(),

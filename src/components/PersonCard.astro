@@ -21,11 +21,14 @@ interface Props {
   website?: string;
   website2?: string;
   bio?: string;
+  /** Photographer credit, shown under the portrait when the photo requires one. */
+  photoCredit?: string;
+  photoCreditUrl?: string;
   /** Entrance-stagger delay in ms (used with the .stagger-grid utility). */
   stagger?: number;
 }
 
-const { name, institution, role, image, email, website, website2, bio, stagger } = Astro.props;
+const { name, institution, role, image, email, website, website2, bio, photoCredit, photoCreditUrl, stagger } = Astro.props;
 
 const initials = name
   .replace(/\s*\(.*?\)\s*/g, " ")
@@ -103,13 +106,25 @@ const labLink = website2 ? website : null; // primary website acts as lab page i
 
     <div class="grid items-start gap-8 md:grid-cols-[auto_1fr] md:gap-12">
       <!-- The portrait's home while the profile is open -->
-      <div data-panel-portrait class="aspect-[4/5] w-44 overflow-hidden rounded-xl bg-slate-100 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.35)] dark:bg-slate-800 dark:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)] md:w-56">
-        {image ? (
-          <img src={image} alt={name} loading="lazy" class="h-full w-full object-cover object-[center_30%]" />
-        ) : (
-          <div class="flex h-full w-full items-center justify-center">
-            <span class="font-serif text-3xl text-slate-300 dark:text-slate-600">{initials}</span>
-          </div>
+      <div>
+        <div data-panel-portrait class="aspect-[4/5] w-44 overflow-hidden rounded-xl bg-slate-100 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.35)] dark:bg-slate-800 dark:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)] md:w-56">
+          {image ? (
+            <img src={image} alt={name} loading="lazy" class="h-full w-full object-cover object-[center_30%]" />
+          ) : (
+            <div class="flex h-full w-full items-center justify-center">
+              <span class="font-serif text-3xl text-slate-300 dark:text-slate-600">{initials}</span>
+            </div>
+          )}
+        </div>
+        {image && photoCredit && (
+          <p class="mt-2.5 w-44 font-sans text-[10px] leading-relaxed text-slate-400 dark:text-slate-500 md:w-56">
+            Photo:{" "}
+            {photoCreditUrl ? (
+              <a href={photoCreditUrl} target="_blank" rel="noopener noreferrer" class="underline decoration-slate-300 underline-offset-2 transition-colors hover:text-salmon-600 dark:decoration-slate-600 dark:hover:text-salmon-400">{photoCredit}</a>
+            ) : (
+              photoCredit
+            )}
+          </p>
         )}
       </div>
 
