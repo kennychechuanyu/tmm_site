@@ -118,6 +118,11 @@ panelists:
     photoCreditUrl: "https://www.juliebee.co.uk"
     bio: "Mazviita Chirimuuta was awarded a PhD in visual neuroscience from the University of Cambridge and was a post-doc in Philosophy at Monash University and Washington University in St. Louis. She is Senior Lecturer in Philosophy at the University of Edinburgh. Before then she was Associate Professor in History and Philosophy of Science at the University of Pittsburgh. She writes on conceptual and methodological topics within the mind/brain sciences, including perception and computational modelling, taking a historical approach. Her two books Outside Color: Perceptual Science and the Puzzle of Color in Philosophy (2014) and The Brain Abstracted: Simplification in the History and Philosophy of Neuroscience (2024) are published with MIT Press. Outside Color argues for a novel relational and process-based theory of colour ontology, drawing on recent vision science. The Brain Abstracted argues that computational models in neuroscience are radical simplifications of neuro-biological processes and should not be interpreted as evidence for claims that cognition literally is a form of computation. It was awarded the Nayef Al-Rodhan prize for trans-disciplinary philosophy from the Royal Institute of Philosophy in 2024 and the Lakatos Award from the London School of Economics in 2025."
     website: "https://outsidecolour.net"
+    links:
+      - label: "Synthese (2020)"
+        url: "https://doi.org/10.1007/s11229-020-02713-0"
+      - label: "Lakatos lecture"
+        url: "https://outsidecolour.net/wp-content/uploads/2025/12/chirimuuta-2025-lakatos-lecture.pdf"
   - name: "Joachim Vandekerckhove"
     institution: "University of California, Irvine"
     role: "Department of Cognitive Sciences"
