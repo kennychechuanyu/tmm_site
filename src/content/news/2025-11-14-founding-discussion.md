@@ -1,6 +1,6 @@
 ---
 title: "TMM Founding Discussion: Bridging Theory, Modeling & Measurement"
-description: "The first time we all sat down together, and a long conversation about where theory and measurement stop lining up."
+description: "The first time we all sat down together."
 date: 2025-11-14
 type: meeting-notes
 featured: true
