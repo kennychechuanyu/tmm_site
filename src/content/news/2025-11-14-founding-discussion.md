@@ -1,6 +1,6 @@
 ---
 title: "TMM Founding Discussion: Bridging Theory, Modeling & Measurement"
-description: "Our inaugural discussion identifying issues in the theory-measurement gap."
+description: "The first time we all sat down together, and a long conversation about where theory and measurement stop lining up."
 date: 2025-11-14
 type: meeting-notes
 featured: true
