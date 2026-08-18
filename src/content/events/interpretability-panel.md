@@ -110,6 +110,7 @@ panelists:
   - name: "Henrik Singmann"
     institution: "University College London"
     role: "Department of Experimental Psychology"
+    photo: "/images/people/HS.jpg"
     bio: "Henrik Singmann is an associate professor at the Department of Experimental Psychology at UCL with an interest in applied and computational statistics. His research focuses on formal and computational approaches to human cognition, particularly reasoning, decision making, and memory. In addition to his substantive work, he is known for his statistical modelling work using R, for which he has developed several packages, most prominently afex, bridgesampling, and rtdists."
     website: "http://singmann.org"
   - name: "Mazviita Chirimuuta"
