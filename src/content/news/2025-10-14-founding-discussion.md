@@ -1,7 +1,7 @@
 ---
 title: "TMM Founding Discussion: Bridging Theory, Modeling & Measurement"
 description: "The first time we all sat down together."
-date: 2025-11-14
+date: 2025-10-14
 type: meeting-notes
 featured: true
 ---
@@ -98,4 +98,4 @@ The discussion concluded with planning for an in-person workshop. Several compel
 
 ---
 
-*This summary is based on meeting notes from the November 14, 2025 discussion. For questions or to get involved, contact the TMM network.*
+*This summary is based on meeting notes from the October 14, 2025 discussion. For questions or to get involved, contact the TMM network.*
