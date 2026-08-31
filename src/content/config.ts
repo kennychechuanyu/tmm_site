@@ -40,6 +40,7 @@ const events = defineCollection({
     registrationUrl: z.string().url().optional(),
     time: z.string().optional(),
     timeNote: z.string().optional(),
+    aboutLede: z.string().optional(),
     about: z.string().optional(),
     questions: z.array(z.object({
       label: z.string(),
