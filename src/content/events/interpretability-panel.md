@@ -2,6 +2,7 @@
 title: "Interpretability in Psychological Models"
 date: 2026-10-15
 time: "15:30–19:20 CEST"
+timeNote: "14:30 London · 09:30 New York · 06:30 Los Angeles"
 location: "Online — Microsoft Teams"
 type: "webinar"
 featured: true
@@ -19,18 +20,66 @@ talks:
     speaker: "Adam Sanborn"
     title: "Fusing neural networks with process models to aid interpretability"
     abstract: "Cognitive models have been limited to operating on researcher-defined feature spaces, but advances in neural networks allow for models that can “see” complex stimuli. However, neural networks trained to map complex stimuli to human responses are difficult to interpret, despite advances in techniques for interpreting network activations. Here I discuss approaches for fusing process models with neural networks to enhance interpretability, including process models that operate on neural-network-defined similarity spaces and in particular on those that train the neural network on the ground truth and add plausible perceptual or decision processes to produce human-like responses."
+    panel:
+      - "Jennifer Trueblood"
+      - "Greg Cox"
+      - "Francis Tuerlinckx"
+      - "Andrew Heathcote"
+      - "Stephen José Hanson"
   - time: "16:25–17:10"
     speaker: "Marcel Binz"
     title: "Finding the core of human cognition"
     abstract: "What are the core components of human cognition? To approach this question, we build large-scale cognitive models that capture human behavior across hundreds of experiments. The winning model is based on a small set of interpretable principles: a phoneme-level input representation, a Hebbian-like episodic memory that stores prediction errors instead of raw content, a context-dependent forgetting mechanism, a selective output gate that controls when memory is allowed to guide behavior, and hierarchical application of these principles. We find that these simple components are sufficient to outperform larger black-box models and to reproduce 73% of the effects found in human behavior."
+    panel:
+      - "Mazviita Chirimuuta"
+      - "Sigert Ariens"
+      - "Ven Popov"
+      - "Amy Criss"
   - time: "17:20–18:05"
     speaker: "Adrian Erasmus"
     title: "Interpretability as a bridge to understanding"
     abstract: "This talk offers an account and typology of interpretation as the bridge from one difficult- or impossible-to-understand explanation of a model to another, hopefully more understandable explanation of that model. Through describing the different types of interpretation methods applied in computational cognitive science, this account places understanding at the center of discussions of interpretability and delineates the kind(s) of understanding we should expect. I argue that interpretation is limited in that it cannot provide explanatory understanding, the kind of understanding commonly ideally sought for through applying such methods."
+    panel:
+      - "Julia Haaf"
+      - "Michel Regenwetter"
+      - "Joachim Vandekerckhove"
+      - "Markus Eronen"
+      - "Tyler Brunet"
   - time: "18:10–18:55"
     speaker: "Olivia Guest"
     title: "On models, prediction, and scientific roles thereof"
     abstract: "To interpret models, we can benefit from answering questions such as: What are models and what role do they play in cognitive theorising? I will present a perspective that diverges from the current mainstreams of our fields. Models are not a container for observations through being fit to data and should not be held to the standard of providing us with quantitative predictions. I will also sketch out an evaluative account of modelling to inter alia protect against confusions with other model types, such as with inferential statistical models of the data, and to guard against inferring success prematurely. Ultimately, modelling can only play its unique role of mediating from theory to data and back, if and only if we buttress its special scientific status."
+    panel:
+      - "Henrik Singmann"
+      - "Dora Matzke"
+      - "Peter Killeen"
+      - "Clintin Davis-Stober"
+      - "David Kellen"
+      - "Trisha Van Zandt"
+programme:
+  - time: "15:30"
+    label: "Welcome"
+  - talk: "Adam Sanborn"
+  - talk: "Marcel Binz"
+  - time: "17:10"
+    label: "Break"
+  - talk: "Adrian Erasmus"
+  - talk: "Olivia Guest"
+  - time: "18:55–19:15"
+    label: "Audience Q&A"
+  - time: "19:15"
+    label: "Closing"
+attendance:
+  - group: "Speakers"
+    access: "Invited"
+    note: "Give a short talk on interpretability from your own perspective."
+  - group: "Discussion panel"
+    access: "Invited experts"
+    note: "Respond to the talks, challenge speakers, raise new points, and guide the conversation."
+  - group: "Open audience"
+    access: "Public registration"
+    note: "Anyone interested in the topic is welcome to register and attend. Audience members can ask questions during the final Q&A."
+recordingNote: "The event will be recorded for internal reference by the coordinating team. The recording will not be made publicly available."
 speakers:
   - name: "Marcel Binz"
     institution: "Helmholtz Munich"
@@ -166,20 +215,12 @@ panelists:
     photo: "/images/people/TB.jpg"
     bio: "Tyler Brunet is a philosopher of science working in the philosophy of biology (molecular biology) and the philosophy of technology (AI and robotics). In both areas he brings strange and interesting empirical examples to bear on traditional philosophical problems: what synthetic macromolecules imply about the possibility of subjective experience in machines, what achlorophyllous orchid symbioses tell us about the nature of selection, and what generative AI tells us about the nature of explanation. He also does technical work in evolutionary theory, on evolutionary neutrality and on evolutionary reticulation in molecular and microbiological evolution. In logic he focuses on modal logics, applications of logic within metaphysics, and the use of category theory within modal semantics, having given a categorial perspective on modal (counterfactual) accounts of causation and on modal realism."
     website: "https://experts.exeter.ac.uk/37087-tyler-brunet"
+  - name: "Jennifer Trueblood"
+    institution: "Indiana University"
+  - name: "Amy Criss"
+    institution: "Syracuse University"
+  - name: "Julia Haaf"
+    institution: "University of Amsterdam"
+  - name: "Trisha Van Zandt"
+    institution: "Ohio State University"
 ---
-
-## Programme
-
-The event runs **15:30–19:20 CEST** — 14:30 in London, 9:30 in New York, 6:30 in Los Angeles. Each talk lasts about 15 minutes and is followed by a 30-minute guided discussion with the panel. There is a short break after the second talk, and from 18:55 the floor opens for a 20-minute audience Q&A.
-
-## How to Attend
-
-**Speakers** *(invited).* Give a short talk on interpretability from your own perspective.
-
-**Discussion panel** *(invited experts).* Respond to the talks, challenge speakers, raise new points, and guide the conversation.
-
-**Open audience** *(public registration).* Anyone interested in the topic is welcome to register and attend. Audience members can ask questions during the final Q&A.
-
-## Recording
-
-The event will be recorded for internal reference by the coordinating team. The recording will **not** be made publicly available.

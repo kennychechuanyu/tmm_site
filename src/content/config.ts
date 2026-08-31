@@ -40,6 +40,8 @@ const events = defineCollection({
     registrationUrl: z.string().url().optional(),
     /** Human-readable time range shown next to the date, e.g. "15:30–19:20 CEST". */
     time: z.string().optional(),
+    /** Secondary time info, e.g. conversions to other time zones. */
+    timeNote: z.string().optional(),
     about: z.string().optional(),
     questions: z.array(z.object({
       label: z.string(),
@@ -47,13 +49,29 @@ const events = defineCollection({
     })).optional(),
     speakers: z.array(personSchema).optional(),
     panelists: z.array(personSchema).optional(),
-    /** Talks in running order; `speaker` must match a name in `speakers`. */
+    /** Talks in running order; `speaker` must match a name in `speakers`,
+     *  `panel` entries must match names in `panelists`. */
     talks: z.array(z.object({
       time: z.string().optional(),
       speaker: z.string(),
       title: z.string(),
       abstract: z.string(),
+      panel: z.array(z.string()).optional(),
     })).optional(),
+    /** Full running order. A row is either a plain moment (`label`) or a
+     *  reference to a talk (`talk` = speaker name). */
+    programme: z.array(z.object({
+      time: z.string().optional(),
+      label: z.string().optional(),
+      talk: z.string().optional(),
+    })).optional(),
+    /** Who can attend and how. */
+    attendance: z.array(z.object({
+      group: z.string(),
+      access: z.string().optional(),
+      note: z.string(),
+    })).optional(),
+    recordingNote: z.string().optional(),
   }),
 });
 

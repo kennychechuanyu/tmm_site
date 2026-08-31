@@ -423,6 +423,8 @@ const extraLinksHtml = extraLinks
       if (opener) requestAnimationFrame(() => open(opener));
     }
     openFromHash();
+    // In-page links (e.g. panel names in an event programme) open the card too.
+    window.addEventListener("hashchange", openFromHash);
     document.addEventListener("astro:after-swap", () => {
       activeGrid = null;
       openFromHash();
