@@ -1,0 +1,106 @@
+---
+/**
+ * Re-renders event times and dates in the reader's own time zone.
+ *
+ * Progressive enhancement only: the server already prints correct times in
+ * the event's zone, and this rewrites them just for readers whose wall clock
+ * differs. Every element declares its own source zone, so a listing page can
+ * mix events from different zones.
+ *
+ *   <time data-local-time datetime="…Z" data-end="…Z" data-tz="Europe/Brussels">
+ *   <time … data-compact data-ref="…Z">   short form; flags a day shift
+ *   <p    data-local-note data-source="15:30–19:20 CEST" data-at="…Z" data-tz="…">
+ *   <a    data-local-date="…Z" data-tz="…">  with data-part children:
+ *           day · month · month-short · month-year · year · weekday
+ */
+---
+
+<script>
+  (() => {
+    const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (!localZone) return;
+
+    const wallClock = (instant: Date, zone: string) =>
+      new Intl.DateTimeFormat("en-US", {
+        timeZone: zone,
+        hourCycle: "h23",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(instant);
+
+    /** Nothing to do when the reader already keeps the event's clock. */
+    const differs = (instant: Date, sourceZone: string) =>
+      wallClock(instant, localZone) !== wallClock(instant, sourceZone);
+
+    const fmt = (opts: Intl.DateTimeFormatOptions) =>
+      new Intl.DateTimeFormat(undefined, opts);
+    const hm = fmt({ hour: "numeric", minute: "2-digit" });
+    const hmZone = fmt({ hour: "numeric", minute: "2-digit", timeZoneName: "short" });
+    const dayShort = fmt({ day: "numeric", month: "short" });
+    const dayKey = new Intl.DateTimeFormat("en-CA", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+
+    document.querySelectorAll<HTMLElement>("[data-local-time]").forEach((el) => {
+      const iso = el.getAttribute("datetime");
+      const zone = el.dataset.tz;
+      if (!iso || !zone) return;
+      const from = new Date(iso);
+      if (!differs(from, zone)) return;
+
+      const endIso = el.dataset.end;
+      const to = endIso ? new Date(endIso) : null;
+
+      if (el.hasAttribute("data-compact")) {
+        // The zone is stated once on the cover, so rows stay short.
+        let text = to ? `${hm.format(from)} – ${hm.format(to)}` : hm.format(from);
+        const ref = el.dataset.ref;
+        if (ref && dayKey.format(from) !== dayKey.format(new Date(ref))) {
+          text += ` (${dayShort.format(from)})`;
+        }
+        el.textContent = text;
+      } else {
+        el.textContent = to
+          ? `${hm.format(from)} – ${hmZone.format(to)}`
+          : hmZone.format(from);
+      }
+    });
+
+    document.querySelectorAll<HTMLElement>("[data-local-note]").forEach((el) => {
+      const at = el.dataset.at;
+      const zone = el.dataset.tz;
+      if (!at || !zone || !differs(new Date(at), zone)) return;
+      const source = el.dataset.source;
+      el.textContent = source
+        ? `${source} · shown in your time zone`
+        : "Shown in your time zone";
+    });
+
+    // A date can shift outright: 15:30 in Brussels is next morning in Melbourne.
+    document.querySelectorAll<HTMLElement>("[data-local-date]").forEach((el) => {
+      const iso = el.dataset.localDate;
+      const zone = el.dataset.tz;
+      if (!iso || !zone) return;
+      const when = new Date(iso);
+      if (!differs(when, zone)) return;
+
+      const shapes: Record<string, Intl.DateTimeFormatOptions> = {
+        day: { day: "numeric" },
+        month: { month: "long" },
+        "month-short": { month: "short" },
+        "month-year": { month: "long", year: "numeric" },
+        year: { year: "numeric" },
+        weekday: { weekday: "long" },
+      };
+      el.querySelectorAll<HTMLElement>("[data-part]").forEach((node) => {
+        const shape = shapes[node.dataset.part ?? ""];
+        if (shape) node.textContent = fmt(shape).format(when);
+      });
+    });
+  })();
+</script>

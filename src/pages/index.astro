@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+import RetimeLocal from "../components/RetimeLocal.astro";
+import { toInstants } from "../utils/eventTime";
 import { getCollection } from "astro:content";
 
 // Get upcoming events (TBD-dated events are included and sorted first)
@@ -95,29 +97,35 @@ const heroDescription =
         <ol class="scroll-fade-in-children divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
           {upcomingEvents.map((event) => {
             const d = event.data.date;
-            const day = d ? String(d.getDate()).padStart(2, "0") : null;
-            const month = d ? d.toLocaleDateString("en-US", { month: "short" }) : null;
-            const year = d ? d.getFullYear() : null;
-            const weekday = d ? d.toLocaleDateString("en-US", { weekday: "long" }) : "Date TBD";
+            const part = (o: Intl.DateTimeFormatOptions) =>
+              d!.toLocaleDateString("en-US", { ...o, timeZone: "UTC" });
+            const day = d ? part({ day: "2-digit" }) : null;
+            const month = d ? part({ month: "short" }) : null;
+            const year = d ? part({ year: "numeric" }) : null;
+            const weekday = d ? part({ weekday: "long" }) : "Date TBD";
+            const startsAt = toInstants(event.data.time, d, event.data.timezone)?.start
+              ?? d?.toISOString();
             return (
               <li>
                 <a
                   href={`/events/${event.slug}`}
+                  data-local-date={startsAt}
+                  data-tz={event.data.timezone}
                   class="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 transition-colors hover:bg-slate-50/60 dark:hover:bg-slate-900/30 md:gap-10 md:py-8"
                 >
                   <!-- Date block -->
                   <div class="flex items-baseline gap-3 pl-1 text-slate-900 dark:text-slate-100">
                     {d ? (
                       <>
-                        <span class="font-serif text-4xl leading-[0.85] tabular-nums md:text-6xl">
+                        <span data-part="day" class="font-serif text-4xl leading-[0.85] tabular-nums md:text-6xl">
                           {day}
                         </span>
                         <div
                           class="flex flex-col font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
                           style="letter-spacing: 0.22em;"
                         >
-                          <span>{month}</span>
-                          <span class="font-mono tabular-nums">{year}</span>
+                          <span data-part="month-short">{month}</span>
+                          <span data-part="year" class="font-mono tabular-nums">{year}</span>
                         </div>
                       </>
                     ) : (
@@ -133,7 +141,7 @@ const heroDescription =
                       class="mb-2 flex flex-wrap items-center gap-3 font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
                       style="letter-spacing: 0.22em;"
                     >
-                      <span>{weekday}</span>
+                      <span data-part="weekday">{weekday}</span>
                       <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
                       <span class="text-salmon-600 dark:text-salmon-400">{event.data.type}</span>
                       {event.data.featured && (
@@ -295,4 +303,5 @@ const heroDescription =
       </div>
     </div>
   </section>
+  <RetimeLocal />
 </BaseLayout>

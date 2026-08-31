@@ -44,10 +44,12 @@ const events = defineCollection({
     timezone: z.string().default("Europe/Brussels"),
     /** Secondary time info, e.g. conversions to other time zones. */
     timeNote: z.string().optional(),
-    /** Display-size opening line of the About chapter. */
-    aboutLede: z.string().optional(),
-    /** Supporting About text; may contain inline HTML such as <em>. */
+    /** About, in three beats. Opening prose; may contain inline HTML. */
     about: z.string().optional(),
+    /** The question the event exists to ask, set at display size. */
+    aboutPull: z.string().optional(),
+    /** Closing line: how the event goes about it. */
+    aboutCoda: z.string().optional(),
     questions: z.array(z.object({
       label: z.string(),
       text: z.string(),
