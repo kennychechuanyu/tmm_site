@@ -4,6 +4,7 @@ import Section from "../../components/Section.astro";
 import Button from "../../components/Button.astro";
 import PersonCard from "../../components/PersonCard.astro";
 import InterpretabilityFigure from "../../components/InterpretabilityFigure.astro";
+import { toInstants } from "../../utils/eventTime";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -55,6 +56,11 @@ const rows =
 const byLastName = (a: { name: string }, b: { name: string }) =>
   a.name.split(" ").pop()!.localeCompare(b.name.split(" ").pop()!);
 
+// ── Absolute instants, so the browser can retime everything locally ──
+const tz = event.data.timezone;
+const instantsOf = (raw?: string) => toInstants(raw, d, tz);
+const eventSpan = instantsOf(event.data.time);
+
 // Panel membership; anyone not yet assigned to a session is shown separately
 const assigned = new Set(talks.flatMap((t) => t.panel ?? []));
 const unassigned = panelists.filter((p) => !assigned.has(p.name)).sort(byLastName);
@@ -88,13 +94,13 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
           </dt>
           <dd>
             {dateParts ? (
-              <span class="flex items-baseline gap-3.5">
-                <span class="font-serif text-5xl leading-[0.85] tabular-nums text-slate-900 dark:text-slate-100 md:text-6xl">
+              <span class="flex items-baseline gap-3.5" data-local-date={eventSpan?.start}>
+                <span data-part="day" class="font-serif text-5xl leading-[0.85] tabular-nums text-slate-900 dark:text-slate-100 md:text-6xl">
                   {dateParts.day}
                 </span>
                 <span class="flex flex-col gap-1 font-sans text-[10px] uppercase" style="letter-spacing: 0.22em;">
-                  <span class="text-slate-900 dark:text-slate-100">{dateParts.month} {dateParts.year}</span>
-                  <span class="text-slate-400 dark:text-slate-500">{dateParts.weekday}</span>
+                  <span data-part="month" class="text-slate-900 dark:text-slate-100">{dateParts.month} {dateParts.year}</span>
+                  <span data-part="weekday" class="text-slate-400 dark:text-slate-500">{dateParts.weekday}</span>
                 </span>
               </span>
             ) : (
@@ -110,12 +116,18 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
             </dt>
             <dd>
               <p class="font-serif text-lg leading-snug text-slate-900 dark:text-slate-100">
-                {event.data.time}
+                <time
+                  datetime={eventSpan?.start}
+                  data-local-time
+                  data-end={eventSpan?.end}
+                >{event.data.time}</time>
               </p>
               {event.data.timeNote && (
-                <p class="mt-1.5 font-mono text-[11px] text-slate-500 dark:text-slate-400">
-                  {event.data.timeNote}
-                </p>
+                <p
+                  class="mt-1.5 font-mono text-[11px] text-slate-500 dark:text-slate-400"
+                  data-local-note
+                  data-source={event.data.time}
+                >{event.data.timeNote}</p>
               )}
             </dd>
           </div>
@@ -209,10 +221,17 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
 
           {/* Thin rows carry the moments between sessions */}
           if (!talk) {
+            const moment = instantsOf(row.time);
             return (
               <div class="flex items-center gap-5 py-5">
                 {row.time && (
-                  <span class="font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500">{row.time}</span>
+                  <time
+                    datetime={moment?.start}
+                    data-local-time
+                    data-end={moment?.end}
+                    data-compact
+                    class="font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500"
+                  >{row.time}</time>
                 )}
                 <span class="font-sans text-sm font-medium text-slate-500 dark:text-slate-400">{row.label}</span>
                 <span aria-hidden="true" class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
@@ -237,7 +256,13 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
                   Session
                 </span>
                 {talk.time && (
-                  <span class="ml-auto font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500">{talk.time}</span>
+                  <time
+                    datetime={instantsOf(talk.time)?.start}
+                    data-local-time
+                    data-end={instantsOf(talk.time)?.end}
+                    data-compact
+                    class="ml-auto font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500"
+                  >{talk.time}</time>
                 )}
               </header>
 
@@ -439,3 +464,76 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
     </div>
   </Section>
 </PageLayout>
+
+{eventSpan && (
+  <script define:vars={{ eventTz: tz, eventStart: eventSpan.start }}>
+    // Retime the page into the reader's own zone. The server-rendered times
+    // stay untouched for anyone in the event's zone, without JS, or for
+    // crawlers — this only ever rewrites text that is already correct.
+    (() => {
+      const start = new Date(eventStart);
+      const wall = (tz) =>
+        new Intl.DateTimeFormat("en-US", {
+          timeZone: tz, hourCycle: "h23",
+          year: "numeric", month: "2-digit", day: "2-digit",
+          hour: "2-digit", minute: "2-digit",
+        }).format(start);
+
+      const local = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // Same wall clock as the event zone? Then there is nothing to convert.
+      if (!local || wall(local) === wall(eventTz)) return;
+
+      const hm = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+      const hmZone = new Intl.DateTimeFormat(undefined, {
+        hour: "numeric", minute: "2-digit", timeZoneName: "short",
+      });
+      const dayKey = new Intl.DateTimeFormat("en-CA", {
+        year: "numeric", month: "2-digit", day: "2-digit",
+      });
+      const dayShort = new Intl.DateTimeFormat(undefined, { day: "numeric", month: "short" });
+      const startDay = dayKey.format(start);
+
+      document.querySelectorAll("[data-local-time]").forEach((el) => {
+        const s = el.getAttribute("datetime");
+        if (!s) return;
+        const from = new Date(s);
+        const toAttr = el.getAttribute("data-end");
+        const to = toAttr ? new Date(toAttr) : null;
+
+        // The zone is stated once on the cover; rows inside the programme
+        // stay short, but flag any that land on a different calendar day.
+        let text;
+        if (el.hasAttribute("data-compact")) {
+          text = to ? `${hm.format(from)} – ${hm.format(to)}` : hm.format(from);
+          if (dayKey.format(from) !== startDay) text += ` (${dayShort.format(from)})`;
+        } else {
+          text = to ? `${hm.format(from)} – ${hmZone.format(to)}` : hmZone.format(from);
+        }
+        el.textContent = text;
+      });
+
+      // The hand-written city list is redundant once times are localised;
+      // state the canonical time instead.
+      document.querySelectorAll("[data-local-note]").forEach((el) => {
+        const source = el.getAttribute("data-source");
+        el.textContent = source
+          ? `${source} · shown in your time zone`
+          : "Shown in your time zone";
+      });
+
+      // The date itself can shift — 15:30 in Brussels is the next morning in Melbourne.
+      document.querySelectorAll("[data-local-date]").forEach((el) => {
+        const s = el.getAttribute("data-local-date");
+        if (!s) return;
+        const when = new Date(s);
+        const part = (sel, opts) => {
+          const node = el.querySelector(`[data-part="${sel}"]`);
+          if (node) node.textContent = new Intl.DateTimeFormat(undefined, opts).format(when);
+        };
+        part("day", { day: "numeric" });
+        part("month", { month: "long", year: "numeric" });
+        part("weekday", { weekday: "long" });
+      });
+    })();
+  </script>
+)}

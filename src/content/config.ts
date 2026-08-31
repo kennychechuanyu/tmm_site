@@ -40,6 +40,8 @@ const events = defineCollection({
     registrationUrl: z.string().url().optional(),
     /** Human-readable time range shown next to the date, e.g. "15:30–19:20 CEST". */
     time: z.string().optional(),
+    /** IANA zone the frontmatter wall-clock times are written in. */
+    timezone: z.string().default("Europe/Brussels"),
     /** Secondary time info, e.g. conversions to other time zones. */
     timeNote: z.string().optional(),
     /** Display-size opening line of the About chapter. */
