@@ -41,8 +41,9 @@ const events = defineCollection({
     time: z.string().optional(),
     timezone: z.string().default("Europe/Brussels"),
     timeNote: z.string().optional(),
-    aboutLede: z.string().optional(),
     about: z.string().optional(),
+    aboutPull: z.string().optional(),
+    aboutCoda: z.string().optional(),
     questions: z.array(z.object({
       label: z.string(),
       text: z.string(),
