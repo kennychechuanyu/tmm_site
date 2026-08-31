@@ -385,6 +385,7 @@ const extraLinksHtml = extraLinks
       if (opener) requestAnimationFrame(() => open(opener));
     }
     openFromHash();
+    window.addEventListener("hashchange", openFromHash);
     document.addEventListener("astro:after-swap", () => {
       activeGrid = null;
       openFromHash();

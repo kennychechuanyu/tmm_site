@@ -39,6 +39,7 @@ const events = defineCollection({
     featured: z.boolean().default(false),
     registrationUrl: z.string().url().optional(),
     time: z.string().optional(),
+    timeNote: z.string().optional(),
     about: z.string().optional(),
     questions: z.array(z.object({
       label: z.string(),
@@ -51,7 +52,19 @@ const events = defineCollection({
       speaker: z.string(),
       title: z.string(),
       abstract: z.string(),
+      panel: z.array(z.string()).optional(),
     })).optional(),
+    programme: z.array(z.object({
+      time: z.string().optional(),
+      label: z.string().optional(),
+      talk: z.string().optional(),
+    })).optional(),
+    attendance: z.array(z.object({
+      group: z.string(),
+      access: z.string().optional(),
+      note: z.string(),
+    })).optional(),
+    recordingNote: z.string().optional(),
   }),
 });
 
