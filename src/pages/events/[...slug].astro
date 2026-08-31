@@ -48,8 +48,18 @@ const byLastName = (a: { name: string }, b: { name: string }) => {
   if (aTBC !== bTBC) return aTBC ? 1 : -1;
   return a.name.split(" ").pop()!.localeCompare(b.name.split(" ").pop()!);
 };
-const sortedSpeakers = [...(event.data.speakers ?? [])].sort(byLastName);
+// Speakers follow the running order when talks are declared, last name otherwise
+const talks = event.data.talks ?? [];
+const talkOrder = (name: string) => {
+  const i = talks.findIndex((t) => t.speaker === name);
+  return i === -1 ? talks.length : i;
+};
+const sortedSpeakers = [...(event.data.speakers ?? [])].sort(
+  talks.length > 0 ? (a, b) => talkOrder(a.name) - talkOrder(b.name) : byLastName
+);
 const sortedPanelists = [...(event.data.panelists ?? [])].sort(byLastName);
+const speakerByName = (name: string) =>
+  event.data.speakers?.find((s) => s.name === name);
 ---
 
 <PageLayout
@@ -70,6 +80,16 @@ const sortedPanelists = [...(event.data.panelists ?? [])].sort(byLastName);
             {formatDate(event.data.date, event.data.endDate)}
           </dd>
         </div>
+        {event.data.time && (
+          <div class="flex flex-col gap-1.5">
+            <dt class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
+              Time
+            </dt>
+            <dd class="font-serif text-lg text-slate-900 dark:text-slate-100">
+              {event.data.time}
+            </dd>
+          </div>
+        )}
         <div class="flex flex-col gap-1.5">
           <dt class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
             Where
@@ -122,9 +142,65 @@ const sortedPanelists = [...(event.data.panelists ?? [])].sort(byLastName);
     </Section>
   )}
 
-  <!-- ─── III. Speakers ───────────────────────────────────────────── -->
-  {event.data.speakers && event.data.speakers.length > 0 && (
+  <!-- ─── III. Talks ──────────────────────────────────────────────── -->
+  {talks.length > 0 && (
     <Section background="gray">
+      <div class="mx-auto max-w-4xl">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="inline-block h-px w-10 bg-salmon-500"></span>
+          <p class="font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.22em;">
+            Talks
+          </p>
+        </div>
+        <p class="mb-8 max-w-[60ch] font-sans text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+          Each talk runs about 15 minutes and is followed by a 30-minute guided
+          discussion with the panel. All times CEST.
+        </p>
+
+        <div class="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-700 dark:border-slate-700">
+          {talks.map((talk, i) => {
+            const sp = speakerByName(talk.speaker);
+            return (
+              <article class="grid gap-3 py-10 md:grid-cols-[150px_1fr] md:gap-10">
+                <div class="flex flex-row items-baseline gap-4 md:flex-col md:gap-2">
+                  <p class="font-sans text-[11px] font-semibold uppercase text-navy-600 dark:text-navy-400" style="letter-spacing: 0.18em;">
+                    Talk {i + 1}
+                  </p>
+                  {talk.time && (
+                    <p class="font-mono text-xs text-slate-500 dark:text-slate-400">{talk.time}</p>
+                  )}
+                </div>
+                <div class="min-w-0">
+                  <h3 class="font-serif text-xl leading-snug text-slate-900 dark:text-white md:text-2xl" style="letter-spacing: -0.01em;">
+                    {talk.title}
+                  </h3>
+                  <p class="mt-2.5 font-sans text-sm">
+                    {sp?.website ? (
+                      <a href={sp.website} target="_blank" rel="noopener noreferrer" class="font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
+                        {talk.speaker}
+                      </a>
+                    ) : (
+                      <span class="font-medium text-slate-800 dark:text-slate-200">{talk.speaker}</span>
+                    )}
+                    {sp?.institution && (
+                      <span class="text-slate-500 dark:text-slate-400"> · {sp.institution}</span>
+                    )}
+                  </p>
+                  <p class="mt-4 max-w-[68ch] text-pretty text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">
+                    {talk.abstract}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </Section>
+  )}
+
+  <!-- ─── IV. Speakers ────────────────────────────────────────────── -->
+  {event.data.speakers && event.data.speakers.length > 0 && (
+    <Section background="white">
       <div class="mx-auto max-w-5xl">
         <div class="flex items-center gap-4 mb-12">
           <span class="inline-block h-px w-10 bg-salmon-500"></span>
@@ -152,9 +228,9 @@ const sortedPanelists = [...(event.data.panelists ?? [])].sort(byLastName);
     </Section>
   )}
 
-  <!-- ─── IV. Discussion Panel ────────────────────────────────────── -->
+  <!-- ─── V. Discussion Panel ─────────────────────────────────────── -->
   {event.data.panelists && event.data.panelists.length > 0 && (
-    <Section background="white">
+    <Section background="gray">
       <div class="mx-auto max-w-5xl">
         <div class="flex items-center gap-4 mb-12">
           <span class="inline-block h-px w-10 bg-salmon-500"></span>
@@ -182,8 +258,8 @@ const sortedPanelists = [...(event.data.panelists ?? [])].sort(byLastName);
     </Section>
   )}
 
-  <!-- ─── V. Programme, Attendance & Details ───────────────────────── -->
-  <Section background="gray">
+  <!-- ─── VI. Programme, Attendance & Details ──────────────────────── -->
+  <Section background="white">
     <div class="mx-auto max-w-3xl">
       <div class="prose-tmm">
         <Content />
@@ -192,7 +268,7 @@ const sortedPanelists = [...(event.data.panelists ?? [])].sort(byLastName);
   </Section>
 
   <!-- ─── Back ────────────────────────────────────────────────────── -->
-  <Section background="white">
+  <Section background="gray">
     <div class="text-center">
       <Button href="/events" variant="secondary">
         &larr; Back to All Events

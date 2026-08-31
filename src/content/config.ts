@@ -38,6 +38,8 @@ const events = defineCollection({
     type: z.enum(["conference", "workshop", "webinar", "meetup"]),
     featured: z.boolean().default(false),
     registrationUrl: z.string().url().optional(),
+    /** Human-readable time range shown next to the date, e.g. "15:30–19:20 CEST". */
+    time: z.string().optional(),
     about: z.string().optional(),
     questions: z.array(z.object({
       label: z.string(),
@@ -45,6 +47,13 @@ const events = defineCollection({
     })).optional(),
     speakers: z.array(personSchema).optional(),
     panelists: z.array(personSchema).optional(),
+    /** Talks in running order; `speaker` must match a name in `speakers`. */
+    talks: z.array(z.object({
+      time: z.string().optional(),
+      speaker: z.string(),
+      title: z.string(),
+      abstract: z.string(),
+    })).optional(),
   }),
 });
 
