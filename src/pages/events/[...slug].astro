@@ -177,7 +177,13 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
 
   <!-- ─── Programme: each session with its speaker and panel ──────── -->
   {talks.length > 0 && (
-    <Section background="white" numeral={numeralOf("programme")} title="Programme" metaLabel="All times CEST">
+    <Section
+      background="white"
+      numeral={numeralOf("programme")}
+      title="Programme"
+      metaLabel="All times CEST"
+      subtitle="Four short talks, each followed by a 30-minute guided discussion with its panel."
+    >
       <div>
         {rows.map((row) => {
           const talk = row.talk ? talkBySpeaker(row.talk) : undefined;
@@ -370,24 +376,27 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
             </p>
           </div>
         ))}
-      </div>
 
-      {event.data.recordingNote && (
-        <div class="mt-16 flex max-w-3xl items-start gap-4 rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-          <span aria-hidden="true" class="relative mt-1.5 flex h-2 w-2">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-salmon-400 opacity-60"></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-salmon-500"></span>
-          </span>
-          <div>
-            <p class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
+        {event.data.recordingNote && (
+          <div class="relative pt-6">
+            <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></span>
+            <span aria-hidden="true" class="absolute left-0 top-0 h-[2px] w-8 bg-salmon-500 dark:bg-salmon-400"></span>
+            <h3 class="flex items-center gap-2.5 font-serif text-xl text-slate-900 dark:text-slate-100">
+              <span aria-hidden="true" class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-salmon-400 opacity-60"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-salmon-500"></span>
+              </span>
               Recording
+            </h3>
+            <p class="mt-1.5 font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
+              Not public
             </p>
-            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            <p class="mt-3.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
               {event.data.recordingNote}
             </p>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </Section>
   )}
 
