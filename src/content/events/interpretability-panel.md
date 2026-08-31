@@ -159,7 +159,7 @@ Four short talks, each followed by a guided discussion with an invited panel. Th
 - **Talk 4.** ~15 min presentation followed by 30 min guided discussion
 - **Audience Q&A.** 20 min
 
-Total runtime: approximately **3.5 hours**, including a brief introduction and wrap-up.
+Total runtime: approximately **3 hours 50 minutes**, including a brief introduction and wrap-up.
 
 ## How to Attend
 
