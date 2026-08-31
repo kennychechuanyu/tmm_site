@@ -42,6 +42,9 @@ const events = defineCollection({
     time: z.string().optional(),
     /** Secondary time info, e.g. conversions to other time zones. */
     timeNote: z.string().optional(),
+    /** Display-size opening line of the About chapter. */
+    aboutLede: z.string().optional(),
+    /** Supporting About text; may contain inline HTML such as <em>. */
     about: z.string().optional(),
     questions: z.array(z.object({
       label: z.string(),

@@ -1,0 +1,82 @@
+---
+/**
+ * Journal-style spot figure for the interpretability event: the same
+ * behaviour rendered in three modelling idioms — a cognitive architecture,
+ * an evidence-accumulation model, a neural network. Line art inherits
+ * currentColor so it works on both themes; one element per panel is picked
+ * out in salmon.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<figure class:list={["select-none", className]}>
+  <div class="grid grid-cols-3 gap-5 text-slate-400 dark:text-slate-500">
+    <!-- Cognitive architecture: boxes and arrows -->
+    <div>
+      <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full" aria-hidden="true">
+        <rect x="24" y="10" width="72" height="24" rx="4" />
+        <rect x="24" y="48" width="72" height="24" rx="4" class="text-salmon-500 dark:text-salmon-400" />
+        <rect x="24" y="86" width="72" height="24" rx="4" />
+        <path d="M60 34v9m0 0-3.5-3.5M60 43l3.5-3.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M60 72v9m0 0-3.5-3.5M60 81l3.5-3.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <p class="mt-3 text-center font-sans text-[9px] font-medium uppercase leading-relaxed text-slate-500 dark:text-slate-400" style="letter-spacing: 0.16em;">
+        Cognitive<br />architecture
+      </p>
+    </div>
+
+    <!-- Evidence accumulation: noisy traces racing to a bound -->
+    <div>
+      <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full" aria-hidden="true">
+        <path d="M16 108h94M16 108V14" stroke-linecap="round" />
+        <path d="M16 28h94" stroke-dasharray="4 4" opacity="0.8" />
+        <polyline
+          points="16,108 24,101 30,104 38,94 45,97 53,86 59,90 66,77 73,81 82,70 92,73 102,64"
+          stroke-linejoin="round" stroke-linecap="round" opacity="0.75"
+        />
+        <polyline
+          points="16,108 23,99 29,102 36,90 42,94 49,80 55,84 61,70 67,74 73,57 78,43 82,28"
+          stroke-linejoin="round" stroke-linecap="round"
+          class="text-salmon-500 dark:text-salmon-400"
+        />
+        <circle cx="82" cy="28" r="2.5" fill="currentColor" stroke="none" class="text-salmon-500 dark:text-salmon-400" />
+      </svg>
+      <p class="mt-3 text-center font-sans text-[9px] font-medium uppercase leading-relaxed text-slate-500 dark:text-slate-400" style="letter-spacing: 0.16em;">
+        Evidence<br />accumulation
+      </p>
+    </div>
+
+    <!-- Neural network: layers of nodes, one lit up -->
+    <div>
+      <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full" aria-hidden="true">
+        <g stroke-width="1" opacity="0.45">
+          <path d="M30 32 55 26M30 32 55 60M30 32 55 94M30 60 55 26M30 60 55 94M30 88 55 26M30 88 55 60M30 88 55 94" />
+          <path d="M55 26 88 45M55 26 88 75M55 94 88 45M55 94 88 75" />
+        </g>
+        <g stroke-width="1.25" class="text-salmon-500 dark:text-salmon-400">
+          <path d="M30 60 55 60M55 60 88 45M55 60 88 75" />
+        </g>
+        <circle cx="30" cy="32" r="5" />
+        <circle cx="30" cy="60" r="5" />
+        <circle cx="30" cy="88" r="5" />
+        <circle cx="55" cy="26" r="5" />
+        <circle cx="55" cy="60" r="5" fill="currentColor" class="text-salmon-500 dark:text-salmon-400" />
+        <circle cx="55" cy="94" r="5" />
+        <circle cx="88" cy="45" r="5" />
+        <circle cx="88" cy="75" r="5" />
+      </svg>
+      <p class="mt-3 text-center font-sans text-[9px] font-medium uppercase leading-relaxed text-slate-500 dark:text-slate-400" style="letter-spacing: 0.16em;">
+        Neural<br />network
+      </p>
+    </div>
+  </div>
+
+  <figcaption class="mt-5 border-t border-slate-200 pt-3.5 font-sans text-xs leading-relaxed text-slate-500 dark:border-slate-700 dark:text-slate-400">
+    <span class="font-mono text-[11px] text-salmon-600 dark:text-salmon-400">Fig. 1</span>
+    &nbsp;Three idioms for the same behaviour. Which of them is
+    <em class="font-serif">interpretable</em> — and in what sense?
+  </figcaption>
+</figure>
