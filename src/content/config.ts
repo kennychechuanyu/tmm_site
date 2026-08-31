@@ -39,6 +39,7 @@ const events = defineCollection({
     featured: z.boolean().default(false),
     registrationUrl: z.string().url().optional(),
     time: z.string().optional(),
+    timezone: z.string().default("Europe/Brussels"),
     timeNote: z.string().optional(),
     aboutLede: z.string().optional(),
     about: z.string().optional(),

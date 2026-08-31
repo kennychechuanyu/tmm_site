@@ -75,7 +75,7 @@ attendance:
     access: "Open audience"
     note: "Anyone interested in the topic is welcome to attend. Registration opens soon, and the joining link will be shared with registered attendees before the event."
   - group: "Audience Q&A"
-    access: "18:55–19:15 CEST"
+    access: "Closing session"
     note: "The closing Q&A is open to the whole audience. Questions can be put to any of the speakers or panels from the afternoon."
 recordingNote: "The event will be recorded for internal reference by the coordinating team. The recording will not be made publicly available."
 speakers:
