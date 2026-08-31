@@ -26,11 +26,13 @@ interface Props {
   photoCreditUrl?: string;
   /** Extra labelled links (papers, talks) shown alongside the website links. */
   links?: { label: string; url: string }[];
+  /** Tiny label above the name, e.g. "Speaker" in a mixed session grid. */
+  tag?: string;
   /** Entrance-stagger delay in ms (used with the .stagger-grid utility). */
   stagger?: number;
 }
 
-const { name, institution, role, image, email, website, website2, bio, photoCredit, photoCreditUrl, links, stagger } = Astro.props;
+const { name, institution, role, image, email, website, website2, bio, photoCredit, photoCreditUrl, links, tag, stagger } = Astro.props;
 
 const initials = name
   .replace(/\s*\(.*?\)\s*/g, " ")
@@ -95,7 +97,12 @@ const extraLinksHtml = extraLinks
     )}
   </div>
 
-  <h3 class="mt-6 font-serif text-lg text-slate-900 dark:text-white" style="letter-spacing: -0.01em;">{name}</h3>
+  {tag && (
+    <p class="mt-5 font-sans text-[9px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.24em;">
+      {tag}
+    </p>
+  )}
+  <h3 class:list={[tag ? "mt-1.5" : "mt-6", "font-serif text-lg text-slate-900 dark:text-white"]} style="letter-spacing: -0.01em;">{name}</h3>
   <span aria-hidden="true" class="mx-auto mt-2.5 block h-px w-6 bg-salmon-400/60"></span>
   {institution && <p class="mt-2.5 text-sm font-medium text-navy-600 dark:text-navy-400">{institution}</p>}
   {role && <p class="mt-1 font-serif text-xs italic text-slate-500 dark:text-slate-400">{role}</p>}

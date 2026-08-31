@@ -35,13 +35,9 @@ const dateParts = d
       weekday: datePart({ weekday: "long" }),
     }
   : null;
-const longDate = d
-  ? `${datePart({ weekday: "long" })}, ${datePart({ month: "long", day: "numeric", year: "numeric" })}`
-  : "Date to be announced";
 
-// ── People lookups ───────────────────────────────────────────────────
+// ── People and sessions ──────────────────────────────────────────────
 const talks = event.data.talks ?? [];
-const programme = event.data.programme ?? [];
 const speakers = event.data.speakers ?? [];
 const panelists = event.data.panelists ?? [];
 
@@ -49,27 +45,30 @@ const speakerByName = (name: string) => speakers.find((s) => s.name === name);
 const panelistByName = (name: string) => panelists.find((p) => p.name === name);
 const talkBySpeaker = (name: string) => talks.find((t) => t.speaker === name);
 
-// Same slug rule as PersonCard, so #links open the matching profile card
-const slugFor = (name: string) =>
-  name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-const initialsFor = (name: string) =>
-  name.replace(/\s*\(.*?\)\s*/g, " ").trim().split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+// Running order; falls back to the talks themselves when no programme is given
+const rows =
+  (event.data.programme?.length ?? 0) > 0
+    ? event.data.programme!
+    : talks.map((t) => ({ time: undefined, label: undefined, talk: t.speaker }));
 
-// Speakers follow the running order when talks are declared
-const talkOrder = (name: string) => {
-  const i = talks.findIndex((t) => t.speaker === name);
-  return i === -1 ? talks.length : i;
-};
 const byLastName = (a: { name: string }, b: { name: string }) =>
   a.name.split(" ").pop()!.localeCompare(b.name.split(" ").pop()!);
-const sortedSpeakers = [...speakers].sort(
-  talks.length > 0 ? (a, b) => talkOrder(a.name) - talkOrder(b.name) : byLastName
-);
 
-// Panel groups per talk, plus anyone not yet assigned to a session
+// Panel membership; anyone not yet assigned to a session is shown separately
 const assigned = new Set(talks.flatMap((t) => t.panel ?? []));
 const unassigned = panelists.filter((p) => !assigned.has(p.name)).sort(byLastName);
 const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
+
+// ── Chapter numerals adapt to which chapters this event has ──────────
+const roman = ["I", "II", "III", "IV", "V", "VI"];
+const chapterIds = [
+  event.data.about && "about",
+  talks.length > 0 && "programme",
+  talks.length === 0 && speakers.length > 0 && "speakers",
+  panelists.length > 0 && !groupedPanels && "panel",
+  (event.data.attendance?.length ?? 0) > 0 && "attending",
+].filter(Boolean) as string[];
+const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
 ---
 
 <PageLayout
@@ -98,7 +97,7 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
                 </span>
               </span>
             ) : (
-              <span class="font-serif text-lg text-slate-900 dark:text-slate-100">{longDate}</span>
+              <span class="font-serif text-lg text-slate-900 dark:text-slate-100">Date to be announced</span>
             )}
           </dd>
         </div>
@@ -145,9 +144,9 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
     </div>
   </section>
 
-  <!-- ─── I. About ────────────────────────────────────────────────── -->
+  <!-- ─── About ───────────────────────────────────────────────────── -->
   {event.data.about && (
-    <Section background="gray" numeral="I" title="About" metaLabel="A TMM event">
+    <Section background="gray" numeral={numeralOf("about")} title="About" metaLabel="A TMM event">
       <div class="max-w-3xl">
         <p class="font-serif text-xl italic leading-relaxed text-slate-700 dark:text-slate-300" style="text-indent: 1.5em;">
           {event.data.about}
@@ -176,112 +175,143 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
     </Section>
   )}
 
-  <!-- ─── II. Programme: the running order as a timeline ──────────── -->
-  {programme.length > 0 && (
-    <Section background="white" numeral="II" title="Programme" metaLabel="All times CEST">
-      <ol class="relative ml-1 max-w-4xl list-none border-l border-slate-200 dark:border-slate-700">
-        {programme.map((row) => {
+  <!-- ─── Programme: each session with its speaker and panel ──────── -->
+  {talks.length > 0 && (
+    <Section background="white" numeral={numeralOf("programme")} title="Programme" metaLabel="All times CEST">
+      <div>
+        {rows.map((row) => {
           const talk = row.talk ? talkBySpeaker(row.talk) : undefined;
 
-          {/* Plain moment: welcome, break, Q&A, closing */}
+          {/* Thin rows carry the moments between sessions */}
           if (!talk) {
             return (
-              <li class="scroll-fade-in relative pb-10 pl-8 last:pb-0 md:pl-12">
-                <span aria-hidden="true" class="absolute -left-[4.5px] top-[5px] h-2 w-2 rounded-full bg-slate-300 ring-4 ring-white dark:bg-slate-600 dark:ring-slate-900"></span>
-                <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  {row.time && (
-                    <span class="font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500">{row.time}</span>
-                  )}
-                  <span class="font-sans text-sm font-medium text-slate-600 dark:text-slate-400">{row.label}</span>
-                </p>
-              </li>
+              <div class="flex items-center gap-5 py-5">
+                {row.time && (
+                  <span class="font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500">{row.time}</span>
+                )}
+                <span class="font-sans text-sm font-medium text-slate-500 dark:text-slate-400">{row.label}</span>
+                <span aria-hidden="true" class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
+              </div>
             );
           }
 
-          {/* Session: talk + its discussion panel */}
+          {/* A session: talk, speaker, and its discussion panel together */}
           const idx = talks.indexOf(talk);
           const sp = speakerByName(talk.speaker);
-          const panel = (talk.panel ?? []).map((n) => ({ name: n, person: panelistByName(n) }));
+          const members = (talk.panel ?? []).flatMap((n) => {
+            const p = panelistByName(n);
+            return p ? [p] : [];
+          });
           return (
-            <li class="scroll-fade-in relative pb-14 pl-8 last:pb-0 md:pl-12">
-              <span aria-hidden="true" class="absolute -left-[5.5px] top-[5px] h-[10px] w-[10px] rounded-full bg-salmon-500 ring-4 ring-white dark:bg-salmon-400 dark:ring-slate-900"></span>
-
-              <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <article class="scroll-fade-in py-12 md:py-14">
+              <header class="flex items-baseline gap-5 border-b border-slate-900/15 pb-3 dark:border-slate-100/15 md:gap-7">
+                <span class="font-serif text-4xl italic leading-none text-salmon-500 dark:text-salmon-400 md:text-5xl">
+                  {idx + 1}
+                </span>
                 <span class="font-sans text-[11px] font-semibold uppercase text-navy-600 dark:text-navy-400" style="letter-spacing: 0.18em;">
-                  Session {idx + 1}
+                  Session
                 </span>
                 {talk.time && (
-                  <span class="font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500">{talk.time}</span>
+                  <span class="ml-auto font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500">{talk.time}</span>
                 )}
-              </p>
+              </header>
 
-              <h3 class="mt-3 max-w-[26ch] font-serif text-2xl leading-snug text-slate-900 dark:text-white md:text-3xl" style="letter-spacing: -0.01em;">
-                {talk.title}
-              </h3>
+              <div class="mt-8 max-w-3xl">
+                <h3 class="font-serif text-2xl leading-snug text-slate-900 dark:text-white md:text-3xl" style="letter-spacing: -0.01em;">
+                  {talk.title}
+                </h3>
 
-              <p class="mt-3 font-sans text-sm">
-                {sp?.website ? (
-                  <a href={sp.website} target="_blank" rel="noopener noreferrer" class="font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
-                    {talk.speaker}
-                  </a>
-                ) : (
-                  <span class="font-medium text-slate-800 dark:text-slate-200">{talk.speaker}</span>
-                )}
-                {sp?.institution && (
-                  <span class="text-slate-500 dark:text-slate-400"> · {sp.institution}</span>
-                )}
-              </p>
+                <p class="mt-3 font-sans text-sm">
+                  {sp?.website ? (
+                    <a href={sp.website} target="_blank" rel="noopener noreferrer" class="font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
+                      {talk.speaker}
+                    </a>
+                  ) : (
+                    <span class="font-medium text-slate-800 dark:text-slate-200">{talk.speaker}</span>
+                  )}
+                  {sp?.institution && (
+                    <span class="text-slate-500 dark:text-slate-400"> · {sp.institution}</span>
+                  )}
+                </p>
 
-              <p class="mt-4 max-w-[68ch] text-pretty text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">
-                {talk.abstract}
-              </p>
+                <p class="mt-5 text-pretty text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">
+                  {talk.abstract}
+                </p>
+              </div>
 
-              {panel.length > 0 && (
-                <div class="mt-6">
-                  <p class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
-                    In discussion
-                  </p>
-                  <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-3">
-                    <span class="flex -space-x-2">
-                      {panel.map(({ name, person }) => (
-                        <a href={`#${slugFor(name)}`} class="group relative block" title={name}>
-                          {person?.photo ? (
-                            <img
-                              src={person.photo}
-                              alt={name}
-                              loading="lazy"
-                              class="h-9 w-9 rounded-full object-cover object-[center_30%] ring-2 ring-white transition-transform duration-300 group-hover:-translate-y-0.5 dark:ring-slate-900"
-                            />
-                          ) : (
-                            <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 font-serif text-[10px] text-slate-400 ring-2 ring-white transition-transform duration-300 group-hover:-translate-y-0.5 dark:bg-slate-800 dark:text-slate-500 dark:ring-slate-900">
-                              {initialsFor(name)}
-                            </span>
-                          )}
-                        </a>
-                      ))}
-                    </span>
-                    <p class="font-sans text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-                      {panel.map(({ name }, i) => (
-                        <Fragment>
-                          <a href={`#${slugFor(name)}`} class="text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">{name}</a>{i < panel.length - 1 && <span aria-hidden="true"> · </span>}
-                        </Fragment>
-                      ))}
-                    </p>
-                  </div>
+              {(sp || members.length > 0) && (
+                <div class="stagger-grid mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+                  {sp && (
+                    <PersonCard
+                      name={sp.name}
+                      institution={sp.institution}
+                      role={sp.role}
+                      image={sp.photo}
+                      photoCredit={sp.photoCredit}
+                      photoCreditUrl={sp.photoCreditUrl}
+                      website={sp.website}
+                      links={sp.links}
+                      bio={sp.bio}
+                      tag="Speaker"
+                      stagger={0}
+                    />
+                  )}
+                  {members.map((person, i) => (
+                    <PersonCard
+                      name={person.name}
+                      institution={person.institution}
+                      role={person.role}
+                      image={person.photo}
+                      photoCredit={person.photoCredit}
+                      photoCreditUrl={person.photoCreditUrl}
+                      website={person.website}
+                      links={person.links}
+                      bio={person.bio}
+                      tag="Panel"
+                      stagger={Math.min((i + 1) * 70, 560)}
+                    />
+                  ))}
                 </div>
               )}
-            </li>
+            </article>
           );
         })}
-      </ol>
+
+        {groupedPanels && unassigned.length > 0 && (
+          <div class="py-12 md:py-14">
+            <header class="flex items-baseline gap-5 border-b border-slate-900/15 pb-3 dark:border-slate-100/15 md:gap-7">
+              <span class="font-sans text-[11px] font-semibold uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.18em;">
+                Panel to be assigned
+              </span>
+            </header>
+            <div class="stagger-grid mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+              {unassigned.map((person, i) => (
+                <PersonCard
+                  name={person.name}
+                  institution={person.institution}
+                  role={person.role}
+                  image={person.photo}
+                  photoCredit={person.photoCredit}
+                  photoCreditUrl={person.photoCreditUrl}
+                  website={person.website}
+                  links={person.links}
+                  bio={person.bio}
+                  tag="Panel"
+                  stagger={Math.min(i * 70, 560)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </Section>
   )}
 
-  <!-- ─── III. Speakers ───────────────────────────────────────────── -->
-  {sortedSpeakers.length > 0 && (
-    <Section background="gray" numeral="III" title="Speakers" metaLabel="In order of appearance">
+  <!-- ─── Speakers (only for events without a session programme) ──── -->
+  {talks.length === 0 && speakers.length > 0 && (
+    <Section background="white" numeral={numeralOf("speakers")} title="Speakers">
       <div class="stagger-grid grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-        {sortedSpeakers.map((person, i) => (
+        {[...speakers].sort(byLastName).map((person, i) => (
           <PersonCard
             name={person.name}
             institution={person.institution}
@@ -299,99 +329,31 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
     </Section>
   )}
 
-  <!-- ─── IV. Discussion panel, grouped by session ────────────────── -->
-  {panelists.length > 0 && (
-    <Section background="white" numeral="IV" title="Discussion panel" metaLabel={`${panelists.length} discussants`}>
-      {groupedPanels ? (
-        <div class="space-y-20">
-          {talks.map((talk, idx) => {
-            const members = (talk.panel ?? [])
-              .map((n) => panelistByName(n))
-              .filter(Boolean) as typeof panelists;
-            if (members.length === 0) return null;
-            return (
-              <div>
-                <header class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-slate-200 pb-3 dark:border-slate-700">
-                  <span class="font-sans text-[11px] font-semibold uppercase text-navy-600 dark:text-navy-400" style="letter-spacing: 0.18em;">
-                    Panel {idx + 1}
-                  </span>
-                  <span class="font-serif text-lg italic text-slate-600 dark:text-slate-400">
-                    with {talk.speaker}
-                  </span>
-                  {talk.time && (
-                    <span class="ml-auto font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500">{talk.time}</span>
-                  )}
-                </header>
-                <div class="stagger-grid mt-10 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-                  {members.map((person, i) => (
-                    <PersonCard
-                      name={person.name}
-                      institution={person.institution}
-                      role={person.role}
-                      image={person.photo}
-                      photoCredit={person.photoCredit}
-                      photoCreditUrl={person.photoCreditUrl}
-                      website={person.website}
-                      links={person.links}
-                      bio={person.bio}
-                      stagger={Math.min(i * 70, 560)}
-                    />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-
-          {unassigned.length > 0 && (
-            <div>
-              <header class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-slate-200 pb-3 dark:border-slate-700">
-                <span class="font-sans text-[11px] font-semibold uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.18em;">
-                  Panel to be assigned
-                </span>
-              </header>
-              <div class="stagger-grid mt-10 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-                {unassigned.map((person, i) => (
-                  <PersonCard
-                    name={person.name}
-                    institution={person.institution}
-                    role={person.role}
-                    image={person.photo}
-                    photoCredit={person.photoCredit}
-                    photoCreditUrl={person.photoCreditUrl}
-                    website={person.website}
-                    links={person.links}
-                    bio={person.bio}
-                    stagger={Math.min(i * 70, 560)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div class="stagger-grid grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {[...panelists].sort(byLastName).map((person, i) => (
-            <PersonCard
-              name={person.name}
-              institution={person.institution}
-              role={person.role}
-              image={person.photo}
-              photoCredit={person.photoCredit}
-              photoCreditUrl={person.photoCreditUrl}
-              website={person.website}
-              links={person.links}
-              bio={person.bio}
-              stagger={Math.min(i * 70, 560)}
-            />
-          ))}
-        </div>
-      )}
+  <!-- ─── Discussion panel (only when not grouped into sessions) ──── -->
+  {panelists.length > 0 && !groupedPanels && (
+    <Section background="gray" numeral={numeralOf("panel")} title="Discussion panel" metaLabel={`${panelists.length} discussants`}>
+      <div class="stagger-grid grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        {[...panelists].sort(byLastName).map((person, i) => (
+          <PersonCard
+            name={person.name}
+            institution={person.institution}
+            role={person.role}
+            image={person.photo}
+            photoCredit={person.photoCredit}
+            photoCreditUrl={person.photoCreditUrl}
+            website={person.website}
+            links={person.links}
+            bio={person.bio}
+            stagger={Math.min(i * 70, 560)}
+          />
+        ))}
+      </div>
     </Section>
   )}
 
-  <!-- ─── V. Attending ────────────────────────────────────────────── -->
+  <!-- ─── Attending ───────────────────────────────────────────────── -->
   {event.data.attendance && event.data.attendance.length > 0 && (
-    <Section background="gray" numeral="V" title="Attending" metaLabel="Practical details">
+    <Section background="gray" numeral={numeralOf("attending")} title="Attending" metaLabel="Practical details">
       <div class="grid gap-x-10 gap-y-12 md:grid-cols-3">
         {event.data.attendance.map((a) => (
           <div class="relative pt-6">
