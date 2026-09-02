@@ -186,8 +186,10 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
               <p class="font-sans text-[10px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.24em;">
                 The question
               </p>
-              <p class="mt-6 max-w-[22ch] font-serif text-[1.875rem] leading-[1.15] text-slate-900 dark:text-white md:text-[2.75rem]" style="letter-spacing: -0.022em;">
-                {event.data.aboutPull}
+              <p class="mt-6 max-w-[46ch] font-serif text-[1.75rem] leading-[1.2] text-slate-900 dark:text-white md:text-[2.625rem] md:leading-[1.15]" style="letter-spacing: -0.022em;">
+                {event.data.aboutPull.split(/(?<=[?!.])\s+/).map((sentence) => (
+                  <span class="block text-balance">{sentence}</span>
+                ))}
               </p>
             </>
           )}
@@ -311,7 +313,7 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
               {/* The talk, with its speaker alongside rather than lost among the panel */}
               <div class="mt-8 grid items-start gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_11rem]">
                 <div class="max-w-[68ch]">
-                  <h3 class="font-serif text-2xl leading-snug text-slate-900 dark:text-white md:text-3xl" style="letter-spacing: -0.01em;">
+                  <h3 class="max-w-[34ch] text-balance font-serif text-2xl leading-snug text-slate-900 dark:text-white md:text-3xl" style="letter-spacing: -0.01em;">
                     {talk.title}
                   </h3>
                   <p class="mt-5 text-pretty text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">
