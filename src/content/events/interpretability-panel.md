@@ -29,22 +29,15 @@ questions:
 aboutCoda:
   - label: "The format"
     text: >-
-      To explore these questions, the event brings together perspectives from cognitive
-      modelling, mathematical psychology, machine learning, and philosophy of science. Four
-      short talks will approach interpretability through questions about the scientific roles
-      of models, theory-informed large-scale models of cognition, combinations of neural
-      networks and process models, and the relationship between interpretation and
-      understanding. Each talk will serve as the starting point for a structured panel
-      discussion, but the conversation will not be limited to the content of the talk. Panel
-      members will also be encouraged to introduce other questions and perspectives that they
-      consider important to the broader discussion.
+      Four short talks will open different perspectives on model interpretability, each
+      followed by a structured panel discussion. The talks provide a starting point, while
+      the panels are encouraged to broaden the conversation and bring in their own questions
+      and perspectives.
   - label: "The aim"
     text: >-
-      The aim is not to impose a single definition of interpretability or to argue that one
-      model class is always preferable to another. Instead, we hope to clarify where different
-      modelling traditions agree and disagree, identify the dimensions along which
-      interpretability should be evaluated, and begin developing a more useful shared
-      vocabulary for psychological science.
+      Rather than seeking a single definition of interpretability, the event aims to clarify
+      where different modelling traditions agree and disagree, and to develop a more useful
+      shared language for discussing interpretability in psychological science.
 talks:
   - time: "15:35–16:20"
     speaker: "Adam Sanborn"
