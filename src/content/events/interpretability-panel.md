@@ -8,30 +8,43 @@ type: "webinar"
 featured: true
 description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
 about: |
-  A model earns its keep in psychology by letting us say something about the mind: that
-  attention is what differs between these two groups, that memories fade at this rate. Every
-  such claim is read off the model. If the model cannot be read, there is no claim — only a
-  good fit.
-
-  So the field asks that models be <em>interpretable</em>. But the word covers at least three
-  different demands: that a model be small enough to hold in your head, that each parameter
-  stand for a real psychological quantity, or merely that some method exists for probing it
-  after the fact. A model can satisfy any one of these and fail the rest.
-
-  It is tempting to blame machine learning for the confusion. But psychologists were already
-  arguing about whether a fitted parameter measures the process it is named after. What
-  changed is that the three demands used to arrive together — a small model with labelled
-  parts was usually all of them at once — and large models pulled them apart. A network can
-  now predict behaviour across hundreds of experiments and remain unreadable. The question
-  can no longer be deferred.
-aboutPull: "What should it mean? And is there still one answer?"
+  Computational models serve many different purposes in psychological science. They can
+  describe patterns in data, formalise theories, generate predictions, and offer accounts of
+  the processes that produce behaviour. Yet the term <em>interpretable</em> is now applied to
+  very different kinds of models, from evidence accumulation models and Bayesian accounts to
+  cognitive architectures and large neural networks, often without agreement about what
+  exactly is being interpreted, by whom, or for what scientific purpose.
+aboutPull: >-
+  This event asks whether interpretability is a single property of a model, or a family of
+  related qualities that depend on the model's users, aims, and level of description.
 questions:
-  - label: "Foundations"
-    text: "What is interpretability, what is it not, and is it graded or binary?"
-  - label: "Structure"
-    text: "Which model classes are more interpretable, and why? How do mimicry, auxiliary assumptions, and parameter identifiability complicate the picture?"
-  - label: "Relations"
-    text: "How does interpretability relate to explanation, prediction, and generalizability, and can it be disentangled from them?"
+  - label: "Model class"
+    text: "Are process models inherently more interpretable than descriptive or machine-learned models?"
+  - label: "Parsimony"
+    text: "Does parsimony make a model easier to understand, or can a simple model still conceal consequential assumptions?"
+  - label: "Distinctions"
+    text: "How should interpretability be distinguished from explanation, prediction, identifiability, psychological plausibility, scope, and generalisability?"
+  - label: "Understanding"
+    text: "When a model is opaque, can interpretation methods provide genuine understanding, or only a more accessible description of its behaviour?"
+aboutCoda:
+  - label: "The format"
+    text: >-
+      To explore these questions, the event brings together perspectives from cognitive
+      modelling, mathematical psychology, machine learning, and philosophy of science. Four
+      short talks will approach interpretability through questions about the scientific roles
+      of models, theory-informed large-scale models of cognition, combinations of neural
+      networks and process models, and the relationship between interpretation and
+      understanding. Each talk will serve as the starting point for a structured panel
+      discussion, but the conversation will not be limited to the content of the talk. Panel
+      members will also be encouraged to introduce other questions and perspectives that they
+      consider important to the broader discussion.
+  - label: "The aim"
+    text: >-
+      The aim is not to impose a single definition of interpretability or to argue that one
+      model class is always preferable to another. Instead, we hope to clarify where different
+      modelling traditions agree and disagree, identify the dimensions along which
+      interpretability should be evaluated, and begin developing a more useful shared
+      vocabulary for psychological science.
 talks:
   - time: "15:35–16:20"
     speaker: "Adam Sanborn"
@@ -52,6 +65,7 @@ talks:
       - "Sigert Ariens"
       - "Ven Popov"
       - "Amy Criss"
+      - "Marie-Ann Sengewald"
   - time: "17:20–18:05"
     speaker: "Adrian Erasmus"
     title: "Interpretability as a bridge to understanding"

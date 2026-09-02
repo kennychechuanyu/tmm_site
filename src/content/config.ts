@@ -48,8 +48,11 @@ const events = defineCollection({
     about: z.string().optional(),
     /** The question the event exists to ask, set at display size. */
     aboutPull: z.string().optional(),
-    /** Closing line: how the event goes about it. */
-    aboutCoda: z.string().optional(),
+    /** Closing blocks: how the event goes about it, and what it is for. */
+    aboutCoda: z.array(z.object({
+      label: z.string(),
+      text: z.string(),
+    })).optional(),
     questions: z.array(z.object({
       label: z.string(),
       text: z.string(),
