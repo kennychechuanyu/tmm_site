@@ -78,7 +78,8 @@ attendance:
   - group: "Audience Q&A"
     access: "Closing session"
     note: "The closing Q&A is open to the whole audience. Questions can be put to any of the speakers or panels from the afternoon."
-recordingNote: "The event will be recorded for internal reference by the coordinating team. The recording will not be made publicly available."
+recordingAccess: "Internal for now"
+recordingNote: "The session will be recorded. For the moment the recording is for the coordinating team's own reference; we would ask the speakers and panel members first before sharing any of it more widely."
 speakers:
   - name: "Marcel Binz"
     institution: "Helmholtz Munich"

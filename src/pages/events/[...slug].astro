@@ -448,9 +448,11 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
               </span>
               Recording
             </h3>
-            <p class="mt-1.5 font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
-              Not public
-            </p>
+            {event.data.recordingAccess && (
+              <p class="mt-1.5 font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
+                {event.data.recordingAccess}
+              </p>
+            )}
             <p class="mt-3.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
               {event.data.recordingNote}
             </p>

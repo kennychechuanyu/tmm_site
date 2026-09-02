@@ -78,6 +78,7 @@ const events = defineCollection({
       access: z.string().optional(),
       note: z.string(),
     })).optional(),
+    recordingAccess: z.string().optional(),
     recordingNote: z.string().optional(),
   }),
 });
