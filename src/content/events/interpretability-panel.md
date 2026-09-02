@@ -218,6 +218,13 @@ panelists:
     institution: "Indiana University"
   - name: "Amy Criss"
     institution: "Syracuse University"
+    role: "Department of Psychology"
+    photo: "/images/people/AC.jpg"
+    bio: "Dr. Amy H. Criss is a cognitive scientist and Professor of Psychology at Syracuse University. Her program of research is focused on understanding human memory using computational modeling and behavioral experiments in tandem. Prior to her faculty position, Dr. Criss was a postdoctoral fellow at Carnegie Mellon University. She earned a B.A. at Miami University, a Ph.D. in both cognitive science and cognitive psychology at Indiana University. She has served as Department Chair, Graduate Director, and has served her research community in roles including President of the Society for Mathematical Psychology and associate editor for several journals. Dr. Criss is currently on detail at the National Science Foundation where she serves as Program Director in the Directorate for Translation, Innovation, and Partnerships (TIP) and Directorate for Social Behavioral and Economic Sciences (SBE)."
+    website: "https://memolab.syr.edu/"
+    links:
+      - label: "Syracuse profile"
+        url: "https://artsandsciences.syracuse.edu/people/faculty/criss-phd-amy-h/"
   - name: "Julia Haaf"
     institution: "University of Amsterdam"
   - name: "Trisha Van Zandt"
