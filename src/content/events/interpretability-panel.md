@@ -73,11 +73,9 @@ programme:
     label: "Closing"
 attendance:
   - group: "Registration"
-    access: "Open audience"
     note: "Anyone interested in the topic is welcome to attend. Registration opens soon, and the joining link will be shared with registered attendees before the event."
   - group: "Audience Q&A"
     note: "The closing Q&A is open to the whole audience. Questions can be put to any of the speakers or panels from the afternoon."
-recordingAccess: "Internal for now"
 recordingNote: "The session will be recorded. For the moment the recording is for the coordinating team's own reference; we would ask the speakers and panel members first before sharing any of it more widely."
 speakers:
   - name: "Marcel Binz"
