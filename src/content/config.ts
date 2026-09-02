@@ -43,7 +43,10 @@ const events = defineCollection({
     timeNote: z.string().optional(),
     about: z.string().optional(),
     aboutPull: z.string().optional(),
-    aboutCoda: z.string().optional(),
+    aboutCoda: z.array(z.object({
+      label: z.string(),
+      text: z.string(),
+    })).optional(),
     questions: z.array(z.object({
       label: z.string(),
       text: z.string(),
