@@ -7,9 +7,9 @@ location: "Online — Microsoft Teams"
 type: "webinar"
 featured: true
 description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
-about: "Computational models now sit at the centre of psychological theorising. Yet the word <em>interpretable</em>, attached to cognitive architectures, evidence accumulation models, Bayesian accounts, and now large neural networks alike, has begun to mean very different things to very different people."
+about: "<em>Interpretable</em> has become a word psychological science can neither do without nor agree on. It is claimed for cognitive architectures, for evidence accumulation models, for Bayesian accounts, and now for large neural networks — model classes with very little in common. Either the word tracks something they genuinely share, or it has quietly become four different words."
 aboutPull: "What should it mean? And is a shared notion even recoverable?"
-aboutCoda: "We are bringing together speakers from cognitive modelling, machine learning, and the philosophy of science for a structured conversation."
+aboutCoda: "Four speakers, from cognitive modelling, machine learning, and the philosophy of science, take the question from different starting points. The aim is less to fix a definition than to find out how much of the disagreement is substantive."
 questions:
   - label: "Foundations"
     text: "What is interpretability, what is it not, and is it graded or binary?"
