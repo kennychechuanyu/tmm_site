@@ -426,11 +426,6 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
             <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></span>
             <span aria-hidden="true" class="absolute left-0 top-0 h-[2px] w-8 bg-salmon-500 dark:bg-salmon-400"></span>
             <h3 class="font-serif text-xl text-slate-900 dark:text-slate-100">{a.group}</h3>
-            {a.access && (
-              <p class="mt-1.5 font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
-                {a.access}
-              </p>
-            )}
             <p class="mt-3.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
               {a.note}
             </p>
@@ -448,11 +443,6 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
               </span>
               Recording
             </h3>
-            {event.data.recordingAccess && (
-              <p class="mt-1.5 font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
-                {event.data.recordingAccess}
-              </p>
-            )}
             <p class="mt-3.5 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
               {event.data.recordingNote}
             </p>

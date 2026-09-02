@@ -75,10 +75,8 @@ const events = defineCollection({
     /** Who can attend and how. */
     attendance: z.array(z.object({
       group: z.string(),
-      access: z.string().optional(),
       note: z.string(),
     })).optional(),
-    recordingAccess: z.string().optional(),
     recordingNote: z.string().optional(),
   }),
 });
