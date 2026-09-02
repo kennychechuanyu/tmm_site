@@ -8,14 +8,21 @@ type: "webinar"
 featured: true
 description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
 about: |
-  Psychology's models are getting better at predicting what people do, and harder to understand.
-  A model can now reproduce human behaviour across hundreds of experiments and still be almost
-  impossible to read. That is an uncomfortable position for a science whose purpose is to explain
-  the mind.
+  Psychology's models are getting better at predicting what people do, and harder to
+  understand. A model can now reproduce human behaviour across hundreds of experiments and
+  still be almost impossible to read. That is an uncomfortable position for a science whose
+  purpose is to explain the mind.
 
-  The usual answer is to ask that models be <em>interpretable</em>. But the word gets applied to
-  things as different as a diagram of memory stages and a billion-parameter network, often without
-  anyone noticing that these are different demands.
+  The usual answer is to ask that models be <em>interpretable</em>. But that word is doing
+  several jobs at once. Sometimes it means the model has few enough moving parts to hold in
+  your head. Sometimes it means each parameter stands for a real psychological quantity —
+  how fast a person gathers evidence, how quickly a memory fades. Sometimes it means only
+  that a method exists for probing a trained network after the fact.
+
+  These are not degrees of a single virtue. A model can be small and readable while its
+  parameters measure nothing in particular. A model can be unreadable and still capture
+  something real. Neither fact settles whether we have understood anything — yet all of them
+  are defended with the same word.
 aboutPull: "What should it mean? And is there still one answer?"
 questions:
   - label: "Foundations"
