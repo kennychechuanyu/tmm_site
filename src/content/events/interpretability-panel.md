@@ -8,21 +8,22 @@ type: "webinar"
 featured: true
 description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
 about: |
-  Psychology's models are getting better at predicting what people do, and harder to
-  understand. A model can now reproduce human behaviour across hundreds of experiments and
-  still be almost impossible to read. That is an uncomfortable position for a science whose
-  purpose is to explain the mind.
+  A model earns its keep in psychology by letting us say something about the mind: that
+  attention is what differs between these two groups, that memories fade at this rate. Every
+  such claim is read off the model. If the model cannot be read, there is no claim — only a
+  good fit.
 
-  The usual answer is to ask that models be <em>interpretable</em>. But that word is doing
-  several jobs at once. Sometimes it means the model has few enough moving parts to hold in
-  your head. Sometimes it means each parameter stands for a real psychological quantity —
-  how fast a person gathers evidence, how quickly a memory fades. Sometimes it means only
-  that a method exists for probing a trained network after the fact.
+  So the field asks that models be <em>interpretable</em>. But the word covers at least three
+  different demands: that a model be small enough to hold in your head, that each parameter
+  stand for a real psychological quantity, or merely that some method exists for probing it
+  after the fact. A model can satisfy any one of these and fail the rest.
 
-  These are not degrees of a single virtue. A model can be small and readable while its
-  parameters measure nothing in particular. A model can be unreadable and still capture
-  something real. Neither fact settles whether we have understood anything — yet all of them
-  are defended with the same word.
+  It is tempting to blame machine learning for the confusion. But psychologists were already
+  arguing about whether a fitted parameter measures the process it is named after. What
+  changed is that the three demands used to arrive together — a small model with labelled
+  parts was usually all of them at once — and large models pulled them apart. A network can
+  now predict behaviour across hundreds of experiments and remain unreadable. The question
+  can no longer be deferred.
 aboutPull: "What should it mean? And is there still one answer?"
 questions:
   - label: "Foundations"
