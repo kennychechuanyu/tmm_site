@@ -8,15 +8,21 @@ type: "webinar"
 featured: true
 description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
 about: |
-  Computational models serve many different purposes in psychological science. They can
-  describe patterns in data, formalise theories, generate predictions, and offer accounts of
-  the processes that produce behaviour. Yet the term <em>interpretable</em> is now applied to
-  very different kinds of models, from evidence accumulation models and Bayesian accounts to
-  cognitive architectures and large neural networks, often without agreement about what
-  exactly is being interpreted, by whom, or for what scientific purpose.
-aboutPull: >-
-  This event asks whether interpretability is a single property of a model, or a family of
-  related qualities that depend on the model's users, aims, and level of description.
+  Computational models can serve many purposes in psychological and cognitive science. They
+  can describe patterns in data, formalise theories, and generate predictions. Researchers
+  often distinguish between normative, descriptive, and process models; between models
+  designed to explain, predict, or reproduce behaviour. But these categories do not tell us
+  what makes a model <em>interpretable</em>, or whether interpretability means the same thing
+  across modelling traditions.
+
+  Is interpretability a single property that a model possesses or lacks? Does it lie in the
+  meaning of a model's parameters, the transparency of its functional form, its relation to
+  psychological constructs or external measures, or something else? And how does what counts
+  as interpretable depend on who is using the model, for what purpose, and at what level of
+  description? These questions arise across models ranging from evidence accumulation and
+  Bayesian approaches to cognitive architectures and large neural networks. This event
+  explores these different ways of thinking about interpretability and how they might help us
+  evaluate and use models in psychological science.
 questions:
   - label: "Model class"
     text: "Are process models inherently more interpretable than descriptive or machine-learned models?"
