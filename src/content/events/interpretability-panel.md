@@ -2,7 +2,7 @@
 title: "Interpretability in Psychological Models"
 date: 2026-10-15
 time: "15:30–19:20 CEST"
-timeNote: "14:30 London · 09:30 New York · 06:30 Los Angeles"
+timeNote: "21:30 Hong Kong · 14:30 London · 09:30 New York · 06:30 Los Angeles · 00:30 Melbourne (+1)"
 location: "Online — Microsoft Teams"
 type: "webinar"
 featured: true
