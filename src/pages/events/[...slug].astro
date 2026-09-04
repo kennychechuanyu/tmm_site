@@ -3,7 +3,6 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
 import Button from "../../components/Button.astro";
 import PersonCard from "../../components/PersonCard.astro";
-import InterpretabilityFigure from "../../components/InterpretabilityFigure.astro";
 import RetimeLocal from "../../components/RetimeLocal.astro";
 import { toInstants } from "../../utils/eventTime";
 import { getCollection, render } from "astro:content";
@@ -321,20 +320,19 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
                 )}
               </header>
 
-              {/* The talk, with its speaker alongside rather than lost among the panel */}
-              <div class="mt-8 grid items-start gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_11rem]">
-                <div>
-                  {/* The title takes the full column; only the abstract is held
-                      to a reading measure, or long titles break badly. */}
-                  <h3 class="text-pretty font-serif text-2xl leading-snug text-slate-900 dark:text-white md:text-3xl" style="letter-spacing: -0.01em;">
-                    {talk.title}
-                  </h3>
-                  <p class="mt-5 max-w-[68ch] text-pretty text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">
-                    {talk.abstract}
-                  </p>
-                </div>
+              {/* The title takes the whole column, so long ones break on their own terms */}
+              <h3 class="mt-8 text-pretty font-serif text-2xl leading-snug text-slate-900 dark:text-white md:text-3xl" style="letter-spacing: -0.01em;">
+                {talk.title}
+              </h3>
+
+              {/* Abstract with the speaker beside it, packed to the left: the two read
+                  as one unit instead of a text block and a portrait stranded at the far edge */}
+              <div class="mt-5 flex flex-col items-start gap-y-10 lg:flex-row lg:gap-x-14">
+                <p class="max-w-[68ch] text-pretty text-[15px] leading-[1.8] text-slate-600 dark:text-slate-300">
+                  {talk.abstract}
+                </p>
                 {sp && (
-                  <div class="lg:pt-1">
+                  <div class="w-full shrink-0 lg:w-44">
                     <PersonCard
                       name={sp.name}
                       institution={sp.institution}
@@ -356,7 +354,7 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
                   <p class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
                     In discussion
                   </p>
-                  <div class="stagger-grid mt-8 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
+                  <div class:list={["stagger-grid mt-8 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3", members.length >= 6 ? "lg:grid-cols-6" : "lg:grid-cols-5"]}>
                     {members.map((person, i) => (
                       <PersonCard
                         name={person.name}
@@ -385,7 +383,7 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
                 Panel to be assigned
               </span>
             </header>
-            <div class="stagger-grid mt-8 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
+            <div class:list={["stagger-grid mt-8 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3", unassigned.length >= 6 ? "lg:grid-cols-6" : "lg:grid-cols-5"]}>
               {unassigned.map((person, i) => (
                 <PersonCard
                   name={person.name}

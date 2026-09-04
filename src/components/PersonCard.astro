@@ -78,7 +78,12 @@ const extraLinksHtml = extraLinks
        the panel and this becomes a quiet empty frame with the initials. -->
   <div
     data-card-portrait
-    class="relative aspect-[4/5] w-40 overflow-hidden rounded-xl bg-slate-100 shadow-[0_14px_36px_-14px_rgba(15,23,42,0.3)] transition-all duration-500 group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.4)] group-aria-expanded:shadow-none group-aria-expanded:ring-1 group-aria-expanded:ring-slate-200 dark:bg-slate-800 dark:shadow-[0_14px_36px_-14px_rgba(0,0,0,0.65)] dark:group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.3)] dark:group-aria-expanded:ring-slate-700"
+    class:list={[
+      "relative aspect-[4/5] w-40 overflow-hidden rounded-xl transition-all duration-500",
+      image
+        ? "bg-slate-100 shadow-[0_14px_36px_-14px_rgba(15,23,42,0.3)] group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.4)] group-aria-expanded:shadow-none group-aria-expanded:ring-1 group-aria-expanded:ring-slate-200 dark:bg-slate-800 dark:shadow-[0_14px_36px_-14px_rgba(0,0,0,0.65)] dark:group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.3)] dark:group-aria-expanded:ring-slate-700"
+        : "border border-dashed border-slate-300 group-hover:border-salmon-400/70 dark:border-slate-600 dark:group-hover:border-salmon-400/60",
+    ]}
   >
     {image ? (
       <Fragment>
@@ -129,7 +134,12 @@ const extraLinksHtml = extraLinks
     <div class="grid items-start gap-8 md:grid-cols-[auto_1fr] md:gap-12">
       <!-- The portrait's home while the profile is open -->
       <div>
-        <div data-panel-portrait class="aspect-[4/5] w-44 overflow-hidden rounded-xl bg-slate-100 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.35)] dark:bg-slate-800 dark:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)] md:w-56">
+        <div data-panel-portrait class:list={[
+          "aspect-[4/5] w-44 overflow-hidden rounded-xl md:w-56",
+          image
+            ? "bg-slate-100 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.35)] dark:bg-slate-800 dark:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)]"
+            : "border border-dashed border-slate-300 dark:border-slate-600",
+        ]}>
           {image ? (
             <img src={image} alt={name} loading="lazy" class="h-full w-full object-cover object-[center_30%]" />
           ) : (
