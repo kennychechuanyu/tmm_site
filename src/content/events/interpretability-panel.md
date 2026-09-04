@@ -4,6 +4,7 @@ date: 2026-10-15
 time: "15:30–19:20 CEST"
 timeNote: "21:30 Hong Kong · 14:30 London · 09:30 New York · 06:30 Los Angeles · 00:30 Melbourne (+1)"
 location: "Online — Microsoft Teams"
+registrationUrl: "https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621"
 type: "webinar"
 featured: true
 description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
