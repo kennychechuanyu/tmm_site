@@ -85,6 +85,8 @@ const events = defineCollection({
       label: z.string().optional(),
       talk: z.string().optional(),
     })).optional(),
+    /** Minutes of talk and of discussion in each session, for the running order. */
+    sessionFormat: z.object({ talk: z.number(), discussion: z.number() }).optional(),
     /** Who can attend and how. */
     attendance: z.array(z.object({
       group: z.string(),

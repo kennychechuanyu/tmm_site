@@ -104,6 +104,7 @@ programme:
     label: "Audience Q&A"
   - time: "19:15"
     label: "Closing"
+sessionFormat: { talk: 15, discussion: 30 }
 moderators:
   - name: Kenny Yu
     institution: KU Leuven

@@ -70,6 +70,33 @@ const instantsOf = (raw?: string) => toInstants(raw, d, tz);
 /** Just the opening time of a range, for the compact running order. */
 const startLabel = (raw?: string) => raw?.match(/\d{1,2}:\d{2}/)?.[0] ?? raw;
 const eventSpan = instantsOf(event.data.time);
+
+// ── Running order: every row gets a start, an end and a length ───────
+const wallClock = (iso?: string) =>
+  iso
+    ? new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(iso))
+    : undefined;
+const zoneAbbr = eventSpan
+  ? new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "numeric", timeZoneName: "short" })
+      .formatToParts(new Date(eventSpan.start))
+      .find((p) => p.type === "timeZoneName")?.value
+  : undefined;
+const sessionFormat = event.data.sessionFormat;
+const timeline = rows
+  .map((row) => {
+    const talk = row.talk ? talkBySpeaker(row.talk) : undefined;
+    const raw = talk?.time ?? row.time;
+    return { row, talk, raw, at: instantsOf(raw) };
+  })
+  .map((r, i, all) => {
+    // A row without its own end runs until the next row starts, or the event ends.
+    const nextStart = all.slice(i + 1).find((x) => x.at?.start)?.at?.start;
+    const end = r.at?.end ?? nextStart ?? eventSpan?.end;
+    const minutes =
+      r.at?.start && end ? Math.round((new Date(end).getTime() - new Date(r.at.start).getTime()) / 60000) : undefined;
+    const label = r.at?.start ? `${wallClock(r.at.start)} – ${wallClock(end)}` : r.raw;
+    return { ...r, end, minutes, label };
+  });
 /** Static .ics built by src/pages/events/[slug].ics.ts for dated, timed events. */
 const icsHref = eventSpan ? `/events/${event.slug}.ics` : undefined;
 
@@ -260,54 +287,77 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
       title="Programme"
       subtitle="Four short talks, each followed by a 30-minute guided discussion with its panel."
     >
-      {/* At a glance — the whole event in eight lines, each talk a jump link */}
-      <ol class="mb-20 max-w-4xl divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-700 dark:border-slate-700 md:mb-24">
-        {rows.map((row) => {
-          const talk = row.talk ? talkBySpeaker(row.talk) : undefined;
-          const raw = talk?.time ?? row.time;
-          const at = instantsOf(raw);
-          const clock = (
-            <time
-              datetime={at?.start}
-              data-local-time
-              data-compact
-              data-tz={tz}
-              data-ref={eventSpan?.start}
-              class="font-mono text-xs tabular-nums text-slate-400 dark:text-slate-500"
-            >{startLabel(raw)}</time>
-          );
-
-          if (!talk) {
+      {/* At a glance: every row with its start, end and length; sessions numbered to match the detail below */}
+      <table class="mb-20 w-full max-w-4xl border-collapse md:mb-24">
+        <thead>
+          <tr class="border-b border-slate-900/15 dark:border-slate-100/15">
+            <th scope="col" class="pb-3 pr-4 text-left font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500 md:pr-6" style="letter-spacing: 0.22em;">
+              Time{zoneAbbr && (
+                <span> · <span data-local-zone data-at={eventSpan?.start} data-tz={tz}>{zoneAbbr}</span></span>
+              )}
+            </th>
+            <th scope="col" class="pb-3 text-left font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
+              Programme
+            </th>
+            <th scope="col" class="hidden pb-3 pl-4 text-right font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500 sm:table-cell" style="letter-spacing: 0.22em;">
+              Length
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {timeline.map(({ row, talk, at, end, minutes, label }) => {
+            const idx = talk ? talks.indexOf(talk) : -1;
+            const isBreak = !talk && /break/i.test(row.label ?? "");
             return (
-              <li class="grid grid-cols-[4.5rem_1fr] items-baseline gap-4 py-3.5 md:grid-cols-[6rem_1fr]">
-                {clock}
-                <span class="font-sans text-sm text-slate-500 dark:text-slate-400">{row.label}</span>
-              </li>
+              <tr class:list={[
+                "border-b border-slate-200 dark:border-slate-700",
+                isBreak && "bg-slate-50/80 dark:bg-slate-900/40",
+              ]}>
+                <td class="whitespace-nowrap py-4 pr-4 align-top font-mono text-xs tabular-nums leading-6 text-slate-500 dark:text-slate-400 md:pr-6">
+                  <time
+                    datetime={at?.start}
+                    data-local-time
+                    data-compact
+                    data-end={end}
+                    data-tz={tz}
+                    data-ref={eventSpan?.start}
+                  >{label}</time>
+                </td>
+                <td class="py-4 align-top">
+                  <div class="flex items-start gap-3 md:gap-4">
+                    <span aria-hidden="true" class="w-4 shrink-0 font-serif text-lg leading-6 text-salmon-500 dark:text-salmon-400 md:text-xl">
+                      {talk ? idx + 1 : ""}
+                    </span>
+                    {talk ? (
+                      <div class="min-w-0">
+                        <a href={`#session-${idx + 1}`} class="group inline-flex items-baseline gap-2">
+                          <span class="font-serif text-base leading-6 text-slate-900 decoration-salmon-400/60 underline-offset-4 group-hover:underline dark:text-slate-100 md:text-lg">
+                            {talk.title}
+                          </span>
+                          <svg aria-hidden="true" class="h-3 w-3 shrink-0 translate-y-px text-slate-300 transition-transform duration-300 group-hover:translate-y-1 group-hover:text-salmon-500 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v13m0 0 5.5-5.5M12 18l-5.5-5.5" />
+                          </svg>
+                        </a>
+                        <p class="mt-1 font-sans text-[13px] text-slate-500 dark:text-slate-400">
+                          <span class="text-slate-700 dark:text-slate-300">{talk.speaker}</span>
+                          {sessionFormat && (
+                            <span> · Talk {sessionFormat.talk} min · Discussion {sessionFormat.discussion} min</span>
+                          )}
+                        </p>
+                      </div>
+                    ) : (
+                      <span class="font-sans text-sm leading-6 text-slate-500 dark:text-slate-400">{row.label}</span>
+                    )}
+                  </div>
+                </td>
+                <td class="hidden whitespace-nowrap py-4 pl-4 text-right align-top font-mono text-xs tabular-nums leading-6 text-slate-400 dark:text-slate-500 sm:table-cell">
+                  {minutes !== undefined && `${minutes} min`}
+                </td>
+              </tr>
             );
-          }
-
-          const idx = talks.indexOf(talk);
-          return (
-            <li>
-              <a
-                href={`#session-${idx + 1}`}
-                class="group -mx-3 grid grid-cols-[4.5rem_1fr_auto] items-baseline gap-4 rounded px-3 py-3.5 transition-colors hover:bg-slate-50 dark:hover:bg-slate-900/40 md:grid-cols-[6rem_1fr_auto]"
-              >
-                {clock}
-                <span class="min-w-0">
-                  <span class="font-serif text-base text-slate-900 decoration-salmon-400/60 underline-offset-4 group-hover:underline dark:text-slate-100 md:text-lg">
-                    {talk.title}
-                  </span>
-                  <span class="ml-2 font-sans text-sm text-slate-500 dark:text-slate-400">{talk.speaker}</span>
-                </span>
-                <svg aria-hidden="true" class="h-3 w-3 shrink-0 translate-y-px text-slate-300 transition-transform duration-300 group-hover:translate-y-1 group-hover:text-salmon-500 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v13m0 0 5.5-5.5M12 18l-5.5-5.5" />
-                </svg>
-              </a>
-            </li>
-          );
-        })}
-      </ol>
+          })}
+        </tbody>
+      </table>
 
       {/* Each session in full: the talk, its speaker, and the panel that responds */}
       <div class="space-y-20 md:space-y-28">

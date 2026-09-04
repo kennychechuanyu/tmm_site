@@ -10,6 +10,7 @@
  *   <time data-local-time datetime="…Z" data-end="…Z" data-tz="Europe/Brussels">
  *   <time … data-compact data-ref="…Z">   short form; flags a day shift
  *   <p    data-local-note data-source="15:30–19:20 CEST" data-at="…Z" data-tz="…">
+ *   <span data-local-zone data-at="…Z" data-tz="…">CEST</span>  → reader's zone name
  *   <a    data-local-date="…Z" data-tz="…">  with data-part children:
  *           day · month · month-short · month-year · year · weekday
  */
@@ -79,6 +80,18 @@
       el.textContent = source
         ? `${source} · shown in your time zone`
         : "Shown in your time zone";
+    });
+
+    // A zone label next to a table of times: "CEST" becomes "PDT", "GMT+8", …
+    const zoneName = fmt({ hour: "numeric", timeZoneName: "short" });
+    document.querySelectorAll<HTMLElement>("[data-local-zone]").forEach((el) => {
+      const at = el.dataset.at;
+      const zone = el.dataset.tz;
+      if (!at || !zone) return;
+      const when = new Date(at);
+      if (!differs(when, zone)) return;
+      const part = zoneName.formatToParts(when).find((p) => p.type === "timeZoneName");
+      if (part) el.textContent = part.value;
     });
 
     // A date can shift outright: 15:30 in Brussels is next morning in Melbourne.
