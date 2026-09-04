@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  site: "https://tmm-site.vercel.app",
+  site: "https://tmmpsych.vercel.app",
   integrations: [
     tailwind()
   ],
