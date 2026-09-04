@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tmm-site.vercel.app/sitemap-index.xml
+Sitemap: https://tmmpsych.vercel.app/sitemap-index.xml
