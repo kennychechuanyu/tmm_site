@@ -53,6 +53,8 @@ const events = defineCollection({
     })).optional(),
     speakers: z.array(personSchema).optional(),
     panelists: z.array(personSchema).optional(),
+    moderators: z.array(personSchema).optional(),
+    moderatorsNote: z.string().optional(),
     talks: z.array(z.object({
       time: z.string().optional(),
       speaker: z.string(),
