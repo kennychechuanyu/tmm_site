@@ -102,7 +102,7 @@ programme:
     label: "Closing"
 attendance:
   - group: "Registration"
-    note: "Anyone interested in the topic is welcome to attend. Registration opens soon, and the joining link will be shared with registered attendees before the event."
+    note: "Anyone interested in the topic is welcome to attend. <a href=\"https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621\" target=\"_blank\" rel=\"noopener noreferrer\">Registration is open</a>; the joining link is emailed to you as soon as you register."
   - group: "Audience Q&A"
     note: "The closing Q&A is open to the whole audience. Questions can be put to any of the speakers or panels from the afternoon."
 recordingNote: "The session will be recorded. For the moment the recording is for the coordinating team's own reference; we would ask the speakers and panel members first before sharing any of it more widely."
