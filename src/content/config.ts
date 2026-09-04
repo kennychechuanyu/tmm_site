@@ -70,6 +70,7 @@ const events = defineCollection({
       label: z.string().optional(),
       talk: z.string().optional(),
     })).optional(),
+    sessionFormat: z.object({ talk: z.number(), discussion: z.number() }).optional(),
     attendance: z.array(z.object({
       group: z.string(),
       note: z.string(),
