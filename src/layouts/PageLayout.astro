@@ -8,6 +8,10 @@ interface Props {
   subtitle?: string;
   eyebrow?: string;
   compact?: boolean;
+  /** Social-share image path, forwarded to <SEO>. */
+  image?: string;
+  /** Fraction of the hero width the constellation's hubs keep clear of, for long titles. */
+  titleClearance?: number;
 }
 
 const {
@@ -16,14 +20,21 @@ const {
   subtitle,
   eyebrow = "TMM Network",
   compact = false,
+  image,
+  titleClearance = 0.46,
 } = Astro.props;
+
+const heroMask =
+  titleClearance > 0.5
+    ? "linear-gradient(72deg, transparent 50%, #000 72%)"
+    : "linear-gradient(72deg, transparent 40%, #000 66%)";
 
 const titleSize = compact
   ? "clamp(1.875rem, 4vw, 3.25rem)"
   : "clamp(2.5rem, 7vw, 5.25rem)";
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={image}>
   <!-- Editorial Page Header -->
   <section class="relative overflow-hidden border-b border-slate-900/10 bg-white pt-24 pb-16 dark:border-slate-100/10 dark:bg-slate-950 md:pt-32 md:pb-24">
     <!-- Paper texture -->
@@ -34,7 +45,7 @@ const titleSize = compact
     ></div>
 
     <!-- Signature animation: data resampling around a model curve -->
-    <DataCurve class="opacity-90" />
+    <DataCurve class="opacity-90" hubMin={titleClearance} mask={heroMask} />
 
     <div class="container-wide relative">
       <!-- Eyebrow -->
@@ -57,7 +68,7 @@ const titleSize = compact
       {subtitle && (
         <div class="mt-8 flex items-start gap-5">
           <div aria-hidden="true" class="mt-2 hidden h-12 w-px bg-slate-900 dark:bg-slate-100 sm:block"></div>
-          <p class="font-serif text-lg leading-snug text-slate-700 dark:text-slate-300 md:text-xl">
+          <p class="max-w-4xl font-serif text-lg leading-snug text-slate-700 dark:text-slate-300 md:text-xl">
             {subtitle}
           </p>
         </div>

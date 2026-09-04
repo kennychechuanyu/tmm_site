@@ -21,9 +21,7 @@ const hasBody = (event.body ?? "").trim().length > 0;
 
 const eventTypeLabel =
   event.data.type.charAt(0).toUpperCase() + event.data.type.slice(1);
-const eyebrow = event.data.featured
-  ? `${eventTypeLabel} · Featured`
-  : eventTypeLabel;
+const eyebrow = event.data.eyebrow ?? eventTypeLabel;
 
 // ── Date, split into typographic parts for the cover strip ───────────
 const d = event.data.date;
@@ -72,6 +70,8 @@ const instantsOf = (raw?: string) => toInstants(raw, d, tz);
 /** Just the opening time of a range, for the compact running order. */
 const startLabel = (raw?: string) => raw?.match(/\d{1,2}:\d{2}/)?.[0] ?? raw;
 const eventSpan = instantsOf(event.data.time);
+/** Static .ics built by src/pages/events/[slug].ics.ts for dated, timed events. */
+const icsHref = eventSpan ? `/events/${event.slug}.ics` : undefined;
 
 // Panel membership; anyone not yet assigned to a session is shown separately
 const assigned = new Set(talks.flatMap((t) => t.panel ?? []));
@@ -95,7 +95,10 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
 <PageLayout
   title={event.data.title}
   description={event.data.description}
+  subtitle={event.data.deck}
   eyebrow={eyebrow}
+  image={event.data.ogImage}
+  titleClearance={0.76}
   compact
 >
   <!-- ─── Cover strip: when · time · where · register ──────────────── -->
@@ -159,7 +162,7 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
           </dd>
         </div>
 
-        <div class="flex items-center sm:col-span-2 md:col-span-1 md:ml-auto md:pl-12">
+        <div class="flex flex-col items-start justify-center gap-2.5 sm:col-span-2 md:col-span-1 md:ml-auto md:pl-12">
           {event.data.registrationUrl ? (
             <Button href={event.data.registrationUrl} external>
               Register Now
@@ -167,6 +170,20 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
           ) : (
             <p class="font-serif text-sm italic text-slate-400 dark:text-slate-500">
               Registration opens soon.
+            </p>
+          )}
+          {(event.data.admission || icsHref) && (
+            <p class="font-sans text-xs text-slate-500 dark:text-slate-400">
+              {event.data.admission && <span>{event.data.admission}</span>}
+              {event.data.admission && icsHref && (
+                <span aria-hidden="true" class="mx-1.5 text-slate-300 dark:text-slate-600">·</span>
+              )}
+              {icsHref && (
+                <a
+                  href={icsHref}
+                  class="underline decoration-slate-300 underline-offset-2 transition-colors hover:text-salmon-600 dark:decoration-slate-600 dark:hover:text-salmon-400"
+                >Add to calendar</a>
+              )}
             </p>
           )}
         </div>

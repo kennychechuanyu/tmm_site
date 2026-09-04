@@ -7,7 +7,11 @@ location: "Online — Microsoft Teams"
 registrationUrl: "https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621"
 type: "webinar"
 featured: true
-description: "A TMM panel on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
+description: "Four talks and four panel discussions on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
+deck: "Four talks and four panel discussions on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
+eyebrow: "Online · Talks and panel discussions"
+admission: "Free and open to all"
+ogImage: /images/og/interpretability-panel.png
 about: |
   Computational models can serve many purposes in psychological and cognitive science. They
   can describe patterns in data, formalise theories, and generate predictions. Researchers

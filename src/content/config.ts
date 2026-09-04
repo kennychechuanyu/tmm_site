@@ -38,6 +38,14 @@ const events = defineCollection({
     type: z.enum(["conference", "workshop", "webinar", "meetup"]),
     featured: z.boolean().default(false),
     registrationUrl: z.string().url().optional(),
+    /** One line under the Register button, e.g. "Free and open to all". */
+    admission: z.string().optional(),
+    /** Overrides the computed eyebrow above the title. */
+    eyebrow: z.string().optional(),
+    /** One-sentence deck shown under the title. */
+    deck: z.string().optional(),
+    /** Per-event social-share image, 1200×630, under /public. */
+    ogImage: z.string().optional(),
     /** Human-readable time range shown next to the date, e.g. "15:30–19:20 CEST". */
     time: z.string().optional(),
     /** IANA zone the frontmatter wall-clock times are written in. */
