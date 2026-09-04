@@ -430,18 +430,18 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
           <p class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
             Moderators
           </p>
-          <ul class="mt-5 flex flex-col gap-y-4 sm:flex-row sm:flex-wrap sm:gap-x-10">
+          <ul class="mt-5 flex flex-col gap-y-4 sm:flex-row sm:flex-wrap sm:gap-x-12">
             {moderators.map((m) => (
-              <li class="flex items-center gap-x-3">
+              <li class="flex items-center gap-x-3.5">
                 {m.photo && (
                   <img
                     src={m.photo}
                     alt=""
-                    width="40"
-                    height="40"
+                    width="56"
+                    height="56"
                     loading="lazy"
                     decoding="async"
-                    class="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-slate-900/10 dark:ring-slate-100/10"
+                    class="h-14 w-14 shrink-0 rounded-full object-cover ring-1 ring-slate-900/10 dark:ring-slate-100/10"
                   />
                 )}
                 <span class="flex flex-col leading-tight">
