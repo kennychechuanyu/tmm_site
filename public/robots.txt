@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tmm-network.org/sitemap-index.xml
+Sitemap: https://tmm-site.vercel.app/sitemap-index.xml
