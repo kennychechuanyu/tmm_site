@@ -100,6 +100,14 @@ programme:
     label: "Audience Q&A"
   - time: "19:15"
     label: "Closing"
+moderators:
+  - name: Kenny Yu
+    institution: KU Leuven
+  - name: Maria Robinson
+    institution: University of Warwick
+  - name: Niels Vanhasbroeck
+    institution: University of Amsterdam
+moderatorsNote: "They chair the four discussions and put the audience's questions to the panel."
 attendance:
   - group: "Registration"
     note: "Anyone interested in the topic is welcome to attend. <a href=\"https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621\" target=\"_blank\" rel=\"noopener noreferrer\">Registration is open</a>; the joining link is emailed to you as soon as you register."

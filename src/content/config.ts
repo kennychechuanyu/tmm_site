@@ -59,6 +59,9 @@ const events = defineCollection({
     })).optional(),
     speakers: z.array(personSchema).optional(),
     panelists: z.array(personSchema).optional(),
+    /** Who chairs the discussions. Listed quietly at the end of the programme. */
+    moderators: z.array(personSchema).optional(),
+    moderatorsNote: z.string().optional(),
     /** Talks in running order; `speaker` must match a name in `speakers`,
      *  `panel` entries must match names in `panelists`. */
     talks: z.array(z.object({
