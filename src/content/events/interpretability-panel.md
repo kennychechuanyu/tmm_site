@@ -120,7 +120,7 @@ attendance:
     note: "The event is open to researchers, students, and anyone else interested in model interpretability and related topics. <a href=\"https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621\" target=\"_blank\" rel=\"noopener noreferrer\">Registration is open</a>; the joining link is emailed to you as soon as you register."
   - group: "Audience Q&A"
     note: "Attendees join without camera or microphone. Questions are submitted in writing through the Teams Q&A at any point in the afternoon, and the moderators put a selection of them to the speakers and panels in the closing 20 minutes."
-recordingNote: "The event is recorded for internal TMM use only, to keep an accurate record of the discussion and to develop notes and possible follow-up activities. There are no plans to make the recording public. If we ever wanted to share any part of it, we would ask the speakers and panel members first."
+recordingNote: "The event is recorded for TMM's internal use. There are no plans to publish the recording."
 speakers:
   - name: "Marcel Binz"
     institution: "Helmholtz Munich"
