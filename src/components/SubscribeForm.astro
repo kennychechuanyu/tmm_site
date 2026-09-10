@@ -1,0 +1,52 @@
+---
+/**
+ * One-field mailing-list sign-up that posts directly to Buttondown.
+ * `tag` records where the subscriber came from. Renders nothing until
+ * the Buttondown username is set in src/utils/newsletter.ts.
+ */
+import { subscribeEndpoint } from "../utils/newsletter";
+
+interface Props {
+  tag?: string;
+  /** Tighter spacing for the footer. */
+  compact?: boolean;
+  /** Text under the field; pass an empty string to omit. */
+  note?: string;
+}
+const {
+  tag = "website",
+  compact = false,
+  note = "Occasional emails about the network's events and discussions. One confirmation email; unsubscribe at any time.",
+} = Astro.props;
+const id = `subscribe-${tag.replace(/[^a-z0-9]+/gi, "-")}`;
+---
+
+{subscribeEndpoint && (
+  <form
+    action={subscribeEndpoint}
+    method="post"
+    target="_blank"
+    rel="noopener"
+    class:list={["flex flex-col", compact ? "gap-2" : "gap-3"]}
+  >
+    <input type="hidden" name="tag" value={tag} />
+    <label for={id} class="sr-only">Email address</label>
+    <div class="flex max-w-md gap-2">
+      <input
+        id={id}
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder="you@university.edu"
+        class:list={["input flex-1", compact && "py-1.5 text-sm"]}
+      />
+      <button type="submit" class:list={["btn-primary shrink-0", compact ? "px-3 py-1.5 text-sm" : "px-5 py-2.5 text-sm"]}>
+        Subscribe
+      </button>
+    </div>
+    {note && (
+      <p class:list={["font-sans text-slate-500 dark:text-slate-400", compact ? "text-xs" : "text-sm"]}>{note}</p>
+    )}
+  </form>
+)}

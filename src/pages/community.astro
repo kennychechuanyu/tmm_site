@@ -1,4 +1,6 @@
 ---
+import SubscribeForm from "../components/SubscribeForm.astro";
+import { subscribeEndpoint } from "../utils/newsletter";
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
 import ChapterHeader from "../components/ChapterHeader.astro";
@@ -36,6 +38,19 @@ const academicRoles = [
         diverse fields, including but not limited to cognitive modeling, psychometrics,
         experimental psychology, and philosophy of science. Membership is free and open to all.
       </p>
+
+      {subscribeEndpoint && (
+        <div class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/40 md:p-8">
+          <h3 class="font-serif text-xl text-slate-900 dark:text-white">Just the news?</h3>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            The mailing list is the light-touch way to follow TMM: occasional emails about events,
+            summaries of discussions, and opportunities to get involved, without becoming a member.
+          </p>
+          <div class="mt-5">
+            <SubscribeForm tag="community" note="One confirmation email; unsubscribe at any time." />
+          </div>
+        </div>
+      )}
 
       <div class="mt-10 space-y-8">
         <!-- Meetings & Events -->
@@ -231,6 +246,7 @@ const academicRoles = [
         action={`https://formspree.io/f/${FORMSPREE_MEMBERSHIP}`}
         method="POST"
         class="mt-6 space-y-4"
+        data-subscribe-endpoint={subscribeEndpoint}
       >
         <input type="hidden" name="_subject" value="New TMM Membership Request" />
 
@@ -310,6 +326,13 @@ const academicRoles = [
           />
         </div>
 
+        {subscribeEndpoint && (
+          <label class="flex items-start gap-3 pt-1 text-sm text-slate-600 dark:text-slate-400">
+            <input type="checkbox" name="mailing_list" value="yes" class="mt-1 h-4 w-4 rounded border-slate-300 text-navy-600 focus:ring-navy-500" />
+            <span>Also add me to the TMM mailing list: occasional emails about events and discussions, unsubscribe at any time.</span>
+          </label>
+        )}
+
         <!-- Submit -->
         <div class="pt-2">
           <button type="submit" class="btn-primary w-full">
@@ -317,6 +340,22 @@ const academicRoles = [
           </button>
         </div>
       </form>
+
+      <script>
+        // The membership request goes to Formspree; if the box is ticked the
+        // email also goes straight to Buttondown, so nobody has to copy it by hand.
+        const form = document.querySelector<HTMLFormElement>("form[data-subscribe-endpoint]");
+        form?.addEventListener("submit", () => {
+          const endpoint = form.dataset.subscribeEndpoint;
+          const wants = form.querySelector<HTMLInputElement>('input[name="mailing_list"]')?.checked;
+          const email = form.querySelector<HTMLInputElement>('input[name="email"]')?.value;
+          if (!endpoint || !wants || !email) return;
+          const body = new FormData();
+          body.set("email", email);
+          body.set("tag", "member");
+          fetch(endpoint, { method: "POST", body, mode: "no-cors", keepalive: true }).catch(() => {});
+        });
+      </script>
     </div>
   </div>
 
