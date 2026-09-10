@@ -1,11 +1,14 @@
 /**
- * The TMM mailing list lives in Buttondown. Every subscribe form on the site
- * posts straight to it, and Buttondown handles the confirmation email and
- * unsubscribing. Until the account exists this stays empty, and every form
- * that depends on it renders nothing.
+ * The TMM mailing list is a Google Group. Joining is one email to the group's
+ * subscribe address, which Google confirms with a reply; leaving is the link
+ * in every message. Until the group exists this stays empty, and every
+ * sign-up spot on the site renders nothing.
  */
-export const BUTTONDOWN_USERNAME = "";
+export const GOOGLE_GROUP = "";
 
-export const subscribeEndpoint = BUTTONDOWN_USERNAME
-  ? `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`
+export const listAddress = GOOGLE_GROUP ? `${GOOGLE_GROUP}@googlegroups.com` : "";
+export const subscribeAddress = GOOGLE_GROUP ? `${GOOGLE_GROUP}+subscribe@googlegroups.com` : "";
+export const subscribeHref = GOOGLE_GROUP
+  ? `mailto:${subscribeAddress}?subject=${encodeURIComponent("Subscribe to the TMM mailing list")}&body=${encodeURIComponent("Please add me to the TMM mailing list.")}`
   : "";
+export const groupUrl = GOOGLE_GROUP ? `https://groups.google.com/g/${GOOGLE_GROUP}` : "";

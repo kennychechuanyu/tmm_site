@@ -1,52 +1,36 @@
 ---
 /**
- * One-field mailing-list sign-up that posts directly to Buttondown.
- * `tag` records where the subscriber came from. Renders nothing until
- * the Buttondown username is set in src/utils/newsletter.ts.
+ * Mailing-list sign-up for the Google Group: a one-click link that opens an
+ * email to the subscribe address, with the address shown for anyone whose
+ * mail client does not open links. Renders nothing until GOOGLE_GROUP is set
+ * in src/utils/newsletter.ts.
  */
-import { subscribeEndpoint } from "../utils/newsletter";
+import { subscribeAddress, subscribeHref } from "../utils/newsletter";
 
 interface Props {
-  tag?: string;
   /** Tighter spacing for the footer. */
   compact?: boolean;
-  /** Text under the field; pass an empty string to omit. */
+  /** Text under the link; pass an empty string to omit. */
   note?: string;
 }
 const {
-  tag = "website",
   compact = false,
-  note = "Occasional emails about the network's events and discussions. One confirmation email; unsubscribe at any time.",
+  note = "Google sends one confirmation email; reply to it and you are on the list. Unsubscribe from any message.",
 } = Astro.props;
-const id = `subscribe-${tag.replace(/[^a-z0-9]+/gi, "-")}`;
 ---
 
-{subscribeEndpoint && (
-  <form
-    action={subscribeEndpoint}
-    method="post"
-    target="_blank"
-    rel="noopener"
-    class:list={["flex flex-col", compact ? "gap-2" : "gap-3"]}
-  >
-    <input type="hidden" name="tag" value={tag} />
-    <label for={id} class="sr-only">Email address</label>
-    <div class="flex max-w-md gap-2">
-      <input
-        id={id}
-        type="email"
-        name="email"
-        required
-        autocomplete="email"
-        placeholder="you@university.edu"
-        class:list={["input flex-1", compact && "py-1.5 text-sm"]}
-      />
-      <button type="submit" class:list={["btn-primary shrink-0", compact ? "px-3 py-1.5 text-sm" : "px-5 py-2.5 text-sm"]}>
-        Subscribe
-      </button>
+{subscribeHref && (
+  <div class:list={["flex flex-col", compact ? "gap-2" : "gap-3"]}>
+    <div class:list={["flex items-center", compact ? "flex-col items-start gap-y-2" : "flex-wrap gap-x-4 gap-y-2"]}>
+      <a href={subscribeHref} class:list={["btn-primary", compact ? "px-3 py-1.5 text-sm" : "px-5 py-2.5 text-sm"]}>
+        Join the mailing list
+      </a>
+      <span class:list={["font-sans text-slate-500 dark:text-slate-400", compact ? "text-xs" : "text-sm"]}>
+        or email <span class:list={["whitespace-nowrap font-mono text-slate-700 dark:text-slate-300", compact && "text-[11px]"]}>{subscribeAddress}</span>
+      </span>
     </div>
     {note && (
       <p class:list={["font-sans text-slate-500 dark:text-slate-400", compact ? "text-xs" : "text-sm"]}>{note}</p>
     )}
-  </form>
+  </div>
 )}

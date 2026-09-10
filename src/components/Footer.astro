@@ -1,6 +1,6 @@
 ---
 import SubscribeForm from "./SubscribeForm.astro";
-import { subscribeEndpoint } from "../utils/newsletter";
+import { subscribeHref } from "../utils/newsletter";
 const currentYear = new Date().getFullYear();
 
 const columns = [
@@ -94,13 +94,13 @@ const columns = [
             tmm.psych@outlook.com
           </a>
         </div>
-        {subscribeEndpoint && (
+        {subscribeHref && (
           <div class="mt-6">
             <p class="font-sans text-[11px] font-semibold uppercase text-slate-900 dark:text-slate-100" style="letter-spacing: 0.18em;">
               Updates from the network
             </p>
             <div class="mt-3">
-              <SubscribeForm tag="footer" compact note="A few emails a year. Unsubscribe at any time." />
+              <SubscribeForm compact note="A few emails a year. One confirmation email; unsubscribe from any message." />
             </div>
           </div>
         )}
