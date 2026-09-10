@@ -106,13 +106,11 @@ const heroDescription =
             const startsAt = toInstants(event.data.time, d, event.data.timezone)?.start
               ?? d?.toISOString();
             return (
-              <li>
-                <a
-                  href={`/events/${event.slug}`}
-                  data-local-date={startsAt}
-                  data-tz={event.data.timezone}
-                  class="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 transition-colors hover:bg-slate-50/60 dark:hover:bg-slate-900/30 md:gap-10 md:py-8"
-                >
+              <li
+                data-local-date={startsAt}
+                data-tz={event.data.timezone}
+                class="relative grid grid-cols-[auto_1fr] items-center gap-x-5 gap-y-5 py-6 transition-colors hover:bg-slate-50/60 dark:hover:bg-slate-900/30 sm:grid-cols-[auto_1fr_auto] md:gap-x-10 md:py-8"
+              >
                   <!-- Date block -->
                   <div class="flex items-baseline gap-3 pl-1 text-slate-900 dark:text-slate-100">
                     {d ? (
@@ -151,22 +149,22 @@ const heroDescription =
                         </>
                       )}
                     </div>
-                    <h3 class="font-serif text-xl leading-tight text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400 md:text-2xl">
-                      {event.data.title}
+                    <h3 class="font-serif text-xl leading-tight text-slate-900 dark:text-slate-100 md:text-2xl">
+                      {/* Stretched link: the whole row opens the event, without nesting the button inside it */}
+                      <a href={`/events/${event.slug}/`} class="after:absolute after:inset-0 after:content-['']">{event.data.title}</a>
                     </h3>
                     <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
                       {event.data.location}
                     </p>
                   </div>
 
-                  <!-- Arrow -->
-                  <span
-                    aria-hidden="true"
-                    class="hidden pr-2 text-xl text-slate-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-salmon-500 dark:text-slate-600 md:inline"
-                  >
-                    →
-                  </span>
-                </a>
+                  <!-- What you get by clicking, said in words -->
+                  <div class="col-span-2 sm:col-span-1 sm:justify-self-end sm:pr-1">
+                    <a href={`/events/${event.slug}/`} class="btn-secondary relative z-10 px-4 py-2 text-sm">
+                      Programme and registration
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
               </li>
             );
           })}
@@ -235,15 +233,15 @@ const heroDescription =
         <div class="scroll-fade-in-right lg:col-span-7">
           <ol class="divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
             {activities.map((activity, i) => (
-              <li class="group grid grid-cols-[auto_1fr] gap-6 py-6 md:gap-10 md:py-8">
+              <li class="grid grid-cols-[auto_1fr] gap-6 py-6 md:gap-10 md:py-8">
                 <span class="pt-1.5 font-mono text-[11px] tabular-nums text-slate-500 dark:text-slate-500" style="letter-spacing: 0.1em;">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 class="font-serif text-xl leading-tight text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400 md:text-2xl">
+                  <h3 class="font-serif text-xl leading-tight text-slate-900 dark:text-slate-100 md:text-2xl">
                     {activity.title}
                   </h3>
-                  <p class="mt-2 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400">
+                  <p class="mt-2 max-w-xl text-pretty font-serif text-[17px] leading-[1.7] text-slate-700 dark:text-slate-300">
                     {activity.description}
                   </p>
                 </div>
@@ -273,29 +271,16 @@ const heroDescription =
       </header>
 
       <!-- Three editorial plates -->
-      <div class="scroll-fade-in-children grid gap-10 md:grid-cols-3 md:gap-12">
+      <div class="grid gap-10 md:grid-cols-3 md:gap-12">
         {focusAreas.map((area, i) => (
-          <article class="group relative pt-10">
-            <!-- Top rule (static) -->
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900 dark:bg-slate-100"></div>
-            <!-- Top rule (salmon sweep on hover) -->
-            <div
-              aria-hidden="true"
-              class="absolute inset-x-0 top-0 h-[3px] w-0 bg-salmon-500 transition-[width] duration-[900ms] ease-out group-hover:w-full dark:bg-salmon-400"
-            ></div>
-
-            <!-- Numeral -->
-            <div class="mb-8">
-              <span class="font-serif italic leading-[0.8] text-slate-900 transition-colors duration-500 group-hover:text-salmon-500 dark:text-slate-100 dark:group-hover:text-salmon-400" style="font-size: 5.5rem;">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </div>
-
-            <h3 class="font-serif text-2xl leading-[1.2] text-slate-900 dark:text-slate-100 md:text-[1.7rem]">
+          <article class="border-t border-slate-900 pt-6 dark:border-slate-100">
+            <span class="font-mono text-[11px] tabular-nums text-slate-500 dark:text-slate-500" style="letter-spacing: 0.1em;">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3 class="mt-4 font-serif text-2xl leading-[1.2] text-slate-900 dark:text-slate-100 md:text-[1.7rem]">
               {area.title}
             </h3>
-
-            <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            <p class="mt-3 text-pretty font-serif text-lg leading-[1.65] text-slate-700 dark:text-slate-300">
               {area.description}
             </p>
           </article>

@@ -74,13 +74,8 @@ const { subtitle, description, primaryCTA, secondaryCTA } = Astro.props;
           {(primaryCTA || secondaryCTA) && (
             <div class="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4">
               {primaryCTA && (
-                <a
-                  href={primaryCTA.href}
-                  class="group inline-flex items-center gap-3 bg-slate-900 px-7 py-4 font-sans text-[11px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-salmon-600 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-salmon-500 dark:hover:text-white"
-                  style="letter-spacing: 0.18em;"
-                >
-                  <span>{primaryCTA.label}</span>
-                  <span aria-hidden="true" class="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <a href={primaryCTA.href} class="btn-primary px-5 py-2.5 text-sm">
+                  {primaryCTA.label}
                 </a>
               )}
               {secondaryCTA && (
@@ -99,12 +94,4 @@ const { subtitle, description, primaryCTA, secondaryCTA } = Astro.props;
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="pointer-events-none absolute bottom-6 right-4 hidden flex-col items-center gap-3 font-sans text-[9px] uppercase text-slate-500 dark:text-slate-500 md:flex lg:right-8"
-       style="letter-spacing: 0.3em;">
-    <span style="writing-mode: vertical-rl; transform: rotate(180deg);">Read on</span>
-    <div class="relative h-12 w-px overflow-hidden bg-slate-300 dark:bg-slate-700">
-      <div class="absolute inset-x-0 h-4 bg-slate-900 animate-scroll-hint dark:bg-slate-100"></div>
-    </div>
-  </div>
 </section>
