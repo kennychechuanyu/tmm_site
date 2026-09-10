@@ -1,4 +1,4 @@
-export const GOOGLE_GROUP = "";
+export const GOOGLE_GROUP = "tmm-network";
 
 export const listAddress = GOOGLE_GROUP ? `${GOOGLE_GROUP}@googlegroups.com` : "";
 export const subscribeAddress = GOOGLE_GROUP ? `${GOOGLE_GROUP}+subscribe@googlegroups.com` : "";
