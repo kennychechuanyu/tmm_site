@@ -1,294 +1,307 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import DataCurve from "../components/DataCurve.astro";
+import Hero from "../components/Hero.astro";
 import RetimeLocal from "../components/RetimeLocal.astro";
-import SubscribeForm from "../components/SubscribeForm.astro";
-import { getCollection } from "astro:content";
 import { toInstants } from "../utils/eventTime";
-import { coordinatingCommittee, networkMembers, sortByName, slugOf } from "../data/people";
-import { collections } from "../data/collections";
+import { getCollection } from "astro:content";
 
-// ── The network, in its own numbers ───────────────────────────────────
-const team = [...coordinatingCommittee].sort(sortByName);
-const members = [...networkMembers].sort(sortByName);
-const everyone = [...team, ...members];
-const institutions = new Set(everyone.flatMap((p) => p.institution.split(/\s*&\s*/)));
-const coordinators = team.map((p) => p.name);
-const coordinatorsLine =
-  coordinators.length > 1
-    ? `${coordinators.slice(0, -1).join(", ")} and ${coordinators.at(-1)}`
-    : coordinators[0] ?? "";
-
-// ── Next event ────────────────────────────────────────────────────────
+// Get upcoming events (TBD-dated events are included and sorted first)
+const allEvents = await getCollection("events");
 const now = new Date();
-const upcoming = (await getCollection("events"))
-  .filter((e) => !e.data.date || e.data.date >= now)
-  .sort((a, b) => (a.data.date?.getTime() ?? -Infinity) - (b.data.date?.getTime() ?? -Infinity));
-const next = upcoming[0];
-const later = upcoming.slice(1);
-const nextSpan = next ? toInstants(next.data.time, next.data.date, next.data.timezone) : null;
-const nextDate = next?.data.date;
-const datePart = (o: Intl.DateTimeFormatOptions) =>
-  nextDate ? nextDate.toLocaleDateString("en-GB", { ...o, timeZone: "UTC" }) : "";
-const nextSpeakers = next
-  ? (next.data.talks ?? [])
-      .map((t) => next.data.speakers?.find((s) => s.name === t.speaker))
-      .filter((s): s is NonNullable<typeof s> => Boolean(s))
-  : [];
-const nextIcs = next && nextSpan ? `/events/${next.slug}.ics` : undefined;
+const upcomingEvents = allEvents
+  .filter((event) => !event.data.date || event.data.date >= now)
+  .sort((a, b) => {
+    const ad = a.data.date?.getTime() ?? -Infinity;
+    const bd = b.data.date?.getTime() ?? -Infinity;
+    return ad - bd;
+  })
+  .slice(0, 3);
 
-// ── From the network ──────────────────────────────────────────────────
-const news = (await getCollection("news"))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 1);
-const newsDate = (d: Date) => d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+// What We Do — activities
+const activities = [
+  {
+    title: "Unite disciplines",
+    description:
+      "Bringing together cognitive modelers, psychometricians, experimentalists, and philosophers.",
+  },
+  {
+    title: "Foster dialogue",
+    description:
+      "Creating spaces where theoretical, modeling, and methodological assumptions can be questioned.",
+  },
+  {
+    title: "Organize events",
+    description:
+      "Hosting workshops and conferences where conversations translate into concrete progress.",
+  },
+  {
+    title: "Build collaborations",
+    description:
+      "Providing a platform where joint research projects can emerge from shared understanding.",
+  },
+];
 
-const kicker = "font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500";
-const link = "editorial-underline font-sans text-sm font-medium text-slate-900 dark:text-slate-100";
+// Focus areas
+const focusAreas = [
+  {
+    title: "Theory–Measurement Gap",
+    description:
+      "What we measure often isn't what we theorize. We expose the hidden assumptions.",
+  },
+  {
+    title: "Prediction–Explanation Gap",
+    description:
+      "Good predictions can come from bad theories. We investigate what it really takes for a model to explain.",
+  },
+  {
+    title: "Cumulative Science",
+    description:
+      "Evidence for theories and evidence for measures get tangled. We work to untangle them—so both can genuinely accumulate.",
+  },
+];
+
+const heroDescription =
+  "TMM is an international network addressing the disconnect between what psychologists <em>theorize</em>, what they <em>model</em>, and what they actually <em>measure</em>.";
 ---
 
 <BaseLayout
   title="TMM — Theory, Model, Measurement"
-  description="An international network of researchers working on how psychological theory, formal models and measurement fit together, and on what goes wrong when they do not."
+  description="An international network addressing the disconnect between what psychologists theorize, what they model, and what they actually measure."
 >
-  <!-- ─── Masthead ────────────────────────────────────────────────── -->
-  <section class="relative overflow-hidden border-b border-slate-900/10 bg-white pt-24 pb-16 dark:border-slate-100/10 dark:bg-slate-950 md:pt-32 md:pb-24">
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.04] dark:text-slate-100 dark:opacity-[0.08]"
-      style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
-    ></div>
-    <DataCurve class="opacity-90" hubMin={0.84} mask="linear-gradient(72deg, transparent 56%, #000 78%)" />
+  <!-- ===== Hero ===== -->
+  <Hero
+    subtitle="Bridging Theory and Measurement in Psychology"
+    description={heroDescription}
+    primaryCTA={{ label: "Join the Network", href: "/community" }}
+  />
 
-    <div class="container-wide relative">
-      <p class="flex items-center gap-4 font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.22em;">
-        <span aria-hidden="true" class="inline-block h-px w-12 bg-salmon-500/80 dark:bg-salmon-400/80"></span>
-        <span>An international research network</span>
-      </p>
-      <h1 class="mt-8 font-serif font-normal leading-[0.98] tracking-[-0.02em] text-slate-900 dark:text-slate-100" style="font-size: clamp(2.75rem, 6.2vw, 5rem);">
-        Theory, Model, Measurement
-      </h1>
-      <p class="mt-8 max-w-[34em] text-pretty font-serif text-xl leading-[1.5] text-slate-700 dark:text-slate-300 md:text-[1.5rem]">
-        TMM is a network of researchers working on how psychological theory, formal models and
-        measurement fit together, and on what goes wrong when they do not.
-      </p>
-      <p class="mt-8 font-mono text-xs text-slate-500 dark:text-slate-400">
-        {everyone.length} researchers · {institutions.size} institutions · since 2025
-      </p>
+  <!-- ====================================================================
+       I · Upcoming Events
+       ==================================================================== -->
+  <section class="relative bg-white py-20 dark:bg-slate-950 md:py-28">
+    <div class="container-wide">
+      <!-- Chapter header -->
+      <header class="mb-12 flex items-baseline gap-6 md:mb-16 md:gap-10">
+        <span class="font-serif text-5xl italic leading-none text-salmon-500 dark:text-salmon-400 md:text-6xl">
+          I
+        </span>
+        <div class="flex flex-1 items-baseline gap-4 border-b border-slate-900/15 pb-3 dark:border-slate-100/15">
+          <h2 class="font-serif text-3xl leading-none text-slate-900 dark:text-slate-100 md:text-5xl">
+            Upcoming Events
+          </h2>
+        </div>
+      </header>
+
+      <!-- Editorial agenda list -->
+      {upcomingEvents.length > 0 ? (
+        <ol class="scroll-fade-in-children divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+          {upcomingEvents.map((event) => {
+            const d = event.data.date;
+            const part = (o: Intl.DateTimeFormatOptions) =>
+              d!.toLocaleDateString("en-US", { ...o, timeZone: "UTC" });
+            const day = d ? part({ day: "2-digit" }) : null;
+            const month = d ? part({ month: "short" }) : null;
+            const year = d ? part({ year: "numeric" }) : null;
+            const weekday = d ? part({ weekday: "long" }) : "Date TBD";
+            const startsAt = toInstants(event.data.time, d, event.data.timezone)?.start
+              ?? d?.toISOString();
+            return (
+              <li>
+                <a
+                  href={`/events/${event.slug}`}
+                  data-local-date={startsAt}
+                  data-tz={event.data.timezone}
+                  class="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 transition-colors hover:bg-slate-50/60 dark:hover:bg-slate-900/30 md:gap-10 md:py-8"
+                >
+                  <!-- Date block -->
+                  <div class="flex items-baseline gap-3 pl-1 text-slate-900 dark:text-slate-100">
+                    {d ? (
+                      <>
+                        <span data-part="day" class="font-serif text-4xl leading-[0.85] tabular-nums md:text-6xl">
+                          {day}
+                        </span>
+                        <div
+                          class="flex flex-col font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
+                          style="letter-spacing: 0.22em;"
+                        >
+                          <span data-part="month-short">{month}</span>
+                          <span data-part="year" class="font-mono tabular-nums">{year}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <span class="font-serif text-2xl italic leading-[0.9] text-slate-500 dark:text-slate-500 md:text-3xl">
+                        TBD
+                      </span>
+                    )}
+                  </div>
+
+                  <!-- Details -->
+                  <div class="min-w-0 pr-2">
+                    <div
+                      class="mb-2 flex flex-wrap items-center gap-3 font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
+                      style="letter-spacing: 0.22em;"
+                    >
+                      <span data-part="weekday">{weekday}</span>
+                      <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
+                      <span class="text-salmon-600 dark:text-salmon-400">{event.data.type}</span>
+                      {event.data.featured && (
+                        <>
+                          <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
+                          <span>Featured</span>
+                        </>
+                      )}
+                    </div>
+                    <h3 class="font-serif text-xl leading-tight text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400 md:text-2xl">
+                      {event.data.title}
+                    </h3>
+                    <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                      {event.data.location}
+                    </p>
+                  </div>
+
+                  <!-- Arrow -->
+                  <span
+                    aria-hidden="true"
+                    class="hidden pr-2 text-xl text-slate-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-salmon-500 dark:text-slate-600 md:inline"
+                  >
+                    →
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      ) : (
+        <div class="scroll-fade-in border-y border-slate-900/15 py-16 text-center dark:border-slate-100/15">
+          <p class="font-serif text-xl italic text-slate-500 dark:text-slate-500">
+            No events currently scheduled. Check back soon.
+          </p>
+        </div>
+      )}
+
+      <!-- Footer link -->
+      <div class="mt-10 flex items-center justify-end md:mt-12">
+        <a
+          href="/events"
+          class="group inline-flex items-center gap-2 font-sans text-sm font-medium text-slate-900 dark:text-slate-100"
+        >
+          <span class="editorial-underline">View all events</span>
+          <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ─── Next event ──────────────────────────────────────────────── -->
-  {next && (
-    <section class="bg-white py-16 dark:bg-slate-950 md:py-24">
-      <div class="container-wide">
-        <p class={kicker} style="letter-spacing: 0.22em;">Next event</p>
+  <!-- ====================================================================
+       II · What We Do
+       ==================================================================== -->
+  <section class="relative overflow-hidden bg-slate-50 py-20 dark:bg-slate-900/40 md:py-32">
+    <!-- Top + bottom hairlines -->
+    <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900/10 dark:bg-slate-100/10"></div>
+    <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-px bg-slate-900/10 dark:bg-slate-100/10"></div>
 
-        <div class="mt-8 grid gap-10 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-16">
-          {/* When and where */}
-          <div>
-            {nextDate ? (
-              <div data-local-date={nextSpan?.start} data-tz={next.data.timezone}>
-                <span data-part="day" class="block font-serif text-7xl leading-[0.85] tabular-nums text-slate-900 dark:text-slate-100">
-                  {datePart({ day: "numeric" })}
-                </span>
-                <p class="mt-3 flex flex-col gap-1 font-sans text-[10px] uppercase" style="letter-spacing: 0.22em;">
-                  <span data-part="month-year" class="text-slate-900 dark:text-slate-100">{datePart({ month: "long", year: "numeric" })}</span>
-                  <span data-part="weekday" class="text-slate-400 dark:text-slate-500">{datePart({ weekday: "long" })}</span>
-                </p>
-              </div>
-            ) : (
-              <p class="font-serif text-2xl italic text-slate-500">Date to be announced</p>
-            )}
-            {next.data.time && (
-              <p class="mt-6 font-serif text-lg leading-snug text-slate-900 dark:text-slate-100">
-                <time datetime={nextSpan?.start} data-local-time data-end={nextSpan?.end} data-tz={next.data.timezone}>{next.data.time}</time>
-              </p>
-            )}
-            <p class="mt-1 font-sans text-sm text-slate-500 dark:text-slate-400">{next.data.location}</p>
-          </div>
+    <div class="container-wide">
+      <!-- Chapter header -->
+      <header class="mb-16 flex items-baseline gap-6 md:mb-24 md:gap-10">
+        <span class="font-serif text-5xl italic leading-none text-salmon-500 dark:text-salmon-400 md:text-6xl">
+          II
+        </span>
+        <div class="flex flex-1 items-baseline gap-4 border-b border-slate-900/15 pb-3 dark:border-slate-100/15">
+          <h2 class="font-serif text-3xl leading-none text-slate-900 dark:text-slate-100 md:text-5xl">
+            What We Do
+          </h2>
+        </div>
+      </header>
 
-          {/* What */}
-          <div class="min-w-0">
-            <h2 class="text-pretty font-serif text-3xl leading-[1.1] text-slate-900 dark:text-slate-100 md:text-[2.5rem]" style="letter-spacing: -0.01em;">
-              <a href={`/events/${next.slug}/`} class="decoration-salmon-400/60 underline-offset-[6px] hover:underline">{next.data.title}</a>
-            </h2>
-            {(next.data.deck ?? next.data.description) && (
-              <p class="mt-5 max-w-[58ch] text-pretty font-serif text-lg leading-[1.6] text-slate-700 dark:text-slate-300 md:text-xl">
-                {next.data.deck ?? next.data.description}
-              </p>
-            )}
-
-            {nextSpeakers.length > 0 && (
-              <div class="mt-9">
-                <p class={kicker} style="letter-spacing: 0.22em;">Speakers</p>
-                <ul class="mt-4 flex flex-wrap gap-x-9 gap-y-4">
-                  {nextSpeakers.map((s) => (
-                    <li class="flex items-center gap-3">
-                      {s.photo ? (
-                        <img src={s.photo} alt="" width="56" height="56" loading="lazy" decoding="async" class="h-14 w-14 shrink-0 rounded-full object-cover ring-1 ring-slate-900/10 dark:ring-slate-100/10" />
-                      ) : (
-                        <span aria-hidden="true" class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-100 font-serif text-sm text-slate-400 dark:bg-slate-800">
-                          {s.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
-                        </span>
-                      )}
-                      <span class="flex flex-col leading-tight">
-                        <span class="font-serif text-base text-slate-900 dark:text-slate-100">{s.name}</span>
-                        <span class="font-sans text-[13px] text-slate-500 dark:text-slate-400">{s.institution}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <a href={`/events/${next.slug}/`} class="btn-primary px-5 py-2.5 text-sm">Programme and registration</a>
-              {nextIcs && <a href={nextIcs} class={link}>Add to calendar</a>}
-              {next.data.admission && <span class="font-sans text-sm text-slate-500 dark:text-slate-400">{next.data.admission}</span>}
-            </div>
+      <div class="grid gap-14 lg:grid-cols-12 lg:gap-20">
+        <!-- Left: manifesto -->
+        <div class="scroll-fade-in-left lg:col-span-5">
+          <p class="font-serif text-3xl leading-[1.12] text-slate-900 dark:text-slate-100 md:text-[2.5rem]">
+            Psychologists
+            <em class="font-normal text-slate-500 dark:text-slate-400">theorize</em>,
+            <em class="font-normal text-slate-500 dark:text-slate-400">model</em>, and
+            <em class="font-normal text-slate-500 dark:text-slate-400">measure</em>
+            in disconnected ways.
+          </p>
+          <div class="mt-10 flex items-center gap-5">
+            <div aria-hidden="true" class="h-px w-16 bg-salmon-500 dark:bg-salmon-400"></div>
+            <p class="font-serif text-2xl italic text-salmon-600 dark:text-salmon-400 md:text-3xl">
+              We work to align them.
+            </p>
           </div>
         </div>
 
-        {later.length > 0 && (
-          <ol class="mt-14 divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
-            {later.map((e) => (
-              <li>
-                <a href={`/events/${e.slug}/`} class="group flex flex-wrap items-baseline gap-x-6 gap-y-1 py-4">
-                  <span class="font-mono text-xs tabular-nums text-slate-500">
-                    {e.data.date ? e.data.date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }) : "Date to be announced"}
-                  </span>
-                  <span class="font-serif text-lg text-slate-900 decoration-salmon-400/60 underline-offset-4 group-hover:underline dark:text-slate-100">{e.data.title}</span>
-                  <span class="font-sans text-sm text-slate-500">{e.data.location}</span>
-                </a>
+        <!-- Right: numbered activities -->
+        <div class="scroll-fade-in-right lg:col-span-7">
+          <ol class="divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+            {activities.map((activity, i) => (
+              <li class="group grid grid-cols-[auto_1fr] gap-6 py-6 md:gap-10 md:py-8">
+                <span class="pt-1.5 font-mono text-[11px] tabular-nums text-slate-500 dark:text-slate-500" style="letter-spacing: 0.1em;">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 class="font-serif text-xl leading-tight text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400 md:text-2xl">
+                    {activity.title}
+                  </h3>
+                  <p class="mt-2 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400">
+                    {activity.description}
+                  </p>
+                </div>
               </li>
             ))}
           </ol>
-        )}
-      </div>
-    </section>
-  )}
-
-  <!-- ─── What the network is about ───────────────────────────────── -->
-  <section class="border-y border-slate-900/10 bg-slate-50 py-16 dark:border-slate-100/10 dark:bg-slate-900/40 md:py-24">
-    <div class="container-wide">
-      <p class={kicker} style="letter-spacing: 0.22em;">What the network is about</p>
-      <p class="mt-8 max-w-[24em] text-pretty font-serif text-[1.75rem] leading-[1.2] text-slate-900 dark:text-slate-100 md:text-[2.25rem]" style="letter-spacing: -0.01em;">
-        Psychology theorizes, models and measures in disconnected ways.
-      </p>
-
-      <div class="mt-12 grid gap-10 md:grid-cols-2 md:gap-14">
-        <div>
-          <h3 class="font-serif text-xl text-slate-900 dark:text-slate-100">Prediction and explanation</h3>
-          <p class="mt-3 text-pretty font-serif text-[17px] leading-[1.7] text-slate-700 dark:text-slate-300">
-            A model that forecasts behaviour well is not necessarily grounded in a theory of it.
-            Predictive success gets mistaken for theoretical progress, while the models that do
-            explain stay confined to narrow domains. What does it take for a model to explain?
-          </p>
-        </div>
-        <div>
-          <h3 class="font-serif text-xl text-slate-900 dark:text-slate-100">Measurement and theory</h3>
-          <p class="mt-3 text-pretty font-serif text-[17px] leading-[1.7] text-slate-700 dark:text-slate-300">
-            The link between a psychological construct and the instrument that measures it is
-            rarely spelled out. Auxiliary assumptions bridge the two, and while they stay
-            implicit, statistical convenience is confused with psychological reality.
-          </p>
         </div>
       </div>
-
-      <p class="mt-12"><a href="/about/" class={link}>More about the network →</a></p>
     </div>
   </section>
 
-  <!-- ─── Who we are ──────────────────────────────────────────────── -->
-  <section class="bg-white py-16 dark:bg-slate-950 md:py-24">
+  <!-- ====================================================================
+       III · Our Focus
+       ==================================================================== -->
+  <section class="relative bg-white py-20 dark:bg-slate-950 md:py-32">
     <div class="container-wide">
-      <div class="flex items-baseline justify-between gap-6">
-        <p class={kicker} style="letter-spacing: 0.22em;">Who we are</p>
-        <a href="/people/" class={link}>All members →</a>
-      </div>
+      <!-- Chapter header -->
+      <header class="mb-16 flex items-baseline gap-6 md:mb-20 md:gap-10">
+        <span class="font-serif text-5xl italic leading-none text-salmon-500 dark:text-salmon-400 md:text-6xl">
+          III
+        </span>
+        <div class="flex flex-1 items-baseline gap-4 border-b border-slate-900/15 pb-3 dark:border-slate-100/15">
+          <h2 class="font-serif text-3xl leading-none text-slate-900 dark:text-slate-100 md:text-5xl">
+            Our Focus
+          </h2>
+        </div>
+      </header>
 
-      <ul class="mt-8 flex flex-wrap gap-2.5 md:gap-3">
-        {everyone.map((p) => (
-          <li>
-            <a
-              href={`/people/#${slugOf(p.name)}`}
-              title={p.name}
-              class="block h-14 w-14 overflow-hidden rounded-full ring-1 ring-slate-900/10 transition duration-300 hover:ring-2 hover:ring-salmon-400 dark:ring-slate-100/10 md:h-16 md:w-16"
-            >
-              <img src={p.image} alt={p.name} width="64" height="64" loading="lazy" decoding="async" class="h-full w-full object-cover" />
-            </a>
-          </li>
-        ))}
-      </ul>
+      <!-- Three editorial plates -->
+      <div class="scroll-fade-in-children grid gap-10 md:grid-cols-3 md:gap-12">
+        {focusAreas.map((area, i) => (
+          <article class="group relative pt-10">
+            <!-- Top rule (static) -->
+            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900 dark:bg-slate-100"></div>
+            <!-- Top rule (salmon sweep on hover) -->
+            <div
+              aria-hidden="true"
+              class="absolute inset-x-0 top-0 h-[3px] w-0 bg-salmon-500 transition-[width] duration-[900ms] ease-out group-hover:w-full dark:bg-salmon-400"
+            ></div>
 
-      <p class="mt-9 max-w-[62ch] text-pretty font-serif text-lg leading-[1.6] text-slate-700 dark:text-slate-300">
-        Coordinated by {coordinatorsLine}, with {members.length} members at {institutions.size} universities
-        in Europe, North America, Asia and Australia. Membership is free and open to researchers at any career
-        stage who work on these questions.
-      </p>
-    </div>
-  </section>
+            <!-- Numeral -->
+            <div class="mb-8">
+              <span class="font-serif italic leading-[0.8] text-slate-900 transition-colors duration-500 group-hover:text-salmon-500 dark:text-slate-100 dark:group-hover:text-salmon-400" style="font-size: 5.5rem;">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
 
-  <!-- ─── From the network ────────────────────────────────────────── -->
-  <section class="border-y border-slate-900/10 bg-slate-50 py-16 dark:border-slate-100/10 dark:bg-slate-900/40 md:py-24">
-    <div class="container-wide">
-      <p class={kicker} style="letter-spacing: 0.22em;">From the network</p>
-      <div class="mt-8 grid gap-x-14 gap-y-10 md:grid-cols-3">
-        {news.map((n) => (
-          <article>
-            <p class="font-mono text-xs text-slate-500 dark:text-slate-400">Meeting notes · {newsDate(n.data.date)}</p>
-            <h3 class="mt-2 font-serif text-xl leading-snug text-slate-900 dark:text-slate-100">
-              <a href={`/news/${n.slug}/`} class="decoration-salmon-400/60 underline-offset-4 hover:underline">{n.data.title}</a>
+            <h3 class="font-serif text-2xl leading-[1.2] text-slate-900 dark:text-slate-100 md:text-[1.7rem]">
+              {area.title}
             </h3>
-            <p class="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">{n.data.description}</p>
-          </article>
-        ))}
-        {collections.map((c) => (
-          <article>
-            <p class="font-mono text-xs text-slate-500 dark:text-slate-400">{c.type}</p>
-            <h3 class="mt-2 font-serif text-xl leading-snug text-slate-900 dark:text-slate-100">
-              <a href={`/resources/${c.slug}/`} class="decoration-salmon-400/60 underline-offset-4 hover:underline">{c.title}</a>
-            </h3>
-            <p class="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">{c.blurb}</p>
+
+            <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+              {area.description}
+            </p>
           </article>
         ))}
       </div>
     </div>
   </section>
-
-  <!-- ─── Take part ───────────────────────────────────────────────── -->
-  <section class="bg-white py-16 dark:bg-slate-950 md:py-24">
-    <div class="container-wide">
-      <p class={kicker} style="letter-spacing: 0.22em;">Take part</p>
-      <div class="mt-8 grid gap-10 md:grid-cols-3 md:gap-14">
-        <div>
-          <h3 class="font-serif text-xl text-slate-900 dark:text-slate-100">Become a member</h3>
-          <p class="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-            Free, and open to researchers at any career stage. Members are listed on the People page
-            and take part in the network's discussions and events.
-          </p>
-          <p class="mt-4"><a href="/community/" class={link}>Join the network →</a></p>
-        </div>
-        <div>
-          <h3 class="font-serif text-xl text-slate-900 dark:text-slate-100">Follow the mailing list</h3>
-          <p class="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-            A few emails a year about the network's events and discussions, for anyone who wants to
-            keep an eye on what TMM is doing.
-          </p>
-          <div class="mt-4"><SubscribeForm compact note="" /></div>
-        </div>
-        <div>
-          <h3 class="font-serif text-xl text-slate-900 dark:text-slate-100">Propose a discussion</h3>
-          <p class="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
-            Have a question the field should be grappling with, or a project idea looking for
-            collaborators? Send it in and we will put it to the network.
-          </p>
-          <p class="mt-4"><a href="/community/" class={link}>Propose a topic →</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <RetimeLocal />
 </BaseLayout>
