@@ -1,0 +1,33 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title="Page not found"
+  description="That address does not exist on the TMM site."
+  eyebrow="404"
+  subtitle="That address does not exist here. The page may have moved, or the link may have a typo."
+  compact
+>
+  <section class="bg-white dark:bg-slate-950">
+    <div class="container-wide py-16 md:py-24">
+      <p class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
+        Try one of these
+      </p>
+      <ul class="mt-5 flex flex-wrap gap-x-8 gap-y-3">
+        {[
+          ["/", "Home"],
+          ["/events/", "Events"],
+          ["/people/", "People"],
+          ["/about/", "About TMM"],
+        ].map(([href, label]) => (
+          <li>
+            <a href={href} class="font-serif text-lg text-slate-900 decoration-salmon-400/60 underline-offset-4 hover:underline dark:text-slate-100">
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</PageLayout>
