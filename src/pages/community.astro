@@ -246,6 +246,7 @@ const academicRoles = [
       </p>
 
       <form
+        id="membership-form"
         action={`https://formspree.io/f/${FORMSPREE_MEMBERSHIP}`}
         method="POST"
         class="mt-6 space-y-4"
@@ -342,6 +343,24 @@ const academicRoles = [
           </button>
         </div>
       </form>
+
+      {/* Shown in place of the form once Formspree has accepted the request.
+          Google Groups cannot be joined by a website, so the one click is the applicant's. */}
+      <div id="membership-success" class="mt-6 hidden">
+        <p class="text-base text-slate-900 dark:text-white">Thank you. Your membership request has been sent.</p>
+        {subscribeHref ? (
+          <div class="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/40">
+            <p class="text-sm text-slate-700 dark:text-slate-300">
+              One more click if you would like the network's emails, a few a year:
+            </p>
+            <div class="mt-3">
+              <SubscribeForm note="Google sends one confirmation email; reply to it and you are on the list." />
+            </div>
+          </div>
+        ) : (
+          <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">We will be in touch by email.</p>
+        )}
+      </div>
     </div>
   </div>
 
@@ -596,6 +615,33 @@ const academicRoles = [
       if (!membershipModal?.classList.contains('hidden')) closeModal(membershipModal);
       if (!projectModal?.classList.contains('hidden')) closeModal(projectModal);
       if (!discussionModal?.classList.contains('hidden')) closeModal(discussionModal);
+    }
+  });
+</script>
+
+<script>
+  const membershipForm = document.getElementById("membership-form") as HTMLFormElement | null;
+  const membershipSuccess = document.getElementById("membership-success");
+  let submittingNormally = false;
+  membershipForm?.addEventListener("submit", async (e) => {
+    if (submittingNormally || !membershipSuccess) return;
+    e.preventDefault();
+    const button = membershipForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (button) button.disabled = true;
+    try {
+      const res = await fetch(membershipForm.action, {
+        method: "POST",
+        body: new FormData(membershipForm),
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      membershipForm.classList.add("hidden");
+      membershipSuccess.classList.remove("hidden");
+    } catch {
+      // Formspree unreachable from the page: let the browser submit the ordinary way.
+      submittingNormally = true;
+      if (button) button.disabled = false;
+      membershipForm.submit();
     }
   });
 </script>
