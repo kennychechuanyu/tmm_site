@@ -1,6 +1,6 @@
 ---
 import SubscribeForm from "../components/SubscribeForm.astro";
-import { subscribeHref, groupUrl } from "../utils/newsletter";
+import { subscribeHref } from "../utils/newsletter";
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
 import ChapterHeader from "../components/ChapterHeader.astro";
@@ -49,9 +49,6 @@ const academicRoles = [
           <div class="mt-5">
             <SubscribeForm />
           </div>
-          <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
-            Past messages are kept in the <a href={groupUrl} target="_blank" rel="noopener noreferrer" class="underline decoration-slate-300 underline-offset-2 hover:text-salmon-600 dark:decoration-slate-600">list archive</a>.
-          </p>
         </div>
       )}
 
