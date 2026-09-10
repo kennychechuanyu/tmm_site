@@ -272,7 +272,8 @@ panelists:
       - label: "Syracuse profile"
         url: "https://artsandsciences.syracuse.edu/people/faculty/criss-phd-amy-h/"
   - name: "Julia Haaf"
-    institution: "University of Amsterdam"
+    institution: "University of Potsdam"
+    role: "Psychological Methods, Statistics and Evaluation"
   - name: "Trisha Van Zandt"
     institution: "Ohio State University"
 ---
