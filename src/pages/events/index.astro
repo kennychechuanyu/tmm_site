@@ -3,7 +3,6 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
 import ChapterHeader from "../../components/ChapterHeader.astro";
 import Button from "../../components/Button.astro";
-import RetimeLocal from "../../components/RetimeLocal.astro";
 import { toInstants } from "../../utils/eventTime";
 import { getCollection } from "astro:content";
 
@@ -193,5 +192,4 @@ const pastEvents = allEvents
       <Button href="/contact">Submit a Proposal</Button>
     </div>
   </Section>
-  <RetimeLocal />
 </PageLayout>

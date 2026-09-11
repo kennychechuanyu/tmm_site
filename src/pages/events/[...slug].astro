@@ -3,7 +3,6 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
 import Button from "../../components/Button.astro";
 import PersonCard from "../../components/PersonCard.astro";
-import RetimeLocal from "../../components/RetimeLocal.astro";
 import { toInstants } from "../../utils/eventTime";
 import { getCollection, render } from "astro:content";
 
@@ -613,5 +612,4 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
       </Button>
     </div>
   </Section>
-  {eventSpan && <RetimeLocal />}
 </PageLayout>
