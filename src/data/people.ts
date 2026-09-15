@@ -275,4 +275,12 @@ export const networkMembers = [
     website: "https://cidlab.com",
     bio: "Joachim Vandekerckhove (PhD 2009, University of Leuven, Belgium) is a Full Professor at the University of California, Irvine, where he has appointments at the Department of Cognitive Sciences, Department of Statistics, and the Department of Logic & Philosophy of Science. He is also a Senior Fellow of the National Research Council. He is an internationally recognized expert in statistical and experimental methodology as well as in cognitive and behavioral modeling, and lectures and consults on these topics for clients in the academic, public, and private sector. Vandekerckhove has authored over 90 academic publications and is the developer of multiple popular software packages for cognitive model fitting and evaluation. His research focuses on the measurement of cognitive processes and involves cognitive modeling, psychometrics, meta-science, and the development of robust research methods that improve on classical methods with modern technologies. He has held a number of service roles, including guest editing for Psychonomic Bulletin & Review and the Proceedings of the National Academy of Science, serving on the editorial boards of Psychonomic Bulletin & Review, Behavior Research Methods, and Journal for Mathematical Psychology. Since 2018, he has served as the standing Conference Chair for the Society for Mathematical Psychology, which organizes three annual events, including a Psychonomics satellite meeting.",
   },
+  {
+    name: "Aaron S. Benjamin",
+    role: "Department of Psychology",
+    institution: "University of Illinois Urbana-Champaign",
+    image: "/images/people/AB.jpg",
+    website: "https://publish.illinois.edu/benjaminlab/",
+    bio: "Aaron S. Benjamin is Professor at the University of Illinois Urbana-Champaign, where he holds appointments in the Department of Psychology, the Program in Neuroscience, and the Beckman Institute for Advanced Science and Technology. Benjamin\u2019s research program addresses basic and applied questions in human cognition. He uses empirical and computational approaches to understanding attention, learning, memory, and decision-making.",
+  },
 ];
