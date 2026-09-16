@@ -283,4 +283,12 @@ export const networkMembers = [
     website: "https://publish.illinois.edu/benjaminlab/",
     bio: "Aaron S. Benjamin is Professor at the University of Illinois Urbana-Champaign, where he holds appointments in the Department of Psychology, the Program in Neuroscience, and the Beckman Institute for Advanced Science and Technology. Benjamin\u2019s research program addresses basic and applied questions in human cognition. He uses empirical and computational approaches to understanding attention, learning, memory, and decision-making.",
   },
+  {
+    name: "Weiwei Zhang",
+    role: "Department of Psychological and Brain Sciences",
+    institution: "University of California, Riverside",
+    image: "/images/people/WZ.jpg",
+    website: "https://memory.ucr.edu/research/",
+    bio: "Weiwei Zhang is Professor of Psychology at the University of California, Riverside and an APS Fellow. His research examines the nature and limits of mental representations, with a particular focus on visual working memory, long-term memory, attention, and decision making. His lab combines behavioral experiments with computational modeling, eye tracking, EEG/fMRI, and non-invasive brain stimulation to understand how the precision and accessibility of internal representations shape cognition in healthy and clinical populations.",
+  },
 ];
