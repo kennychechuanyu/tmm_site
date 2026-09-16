@@ -291,4 +291,12 @@ export const networkMembers = [
     website: "https://memory.ucr.edu/research/",
     bio: "Weiwei Zhang is Professor of Psychology at the University of California, Riverside and an APS Fellow. His research examines the nature and limits of mental representations, with a particular focus on visual working memory, long-term memory, attention, and decision making. His lab combines behavioral experiments with computational modeling, eye tracking, EEG/fMRI, and non-invasive brain stimulation to understand how the precision and accessibility of internal representations shape cognition in healthy and clinical populations.",
   },
+  {
+    name: "Tobias Rebholz",
+    role: "Fuqua School of Business",
+    institution: "Duke University",
+    image: "/images/people/TR.jpg",
+    website: "https://tobiasrebholz.github.io/",
+    bio: "Tobias Rebholz is a Walter Benjamin Fellow and Visiting Research Scholar at Duke University\u2019s Fuqua School of Business. He earned his PhD in 2023 through the German research training group Statistical Modeling in Psychology. His research focuses on developing and applying quantitative, computational, and open methods for behavioral research in judgment and decision-making, social cognition, and human-computer interaction. His recent work investigates how users use information sampled from AI assistants designed to promote institutional objectives and norms among stakeholders.",
+  },
 ];
