@@ -3,6 +3,7 @@ import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
 import ChapterHeader from "../components/ChapterHeader.astro";
 import ContactForm from "../components/ContactForm.astro";
+import FormHandler from "../components/FormHandler.astro";
 
 const FORMSPREE_ID = "mdaaobwz";
 ---
@@ -24,6 +25,7 @@ const FORMSPREE_ID = "mdaaobwz";
           </p>
           <div class="mt-8">
             <ContactForm formspreeId={FORMSPREE_ID} />
+            <FormHandler />
           </div>
         </div>
 
