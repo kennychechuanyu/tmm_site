@@ -299,4 +299,13 @@ export const networkMembers = [
     website: "https://tobiasrebholz.github.io/",
     bio: "Tobias Rebholz is a Walter Benjamin Fellow and Visiting Research Scholar at Duke University\u2019s Fuqua School of Business. He earned his PhD in 2023 through the German research training group Statistical Modeling in Psychology. His research focuses on developing and applying quantitative, computational, and open methods for behavioral research in judgment and decision-making, social cognition, and human-computer interaction. His recent work investigates how users use information sampled from AI assistants designed to promote institutional objectives and norms among stakeholders.",
   },
+  {
+    name: "Peter Kvam",
+    role: "Department of Psychology",
+    institution: "The Ohio State University",
+    email: "kvam.4@osu.edu",
+    image: "/images/people/PKV.jpg",
+    website: "https://peterkvam.com/",
+    bio: "Peter Kvam is an Associate Professor in the Psychology Department at The Ohio State University. He received his B.S. in Psychology and B.A. in Mathematics and Sociology from Indiana University in 2012 and his Ph.D. in Psychology from Michigan State University in 2017. After visiting positions at the Max Planck Institute in Berlin and the University of Tasmania, he completed postdoctoral fellowships at Indiana University and The Ohio State University in 2017\u20132019. He was previously a faculty member at the University of Florida from 2019\u20132024 before joining the department in 2024. His work investigates the cognitive mechanisms underlying many types of decisions, ranging from visual perception to judgments about the value of complex multi-attribute consumer products. His current focus is on how people navigate complex, dynamic, multi-alternative and continuous decisions, such as bidding for homes in competitive housing markets where options appear and disappear over time. As part of this effort, he uses machine learning and artificial intelligence to test and create computational models of human behavior, allowing new theories of latent (cognitive, neural) processes to be developed in a data-driven way.",
+  },
 ];
