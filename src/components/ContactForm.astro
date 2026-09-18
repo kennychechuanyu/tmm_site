@@ -3,14 +3,18 @@ interface Props {
   formspreeId?: string;
 }
 
+import { formAction } from "../utils/forms";
 const { formspreeId = "YOUR_FORM_ID" } = Astro.props;
 ---
 
 <form
-  action={`https://formspree.io/f/${formspreeId}`}
+  action={formAction(formspreeId)}
   method="POST"
   class="space-y-6"
+  data-site-form="contact"
+  data-success="contact-success"
 >
+  <input type="hidden" name="form" value="contact" />
   <div class="grid gap-6 sm:grid-cols-2">
     <div>
       <label for="name" class="label">Name</label>
@@ -66,8 +70,8 @@ const { formspreeId = "YOUR_FORM_ID" } = Astro.props;
     ></textarea>
   </div>
 
-  <!-- Honeypot for spam protection -->
-  <input type="text" name="_gotcha" style="display:none" />
+  <!-- Honeypot: hidden from people, filled in by bots -->
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
 
   <div>
     <button type="submit" class="btn-primary w-full sm:w-auto">
@@ -75,3 +79,8 @@ const { formspreeId = "YOUR_FORM_ID" } = Astro.props;
     </button>
   </div>
 </form>
+
+<div id="contact-success" class="hidden rounded-lg border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/40">
+  <p class="font-serif text-lg text-slate-900 dark:text-white">Thank you. Your message has been sent.</p>
+  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">We reply from tmm.psych@outlook.com, usually within a few days.</p>
+</div>

@@ -1,5 +1,7 @@
 ---
 import SubscribeForm from "../components/SubscribeForm.astro";
+import FormHandler from "../components/FormHandler.astro";
+import { formAction } from "../utils/forms";
 import { subscribeHref } from "../utils/newsletter";
 import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../components/Section.astro";
@@ -246,11 +248,15 @@ const academicRoles = [
 
       <form
         id="membership-form"
-        action={`https://formspree.io/f/${FORMSPREE_MEMBERSHIP}`}
+        action={formAction(FORMSPREE_MEMBERSHIP)}
         method="POST"
         class="mt-6 space-y-4"
+        data-site-form="join"
+        data-success="membership-success"
       >
         <input type="hidden" name="_subject" value="New TMM Membership Request" />
+        <input type="hidden" name="form" value="join" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
 
         <!-- Name -->
         <div>
@@ -387,11 +393,15 @@ const academicRoles = [
       </p>
 
       <form
-        action={`https://formspree.io/f/${FORMSPREE_PROJECT}`}
+        action={formAction(FORMSPREE_PROJECT)}
         method="POST"
         class="mt-6 space-y-4"
+        data-site-form="project"
+        data-success="project-success"
       >
         <input type="hidden" name="_subject" value="New TMM Project Idea" />
+        <input type="hidden" name="form" value="project" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
 
         <!-- Name -->
         <div>
@@ -464,6 +474,11 @@ const academicRoles = [
           </button>
         </div>
       </form>
+
+      <div id="project-success" class="mt-6 hidden">
+        <p class="font-serif text-lg text-slate-900 dark:text-white">Thank you. Your idea has been sent to the coordinating team.</p>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">We will put it to the network and get back to you by email.</p>
+      </div>
     </div>
   </div>
 
@@ -491,11 +506,15 @@ const academicRoles = [
       </p>
 
       <form
-        action={`https://formspree.io/f/${FORMSPREE_DISCUSSION}`}
+        action={formAction(FORMSPREE_DISCUSSION)}
         method="POST"
         class="mt-6 space-y-4"
+        data-site-form="discussion"
+        data-success="discussion-success"
       >
         <input type="hidden" name="_subject" value="New TMM Discussion Topic" />
+        <input type="hidden" name="form" value="discussion" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
 
         <!-- Name -->
         <div>
@@ -556,8 +575,14 @@ const academicRoles = [
           </button>
         </div>
       </form>
+
+      <div id="discussion-success" class="mt-6 hidden">
+        <p class="font-serif text-lg text-slate-900 dark:text-white">Thank you. Your topic has been sent to the coordinating team.</p>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">We will raise it with the network and get back to you by email.</p>
+      </div>
     </div>
   </div>
+<FormHandler />
 </PageLayout>
 
 <script>
@@ -614,33 +639,6 @@ const academicRoles = [
       if (!membershipModal?.classList.contains('hidden')) closeModal(membershipModal);
       if (!projectModal?.classList.contains('hidden')) closeModal(projectModal);
       if (!discussionModal?.classList.contains('hidden')) closeModal(discussionModal);
-    }
-  });
-</script>
-
-<script>
-  const membershipForm = document.getElementById("membership-form") as HTMLFormElement | null;
-  const membershipSuccess = document.getElementById("membership-success");
-  let submittingNormally = false;
-  membershipForm?.addEventListener("submit", async (e) => {
-    if (submittingNormally || !membershipSuccess) return;
-    e.preventDefault();
-    const button = membershipForm.querySelector<HTMLButtonElement>('button[type="submit"]');
-    if (button) button.disabled = true;
-    try {
-      const res = await fetch(membershipForm.action, {
-        method: "POST",
-        body: new FormData(membershipForm),
-        headers: { Accept: "application/json" },
-      });
-      if (!res.ok) throw new Error(String(res.status));
-      membershipForm.classList.add("hidden");
-      membershipSuccess.classList.remove("hidden");
-    } catch {
-      // Formspree unreachable from the page: let the browser submit the ordinary way.
-      submittingNormally = true;
-      if (button) button.disabled = false;
-      membershipForm.submit();
     }
   });
 </script>

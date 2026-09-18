@@ -3,6 +3,8 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
 import ChapterHeader from "../../components/ChapterHeader.astro";
 import { collections } from "../../data/collections";
+import FormHandler from "../../components/FormHandler.astro";
+import { formAction } from "../../utils/forms";
 
 const FORMSPREE_ID = "xjggvlaw";
 
@@ -142,12 +144,15 @@ const resources: { title: string; type: string; source: string; year: number; de
       </p>
 
       <form
-        action={`https://formspree.io/f/${FORMSPREE_ID}`}
+        action={formAction(FORMSPREE_ID)}
         method="POST"
-        enctype="multipart/form-data"
         class="mt-6 space-y-4"
+        data-site-form="resource"
+        data-success="resource-success"
       >
         <input type="hidden" name="_subject" value="New Resource Submission" />
+        <input type="hidden" name="form" value="resource" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
 
         <div>
           <label for="name" class="label">Your Name *</label>
@@ -182,26 +187,21 @@ const resources: { title: string; type: string; source: string; year: number; de
         <div>
           <label for="url" class="label">URL (optional)</label>
           <input type="url" id="url" name="resource_url" class="input" placeholder="https://..." />
-          <p class="mt-1 text-xs text-slate-500">Link to the resource if hosted elsewhere</p>
-        </div>
-
-        <div>
-          <label for="file" class="label">Upload File (optional)</label>
-          <input
-            type="file"
-            id="file"
-            name="attachment"
-            class="block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-navy-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-navy-700 hover:file:bg-navy-200 dark:text-slate-400 dark:file:bg-navy-900/50 dark:file:text-navy-300"
-          />
-          <p class="mt-1 text-xs text-slate-500">Max 10MB. PDF, DOC, PPT, or ZIP files.</p>
+          <p class="mt-1 text-xs text-slate-500">A DOI, a publisher page, or a share link (Drive, OSF) if it is a file of your own.</p>
         </div>
 
         <div class="pt-2">
           <button type="submit" class="btn-primary w-full">Submit Resource</button>
         </div>
       </form>
+
+      <div id="resource-success" class="mt-6 hidden">
+        <p class="font-serif text-lg text-slate-900 dark:text-white">Thank you. Your suggestion has been sent.</p>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">We look at every suggestion and add it to the collection when it fits.</p>
+      </div>
     </div>
   </div>
+<FormHandler />
 </PageLayout>
 
 <script>

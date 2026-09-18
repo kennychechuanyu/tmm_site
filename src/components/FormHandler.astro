@@ -1,0 +1,59 @@
+---
+/**
+ * Submits any <form data-site-form> in the background and swaps it for the
+ * element named in data-success, so nobody leaves the page. Works with both
+ * destinations: Formspree answers JSON, the Google Apps Script cannot answer
+ * cross-site requests, so its send is fire-and-forget. If the send fails for
+ * any reason, the form is submitted the ordinary way as a fallback.
+ * Include once per page that has forms.
+ */
+---
+
+<script>
+  function wire() {
+    document.querySelectorAll<HTMLFormElement>("form[data-site-form]").forEach((form) => {
+      if (form.dataset.wired === "1") return;
+      form.dataset.wired = "1";
+      let fallingBack = false;
+
+      form.addEventListener("submit", async (e) => {
+        if (fallingBack) return;
+        e.preventDefault();
+        const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+        const label = button?.textContent ?? "";
+        if (button) {
+          button.disabled = true;
+          button.textContent = "Sending…";
+        }
+        // URL-encoded, which both destinations parse without fuss (the forms carry no files).
+        const body = new URLSearchParams();
+        new FormData(form).forEach((v, k) => { if (typeof v === "string") body.append(k, v); });
+        body.set("_ajax", "1");
+        const isFormspree = form.action.includes("formspree.io");
+        try {
+          if (isFormspree) {
+            const res = await fetch(form.action, { method: "POST", body, headers: { Accept: "application/json" } });
+            if (!res.ok) throw new Error(String(res.status));
+          } else {
+            // Apps Script cannot answer a cross-site request, so this is fire-and-forget:
+            // a resolved promise means the request left the browser; a rejection falls back below.
+            await fetch(form.action, { method: "POST", body, mode: "no-cors", redirect: "follow" });
+          }
+          const success = form.dataset.success ? document.getElementById(form.dataset.success) : null;
+          form.classList.add("hidden");
+          success?.classList.remove("hidden");
+          success?.scrollIntoView({ block: "nearest" });
+        } catch {
+          fallingBack = true;
+          if (button) {
+            button.disabled = false;
+            button.textContent = label;
+          }
+          form.submit();
+        }
+      });
+    });
+  }
+  wire();
+  document.addEventListener("astro:after-swap", wire);
+</script>
