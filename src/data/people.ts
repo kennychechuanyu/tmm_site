@@ -238,6 +238,7 @@ export const networkMembers = [
   },
   {
     name: "Wenjia Joyce Zhao",
+    email: "wenjia-joyce.zhao@warwick.ac.uk",
     role: "Behavioural Science Group",
     institution: "University of Warwick",
     image: "/images/people/WJZ.jpg",
