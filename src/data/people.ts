@@ -74,6 +74,7 @@ export const networkMembers = [
   },
   {
     name: "Fabian Hutmacher",
+    email: "fabian.hutmacher@uni-wuerzburg.de",
     role: "Psychology of Communication and New Media",
     institution: "University of Würzburg",
     image: "/images/people/FH.jpg",
@@ -278,6 +279,7 @@ export const networkMembers = [
   },
   {
     name: "Aaron S. Benjamin",
+    email: "asbenjam@illinois.edu",
     role: "Department of Psychology",
     institution: "University of Illinois Urbana-Champaign",
     image: "/images/people/AB.jpg",
