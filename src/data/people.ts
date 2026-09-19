@@ -286,6 +286,7 @@ export const networkMembers = [
   },
   {
     name: "Tobias Rebholz",
+    email: "tobias.rebholz@duke.edu",
     role: "Fuqua School of Business",
     institution: "Duke University",
     image: "/images/people/TR.jpg",
