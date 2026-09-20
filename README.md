@@ -86,13 +86,13 @@ const coordinatingCommittee = [
     role: "Research Group Name",
     institution: "University Name",
     email: "email@university.edu",
-    image: "/images/people/XX.jpg",  // Add photo to public/images/people/
+    image: "/images/people/lastname-firstname.jpg",  // same stem as the master photo in the working folder
   },
   // ... existing members
 ];
 ```
 
-**Don't forget:** Add the profile photo to `public/images/people/`
+**Don't forget:** Add the profile photo to `public/images/people/` as `lastname-firstname.jpg` (or `.png`), at most 1200 px on the long side; the untouched original stays in the working folder's `people/photos/`
 
 ---
 
