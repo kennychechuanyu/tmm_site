@@ -312,4 +312,13 @@ export const networkMembers = [
     website: "https://peterkvam.com/",
     bio: "Peter Kvam is an Associate Professor in the Psychology Department at The Ohio State University. He received his B.S. in Psychology and B.A. in Mathematics and Sociology from Indiana University in 2012 and his Ph.D. in Psychology from Michigan State University in 2017. After visiting positions at the Max Planck Institute in Berlin and the University of Tasmania, he completed postdoctoral fellowships at Indiana University and The Ohio State University in 2017\u20132019. He was previously a faculty member at the University of Florida from 2019\u20132024 before joining the department in 2024. His work investigates the cognitive mechanisms underlying many types of decisions, ranging from visual perception to judgments about the value of complex multi-attribute consumer products. His current focus is on how people navigate complex, dynamic, multi-alternative and continuous decisions, such as bidding for homes in competitive housing markets where options appear and disappear over time. As part of this effort, he uses machine learning and artificial intelligence to test and create computational models of human behavior, allowing new theories of latent (cognitive, neural) processes to be developed in a data-driven way.",
   },
+  {
+    name: "Tzu-Yao Lin",
+    role: "Quantitative Psychology and Individual Differences \u00b7 Methodology and Statistics",
+    institution: "KU Leuven & Maastricht University",
+    email: "tzuyao.nick.lin@gmail.com",
+    image: "/images/people/lin-tzu-yao.jpg",
+    website: "https://ppw.kuleuven.be/okp/team/Tzu-Yao_Lin/",
+    bio: "Tzu-Yao Lin is a joint PhD candidate at KU Leuven (Quantitative Psychology and Individual Differences) and Maastricht University (Department of Methodology and Statistics). His research investigates the conceptual and methodological foundations of measurement reliability in multilevel and intensive longitudinal designs. He examines what it fundamentally means for repeated measurements to be reliable across occasions and individuals, where hierarchical dependencies and temporal dynamics complicate conventional psychometric indices. Beyond longitudinal psychometrics, he also works on mathematical and computational models of judgment and decision-making, such as extending cultural consensus theory with threshold models.",
+  },
 ];
