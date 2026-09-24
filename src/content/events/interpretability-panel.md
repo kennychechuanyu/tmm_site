@@ -1,7 +1,7 @@
 ---
 title: "Interpretability in Psychological Models"
 date: 2026-10-15
-time: "15:30–19:20 CEST"
+time: "15:30–19:30 CEST"
 timeNote: "21:30 Beijing/Taipei · 14:30 London · 09:30 New York · 06:30 Los Angeles · 00:30 Melbourne (+1)"
 location: "Online — Microsoft Teams"
 registrationUrl: "https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621"
@@ -100,9 +100,9 @@ programme:
     label: "Break"
   - talk: "Adrian Erasmus"
   - talk: "Olivia Guest"
-  - time: "18:55–19:15"
+  - time: "18:55–19:25"
     label: "Audience Q&A"
-  - time: "19:15"
+  - time: "19:25"
     label: "Closing"
 sessionFormat: { talk: 15, discussion: 30 }
 moderators:
@@ -119,7 +119,7 @@ attendance:
   - group: "Registration"
     note: "The event is open to researchers, students, and anyone else interested in model interpretability and related topics. <a href=\"https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621\" target=\"_blank\" rel=\"noopener noreferrer\">Registration is open</a>; the joining link is emailed to you as soon as you register."
   - group: "Audience Q&A"
-    note: "Attendees join without camera or microphone. Questions are submitted in writing through the Teams Q&A at any point in the afternoon, and the moderators put a selection of them to the speakers and panels in the closing 20 minutes."
+    note: "Attendees join without camera or microphone. Questions are submitted in writing through the Teams Q&A at any point in the afternoon, and the moderators put a selection of them to the speakers and panels in the closing 30 minutes."
 recordingNote: "The event is recorded for TMM's internal use. There are no plans to publish the recording."
 speakers:
   - name: "Marcel Binz"
