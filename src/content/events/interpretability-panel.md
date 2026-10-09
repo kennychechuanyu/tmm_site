@@ -274,6 +274,12 @@ panelists:
   - name: "Julia Haaf"
     institution: "University of Potsdam"
     role: "Psychological Methods, Statistics and Evaluation"
+    photo: "/images/people/haaf-julia.jpg"
+    website: "https://jstbcs.github.io/"
+    bio: "Julia Haaf is Professor of Psychological Methods, Statistics and Evaluation at the University of Potsdam. She earned her PhD in Quantitative Psychology at the University of Missouri in 2018, working with Jeff Rouder, and was a postdoctoral fellow and then assistant professor in the Psychological Methods group at the University of Amsterdam before moving to Potsdam in 2024. Her research develops Bayesian hierarchical models of cognitive phenomena such as interference effects, recognition memory and subliminal priming, to understand how much individuals differ and how stable, qualitative differences can be separated from noise. She is particularly interested in how statistical models can express and test psychological theory, for example through ordinal constraints."
+    links:
+      - label: "Potsdam profile"
+        url: "https://www.uni-potsdam.de/en/psych-methods/team/julia-haaf"
   - name: "Trisha Van Zandt"
     institution: "The Ohio State University"
     role: "Department of Psychology"
