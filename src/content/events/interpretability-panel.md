@@ -75,7 +75,6 @@ talks:
     title: "Interpretability as a bridge to understanding"
     abstract: "This talk offers an account and typology of interpretation as the bridge from one difficult- or impossible-to-understand explanation of a model to another, hopefully more understandable explanation of that model. Through describing the different types of interpretation methods applied in computational cognitive science, this account places understanding at the center of discussions of interpretability and delineates the kind(s) of understanding we should expect. I argue that interpretation is limited in that it cannot provide explanatory understanding, the kind of understanding commonly ideally sought for through applying such methods."
     panel:
-      - "Julia Haaf"
       - "Michel Regenwetter"
       - "Joachim Vandekerckhove"
       - "Markus Eronen"
@@ -271,15 +270,6 @@ panelists:
     links:
       - label: "Syracuse profile"
         url: "https://artsandsciences.syracuse.edu/people/faculty/criss-phd-amy-h/"
-  - name: "Julia Haaf"
-    institution: "University of Potsdam"
-    role: "Psychological Methods, Statistics and Evaluation"
-    photo: "/images/people/haaf-julia.jpg"
-    website: "https://jstbcs.github.io/"
-    bio: "Julia Haaf is Professor of Psychological Methods, Statistics and Evaluation at the University of Potsdam. She earned her PhD in Quantitative Psychology at the University of Missouri in 2018, working with Jeff Rouder, and was a postdoctoral fellow and then assistant professor in the Psychological Methods group at the University of Amsterdam before moving to Potsdam in 2024. Her research develops Bayesian hierarchical models of cognitive phenomena such as interference effects, recognition memory and subliminal priming, to understand how much individuals differ and how stable, qualitative differences can be separated from noise. She is particularly interested in how statistical models can express and test psychological theory, for example through ordinal constraints."
-    links:
-      - label: "Potsdam profile"
-        url: "https://www.uni-potsdam.de/en/psych-methods/team/julia-haaf"
   - name: "Trisha Van Zandt"
     institution: "The Ohio State University"
     role: "Department of Psychology"
