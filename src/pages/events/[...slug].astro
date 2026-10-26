@@ -3,7 +3,7 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
 import Button from "../../components/Button.astro";
 import PersonCard from "../../components/PersonCard.astro";
-import { toInstants } from "../../utils/eventTime";
+import { toInstants, hasEnded } from "../../utils/eventTime";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -17,6 +17,8 @@ export async function getStaticPaths() {
 const { event } = Astro.props;
 const { Content } = await render(event);
 const hasBody = (event.body ?? "").trim().length > 0;
+const isPast = hasEnded(event.data);
+const attendance = isPast ? [] : event.data.attendance ?? [];
 
 const eventTypeLabel =
   event.data.type.charAt(0).toUpperCase() + event.data.type.slice(1);
@@ -102,7 +104,7 @@ const chapterIds = [
   talks.length > 0 && "programme",
   talks.length === 0 && speakers.length > 0 && "speakers",
   panelists.length > 0 && !groupedPanels && "panel",
-  (event.data.attendance?.length ?? 0) > 0 && "attending",
+  attendance.length > 0 && "attending",
 ].filter(Boolean) as string[];
 const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
 ---
@@ -154,7 +156,7 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
                   data-tz={tz}
                 >{event.data.time}</time>
               </p>
-              {event.data.timeNote && (
+              {event.data.timeNote && !isPast && (
                 <p
                   class="mt-2 max-w-[15rem] font-mono text-[11px] leading-relaxed text-slate-500 dark:text-slate-400"
                   data-local-note
@@ -177,7 +179,18 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
         </div>
 
         <div class="flex flex-col items-start justify-center gap-2.5 sm:col-span-2 md:col-span-1 md:ml-auto md:pl-12">
-          {event.data.registrationUrl ? (
+          {isPast ? (
+            <>
+              <p class="font-serif text-sm italic text-slate-400 dark:text-slate-500">
+                This event has taken place.
+              </p>
+              {event.data.recordingNote && (
+                <p class="max-w-[17rem] font-sans text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                  {event.data.recordingNote}
+                </p>
+              )}
+            </>
+          ) : event.data.registrationUrl ? (
             <Button href={event.data.registrationUrl} external>
               Register Now
             </Button>
@@ -186,7 +199,7 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
               Registration opens soon.
             </p>
           )}
-          {(event.data.admission || icsHref) && (
+          {!isPast && (event.data.admission || icsHref) && (
             <p class="font-sans text-xs text-slate-500 dark:text-slate-400">
               {event.data.admission && <span>{event.data.admission}</span>}
               {event.data.admission && icsHref && (
@@ -531,10 +544,10 @@ const numeralOf = (id: string) => roman[chapterIds.indexOf(id)];
     </Section>
   )}
 
-  {event.data.attendance && event.data.attendance.length > 0 && (
+  {attendance.length > 0 && (
     <Section background="gray" numeral={numeralOf("attending")} title="Attending" metaLabel="Practical details">
       <div class="grid gap-x-10 gap-y-12 md:grid-cols-3">
-        {event.data.attendance.map((a) => (
+        {attendance.map((a) => (
           <div class="relative pt-6">
             <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></span>
             <span aria-hidden="true" class="absolute left-0 top-0 h-[2px] w-8 bg-salmon-500 dark:bg-salmon-400"></span>

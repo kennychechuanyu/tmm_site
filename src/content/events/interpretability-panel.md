@@ -26,7 +26,7 @@ about: |
   as interpretable depend on who is using the model, for what purpose, and at what level of
   description? These questions arise across models ranging from evidence accumulation and
   Bayesian approaches to cognitive architectures and large neural networks. This event
-  explores these different ways of thinking about interpretability and how they might help us
+  explored these different ways of thinking about interpretability and how they might help us
   evaluate and use models in psychological science.
 questions:
   - label: "Model class"
@@ -40,13 +40,13 @@ questions:
 aboutCoda:
   - label: "The format"
     text: >-
-      Four short talks will open different perspectives on model interpretability, each
-      followed by a structured panel discussion. The talks provide a starting point, while
-      the panels are encouraged to broaden the conversation and bring in their own questions
+      Four short talks opened different perspectives on model interpretability, each
+      followed by a structured panel discussion. The talks provided a starting point, while
+      the panels were encouraged to broaden the conversation and bring in their own questions
       and perspectives.
   - label: "The aim"
     text: >-
-      Rather than seeking a single definition of interpretability, the event aims to clarify
+      Rather than seeking a single definition of interpretability, the event aimed to clarify
       where different modelling traditions agree and disagree, and to develop a more useful
       shared language for discussing interpretability in psychological science.
 talks:
@@ -119,7 +119,7 @@ attendance:
     note: "The event is open to researchers, students, and anyone else interested in model interpretability and related topics. <a href=\"https://events.teams.microsoft.com/event/4cfef021-787b-4ebc-bea5-99a68ff01af3@3973589b-9e40-4eb5-800e-b0b6383d1621\" target=\"_blank\" rel=\"noopener noreferrer\">Registration is open</a>; the joining link is emailed to you as soon as you register."
   - group: "Audience Q&A"
     note: "Attendees join without camera or microphone. Questions are submitted in writing through the Teams Q&A at any point in the afternoon, and the moderators put a selection of them to the speakers and panels in the closing 30 minutes."
-recordingNote: "The event is recorded for TMM's internal use. There are no plans to publish the recording."
+recordingNote: "The event was recorded for TMM's internal use. There are no plans to publish the recording."
 speakers:
   - name: "Marcel Binz"
     institution: "Helmholtz Munich"

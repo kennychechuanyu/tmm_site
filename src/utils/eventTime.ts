@@ -56,3 +56,23 @@ export function toInstants(
 
   return { start: start.toISOString(), end: end?.toISOString() };
 }
+
+interface Dated {
+  date?: Date;
+  endDate?: Date;
+  time?: string;
+  timezone: string;
+}
+
+export function eventEnd({ date, endDate, time, timezone }: Dated): Date | null {
+  if (!date) return null;
+  const day = 24 * 60 * 60 * 1000;
+  if (endDate) return new Date(endDate.getTime() + day);
+  const span = toInstants(time, date, timezone);
+  return new Date(span?.end ?? date.getTime() + day);
+}
+
+export function hasEnded(event: Dated, now = new Date()): boolean {
+  const end = eventEnd(event);
+  return end !== null && end.getTime() < now.getTime();
+}

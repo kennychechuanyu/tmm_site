@@ -1,13 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import { toInstants } from "../utils/eventTime";
+import { toInstants, hasEnded } from "../utils/eventTime";
 import { getCollection } from "astro:content";
 
 const allEvents = await getCollection("events");
 const now = new Date();
 const upcomingEvents = allEvents
-  .filter((event) => !event.data.date || event.data.date >= now)
+  .filter((event) => !hasEnded(event.data, now))
   .sort((a, b) => {
     const ad = a.data.date?.getTime() ?? -Infinity;
     const bd = b.data.date?.getTime() ?? -Infinity;

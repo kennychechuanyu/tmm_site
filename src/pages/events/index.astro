@@ -3,14 +3,14 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import Section from "../../components/Section.astro";
 import ChapterHeader from "../../components/ChapterHeader.astro";
 import Button from "../../components/Button.astro";
-import { toInstants } from "../../utils/eventTime";
+import { toInstants, hasEnded } from "../../utils/eventTime";
 import { getCollection } from "astro:content";
 
 const allEvents = await getCollection("events");
 const now = new Date();
 
 const upcomingEvents = allEvents
-  .filter((event) => !event.data.date || event.data.date >= now)
+  .filter((event) => !hasEnded(event.data, now))
   .sort((a, b) => {
     const ad = a.data.date?.getTime() ?? -Infinity;
     const bd = b.data.date?.getTime() ?? -Infinity;
@@ -18,7 +18,7 @@ const upcomingEvents = allEvents
   });
 
 const pastEvents = allEvents
-  .filter((event) => event.data.date && event.data.date < now)
+  .filter((event) => hasEnded(event.data, now))
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 ---
 
