@@ -18,11 +18,11 @@ export const coordinatingCommittee = [
   },
   {
     name: "Niels Vanhasbroeck",
-    role: "Psychological Methods",
-    institution: "University of Amsterdam",
-    email: "n.d.p.vanhasbroeck@uva.nl",
+    role: "Research",
+    institution: "m-Path Software",
+    email: "niels.vanhasbroeck@protonmail.com",
     image: "/images/people/vanhasbroeck-niels.jpg",
-    bio: "Niels Vanhasbroeck is a mathematical psychologist with a special interest in (non)linear models capturing psychological processes such as emotions, attitudes, and pedestrian behavior. He seeks to bridge mathematical models and psychological theory, allowing for the formulation of theory through the language of mathematics and its testing through phenomena generation and direct engagement with data. He furthermore asks what types of psychological phenomena allow for mathematical description and what we learn through this quantification—connecting qualitative phenomena to quantitative measurement.",
+    bio: "Niels Vanhasbroeck is a researcher at the company m-Path Software, having previously held positions at the KU Leuven and University of Amsterdam. As an academic, he was a mathematical psychologist with a special interest in (non)linear models capturing psychological processes such as emotions, attitudes, and pedestrian behavior. Now, he seeks to evaluate the extent to which we can formulate psychological theory as mathematical models as well as the testing of these theoretical models through a consideration of psychological phenomena and a direct engagement with data. He furthermore asks what types of psychological phenomena allow for mathematical description and what we learn through this quantification — connecting qualitative phenomena to quantitative measurement.",
     website: "https://ndpvh.github.io",
   },
   {
