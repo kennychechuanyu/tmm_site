@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://tmmpsych.vercel.app",
-  integrations: [tailwind(), sitemap()],
+  integrations: [tailwind(), sitemap({ filter: (page) => !page.includes("/thanks") })],
   redirects: {
     "/news/2025-10-14-founding-discussion": "/news/2025-11-14-founding-discussion",
   },

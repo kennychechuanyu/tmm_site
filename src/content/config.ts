@@ -9,6 +9,7 @@ const news = defineCollection({
     author: z.string().optional(),
     type: z.enum(["meeting-notes", "announcement", "update"]).default("update"),
     featured: z.boolean().default(false),
+    ogImage: z.string().optional(),
   }),
 });
 

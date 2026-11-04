@@ -8,12 +8,13 @@ interface Props {
   eyebrow?: string;
   compact?: boolean;
   image?: string;
+  noindex?: boolean;
 }
 
-const { title, description, subtitle, eyebrow, compact = false, image } = Astro.props;
+const { title, description, subtitle, eyebrow, compact = false, image, noindex } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} image={image}>
+<BaseLayout title={title} description={description} image={image} noindex={noindex}>
   <section class:list={["page-head", compact && "is-compact"]}>
     <div class="container-wide">
       {eyebrow && <p class="page-kicker">{eyebrow}</p>}
