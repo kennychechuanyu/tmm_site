@@ -26,6 +26,7 @@ const pastEvents = allEvents
   title="Events"
   description="TMM conferences, workshops, webinars, and meetups on psychological theory, modeling, and measurement."
   subtitle="Conferences, workshops, and webinars on theory, modeling, and measurement"
+  image="/images/share/events.png"
 >
   <Section background="white" compactTop>
     <ChapterHeader title="Upcoming" class="mt-4" />
@@ -58,7 +59,7 @@ const pastEvents = allEvents
                       <span class="mt-2 block font-sans text-sm text-slate-600 dark:text-slate-400">
                         <span data-part="month-short">{month}</span> <span data-part="year">{year}</span>
                       </span>
-                      <span data-part="weekday" class="block font-sans text-sm text-slate-500">{weekday}</span>
+                      <span data-part="weekday" class="block font-sans text-sm text-slate-500 dark:text-slate-400">{weekday}</span>
                     </>
                   ) : (
                     <span class="font-serif text-2xl italic text-slate-500">TBD</span>
@@ -117,7 +118,7 @@ const pastEvents = allEvents
                   <span class="mt-2 block font-sans text-sm text-slate-600 dark:text-slate-400">
                     <span data-part="month-short">{month}</span> <span data-part="year">{year}</span>
                   </span>
-                  <span data-part="weekday" class="block font-sans text-sm text-slate-500">{weekday}</span>
+                  <span data-part="weekday" class="block font-sans text-sm text-slate-500 dark:text-slate-400">{weekday}</span>
                 </div>
                 <div class="min-w-0">
                   <h3 class="font-serif text-xl leading-snug text-slate-900 decoration-1 underline-offset-4 group-hover:underline dark:text-slate-100 md:text-2xl">

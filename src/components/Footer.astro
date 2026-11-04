@@ -33,13 +33,13 @@ const columns = [
           Bridging theory and measurement in psychological science.
         </p>
         <a href="/community" class="mt-4 inline-block font-sans text-[0.9375rem] font-semibold text-slate-900 underline underline-offset-[3px] dark:text-slate-100">
-          Join the network
+          Join the Network
         </a>
       </div>
 
       {columns.map((col) => (
         <nav class="md:col-span-2" aria-label={col.heading}>
-          <h3 class="footer-heading">{col.heading}</h3>
+          <h2 class="footer-heading">{col.heading}</h2>
           <ul class="mt-4 space-y-2.5">
             {col.links.map((link) => (
               <li>
@@ -51,7 +51,7 @@ const columns = [
       ))}
 
       <div class="md:col-span-3">
-        <h3 class="footer-heading">Connect</h3>
+        <h2 class="footer-heading">Connect</h2>
         <div class="mt-4">
           <a href="mailto:tmm.psych@outlook.com" class="footer-link">tmm.psych@outlook.com</a>
         </div>

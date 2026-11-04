@@ -18,8 +18,14 @@ function formatDate(date: Date): string {
 }
 
 function typeLabel(type: string): string {
-  const label = type.replace("-", " ");
-  return label.charAt(0).toUpperCase() + label.slice(1);
+  switch (type) {
+    case "meeting-notes":
+      return "Meeting Notes";
+    case "announcement":
+      return "Announcement";
+    default:
+      return "Update";
+  }
 }
 ---
 
@@ -27,6 +33,7 @@ function typeLabel(type: string): string {
   title="News"
   description="Updates, meeting notes, and announcements from the TMM network."
   subtitle="Updates and meeting notes from our community"
+  image="/images/share/news.png"
 >
   <Section background="white" compactTop>
     {sortedNews.length > 0 ? (

@@ -11,7 +11,7 @@ description: "Four talks and four panel discussions on what it means for a psych
 deck: "Four talks and four panel discussions on what it means for a psychological model to be interpretable, and whether the idea still holds in an era of machine-learned cognition."
 eyebrow: "Online · Talks and panel discussions"
 admission: "Free and open to all"
-ogImage: /images/og/interpretability-panel.png
+ogImage: /images/share/interpretability-panel.png
 about: |
   Computational models can serve many purposes in psychological and cognitive science. They
   can describe patterns in data, formalise theories, and generate predictions. Researchers
@@ -187,7 +187,6 @@ panelists:
     role: "Department of Psychology"
     photo: "/images/people/hanson-stephen.jpg"
     bio: "Stephen José Hanson is a professor of psychology at Rutgers University and director of the Rutgers Brain Imaging Center (RUBIC). His research spans learning theory across humans, animals, and machines, including neural network learning algorithms, computational neuroimaging, and deep learning. He was General Chair of NeurIPS (1992) and a founding member of the McDonnell-Pew Cognitive Neuroscience Advisory Board."
-    website: "https://sasn.rutgers.edu/about-us/faculty-staff/stephen-jose-hanson-0"
   - name: "Michel Regenwetter"
     institution: "University of Illinois"
     role: "Department of Psychology"

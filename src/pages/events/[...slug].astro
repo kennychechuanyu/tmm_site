@@ -4,6 +4,7 @@ import Section from "../../components/Section.astro";
 import Button from "../../components/Button.astro";
 import PersonCard from "../../components/PersonCard.astro";
 import { toInstants, hasEnded } from "../../utils/eventTime";
+import { smallPhoto } from "../../utils/photos";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -169,40 +170,43 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
         </div>
 
         <div class="flex flex-col items-start justify-center gap-2.5 sm:col-span-2 md:col-span-1 md:ml-auto md:pl-12">
-          {isPast ? (
-            <>
-              <p class="font-serif text-base italic text-slate-700 dark:text-slate-300">
-                This event has taken place.
-              </p>
-              {event.data.recordingNote && (
-                <p class="max-w-[17rem] font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  {event.data.recordingNote}
+          <dt class="sr-only">Registration</dt>
+          <dd class="flex flex-col items-start gap-2.5">
+            {isPast ? (
+              <>
+                <p class="font-serif text-base italic text-slate-700 dark:text-slate-300">
+                  This event has taken place.
                 </p>
-              )}
-            </>
-          ) : event.data.registrationUrl ? (
-            <Button href={event.data.registrationUrl} external>
-              Register Now
-            </Button>
-          ) : (
-            <p class="font-serif text-base italic text-slate-700 dark:text-slate-300">
-              Registration opens soon.
-            </p>
-          )}
-          {!isPast && (event.data.admission || icsHref) && (
-            <p class="font-sans text-sm text-slate-600 dark:text-slate-400">
-              {event.data.admission && <span>{event.data.admission}</span>}
-              {event.data.admission && icsHref && (
-                <span aria-hidden="true" class="mx-1.5 text-slate-300 dark:text-slate-600">·</span>
-              )}
-              {icsHref && (
-                <a
-                  href={icsHref}
-                  class="font-semibold text-accent-800 underline decoration-accent-800/30 underline-offset-[3px] hover:decoration-accent-800 dark:text-accent-300"
-                >Add to calendar</a>
-              )}
-            </p>
-          )}
+                {event.data.recordingNote && (
+                  <p class="max-w-[17rem] font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                    {event.data.recordingNote}
+                  </p>
+                )}
+              </>
+            ) : event.data.registrationUrl ? (
+              <Button href={event.data.registrationUrl} external>
+                Register Now
+              </Button>
+            ) : (
+              <p class="font-serif text-base italic text-slate-700 dark:text-slate-300">
+                Registration opens soon.
+              </p>
+            )}
+            {!isPast && (event.data.admission || icsHref) && (
+              <p class="font-sans text-sm text-slate-600 dark:text-slate-400">
+                {event.data.admission && <span>{event.data.admission}</span>}
+                {event.data.admission && icsHref && (
+                  <span aria-hidden="true" class="mx-1.5 text-slate-300 dark:text-slate-600">·</span>
+                )}
+                {icsHref && (
+                  <a
+                    href={icsHref}
+                    class="font-semibold text-accent-800 underline decoration-accent-800/30 underline-offset-[3px] hover:decoration-accent-800 dark:text-accent-300"
+                  >Add to calendar</a>
+                )}
+              </p>
+            )}
+          </dd>
         </div>
       </dl>
     </div>
@@ -438,7 +442,7 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
       </div>
 
       {moderators.length > 0 && (
-        <aside class="mt-20 max-w-4xl border-t border-slate-200 pt-7 dark:border-slate-700 md:mt-28">
+        <div class="mt-20 max-w-4xl border-t border-slate-200 pt-7 dark:border-slate-700 md:mt-28">
           <p class="font-sans text-sm font-semibold text-slate-600 dark:text-slate-400">
             Moderators
           </p>
@@ -447,7 +451,7 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
               <li class="flex items-center gap-x-3.5">
                 {m.photo && (
                   <img
-                    src={m.photo}
+                    src={smallPhoto(m.photo)}
                     alt=""
                     width="56"
                     height="56"
@@ -466,7 +470,7 @@ const groupedPanels = talks.some((t) => (t.panel?.length ?? 0) > 0);
               </li>
             ))}
           </ul>
-        </aside>
+        </div>
       )}
     </Section>
   )}
