@@ -32,7 +32,7 @@ const categoryLabels: Record<string, string> = {
   rel={external ? "noopener noreferrer" : undefined}
   class="card group flex gap-4"
 >
-  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
+  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-accent-100 text-accent-800 dark:bg-accent-900/50 dark:text-accent-300">
     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <Fragment set:html={categoryIcons[category]} />
     </svg>
@@ -40,7 +40,7 @@ const categoryLabels: Record<string, string> = {
 
   <div class="min-w-0 flex-1">
     <div class="flex items-center gap-2">
-      <h3 class="truncate font-semibold text-slate-900 group-hover:text-navy-600 dark:text-white dark:group-hover:text-navy-400 transition-colors">
+      <h3 class="truncate font-semibold text-slate-900 group-hover:text-accent-800 dark:text-white dark:group-hover:text-accent-300 transition-colors">
         {title}
       </h3>
       {external && (
@@ -52,7 +52,7 @@ const categoryLabels: Record<string, string> = {
     <p class="mt-1 text-sm text-slate-600 line-clamp-2 dark:text-slate-400">
       {description}
     </p>
-    <span class="mt-2 inline-block text-xs font-medium text-navy-600 dark:text-navy-400">
+    <span class="mt-2 inline-block text-xs font-medium text-accent-800 dark:text-accent-300">
       {categoryLabels[category]}
     </span>
   </div>

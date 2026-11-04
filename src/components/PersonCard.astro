@@ -12,10 +12,9 @@ interface Props {
   photoCreditUrl?: string;
   links?: { label: string; url: string }[];
   tag?: string;
-  stagger?: number;
 }
 
-const { name, institution, role, image, email, website, website2, bio, photoCredit, photoCreditUrl, links, tag, stagger } = Astro.props;
+const { name, institution, role, image, email, website, website2, bio, photoCredit, photoCreditUrl, links, tag } = Astro.props;
 
 const initials = name
   .replace(/\s*\(.*?\)\s*/g, " ")
@@ -36,28 +35,23 @@ const escapeAttr = (s: string) =>
 const extraLinksHtml = extraLinks
   .map(
     (l) =>
-      `<a href="${escapeAttr(l.url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">${escapeAttr(l.label)}<svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg></a>`
+      `<a href="${escapeAttr(l.url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-sans text-sm font-semibold text-accent-800 underline decoration-accent-800/30 underline-offset-[3px] hover:decoration-accent-800 dark:text-accent-300 dark:decoration-accent-300/40">${escapeAttr(l.label)}</a>`
   )
   .join("");
 ---
 
-<div class="person-cell" style={typeof stagger === "number" ? `transition-delay: ${stagger}ms` : undefined}>
+<div class="person-cell">
 <button
   type="button"
   data-profile-open={dialogId}
   aria-expanded="false"
-  class="profile-trigger group relative flex w-full flex-col items-center pt-8 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-salmon-400 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 rounded-md"
+  class="profile-trigger group relative flex w-full flex-col items-center text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-600 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950"
 >
-  <span aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-200 dark:bg-slate-700"></span>
-  <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[2px] w-0 bg-salmon-500 transition-[width] duration-700 ease-out group-hover:w-full group-aria-expanded:w-full dark:bg-salmon-400"></span>
-
   <div
     data-card-portrait
     class:list={[
-      "relative aspect-[4/5] w-40 overflow-hidden rounded-xl transition-all duration-500",
-      image
-        ? "bg-slate-100 shadow-[0_14px_36px_-14px_rgba(15,23,42,0.3)] group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.4)] group-aria-expanded:shadow-none group-aria-expanded:ring-1 group-aria-expanded:ring-slate-200 dark:bg-slate-800 dark:shadow-[0_14px_36px_-14px_rgba(0,0,0,0.65)] dark:group-hover:shadow-[0_20px_48px_-16px_rgba(240,106,90,0.3)] dark:group-aria-expanded:ring-slate-700"
-        : "border border-dashed border-slate-300 group-hover:border-salmon-400/70 dark:border-slate-600 dark:group-hover:border-salmon-400/60",
+      "relative aspect-[4/5] w-40 overflow-hidden rounded-[3px]",
+      image ? "bg-slate-100 dark:bg-slate-800" : "border border-dashed border-slate-300 dark:border-slate-600",
     ]}
   >
     {image ? (
@@ -66,9 +60,9 @@ const extraLinksHtml = extraLinks
           src={image}
           alt={name}
           loading="lazy"
-          class="h-full w-full object-cover object-[center_30%] transition-[transform,opacity] duration-500 ease-out group-hover:scale-[1.04] group-aria-expanded:opacity-0"
+          class="h-full w-full object-cover object-[center_30%] transition-opacity duration-300 group-aria-expanded:opacity-0"
         />
-        <span aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center font-serif text-2xl text-slate-300 opacity-0 transition-opacity duration-500 group-aria-expanded:opacity-100 dark:text-slate-600">{initials}</span>
+        <span aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center font-serif text-2xl text-slate-300 opacity-0 transition-opacity duration-300 group-aria-expanded:opacity-100 dark:text-slate-600">{initials}</span>
       </Fragment>
     ) : (
       <div class="flex h-full w-full items-center justify-center">
@@ -78,38 +72,33 @@ const extraLinksHtml = extraLinks
   </div>
 
   {tag && (
-    <p class="mt-5 font-sans text-[9px] font-semibold uppercase text-salmon-600 dark:text-salmon-400" style="letter-spacing: 0.24em;">
-      {tag}
-    </p>
+    <p class="mt-4 font-sans text-sm font-semibold text-slate-600 dark:text-slate-400">{tag}</p>
   )}
-  <h3 class:list={[tag ? "mt-1.5" : "mt-6", "font-serif text-lg text-slate-900 dark:text-white"]} style="letter-spacing: -0.01em;">{name}</h3>
-  <span aria-hidden="true" class="mx-auto mt-2.5 block h-px w-6 bg-salmon-400/60"></span>
-  {institution && <p class="mt-2.5 text-sm font-medium text-navy-600 dark:text-navy-400">{institution}</p>}
-  {role && <p class="mt-1 font-serif text-xs italic text-slate-500 dark:text-slate-400">{role}</p>}
+  <h3 class:list={[tag ? "mt-1" : "mt-4", "font-serif text-lg leading-snug text-slate-900 decoration-1 underline-offset-4 group-hover:underline dark:text-white"]}>{name}</h3>
+  {institution && <p class="mt-1 font-sans text-[0.9375rem] font-semibold leading-snug text-slate-700 dark:text-slate-300">{institution}</p>}
+  {role && <p class="mt-0.5 font-sans text-sm leading-snug text-slate-500 dark:text-slate-400">{role}</p>}
 
-  <span class="mt-4 inline-flex items-center gap-1.5 font-sans text-[10px] font-semibold uppercase text-slate-400 transition-colors duration-300 group-hover:text-salmon-600 group-aria-expanded:text-salmon-600 dark:text-slate-500 dark:group-hover:text-salmon-400 dark:group-aria-expanded:text-salmon-400" style="letter-spacing: 0.2em;">
+  <span class="mt-3 inline-flex items-center gap-1 font-sans text-sm font-semibold text-accent-800 dark:text-accent-300">
     {bio ? "View profile" : "Details"}
-    <svg class="h-3 w-3 transition-transform duration-300 group-hover:translate-y-0.5 group-aria-expanded:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v13m0 0 5.5-5.5M12 18l-5.5-5.5" />
+    <svg class="h-3.5 w-3.5 transition-transform duration-200 group-aria-expanded:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
     </svg>
   </span>
 </button>
 
 <template id={dialogId} data-profile-template data-slug={slug}>
-  <div class="relative border-y border-slate-200 py-10 dark:border-slate-800 md:py-12">
-    <button type="button" data-profile-close aria-label="Close profile" class="absolute right-0 top-6 flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200">
+  <div class="relative border-y border-slate-900/15 py-10 dark:border-slate-100/15 md:py-12">
+    <button type="button" data-profile-close aria-label="Close profile" class="absolute right-0 top-6 flex h-9 w-9 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-200">
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
       </svg>
     </button>
 
-    <div class="grid items-start gap-8 md:grid-cols-[auto_1fr] md:gap-12">
+    <div class="grid items-start gap-8 text-left md:grid-cols-[auto_1fr] md:gap-12">
       <div>
         <div data-panel-portrait class:list={[
-          "aspect-[4/5] w-44 overflow-hidden rounded-xl md:w-56",
-          image
-            ? "bg-slate-100 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.35)] dark:bg-slate-800 dark:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)]"
-            : "border border-dashed border-slate-300 dark:border-slate-600",
+          "aspect-[4/5] w-44 overflow-hidden rounded-[3px] md:w-56",
+          image ? "bg-slate-100 dark:bg-slate-800" : "border border-dashed border-slate-300 dark:border-slate-600",
         ]}>
           {image ? (
             <img src={image} alt={name} loading="lazy" class="h-full w-full object-cover object-[center_30%]" />
@@ -120,10 +109,10 @@ const extraLinksHtml = extraLinks
           )}
         </div>
         {image && photoCredit && (
-          <p class="mt-2.5 w-44 font-sans text-[10px] leading-relaxed text-slate-400 dark:text-slate-500 md:w-56">
+          <p class="mt-2.5 w-44 font-sans text-xs leading-relaxed text-slate-500 dark:text-slate-400 md:w-56">
             Photo:{" "}
             {photoCreditUrl ? (
-              <a href={photoCreditUrl} target="_blank" rel="noopener noreferrer" class="underline decoration-slate-300 underline-offset-2 transition-colors hover:text-salmon-600 dark:decoration-slate-600 dark:hover:text-salmon-400">{photoCredit}</a>
+              <a href={photoCreditUrl} target="_blank" rel="noopener noreferrer" class="underline decoration-slate-300 underline-offset-2 hover:text-slate-800 dark:decoration-slate-600 dark:hover:text-slate-200">{photoCredit}</a>
             ) : (
               photoCredit
             )}
@@ -133,34 +122,30 @@ const extraLinksHtml = extraLinks
 
       <div class="min-w-0">
         <h3 class="pr-12 font-serif text-2xl leading-tight text-slate-900 dark:text-white md:text-3xl">{name}</h3>
-        <span aria-hidden="true" class="mt-3 block h-px w-8 bg-salmon-400/70"></span>
-        {institution && <p class="mt-3 text-sm font-medium text-navy-600 dark:text-navy-400">{institution}</p>}
-        {role && <p class="mt-1 font-serif text-sm italic text-slate-500 dark:text-slate-400">{role}</p>}
+        {institution && <p class="mt-2 font-sans text-base font-semibold text-slate-700 dark:text-slate-300">{institution}</p>}
+        {role && <p class="mt-0.5 font-sans text-[0.9375rem] text-slate-500 dark:text-slate-400">{role}</p>}
 
         {bio ? (
-          <p class="mt-6 max-w-[65ch] text-pretty font-sans text-[15px] leading-[1.85] text-slate-600 dark:text-slate-300 md:text-base">{bio}</p>
+          <p class="mt-6 max-w-[65ch] text-pretty text-[1.0625rem] leading-[1.75] text-slate-700 dark:text-slate-300">{bio}</p>
         ) : (
-          <p class="mt-6 font-sans text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">Profile details coming soon.</p>
+          <p class="mt-6 font-sans text-[0.9375rem] italic leading-relaxed text-slate-500 dark:text-slate-400">Profile details coming soon.</p>
         )}
 
         {(email || website || website2 || extraLinks.length > 0) && (
-          <div class="mt-7 flex max-w-[65ch] flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-200 pt-5 dark:border-slate-700">
+          <div class="mt-7 flex max-w-[65ch] flex-wrap items-center gap-x-6 gap-y-3 border-t border-slate-900/15 pt-5 dark:border-slate-100/15">
             {email && (
-              <a href={`mailto:${email}`} class="inline-flex items-center gap-2 font-mono text-xs text-slate-500 transition-colors hover:text-salmon-600 dark:text-slate-400 dark:hover:text-salmon-400">
-                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              <a href={`mailto:${email}`} class="font-sans text-sm text-slate-600 underline decoration-slate-300 underline-offset-[3px] hover:text-slate-900 dark:text-slate-400 dark:decoration-slate-600 dark:hover:text-slate-100">
                 {email}
               </a>
             )}
             {website && (
-              <a href={website} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
+              <a href={website} target="_blank" rel="noopener noreferrer" class="font-sans text-sm font-semibold text-accent-800 underline decoration-accent-800/30 underline-offset-[3px] hover:decoration-accent-800 dark:text-accent-300 dark:decoration-accent-300/40">
                 {labLink ? "Lab page" : "Personal page"}
-                <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
               </a>
             )}
             {website2 && (
-              <a href={website2} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-navy-600 transition-colors hover:text-salmon-600 dark:text-navy-400 dark:hover:text-salmon-400">
+              <a href={website2} target="_blank" rel="noopener noreferrer" class="font-sans text-sm font-semibold text-accent-800 underline decoration-accent-800/30 underline-offset-[3px] hover:decoration-accent-800 dark:text-accent-300 dark:decoration-accent-300/40">
                 Personal page
-                <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
               </a>
             )}
             {extraLinks.length > 0 && <Fragment set:html={extraLinksHtml} />}
@@ -223,7 +208,7 @@ const extraLinksHtml = extraLinks
         height: `${a.height}px`,
         margin: "0",
         zIndex: "40",
-        borderRadius: "0.75rem",
+        borderRadius: "3px",
         objectFit: "cover",
         objectPosition: "center 30%",
         opacity: "1",

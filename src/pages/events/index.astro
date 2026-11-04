@@ -28,86 +28,60 @@ const pastEvents = allEvents
   subtitle="Conferences, workshops, and webinars on theory, modeling, and measurement"
 >
   <Section background="white" compactTop>
-    <ChapterHeader numeral="I" title="Upcoming" metaLabel="Agenda" />
+    <ChapterHeader title="Upcoming" class="mt-4" />
 
     {upcomingEvents.length > 0 ? (
-      <ol class="mt-12 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+      <ol class="mt-8 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
         {upcomingEvents.map((event) => {
           const d = event.data.date;
           const part = (o: Intl.DateTimeFormatOptions) =>
             d!.toLocaleDateString("en-US", { ...o, timeZone: "UTC" });
-          const day = d ? part({ day: "2-digit" }) : null;
+          const day = d ? part({ day: "numeric" }) : null;
           const month = d ? part({ month: "short" }) : null;
           const year = d ? part({ year: "numeric" }) : null;
           const weekday = d ? part({ weekday: "long" }) : "Date TBD";
           const startsAt = toInstants(event.data.time, d, event.data.timezone)?.start
             ?? d?.toISOString();
+          const typeLabel = event.data.type.charAt(0).toUpperCase() + event.data.type.slice(1);
           return (
             <li>
               <a
                 href={`/events/${event.slug}`}
                 data-local-date={startsAt}
                 data-tz={event.data.timezone}
-                class="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 transition-colors hover:bg-slate-50/60 dark:hover:bg-slate-900/30 md:gap-10 md:py-8"
+                class="group grid grid-cols-[5.5rem_1fr] items-start gap-x-6 py-6 sm:grid-cols-[7rem_1fr] md:gap-x-10 md:py-7"
               >
-                <div class="flex items-baseline gap-3 pl-1 text-slate-900 dark:text-slate-100">
+                <div class="text-slate-900 dark:text-slate-100">
                   {d ? (
                     <>
-                      <span data-part="day" class="font-serif text-4xl leading-[0.85] tabular-nums md:text-6xl">
-                        {day}
+                      <span data-part="day" class="block font-serif text-4xl leading-none tabular-nums md:text-5xl">{day}</span>
+                      <span class="mt-2 block font-sans text-sm text-slate-600 dark:text-slate-400">
+                        <span data-part="month-short">{month}</span> <span data-part="year">{year}</span>
                       </span>
-                      <div
-                        class="flex flex-col font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
-                        style="letter-spacing: 0.22em;"
-                      >
-                        <span data-part="month-short">{month}</span>
-                        <span data-part="year" class="font-mono tabular-nums">{year}</span>
-                      </div>
+                      <span data-part="weekday" class="block font-sans text-sm text-slate-500">{weekday}</span>
                     </>
                   ) : (
-                    <span class="font-serif text-2xl italic leading-[0.9] text-slate-500 dark:text-slate-500 md:text-3xl">
-                      TBD
-                    </span>
+                    <span class="font-serif text-2xl italic text-slate-500">TBD</span>
                   )}
                 </div>
-
-                <div class="min-w-0 pr-2">
-                  <div
-                    class="mb-2 flex flex-wrap items-center gap-3 font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
-                    style="letter-spacing: 0.22em;"
-                  >
-                    <span data-part="weekday">{weekday}</span>
-                    <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
-                    <span class="text-salmon-600 dark:text-salmon-400">{event.data.type}</span>
-                    {event.data.featured && (
-                      <>
-                        <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
-                        <span>Featured</span>
-                      </>
-                    )}
-                  </div>
-                  <h3 class="font-serif text-xl leading-tight text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400 md:text-2xl">
+                <div class="min-w-0">
+                  <h3 class="font-serif text-xl leading-snug text-slate-900 decoration-1 underline-offset-4 group-hover:underline dark:text-slate-100 md:text-2xl">
                     {event.data.title}
                   </h3>
-                  <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                    {event.data.location}
+                  <p class="mt-2 flex flex-wrap gap-x-3 font-sans text-[0.9375rem] text-slate-600 dark:text-slate-400">
+                    <span class="font-semibold text-accent-800 dark:text-accent-300">{typeLabel}</span>
+                    {event.data.featured && <span class="font-semibold text-slate-800 dark:text-slate-200">Featured</span>}
+                    <span>{event.data.location}</span>
                   </p>
                 </div>
-
-                <span
-                  aria-hidden="true"
-                  class="hidden pr-2 text-xl text-slate-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-salmon-500 dark:text-slate-600 md:inline"
-                >
-                  →
-                </span>
               </a>
             </li>
           );
         })}
       </ol>
     ) : (
-      <div class="mt-12 border-y border-slate-900/15 py-16 text-center dark:border-slate-100/15">
-        <p class="font-serif text-xl italic text-slate-500 dark:text-slate-500">
+      <div class="mt-8 border-y border-slate-900/15 py-12 dark:border-slate-100/15">
+        <p class="font-serif text-xl italic text-slate-600 dark:text-slate-400">
           No events currently scheduled. Check back soon.
         </p>
       </div>
@@ -116,61 +90,44 @@ const pastEvents = allEvents
 
   {pastEvents.length > 0 && (
     <Section background="gray">
-      <ChapterHeader numeral="II" title="Past Events" metaLabel="Archive" />
+      <ChapterHeader title="Past Events" />
 
-      <ol class="mt-12 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+      <ol class="mt-8 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
         {pastEvents.map((event) => {
           const d = event.data.date!;
           const part = (o: Intl.DateTimeFormatOptions) =>
             d.toLocaleDateString("en-US", { ...o, timeZone: "UTC" });
-          const day = part({ day: "2-digit" });
+          const day = part({ day: "numeric" });
           const month = part({ month: "short" });
           const year = part({ year: "numeric" });
           const weekday = part({ weekday: "long" });
           const startsAt = toInstants(event.data.time, d, event.data.timezone)?.start
             ?? d.toISOString();
+          const typeLabel = event.data.type.charAt(0).toUpperCase() + event.data.type.slice(1);
           return (
             <li>
               <a
                 href={`/events/${event.slug}`}
                 data-local-date={startsAt}
                 data-tz={event.data.timezone}
-                class="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 transition-colors hover:bg-white/60 dark:hover:bg-slate-900/30 md:gap-10 md:py-8"
+                class="group grid grid-cols-[5.5rem_1fr] items-start gap-x-6 py-6 sm:grid-cols-[7rem_1fr] md:gap-x-10 md:py-7"
               >
-                <div class="flex items-baseline gap-3 pl-1 text-slate-500 dark:text-slate-500">
-                  <span data-part="day" class="font-serif text-4xl leading-[0.85] tabular-nums md:text-6xl">
-                    {day}
+                <div class="text-slate-700 dark:text-slate-300">
+                  <span data-part="day" class="block font-serif text-4xl leading-none tabular-nums md:text-5xl">{day}</span>
+                  <span class="mt-2 block font-sans text-sm text-slate-600 dark:text-slate-400">
+                    <span data-part="month-short">{month}</span> <span data-part="year">{year}</span>
                   </span>
-                  <div
-                    class="flex flex-col font-sans text-[10px] uppercase"
-                    style="letter-spacing: 0.22em;"
-                  >
-                    <span data-part="month-short">{month}</span>
-                    <span data-part="year" class="font-mono tabular-nums">{year}</span>
-                  </div>
+                  <span data-part="weekday" class="block font-sans text-sm text-slate-500">{weekday}</span>
                 </div>
-                <div class="min-w-0 pr-2">
-                  <div
-                    class="mb-2 flex flex-wrap items-center gap-3 font-sans text-[10px] uppercase text-slate-500 dark:text-slate-500"
-                    style="letter-spacing: 0.22em;"
-                  >
-                    <span data-part="weekday">{weekday}</span>
-                    <span aria-hidden="true" class="h-px w-4 bg-slate-400 dark:bg-slate-600"></span>
-                    <span>{event.data.type}</span>
-                  </div>
-                  <h3 class="font-serif text-xl leading-tight text-slate-600 transition-colors group-hover:text-slate-900 dark:text-slate-400 dark:group-hover:text-slate-100 md:text-2xl">
+                <div class="min-w-0">
+                  <h3 class="font-serif text-xl leading-snug text-slate-900 decoration-1 underline-offset-4 group-hover:underline dark:text-slate-100 md:text-2xl">
                     {event.data.title}
                   </h3>
-                  <p class="mt-1 text-sm text-slate-500 dark:text-slate-500">
-                    {event.data.location}
+                  <p class="mt-2 flex flex-wrap gap-x-3 font-sans text-[0.9375rem] text-slate-600 dark:text-slate-400">
+                    <span class="font-semibold text-slate-700 dark:text-slate-300">{typeLabel}</span>
+                    <span>{event.data.location}</span>
                   </p>
                 </div>
-                <span
-                  aria-hidden="true"
-                  class="hidden pr-2 text-xl text-slate-400 transition-all duration-300 group-hover:translate-x-1 dark:text-slate-600 md:inline"
-                >
-                  →
-                </span>
               </a>
             </li>
           );
@@ -180,8 +137,8 @@ const pastEvents = allEvents
   )}
 
   <Section background={pastEvents.length > 0 ? "white" : "gray"}>
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <p class="text-slate-600 dark:text-slate-400">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-slate-700 dark:text-slate-300">
         Have an idea for a workshop, webinar, or reading group? We welcome proposals from network members.
       </p>
       <Button href="/contact">Submit a Proposal</Button>

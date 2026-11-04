@@ -30,9 +30,9 @@ const academicRoles = [
   subtitle="Connect with researchers working on the theory-measurement gap"
 >
   <Section background="white">
-    <div class="mx-auto max-w-4xl">
+    <div class="max-w-4xl">
       <ChapterHeader title="Join Our Network" />
-      <p class="mt-10 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300 md:mt-12">
+      <p class="mt-8 max-w-3xl text-lg leading-relaxed text-slate-800 dark:text-slate-200">
         TMM welcomes researchers interested in the
         translation between theory and measurement. We bring together members from
         diverse fields, including but not limited to cognitive modeling, psychometrics,
@@ -40,9 +40,9 @@ const academicRoles = [
       </p>
 
       {subscribeHref && (
-        <div class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/40 md:p-8">
+        <div class="mt-10 border-l-2 border-slate-900 bg-slate-50 p-6 dark:border-slate-100 dark:bg-slate-900/50 md:p-8">
           <h3 class="font-serif text-xl text-slate-900 dark:text-white">Just the news?</h3>
-          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          <p class="mt-2 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
             The mailing list is the light-touch way to follow TMM: occasional emails about events,
             summaries of discussions, and opportunities to get involved, without becoming a member.
           </p>
@@ -52,55 +52,40 @@ const academicRoles = [
         </div>
       )}
 
-      <div class="mt-10 space-y-8">
-        <div class="flex gap-4">
-          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
-            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-            </svg>
-          </div>
+      <ul class="mt-10 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+        <li class="py-5">
           <div>
-            <h3 class="font-semibold text-slate-900 dark:text-white">Regular Meetings & Events</h3>
-            <p class="mt-1 text-slate-600 dark:text-slate-400">
+            <h3 class="font-serif text-xl text-slate-900 dark:text-white">Regular Meetings & Events</h3>
+            <p class="mt-1.5 text-slate-700 dark:text-slate-300">
               We organize seminars, workshops, and conferences bringing together researchers
               working on the intersection of psychological theory, computational modeling,
               and measurement.
             </p>
           </div>
-        </div>
+        </li>
 
-        <div class="flex gap-4">
-          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
-            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-            </svg>
-          </div>
+        <li class="py-5">
           <div>
-            <h3 class="font-semibold text-slate-900 dark:text-white">Working Groups</h3>
-            <p class="mt-1 text-slate-600 dark:text-slate-400">
+            <h3 class="font-serif text-xl text-slate-900 dark:text-white">Working Groups</h3>
+            <p class="mt-1.5 text-slate-700 dark:text-slate-300">
               Join focused working groups that tackle specific challenges at the theory-measurement
               interface. Working groups meet regularly to discuss ideas, share progress, and
               develop collaborative projects.
             </p>
           </div>
-        </div>
+        </li>
 
-        <div class="flex gap-4">
-          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
-            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-            </svg>
-          </div>
+        <li class="py-5">
           <div>
-            <h3 class="font-semibold text-slate-900 dark:text-white">Cross-Disciplinary Collaboration</h3>
-            <p class="mt-1 text-slate-600 dark:text-slate-400">
+            <h3 class="font-serif text-xl text-slate-900 dark:text-white">Cross-Disciplinary Collaboration</h3>
+            <p class="mt-1.5 text-slate-700 dark:text-slate-300">
               Connect with researchers from psychometrics, computational modeling, philosophy
               of science, and substantive domains. Our network fosters collaborations that
               bridge methodological expertise with empirical research questions.
             </p>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
 
       <div class="mt-10">
         <button
@@ -114,57 +99,51 @@ const academicRoles = [
   </Section>
 
   <Section background="white">
-    <div class="mx-auto max-w-4xl">
+    <div class="max-w-4xl">
       <ChapterHeader title="How to Get Involved" />
-      <div class="mt-12 grid gap-6 md:grid-cols-3 md:mt-16">
-        <div class="text-center">
-          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
-            <span class="text-xl font-bold">1</span>
-          </div>
-          <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">Join the Network</h3>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+      <ol class="mt-8 grid gap-8 md:grid-cols-3">
+        <li class="border-t border-slate-900 pt-4 dark:border-slate-100">
+          <span class="font-serif text-3xl leading-none text-accent-800 dark:text-accent-300">1</span>
+          <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Join the Network</h3>
+          <p class="mt-2 text-base text-slate-700 dark:text-slate-300">
             Sign up for free to receive updates and access resources.
           </p>
-        </div>
-        <div class="text-center">
-          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
-            <span class="text-xl font-bold">2</span>
-          </div>
-          <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">Attend Events</h3>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+        </li>
+        <li class="border-t border-slate-900 pt-4 dark:border-slate-100">
+          <span class="font-serif text-3xl leading-none text-accent-800 dark:text-accent-300">2</span>
+          <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Attend Events</h3>
+          <p class="mt-2 text-base text-slate-700 dark:text-slate-300">
             Participate in conferences, workshops, and webinars.
           </p>
-        </div>
-        <div class="text-center">
-          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100 text-navy-600 dark:bg-navy-900/50 dark:text-navy-400">
-            <span class="text-xl font-bold">3</span>
-          </div>
-          <h3 class="mt-4 font-semibold text-slate-900 dark:text-white">Collaborate</h3>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+        </li>
+        <li class="border-t border-slate-900 pt-4 dark:border-slate-100">
+          <span class="font-serif text-3xl leading-none text-accent-800 dark:text-accent-300">3</span>
+          <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Collaborate</h3>
+          <p class="mt-2 text-base text-slate-700 dark:text-slate-300">
             Join a working group or propose a new initiative.
           </p>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </Section>
 
   <Section background="gray">
-    <div class="mx-auto max-w-4xl">
+    <div class="max-w-4xl">
       <ChapterHeader title="Working Groups" />
-      <p class="mt-10 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300 md:mt-12">
+      <p class="mt-8 max-w-3xl text-lg leading-relaxed text-slate-800 dark:text-slate-200">
         Working groups tackle specific challenges at the theory-measurement interface.
         They emerge from project ideas that attract enough interest.
       </p>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">
+      <p class="mt-3 max-w-3xl text-slate-700 dark:text-slate-300">
         None have formed yet. The fastest way to start one is to propose a project idea below and
         see who else is interested.
       </p>
 
       <div class="mt-12">
-        <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+        <h3 class="font-serif text-2xl text-slate-900 dark:text-white">
           Propose a Project Idea
         </h3>
-        <p class="mt-4 text-slate-600 dark:text-slate-400">
+        <p class="mt-3 max-w-3xl text-slate-700 dark:text-slate-300">
           Have a rough idea about theory-measurement alignment? Share it. If others are
           interested, it can grow into a working group. Not every idea needs to be fully
           formed. That's what collaboration is for.
@@ -180,10 +159,10 @@ const academicRoles = [
       </div>
 
       <div class="mt-12">
-        <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+        <h3 class="font-serif text-2xl text-slate-900 dark:text-white">
           Project Ideas Seeking Collaborators
         </h3>
-        <p class="mt-4 text-slate-600 dark:text-slate-400">
+        <p class="mt-3 max-w-3xl text-slate-700 dark:text-slate-300">
           Ideas sent through the form above are listed here once there are a few. Yours could be
           the first.
         </p>
@@ -192,15 +171,15 @@ const academicRoles = [
   </Section>
 
   <Section background="white">
-    <div class="mx-auto max-w-4xl">
+    <div class="max-w-4xl">
       <ChapterHeader title="Discussion Topics" />
-      <p class="mt-10 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300 md:mt-12">
+      <p class="mt-8 max-w-3xl text-lg leading-relaxed text-slate-800 dark:text-slate-200">
         What questions should the field be grappling with? Propose topics you think
         deserve attention: contested assumptions, unresolved tensions, or emerging challenges
         in theory-measurement alignment.
       </p>
 
-      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-800 dark:text-slate-200">
         We organize discussions as network events, online or at workshops.
       </p>
 
@@ -219,7 +198,7 @@ const academicRoles = [
     id="membership-modal"
     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4"
   >
-    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900">
+    <div class="relative w-full max-w-lg rounded-md bg-white p-6 shadow-2xl dark:bg-slate-900">
       <button
         id="close-modal-btn"
         class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
@@ -229,7 +208,7 @@ const academicRoles = [
         </svg>
       </button>
 
-      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+      <h2 class="font-serif text-2xl text-slate-900 dark:text-white">
         Join TMM Network
       </h2>
       <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
@@ -320,7 +299,7 @@ const academicRoles = [
 
         {subscribeHref && (
           <label class="flex items-start gap-3 pt-1 text-sm text-slate-600 dark:text-slate-400">
-            <input type="checkbox" name="mailing_list" value="yes" class="mt-1 h-4 w-4 rounded border-slate-300 text-navy-600 focus:ring-navy-500" />
+            <input type="checkbox" name="mailing_list" value="yes" class="mt-1 h-4 w-4 rounded-sm border-slate-300 text-accent-800 focus:ring-accent-700" />
             <span>Also invite me to the TMM mailing list: occasional emails about events and discussions, unsubscribe at any time.</span>
           </label>
         )}
@@ -335,7 +314,7 @@ const academicRoles = [
       <div id="membership-success" class="mt-6 hidden">
         <p class="text-base text-slate-900 dark:text-white">Thank you. Your membership request has been sent.</p>
         {subscribeHref ? (
-          <div class="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/40">
+          <div class="mt-5 border-l-2 border-slate-900 bg-slate-50 p-4 dark:border-slate-100 dark:bg-slate-900/40">
             <p class="text-sm text-slate-700 dark:text-slate-300">
               One more click if you would like the network's emails, a few a year:
             </p>
@@ -354,7 +333,7 @@ const academicRoles = [
     id="project-modal"
     class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto bg-black/50 p-4"
   >
-    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900 my-8">
+    <div class="relative my-8 w-full max-w-lg rounded-md bg-white p-6 shadow-2xl dark:bg-slate-900">
       <button
         id="close-project-modal-btn"
         class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
@@ -364,7 +343,7 @@ const academicRoles = [
         </svg>
       </button>
 
-      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+      <h2 class="font-serif text-2xl text-slate-900 dark:text-white">
         Propose a Project Idea
       </h2>
       <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
@@ -459,7 +438,7 @@ const academicRoles = [
     id="discussion-modal"
     class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto bg-black/50 p-4"
   >
-    <div class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-slate-900 my-8">
+    <div class="relative my-8 w-full max-w-lg rounded-md bg-white p-6 shadow-2xl dark:bg-slate-900">
       <button
         id="close-discussion-modal-btn"
         class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
@@ -469,7 +448,7 @@ const academicRoles = [
         </svg>
       </button>
 
-      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+      <h2 class="font-serif text-2xl text-slate-900 dark:text-white">
         Propose a Discussion Topic
       </h2>
       <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">

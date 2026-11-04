@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import DataCurve from "../components/DataCurve.astro";
 
 interface Props {
   title: string;
@@ -9,63 +8,17 @@ interface Props {
   eyebrow?: string;
   compact?: boolean;
   image?: string;
-  titleClearance?: number;
 }
 
-const {
-  title,
-  description,
-  subtitle,
-  eyebrow = "TMM Network",
-  compact = false,
-  image,
-  titleClearance = 0.46,
-} = Astro.props;
-
-const heroMask =
-  titleClearance > 0.5
-    ? "linear-gradient(72deg, transparent 50%, #000 72%)"
-    : "linear-gradient(72deg, transparent 40%, #000 66%)";
-
-const titleSize = compact
-  ? "clamp(1.875rem, 4vw, 3.25rem)"
-  : "clamp(2.5rem, 7vw, 5.25rem)";
+const { title, description, subtitle, eyebrow, compact = false, image } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} image={image}>
-  <section class="relative overflow-hidden border-b border-slate-900/10 bg-white pt-24 pb-16 dark:border-slate-100/10 dark:bg-slate-950 md:pt-32 md:pb-24">
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0 text-slate-900 opacity-[0.04] dark:text-slate-100 dark:opacity-[0.08]"
-      style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px;"
-    ></div>
-
-    <DataCurve class="opacity-90" hubMin={titleClearance} mask={heroMask} />
-
-    <div class="container-wide relative">
-      <div
-        class="mb-8 flex items-center gap-4 font-sans text-[11px] font-medium uppercase text-salmon-600 dark:text-salmon-400"
-        style="letter-spacing: 0.22em;"
-      >
-        <span aria-hidden="true" class="inline-block h-px w-12 bg-salmon-500/80 dark:bg-salmon-400/80"></span>
-        <span>{eyebrow}</span>
-      </div>
-
-      <h1
-        class="font-serif font-normal leading-[0.95] tracking-[-0.02em] text-slate-900 dark:text-slate-100"
-        style={`font-size: ${titleSize};`}
-      >
-        {title}
-      </h1>
-
-      {subtitle && (
-        <div class="mt-8 flex items-start gap-5">
-          <div aria-hidden="true" class="mt-2 hidden h-12 w-px bg-slate-900 dark:bg-slate-100 sm:block"></div>
-          <p class="max-w-4xl font-serif text-lg leading-snug text-slate-700 dark:text-slate-300 md:text-xl">
-            {subtitle}
-          </p>
-        </div>
-      )}
+  <section class:list={["page-head", compact && "is-compact"]}>
+    <div class="container-wide">
+      {eyebrow && <p class="page-kicker">{eyebrow}</p>}
+      <h1 class="page-title">{title}</h1>
+      {subtitle && <p class="page-sub">{subtitle}</p>}
     </div>
   </section>
 

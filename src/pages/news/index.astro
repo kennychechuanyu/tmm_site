@@ -17,15 +17,9 @@ function formatDate(date: Date): string {
   });
 }
 
-function getTypeBadge(type: string): { bg: string; text: string } {
-  switch (type) {
-    case "meeting-notes":
-      return { bg: "bg-navy-100 dark:bg-navy-900/50", text: "text-navy-700 dark:text-navy-300" };
-    case "announcement":
-      return { bg: "bg-teal-100 dark:bg-teal-900/50", text: "text-teal-700 dark:text-teal-300" };
-    default:
-      return { bg: "bg-slate-100 dark:bg-slate-800", text: "text-slate-700 dark:text-slate-300" };
-  }
+function typeLabel(type: string): string {
+  const label = type.replace("-", " ");
+  return label.charAt(0).toUpperCase() + label.slice(1);
 }
 ---
 
@@ -36,50 +30,28 @@ function getTypeBadge(type: string): { bg: string; text: string } {
 >
   <Section background="white" compactTop>
     {sortedNews.length > 0 ? (
-      <div class="space-y-8">
-        {sortedNews.map((post) => {
-          const badge = getTypeBadge(post.data.type);
-          return (
-            <article class="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-slate-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/50 dark:hover:border-slate-600">
-              <div class="flex flex-wrap items-center gap-3 text-sm">
-                <time class="text-slate-500 dark:text-slate-400">
-                  {formatDate(post.data.date)}
-                </time>
-                <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${badge.bg} ${badge.text}`}>
-                  {post.data.type.replace("-", " ")}
-                </span>
-                {post.data.featured && (
-                  <span class="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">
-                    Featured
-                  </span>
-                )}
-              </div>
-              <h2 class="mt-3 text-xl font-semibold text-slate-900 dark:text-white">
-                <a
-                  href={`/news/${post.slug}`}
-                  class="hover:text-navy-600 dark:hover:text-navy-400"
-                >
-                  {post.data.title}
-                </a>
-              </h2>
-              <p class="mt-2 text-slate-600 dark:text-slate-400">
-                {post.data.description}
-              </p>
-              <a
-                href={`/news/${post.slug}`}
-                class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-navy-600 hover:text-navy-700 dark:text-navy-400 dark:hover:text-navy-300"
-              >
-                Read more
-                <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
+      <ol class="mt-4 max-w-4xl divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15">
+        {sortedNews.map((post) => (
+          <li class="py-7">
+            <p class="flex flex-wrap gap-x-3 font-sans text-[0.9375rem] text-slate-600 dark:text-slate-400">
+              <time>{formatDate(post.data.date)}</time>
+              <span class="font-semibold text-accent-800 dark:text-accent-300">{typeLabel(post.data.type)}</span>
+              {post.data.featured && <span class="font-semibold text-slate-800 dark:text-slate-200">Featured</span>}
+            </p>
+            <h2 class="mt-2 font-serif text-2xl leading-snug text-slate-900 dark:text-white">
+              <a href={`/news/${post.slug}`} class="decoration-1 underline-offset-4 hover:underline">
+                {post.data.title}
               </a>
-            </article>
-          );
-        })}
-      </div>
+            </h2>
+            <p class="mt-2 text-slate-700 dark:text-slate-300">
+              {post.data.description}
+            </p>
+            <a href={`/news/${post.slug}`} class="text-link mt-3 inline-block">Read more</a>
+          </li>
+        ))}
+      </ol>
     ) : (
-      <p class="text-slate-600 dark:text-slate-400 italic">
+      <p class="italic text-slate-600 dark:text-slate-400">
         No news posts yet. Check back soon!
       </p>
     )}
@@ -87,7 +59,7 @@ function getTypeBadge(type: string): { bg: string; text: string } {
 
   <Section background="gray">
     <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <p class="text-slate-600 dark:text-slate-400">
+      <p class="text-slate-700 dark:text-slate-300">
         Want meeting notes and announcements as they happen? Join the network to stay in the loop.
       </p>
       <Button href="/community">Join the Network</Button>

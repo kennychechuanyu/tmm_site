@@ -31,7 +31,7 @@ const formatDate = (date: Date) => {
   href={href}
   class:list={[
     "card group flex flex-col",
-    featured && "ring-2 ring-navy-500 dark:ring-navy-400",
+    featured && "ring-2 ring-accent-700 dark:ring-accent-300",
   ]}
 >
   <div class="flex items-start justify-between gap-4">
@@ -40,14 +40,14 @@ const formatDate = (date: Date) => {
         {type.charAt(0).toUpperCase() + type.slice(1)}
       </span>
       {featured && (
-        <span class="badge bg-navy-600 text-white dark:bg-navy-500">
+        <span class="badge bg-accent-800 text-white dark:bg-accent-700">
           Featured
         </span>
       )}
     </div>
   </div>
 
-  <h3 class="mt-4 text-lg font-semibold text-slate-900 group-hover:text-navy-600 dark:text-white dark:group-hover:text-navy-400 transition-colors">
+  <h3 class="mt-4 text-lg font-semibold text-slate-900 group-hover:text-accent-800 dark:text-white dark:group-hover:text-accent-300 transition-colors">
     {title}
   </h3>
 

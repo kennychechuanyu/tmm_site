@@ -33,26 +33,21 @@ const values = [
   subtitle="Bridging theory, models, and measurement in psychological science"
 >
   <Section background="white">
-    <div class="mx-auto max-w-5xl">
-      <ChapterHeader numeral="I" title="Our Mission" />
+    <div class="max-w-5xl">
+      <ChapterHeader title="Our Mission" />
 
-      <div class="mt-12 grid gap-12 md:mt-16 lg:grid-cols-12 lg:gap-20">
+      <div class="mt-10 grid gap-10 md:mt-12 lg:grid-cols-12 lg:gap-16">
         <div class="lg:col-span-5">
           <p class="font-serif text-2xl leading-snug text-slate-900 dark:text-slate-100 md:text-3xl">
-            Psychology <em class="font-normal text-slate-500 dark:text-slate-400">theorizes</em>,
-            <em class="font-normal text-slate-500 dark:text-slate-400">models</em>, and
-            <em class="font-normal text-slate-500 dark:text-slate-400">measures</em>
+            Psychology <em>theorizes</em>, <em>models</em>, and <em>measures</em>
             in disconnected ways.
           </p>
-          <div class="mt-6 flex items-center gap-4">
-            <div aria-hidden="true" class="h-px w-12 bg-salmon-500 dark:bg-salmon-400"></div>
-            <p class="font-serif text-lg italic text-salmon-600 dark:text-salmon-400">
-              TMM exists to change that.
-            </p>
-          </div>
+          <p class="mt-5 font-serif text-xl italic text-slate-700 dark:text-slate-300">
+            TMM exists to change that.
+          </p>
         </div>
 
-        <div class="space-y-5 text-base leading-relaxed text-slate-700 dark:text-slate-300 lg:col-span-7">
+        <div class="space-y-5 text-[1.0625rem] leading-relaxed text-slate-700 dark:text-slate-300 lg:col-span-7">
           <p>
             Over the past two decades, computational models have become increasingly
             prominent in psychological science, allowing researchers to formalize
@@ -80,35 +75,23 @@ const values = [
     </div>
   </Section>
 
-  <section class="relative bg-slate-50 py-20 dark:bg-slate-900/40 md:py-32">
-    <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900/10 dark:bg-slate-100/10"></div>
-    <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-px bg-slate-900/10 dark:bg-slate-100/10"></div>
-
+  <section class="section border-y border-slate-900/10 bg-slate-50 dark:border-slate-100/10 dark:bg-slate-900/50">
     <div class="container-wide">
-      <div class="mx-auto max-w-5xl">
-        <ChapterHeader numeral="II" title="Two Fundamental Gaps" />
+      <div class="max-w-5xl">
+        <ChapterHeader title="Two Fundamental Gaps" />
 
-        <p class="mt-10 font-serif text-lg italic text-slate-600 dark:text-slate-400 md:text-xl">
+        <p class="mt-8 max-w-3xl font-serif text-xl italic leading-snug text-slate-700 dark:text-slate-300">
           At the intersection of theory, measurement, and modeling, two crucial gaps
           limit psychology's progress as a quantitative science.
         </p>
 
-        <div class="mt-14 grid gap-10 md:grid-cols-2 md:gap-12">
-          <article class="group relative pt-10">
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900 dark:bg-slate-100"></div>
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] w-0 bg-salmon-500 transition-[width] duration-[900ms] ease-out group-hover:w-full dark:bg-salmon-400"></div>
-
-            <div class="mb-6 flex items-baseline justify-between">
-              <span class="font-serif italic leading-[0.8] text-slate-900 transition-colors duration-500 group-hover:text-salmon-500 dark:text-slate-100 dark:group-hover:text-salmon-400" style="font-size: 4.5rem;">
-                01
-              </span>
-            </div>
-
+        <div class="mt-10 grid gap-10 md:grid-cols-2 md:gap-12">
+          <article class="border-t border-slate-900 pt-5 dark:border-slate-100">
             <h3 class="font-serif text-2xl text-slate-900 dark:text-slate-100">
               The Prediction–Explanation Gap
             </h3>
 
-            <div class="mt-4 space-y-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            <div class="mt-4 space-y-3 text-base leading-relaxed text-slate-700 dark:text-slate-300">
               <p>
                 The relationship between prediction and explanation in theory assessment
                 remains poorly understood. Models that successfully forecast outcomes are
@@ -123,27 +106,18 @@ const values = [
             </div>
           </article>
 
-          <article class="group relative pt-10">
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-slate-900 dark:bg-slate-100"></div>
-            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] w-0 bg-salmon-500 transition-[width] duration-[900ms] ease-out group-hover:w-full dark:bg-salmon-400"></div>
-
-            <div class="mb-6 flex items-baseline justify-between">
-              <span class="font-serif italic leading-[0.8] text-slate-900 transition-colors duration-500 group-hover:text-salmon-500 dark:text-slate-100 dark:group-hover:text-salmon-400" style="font-size: 4.5rem;">
-                02
-              </span>
-            </div>
-
+          <article class="border-t border-slate-900 pt-5 dark:border-slate-100">
             <h3 class="font-serif text-2xl text-slate-900 dark:text-slate-100">
               The Measurement–Theory Gap
             </h3>
 
-            <div class="mt-4 space-y-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            <div class="mt-4 space-y-3 text-base leading-relaxed text-slate-700 dark:text-slate-300">
               <p>
                 The connection between measurement and theoretical constructs remains
                 fundamentally underspecified. This encompasses the
-                <strong class="text-slate-900 dark:text-slate-100">coordination problem</strong>, where
+                <em>coordination problem</em>, where
                 latent constructs may lack clear alignment with how they are measured, and
-                the <strong class="text-slate-900 dark:text-slate-100">inference problem</strong>, where
+                the <em>inference problem</em>, where
                 statistical regularities may not meaningfully map onto psychological
                 constructs.
               </p>
@@ -156,43 +130,33 @@ const values = [
           </article>
         </div>
 
-        <div class="mt-12 flex items-start gap-5 border-l-2 border-salmon-500 py-4 pl-6 dark:border-salmon-400">
-          <p class="text-base leading-relaxed text-slate-700 dark:text-slate-300">
-            <strong class="text-slate-900 dark:text-slate-100">The risk:</strong> Without
-            addressing these gaps, psychology risks producing increasingly sophisticated
-            models that remain descriptively impressive but theoretically shallow, offering
-            forecasts without understanding and parameters without psychological
-            interpretation.
-          </p>
-        </div>
+        <p class="mt-12 max-w-3xl border-l-2 border-slate-900 pl-6 font-serif text-lg leading-relaxed text-slate-800 dark:border-slate-100 dark:text-slate-200">
+          The risk: Without
+          addressing these gaps, psychology risks producing increasingly sophisticated
+          models that remain descriptively impressive but theoretically shallow, offering
+          forecasts without understanding and parameters without psychological
+          interpretation.
+        </p>
       </div>
     </div>
   </section>
 
   <Section background="white">
-    <div class="mx-auto max-w-5xl">
-      <ChapterHeader numeral="III" title="Our Values" />
+    <div class="max-w-5xl">
+      <ChapterHeader title="Our Values" />
 
-      <ol class="mt-12 divide-y divide-slate-900/15 border-y border-slate-900/15 dark:divide-slate-100/15 dark:border-slate-100/15 md:mt-16">
-        {values.map((value, i) => (
-          <li class="group grid grid-cols-[auto_1fr] gap-6 py-6 md:gap-10 md:py-8">
-            <span
-              class="pt-1.5 font-mono text-[11px] tabular-nums text-slate-500 dark:text-slate-500"
-              style="letter-spacing: 0.1em;"
-            >
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <h3 class="font-serif text-xl leading-tight text-slate-900 transition-colors group-hover:text-salmon-600 dark:text-slate-100 dark:group-hover:text-salmon-400 md:text-2xl">
-                {value.title}
-              </h3>
-              <p class="mt-2 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400">
-                {value.description}
-              </p>
-            </div>
+      <ul class="mt-8 grid gap-x-12 md:mt-10 md:grid-cols-2">
+        {values.map((value) => (
+          <li class="border-t border-slate-900/15 py-6 dark:border-slate-100/15">
+            <h3 class="font-serif text-xl leading-tight text-slate-900 dark:text-slate-100 md:text-[1.375rem]">
+              {value.title}
+            </h3>
+            <p class="mt-2 max-w-xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+              {value.description}
+            </p>
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   </Section>
 </PageLayout>

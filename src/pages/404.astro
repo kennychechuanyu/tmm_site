@@ -10,8 +10,8 @@ import PageLayout from "../layouts/PageLayout.astro";
   compact
 >
   <section class="bg-white dark:bg-slate-950">
-    <div class="container-wide py-16 md:py-24">
-      <p class="font-sans text-[10px] font-medium uppercase text-slate-400 dark:text-slate-500" style="letter-spacing: 0.22em;">
+    <div class="container-wide py-12 md:py-16">
+      <p class="font-sans text-sm font-semibold text-slate-600 dark:text-slate-400">
         Try one of these
       </p>
       <ul class="mt-5 flex flex-wrap gap-x-8 gap-y-3">
@@ -22,7 +22,7 @@ import PageLayout from "../layouts/PageLayout.astro";
           ["/about/", "About TMM"],
         ].map(([href, label]) => (
           <li>
-            <a href={href} class="font-serif text-lg text-slate-900 decoration-salmon-400/60 underline-offset-4 hover:underline dark:text-slate-100">
+            <a href={href} class="link font-serif text-lg">
               {label}
             </a>
           </li>

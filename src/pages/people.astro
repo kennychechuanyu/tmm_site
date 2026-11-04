@@ -12,14 +12,14 @@ import { coordinatingCommittee, networkMembers, sortByName } from "../data/peopl
   description="The coordinating team and members of the TMM network: researchers in cognitive modelling, mathematical psychology, psychometrics, machine learning and philosophy of science working on how theory, models and measurement fit together."
 >
   <Section background="white">
-    <div class="mx-auto max-w-6xl">
-      <p class="mb-10 font-sans text-sm text-slate-400 dark:text-slate-500">
+    <div>
+      <p class="mb-8 font-sans text-[0.9375rem] text-slate-600 dark:text-slate-400">
         Each group is ordered alphabetically by last name.
       </p>
       <ChapterHeader title="Coordinating Team" />
 
-      <div class="stagger-grid mt-12 grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3 md:mt-16">
-        {coordinatingCommittee.sort(sortByName).map((member, i) => (
+      <div class="mt-10 grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3">
+        {coordinatingCommittee.sort(sortByName).map((member) => (
           <PersonCard
             name={member.name}
             institution={member.institution}
@@ -32,7 +32,6 @@ import { coordinatingCommittee, networkMembers, sortByName } from "../data/peopl
             website2={member.website2}
             links={(member as any).links}
             bio={member.bio}
-            stagger={Math.min(i * 70, 560)}
           />
         ))}
       </div>
@@ -40,11 +39,11 @@ import { coordinatingCommittee, networkMembers, sortByName } from "../data/peopl
   </Section>
 
   <Section background="gray">
-    <div class="mx-auto max-w-6xl">
+    <div>
       <ChapterHeader title="Network Members" />
 
-      <div class="stagger-grid mt-12 grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3 md:mt-16">
-        {networkMembers.sort(sortByName).map((member, i) => (
+      <div class="mt-10 grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3">
+        {networkMembers.sort(sortByName).map((member) => (
           <PersonCard
             name={member.name}
             institution={member.institution}
@@ -57,7 +56,6 @@ import { coordinatingCommittee, networkMembers, sortByName } from "../data/peopl
             website2={(member as any).website2}
             links={(member as any).links}
             bio={member.bio}
-            stagger={Math.min(i * 70, 560)}
           />
         ))}
       </div>

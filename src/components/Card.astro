@@ -11,8 +11,8 @@ const { title, description, href, class: className, accent } = Astro.props;
 const Tag = href ? "a" : "div";
 
 const accentColors = {
-  navy: "bg-navy-500",
-  salmon: "bg-salmon-500",
+  navy: "bg-accent-700",
+  salmon: "bg-accent-700",
   teal: "bg-teal-500",
 };
 ---
@@ -22,7 +22,7 @@ const accentColors = {
   class:list={[
     "card group relative overflow-hidden",
     href && "cursor-pointer",
-    "hover:-translate-y-1 hover:shadow-lg hover:border-navy-200 dark:hover:border-navy-700",
+    "hover:-translate-y-1 hover:shadow-lg hover:border-accent-200 dark:hover:border-accent-800",
     "transition-all duration-300",
     className,
   ]}
@@ -37,7 +37,7 @@ const accentColors = {
 
   <slot name="icon" />
 
-  <h3 class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-navy-600 dark:group-hover:text-navy-400 transition-colors">
+  <h3 class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-accent-800 dark:group-hover:text-accent-300 transition-colors">
     {title}
   </h3>
 
