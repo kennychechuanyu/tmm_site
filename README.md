@@ -17,7 +17,7 @@ npm run dev
 
 - People: `src/data/people.ts`. Photos go in `public/images/people/` as `lastname-firstname.jpg`, at most 1200 px on the long side.
   The site shows a 400 px WebP copy with the same name from `public/images/people/small/` when there is one.
-  Network members who took part in a past event (as speaker, panelist or moderator) or are named under `participants` in a news post get a photo card; the others are listed with their institution.
+  Network members who took part in a past event (as speaker, panelist or moderator) or are named under `participants` in a news post get a photo card; the others are listed with their `position` and institution.
 - Events: `src/content/events/`
 - Share images (the picture shown when a page link is shared): `public/images/share/`, 1200 × 630 PNG
 - News and meeting notes: `src/content/news/`
