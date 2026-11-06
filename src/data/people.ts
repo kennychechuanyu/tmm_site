@@ -313,4 +313,13 @@ export const networkMembers = [
     website: "https://ppw.kuleuven.be/okp/team/Tzu-Yao_Lin/",
     bio: "Tzu-Yao Lin is a joint PhD candidate at KU Leuven (Quantitative Psychology and Individual Differences) and Maastricht University (Department of Methodology and Statistics). His research investigates the conceptual and methodological foundations of measurement reliability in multilevel and intensive longitudinal designs. He examines what it fundamentally means for repeated measurements to be reliable across occasions and individuals, where hierarchical dependencies and temporal dynamics complicate conventional psychometric indices. Beyond longitudinal psychometrics, he also works on mathematical and computational models of judgment and decision-making, such as extending cultural consensus theory with threshold models.",
   },
+  {
+    name: "Olivia Guest",
+    role: "Donders Centre for Cognition",
+    institution: "Radboud University",
+    email: "olivia.guest@donders.ru.nl",
+    image: "/images/people/guest-olivia.jpg",
+    website: "https://olivia.science/",
+    bio: "Olivia Guest is a computational cognitive scientist at Radboud University's Donders Centre for Cognition. Her work spans the metatheoretical understanding of computational modeling's scientific role, computationally modeling cognitive capacities such as categorization, and critical perspectives on AI trends. She employs diverse methodologies ranging from artificial neural networks to philosophical approaches.",
+  },
 ];
