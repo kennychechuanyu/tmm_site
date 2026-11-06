@@ -10,6 +10,7 @@ const news = defineCollection({
     type: z.enum(["meeting-notes", "announcement", "update"]).default("update"),
     featured: z.boolean().default(false),
     ogImage: z.string().optional(),
+    participants: z.array(z.string()).optional(),
   }),
 });
 

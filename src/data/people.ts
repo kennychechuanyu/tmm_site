@@ -3,8 +3,8 @@ export const slugOf = (name: string) =>
 
 export const lastName = (n: string) =>
   n.replace(/\s*\(.*?\)\s*/g, " ").trim().split(" ").pop()!;
-export const sortByName = (a: { name: string }, b: { name: string }) =>
-  lastName(a.name).localeCompare(lastName(b.name));
+export const sortByName = (a: { name: string; sortAs?: string }, b: { name: string; sortAs?: string }) =>
+  (a.sortAs ?? lastName(a.name)).localeCompare(b.sortAs ?? lastName(b.name)) || a.name.localeCompare(b.name);
 
 export const coordinatingCommittee = [
   {
@@ -322,4 +322,60 @@ export const networkMembers = [
     website: "https://olivia.science/",
     bio: "Olivia Guest is a computational cognitive scientist at Radboud University's Donders Centre for Cognition. Her work spans the metatheoretical understanding of computational modeling's scientific role, computationally modeling cognitive capacities such as categorization, and critical perspectives on AI trends. She employs diverse methodologies ranging from artificial neural networks to philosophical approaches.",
   },
+  { name: "Nadia M. Ady", institution: "Aalto University" },
+  { name: "Mikaela Akrenius", institution: "Indiana University Bloomington" },
+  { name: "David Alarcon", institution: "Universidad Pablo de Olavide" },
+  { name: "Britt Anderson", institution: "University of Waterloo" },
+  { name: "Xiaohong Cai", institution: "Carnegie Mellon University" },
+  { name: "Chris Chang", institution: "Adelaide University" },
+  { name: "Menghuan Chen", institution: "Universitätsklinikum Würzburg" },
+  { name: "Maxence Chevallet", institution: "University of Lausanne" },
+  { name: "Gavin Cooper", institution: "University of Western Australia" },
+  {
+    name: "Amy Criss",
+    role: "Department of Psychology",
+    institution: "Syracuse University",
+    email: "amy.criss@gmail.com",
+    image: "/images/people/criss-amy.jpg",
+    website: "https://memolab.syr.edu/",
+    links: [{ label: "Syracuse profile", url: "https://artsandsciences.syracuse.edu/people/faculty/criss-phd-amy-h/" }],
+    bio: "Dr. Amy H. Criss is a cognitive scientist and Professor of Psychology at Syracuse University. Her program of research is focused on understanding human memory using computational modeling and behavioral experiments in tandem. Prior to her faculty position, Dr. Criss was a postdoctoral fellow at Carnegie Mellon University. She earned a B.A. at Miami University, a Ph.D. in both cognitive science and cognitive psychology at Indiana University. She has served as Department Chair, Graduate Director, and has served her research community in roles including President of the Society for Mathematical Psychology and associate editor for several journals. Dr. Criss is currently on detail at the National Science Foundation where she serves as Program Director in the Directorate for Translation, Innovation, and Partnerships (TIP) and Directorate for Social Behavioral and Economic Sciences (SBE).",
+  },
+  { name: "Michael Ehinmowo", institution: "University of Ibadan" },
+  { name: "Zhongyu Fang", institution: "Chinese University of Hong Kong" },
+  { name: "Denis Federiakin", institution: "Johannes Gutenberg University Mainz" },
+  { name: "Mattias Forsgren", institution: "Uppsala University" },
+  { name: "Gidon T. Frischkorn", institution: "University of Zurich" },
+  { name: "Jocelyn Pamela García Durán", institution: "UNAM", sortAs: "García Durán" },
+  { name: "Merrick Giles", institution: "University of Melbourne" },
+  { name: "Catherine Guazzone", institution: "Independent" },
+  { name: "Ishi Jamdagni", institution: "Adelaide University" },
+  { name: "Rochelle Kaper", institution: "University College London" },
+  { name: "Elif Kaşgöz", institution: "University of Cambridge" },
+  { name: "Aline Korver", institution: "University of Groningen" },
+  { name: "Lisa Koßmann", institution: "KU Leuven" },
+  { name: "Yun-Xiao Li", institution: "University of Warwick" },
+  { name: "Zheng Li", institution: "University of Melbourne" },
+  { name: "Shuyu Liu", institution: "University of Chinese Academy of Sciences" },
+  { name: "Gota Morishita", institution: "University of Melbourne" },
+  { name: "William Ngiam", institution: "Adelaide University" },
+  { name: "Klaus Oberauer", institution: "University of Zurich" },
+  { name: "Divya Pathak", institution: "Indian Institute of Technology Kanpur" },
+  { name: "Fidel Rebón-Ortiz", institution: "GIUNTI-NESPLORA S.L." },
+  { name: "Jill de Ron", institution: "University of Amsterdam" },
+  { name: "Jelena Rosic", institution: "University of Vienna" },
+  { name: "Albert Sesé", institution: "University of the Balearic Islands" },
+  { name: "Maarten Speekenbrink", institution: "University College London" },
+  { name: "Ron Sun", institution: "Rensselaer Polytechnic Institute (RPI)" },
+  { name: "Tamás Szűcs", institution: "KU Leuven" },
+  { name: "Deborah Talmi", institution: "University of Cambridge" },
+  { name: "Li Qian Tay", institution: "Australian National University" },
+  { name: "Peter Thestrup Waade", institution: "ETH Zürich" },
+  { name: "Shensheng Wang", institution: "Georgia Institute of Technology" },
+  { name: "Stella Wernicke", institution: "University of Cambridge" },
+  { name: "Violet Yang", institution: "Southern Methodist University" },
+  { name: "Heber Abraham Zapata Robles", institution: "Centro de Investigación Científica y de Educación Superior de Ensenada", sortAs: "Zapata Robles" },
+  { name: "Jian Zhang", institution: "The First Affiliated Hospital of Guangxi Medical University" },
+  { name: "Lei Zhang", institution: "University of Birmingham" },
+  { name: "Qiong Zhang", institution: "Rutgers University" },
 ];

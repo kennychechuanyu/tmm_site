@@ -5,6 +5,18 @@ date: 2025-11-14
 type: meeting-notes
 featured: true
 ogImage: /images/share/founding-discussion.png
+participants:
+  - "Sigert Ariens"
+  - "Laura Bringmann"
+  - "Markus Eronen"
+  - "Andrew Heathcote"
+  - "Craig Hedge"
+  - "Maria Robinson"
+  - "Adam Sanborn"
+  - "Francis Tuerlinckx"
+  - "Niels Vanhasbroeck"
+  - "Wolf Vanpaemel"
+  - "Kenny Yu"
 ---
 
 ## Participants

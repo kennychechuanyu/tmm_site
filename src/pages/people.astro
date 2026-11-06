@@ -5,6 +5,30 @@ import ChapterHeader from "../components/ChapterHeader.astro";
 import PersonCard from "../components/PersonCard.astro";
 
 import { coordinatingCommittee, networkMembers, sortByName } from "../data/people";
+import { hasEnded } from "../utils/eventTime";
+import { getCollection } from "astro:content";
+
+const events = await getCollection("events");
+const news = await getCollection("news");
+const key = (name: string) =>
+  name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s*\(.*?\)\s*/g, " ").trim().toLowerCase();
+const tookPart = new Set(
+  [
+    ...events
+      .filter((event) => hasEnded(event.data))
+      .flatMap((event) => [
+        ...(event.data.speakers ?? []),
+        ...(event.data.panelists ?? []),
+        ...(event.data.moderators ?? []),
+      ])
+      .map((person) => person.name),
+    ...news.flatMap((post) => post.data.participants ?? []),
+  ].map(key)
+);
+const members = networkMembers.sort(sortByName);
+const withPhoto = members.filter((member) => tookPart.has(key(member.name)));
+const listed = members.filter((member) => !tookPart.has(key(member.name)));
+const slugOf = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 ---
 
 <PageLayout
@@ -42,9 +66,12 @@ import { coordinatingCommittee, networkMembers, sortByName } from "../data/peopl
   <Section background="gray">
     <div>
       <ChapterHeader title="Network Members" />
+      <p class="mt-4 max-w-3xl font-serif text-lg italic leading-snug text-slate-700 dark:text-slate-300">
+        Thank you to the members who have taken part in our meetings and events so far.
+      </p>
 
       <div class="mt-10 grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3">
-        {networkMembers.sort(sortByName).map((member) => (
+        {withPhoto.map((member) => (
           <PersonCard
             name={member.name}
             institution={member.institution}
@@ -60,6 +87,17 @@ import { coordinatingCommittee, networkMembers, sortByName } from "../data/peopl
           />
         ))}
       </div>
+
+      {listed.length > 0 && (
+        <ul class="mt-16 gap-x-8 border-t border-slate-900/15 pt-8 dark:border-slate-100/15 sm:columns-2 lg:columns-3">
+          {listed.map((member) => (
+            <li id={slugOf(member.name)} class="scroll-mt-24 break-inside-avoid py-2.5">
+              <p class="font-serif text-lg leading-snug text-slate-900 dark:text-white">{member.name}</p>
+              <p class="mt-0.5 font-sans text-[0.9375rem] leading-snug text-slate-600 dark:text-slate-400">{member.institution}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   </Section>
 </PageLayout>
