@@ -391,4 +391,13 @@ export const networkMembers = [
   { name: "Jian Zhang", institution: "The First Affiliated Hospital of Guangxi Medical University", position: "Associate Professor" },
   { name: "Lei Zhang", institution: "University of Birmingham", position: "Associate Professor" },
   { name: "Qiong Zhang", institution: "Rutgers University", position: "Assistant Professor" },
+  {
+    name: "Trisha Van Zandt",
+    role: "Department of Psychology",
+    institution: "The Ohio State University",
+    email: "van-zandt.2@osu.edu",
+    image: "/images/people/van-zandt-trisha.jpg",
+    website: "https://psychology.osu.edu/people/van-zandt.2",
+    bio: "Dr. Trisha Van Zandt is a Professor of Psychology at The Ohio State University, where she also holds a courtesy appointment in the Department of Statistics. She earned her Ph.D. in Quantitative Psychology from Purdue University in 1992 and completed a postdoctoral fellowship at Northwestern University before serving on the faculty at Johns Hopkins University and subsequently joining Ohio State in 2000. An internationally recognized expert in mathematical and cognitive psychology, her research focuses on quantitative methods, Bayesian modeling, and the cognitive mechanisms underlying memory, judgment, and decision-making—particularly through the computational and time-series analysis of response times. Alongside extensive research support from the National Science Foundation and co-authoring key texts including Human Factors in Simple and Complex Systems, she has served as Program Director for the NSF's Human Networks and Data Science program, President of the Society for Mathematical Psychology, and Associate Editor for the Journal of Mathematical Psychology and Data Science in Science. Her contributions to research, leadership, and teaching have been recognized with honors including the Presidential Early Career Award for Scientists and Engineers (PECASE), the Purdue University Distinguished Woman Scholar Award, and the Joan N. Huber Faculty Fellow Award.",
+  },
 ];
