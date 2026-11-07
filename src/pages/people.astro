@@ -94,6 +94,9 @@ const slugOf = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").
             <li id={slugOf(member.name)} class="scroll-mt-24 break-inside-avoid py-2.5">
               <p class="font-serif text-lg leading-snug text-slate-900 dark:text-white">{member.name}</p>
               <p class="mt-0.5 font-sans text-[0.9375rem] leading-snug text-slate-600 dark:text-slate-400">{[(member as any).position, member.institution].filter(Boolean).join(", ")}</p>
+              {(member as any).role && (member as any).role !== member.institution && (
+                <p class="mt-0.5 font-sans text-sm leading-snug text-slate-500 dark:text-slate-400">{(member as any).role}</p>
+              )}
             </li>
           ))}
         </ul>
