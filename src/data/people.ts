@@ -419,4 +419,12 @@ export const networkMembers = [
     website: "https://adrianerasmus.com",
     bio: "Adrian Erasmus is a philosopher of science and assistant professor in the Department of Philosophy at the University of Alabama. Drawing on his training in history and philosophy of science, he uses conceptual analysis, empirical findings, historical case studies, and the application of formal methods to help solve important practical problems in science, medicine, and technology. His specific research interests include conceptual and methodological questions about medical inference, the role of artificial intelligence in clinical decision-making, and the nature and impact of bias in scientific research.",
   },
+  {
+    name: "Stephen José Hanson",
+    role: "Department of Psychology",
+    institution: "Rutgers University",
+    email: "sjh42@rubic.rutgers.edu",
+    image: "/images/people/hanson-stephen.jpg",
+    bio: "Stephen José Hanson is a professor of psychology at Rutgers University and director of the Rutgers Brain Imaging Center (RUBIC). His research spans learning theory across humans, animals, and machines, including neural network learning algorithms, computational neuroimaging, and deep learning. He was General Chair of NeurIPS (1992) and a founding member of the McDonnell-Pew Cognitive Neuroscience Advisory Board.",
+  },
 ];
