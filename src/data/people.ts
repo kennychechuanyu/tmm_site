@@ -410,4 +410,13 @@ export const networkMembers = [
     website: "https://psychology.illinois.edu/directory/profile/regenwet",
     bio: "Michel Regenwetter is a Professor of Psychology, Political Science, and Electrical and Computer Engineering at the University of Illinois. He is an affiliate member of the Center for Social and Behavioral Science and of the Coordinated Science Laboratory at Illinois. After having double majored in Psychology and Mathematics at the University of Bonn (Germany), Regenwetter completed a PhD in Mathematical Behavioral Science at UC Irvine (USA). Regenwetter received the 1999 Young Investigator Award of the Society for Mathematical Psychology, co-received the 2012 Exeter Prize for Research in Experimental Economics, Decision Theory, and Behavioral Economics, and is an elected fellow of both the Association for Psychological Science and of the Psychonomic Society. He has co-authored an award-winning book as well as numerous journal articles spanning several scientific disciplines. Regenwetter's research revolves around modeling heterogeneity of behavior, especially in decision making, as well as meta-theory, especially scientific reasoning fallacies that plague behavioral research.",
   },
+  {
+    name: "Adrian Erasmus",
+    role: "Department of Philosophy",
+    institution: "University of Alabama",
+    email: "aderasmus@ua.edu",
+    image: "/images/people/erasmus-adrian.jpg",
+    website: "https://adrianerasmus.com",
+    bio: "Adrian Erasmus is a philosopher of science and assistant professor in the Department of Philosophy at the University of Alabama. Drawing on his training in history and philosophy of science, he uses conceptual analysis, empirical findings, historical case studies, and the application of formal methods to help solve important practical problems in science, medicine, and technology. His specific research interests include conceptual and methodological questions about medical inference, the role of artificial intelligence in clinical decision-making, and the nature and impact of bias in scientific research.",
+  },
 ];
