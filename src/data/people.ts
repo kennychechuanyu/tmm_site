@@ -219,6 +219,7 @@ export const networkMembers = [
     name: "Dora Matzke",
     role: "Psychological Methods",
     institution: "University of Amsterdam",
+    position: "Associate Professor",
     email: "d.matzke@uva.nl",
     image: "/images/people/matzke-dora.jpg",
     website: "https://www.ampl-psych.com/team/dora-matzke/",
