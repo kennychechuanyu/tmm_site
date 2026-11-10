@@ -427,4 +427,22 @@ export const networkMembers = [
     image: "/images/people/hanson-stephen.jpg",
     bio: "Stephen José Hanson is a professor of psychology at Rutgers University and director of the Rutgers Brain Imaging Center (RUBIC). His research spans learning theory across humans, animals, and machines, including neural network learning algorithms, computational neuroimaging, and deep learning. He was General Chair of NeurIPS (1992) and a founding member of the McDonnell-Pew Cognitive Neuroscience Advisory Board.",
   },
+  {
+    name: "Ven Popov",
+    role: "Department of Psychology",
+    institution: "University of Zurich",
+    email: "vencislav.popov@gmail.com",
+    image: "/images/people/popov-ven.jpg",
+    website: "https://venpopov.com/",
+    bio: "Ven Popov is a tenured senior scientist in computational modeling of behavior at the Department of Psychology, University of Zürich. He uses computational modeling to understand the structure, organization, and function of fundamental cognitive processes, to refine the development and evaluation of psychological theories, and to improve psychological measurement. His work centers on addressing the theory crisis in psychology through mechanistic models, primarily within human memory research, while developing accessible Bayesian tools and strengthening measurement standards.",
+  },
+  {
+    name: "Peter Killeen",
+    role: "Department of Psychology",
+    institution: "Arizona State University",
+    email: "killeen@asu.edu",
+    image: "/images/people/killeen-peter.png",
+    website: "https://search.asu.edu/profile/56114",
+    bio: "Peter Killeen studies choice, schedule-induced behavior, reinforcement schedules, interval timing, and delay and probability discounting, all under the microscope of mathematics. He has received the Poetry in Science Award, the APA Div. 25 Outstanding Researcher Award, the Banco de Santander Research Prize, and the F. J. McGuigan Lecture on Understanding the Human Mind. He was President of the Society of Experimental Psychologists, the Society for the Quantitative Analysis of Behavior, and the Association for Behavior Analysis.",
+  },
 ];
